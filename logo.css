@@ -3353,3 +3353,368 @@ h2,
   }
 
 }
+
+
+/* =========================================================
+   LOGO 페이지 — 모바일 가로 스크롤 막기 / 2026.10.14
+   ---- 오른쪽에서 들어오는 카드(.reveal-right, 예: 사선 커팅각)가
+        나타나기 전 28px 오른쪽에 있어서 휴대폰에서 화면이 옆으로 약 8px 밀림
+   ---- 가로로 넘치는 것만 잘라냄 (clip 은 sticky · 세로 스크롤에 영향 없음)
+========================================================= */
+
+html,
+body {
+  overflow-x: clip;
+}
+
+/* =========================================================
+   LARGE SCREEN LAYOUT — 맥북 비율 그대로 (자동 생성) / 2026.10.14
+   ---------------------------------------------------------
+   아이맥(2048px)처럼 넓은 화면에서
+   페이지마다 내용 칸의 최대 폭(1120 · 1200 · 1380 · 1500px 등)과
+   양옆 여백 최대값에 걸려 내용이 더 안 넓어지고 가운데로 모임
+   → 양옆 여백이 페이지마다 300 ~ 430px 로 크게 벌어지고 서로 달라짐
+     (맥북에서는 50 ~ 160px)
+
+   수정 ) 1513px 이상에서만 이 파일의 가로 배치 값
+          (width · max-width · padding · margin · gap · left · right · 변수)을
+          "맥북(1512px)에서 계산된 값 ÷ 1512" 비율(vw)로 다시 적용
+          → 아이맥에서도 맥북 화면을 그대로 1.35배 확대한 배치
+   ---- 맥북 · 태블릿 · 모바일(1512px 이하)은 이 블록이 꺼져 있어 기존 그대로
+   ---- 원래 규칙 순서 그대로 다시 써서 어떤 규칙이 이기는지(cascade)도 동일
+   ---- 위쪽 원본 CSS 를 고치면 이 블록도 다시 만들어야 함
+        (scratchpad/large_screen.py 로 자동 생성 — 손으로 고치지 않기)
+========================================================= */
+
+@media (min-width: 1513px) {
+
+  body,h1,h2,h3,h4,p {
+    margin: 0;
+  }
+  body {
+    margin: 0;
+  }
+  img {
+    max-width: 100%;
+  }
+  button {
+    padding: 0;
+  }
+  .wrap {
+    max-width: 79.3651vw;
+    margin: 0 auto;
+    padding: 0 2.1164vw;
+  }
+  .site-header {
+    --header-height: 3.836vw;
+    --header-logo-width: 9.5899vw;
+    --header-column-brand: 6.0847vw;
+    --header-column-interface: 7.9365vw;
+    --header-column-experience: 8.7302vw;
+    --header-column-about: 5.4233vw;
+    --header-center-gap: 2.8vw;
+    --header-visual-shift: 1.8vw;
+    left: 0;
+    width: 100%;
+  }
+  .site-header__bar {
+    width: 100%;
+    padding: 0 var(--header-side-padding);
+  }
+  .site-header__nav {
+    left: calc(50% + var(--header-visual-shift));
+    column-gap: var(--header-center-gap);
+    width: max-content;
+  }
+  .site-header__nav-link {
+    width: max-content;
+  }
+  .site-header__nav-link::after {
+    left: 0;
+    width: 100%;
+  }
+  .site-header__mega {
+    left: 0;
+    width: 100%;
+    padding: calc(var(--header-height) + 1.8519vw) var(--header-side-padding) 2.5132vw;
+  }
+  .site-header__mega-grid {
+    left: var(--header-visual-shift);
+    column-gap: var(--header-center-gap);
+    width: max-content;
+    margin: 0 auto;
+  }
+  .site-header__mega-links {
+    gap: 0.9259vw;
+  }
+  .site-header__mega-links a {
+    width: max-content;
+  }
+  .site-header__mega-links a::after {
+    left: 0;
+    width: 100%;
+  }
+  .hero video {
+    width: 100%;
+  }
+  .hero__still {
+    gap: 2.381vw;
+  }
+  .hero__logo {
+    width: 30vw;
+  }
+  .hero__replay {
+    right: 3vw;
+    gap: 0.5291vw;
+  }
+  .scroll {
+    left: 50%;
+    gap: 0.5291vw;
+  }
+  .scroll::after {
+    width: 1px;
+  }
+  main > section {
+    padding: 9.2593vw 0;
+  }
+  .site-header__mega-column {
+    padding: 0 !important;
+    margin: 0;
+  }
+  .eyebrow {
+    margin-bottom: 1.1905vw;
+  }
+  .lead {
+    margin-top: 1.455vw;
+    max-width: 41.0053vw;
+  }
+  .intro .logo {
+    margin: 4.2328vw auto 0;
+    width: min( 19.8413vw, 52% );
+  }
+  #wave .lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #color .lead {
+    margin-left: auto;
+    margin-right: 0;
+  }
+  .concept-rows {
+    margin-top: 3.7037vw;
+  }
+  .concept-row {
+    gap: 2.1164vw;
+    padding: 2.5132vw 0.2646vw;
+  }
+  .concept-row::after {
+    right: 0.3968vw;
+  }
+  .concept-row .num {
+    padding-top: 0.1984vw;
+  }
+  .concept-row__body {
+    gap: 2.1164vw;
+  }
+  .concept-row__body p {
+    margin: 0;
+  }
+  .split {
+    gap: 2.1164vw;
+    margin-top: 3.7037vw;
+  }
+  .figure {
+    padding: 2.6455vw;
+    margin: 0;
+  }
+  .specs {
+    gap: 1px;
+  }
+  .specs div {
+    padding: 1.455vw 1.5873vw;
+  }
+  .details {
+    gap: 1.5873vw;
+    margin-top: 3.7037vw;
+  }
+  .detail img {
+    width: 100%;
+  }
+  .detail .cap {
+    padding: 1.455vw 1.8519vw;
+  }
+  .blueprint__v {
+    width: 1px;
+  }
+  .blueprint svg {
+    width: 100%;
+  }
+  .steps {
+    gap: 11vw;
+    margin-top: 8.5979vw;
+  }
+  .step {
+    gap: 5.9524vw;
+  }
+  .step__ghost {
+    left: 50%;
+  }
+  .step .pic video {
+    width: 100%;
+  }
+  .step .t {
+    max-width: 30.4233vw;
+  }
+  .step .t .num {
+    margin-bottom: 0.7937vw;
+  }
+  .step h4 {
+    margin: 0 0 0.9259vw;
+  }
+  .step p {
+    margin: 0;
+  }
+  .color-blocks {
+    gap: 1.3228vw;
+    margin-top: 4.2328vw;
+  }
+  .color-block {
+    padding: 1.9841vw 2.1164vw;
+  }
+  .color-block::after {
+    right: -0.3968vw;
+  }
+  .color-block__hex {
+    margin-top: 0.3968vw;
+  }
+  .bento {
+    gap: 1.8519vw;
+    margin-top: 4.2328vw;
+  }
+  .app-item {
+    gap: 1.0582vw;
+  }
+  .app {
+    width: 100%;
+  }
+  .app img {
+    width: 50%;
+  }
+  .toast {
+    left: 50%;
+    padding: 0.7937vw 1.3228vw;
+  }
+  .case-container {
+    width: min( 100% - 5.291vw, 87.3016vw );
+    margin: 0 auto;
+  }
+  .case-footer {
+    width: 100%;
+    margin: 0;
+    padding: 4vw 0 0;
+  }
+  .case-footer__top {
+    gap: 4vw;
+  }
+  .case-footer__column {
+    min-width: 0;
+  }
+  .case-footer__label {
+    margin: 0 0 1.0582vw;
+  }
+  .case-footer__project-name, .case-footer__text, .case-footer__column a {
+    margin: 0;
+  }
+  .case-footer__project-name {
+    margin-bottom: 2px;
+  }
+  .case-footer__column a {
+    width: max-content;
+  }
+  .case-footer__column a::after, .case-footer__back-to-top::after {
+    left: 0;
+    width: 100%;
+  }
+  .case-footer__utility {
+    margin-top: 5vw;
+  }
+  .case-footer__back-to-top {
+    gap: 0.5291vw;
+  }
+  .case-footer__brand-stage {
+    width: 100%;
+    margin-top: 3.3vw;
+  }
+  .case-footer__brand-lockup {
+    gap: 1.5vw;
+    width: calc( 100% - 5vw );
+    margin: 0 auto;
+  }
+  .case-footer__symbol {
+    gap: 0.42vw;
+    padding-bottom: 2.5vw;
+  }
+  .case-footer__symbol span {
+    width: 4vw;
+  }
+  .case-footer__symbol span:nth-child(1), .case-footer__symbol span:nth-child(3) {
+    margin-left: 0.9vw;
+  }
+  .case-footer__symbol span:nth-child(2) {
+    width: 5vw;
+  }
+  .case-footer__brand {
+    margin: 0;
+  }
+  .site-header__mega {
+    padding-top: calc( var(--header-height) + 1.9444vw );
+    padding-bottom: 2.6389vw;
+  }
+  .site-header__mega-links {
+    gap: .9722vw;
+  }
+  .case-container {
+    width: var(--desktop-content-width);
+  }
+  .case-footer {
+    padding: 3.6vw 0 0;
+  }
+  .case-footer__top {
+    gap: 4.2vw;
+  }
+  .case-footer__label {
+    margin-bottom: 1.05vw;
+  }
+  .case-footer__utility {
+    margin-top: 4.2vw;
+  }
+  .case-footer__brand-stage {
+    margin-top: 2.4vw;
+  }
+  .case-footer__brand-lockup {
+    width: 95vw;
+    gap: 1.4vw;
+  }
+  .case-footer__symbol {
+    gap: .4vw;
+    padding-bottom: 2.05vw;
+  }
+  .case-footer__symbol span {
+    width: 4vw;
+  }
+  .case-footer__symbol span:nth-child(1), .case-footer__symbol span:nth-child(3) {
+    margin-left: .85vw;
+  }
+  .case-footer__symbol span:nth-child(2) {
+    width: 5vw;
+  }
+  .site-header__mega {
+    padding-top: calc( var(--header-height) + .5556vw );
+  }
+  :root {
+    --type-title-size: 2.7778vw;
+    --type-sub-size: 1.1243vw;
+    --type-body-size: 0.9921vw;
+  }
+
+}

@@ -6039,3 +6039,737 @@ body.hud-page.is-header-hidden .site-header {
 .display-page .dh8__scr--base {
   opacity: 1;
 }
+
+/* =========================================================
+   LARGE SCREEN LAYOUT — 맥북 비율 그대로 (자동 생성) / 2026.10.14
+   ---------------------------------------------------------
+   아이맥(2048px)처럼 넓은 화면에서
+   페이지마다 내용 칸의 최대 폭(1120 · 1200 · 1380 · 1500px 등)과
+   양옆 여백 최대값에 걸려 내용이 더 안 넓어지고 가운데로 모임
+   → 양옆 여백이 페이지마다 300 ~ 430px 로 크게 벌어지고 서로 달라짐
+     (맥북에서는 50 ~ 160px)
+
+   수정 ) 1513px 이상에서만 이 파일의 가로 배치 값
+          (width · max-width · padding · margin · gap · left · right · 변수)을
+          "맥북(1512px)에서 계산된 값 ÷ 1512" 비율(vw)로 다시 적용
+          → 아이맥에서도 맥북 화면을 그대로 1.35배 확대한 배치
+   ---- 맥북 · 태블릿 · 모바일(1512px 이하)은 이 블록이 꺼져 있어 기존 그대로
+   ---- 원래 규칙 순서 그대로 다시 써서 어떤 규칙이 이기는지(cascade)도 동일
+   ---- 위쪽 원본 CSS 를 고치면 이 블록도 다시 만들어야 함
+        (scratchpad/large_screen.py 로 자동 생성 — 손으로 고치지 않기)
+========================================================= */
+
+@media (min-width: 1513px) {
+
+  .display-page {
+    --display-max-width: 84.6561vw;
+    margin: 0;
+  }
+  .display-page h1, .display-page h2, .display-page h3, .display-page p {
+    margin: 0;
+  }
+  .display-page img {
+    max-width: 100%;
+  }
+  .display-page .display-main {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .display-page .display-hero {
+    width: 100%;
+    padding: 10.582vw 0 0;
+  }
+  .display-page .display-hero__word {
+    left: 50%;
+    width: max-content;
+  }
+  .display-page .display-hero__title {
+    margin-bottom: -1.8519vw;
+  }
+  .display-page .display-hero__visual {
+    width: 100%;
+    max-width: none;
+    margin-bottom: -2.3148vw;
+  }
+  .display-page .display-manifesto {
+    width: 100%;
+  }
+  .display-page .display-manifesto__inner {
+    padding: 8.2672vw 4vw 5vw;
+  }
+  .display-page .display-manifesto__title {
+    margin-top: 4.5vw;
+  }
+  .display-page .display-manifesto__bottom {
+    gap: 3.7037vw;
+    margin-top: auto;
+    padding-top: 6vw;
+  }
+  .display-page .display-manifesto__size {
+    gap: 1.5vw;
+  }
+  .display-page .display-manifesto__size span {
+    padding-bottom: 0.6vw;
+  }
+  .display-page .display-scenes {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .display-page .display-scenes__visual {
+    width: 100%;
+    margin: 0;
+  }
+  .display-page .display-scenes__steps {
+    width: 100%;
+    margin: -100svh 0 0;
+    padding: 0;
+  }
+  .display-page .display-scenes__word, .display-page .display-scenes__giant, .display-page [data-display-scene-word], .display-page [data-scene-giant], .display-page .dd-story__word {
+    left: 4.2vw;
+    width: max-content;
+    max-width: none;
+    margin: 0;
+  }
+  .display-page .display-scenes__screen {
+    left: 30vw;
+    width: min(66vw, 82.0106vw);
+  }
+  .display-page .display-scenes__image {
+    width: 100%;
+    max-width: none;
+  }
+  .display-page .display-scene {
+    left: 4.2vw;
+    width: min(22vw, 23.1481vw);
+    min-width: 0;
+    max-width: 23.1481vw;
+    margin: 0;
+    padding: 0;
+  }
+  .display-page .display-scene__eyebrow {
+    width: 100%;
+    margin: 0 0 1.4vw;
+    padding: 0;
+  }
+  .display-page .display-scene__title {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .display-page .display-scene__title span {
+    margin: 0;
+    padding: 0;
+  }
+  .display-page .display-scene__description {
+    width: 100%;
+    max-width: 21.164vw;
+    margin: 2vw 0 0;
+    padding: 0;
+  }
+  .display-page .display-scene__eyebrow, .display-page .display-scene__title, .display-page .display-scene__description {
+    left: 0;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+  .display-page .display-scenes__counter {
+    right: 4.2vw;
+    gap: 0.7937vw;
+  }
+  .display-page .display-scenes__counter i {
+    width: 2.9101vw;
+  }
+  .display-page .display-overview {
+    width: 100%;
+    margin: 0;
+  }
+  .display-page .display-overview__sticky {
+    width: 100%;
+  }
+  .display-page .display-overview__inner {
+    width: min(calc(100% - 6.3492vw), 91.2698vw);
+    margin: 0 auto;
+  }
+  .display-page .display-overview__background-word {
+    left: 50%;
+    width: max-content;
+  }
+  .display-page .display-overview__intro {
+    left: 2%;
+    width: 24.4709vw;
+  }
+  .display-page .display-overview__eyebrow {
+    margin-bottom: 1.5873vw;
+  }
+  .display-page .display-overview__title {
+    margin: 0;
+  }
+  .display-page .display-overview__description {
+    max-width: 22.4868vw;
+    margin-top: 1.8519vw;
+  }
+  .display-page .display-overview__visual {
+    left: 71%;
+    width: min(54vw, 50.2646vw);
+  }
+  .display-page .display-info {
+    left: 50%;
+    width: min(44vw, 42.9894vw);
+    margin: 0;
+  }
+  .display-page .display-info__image {
+    width: 100%;
+  }
+  .display-page .display-info__image img {
+    width: 100%;
+  }
+  .display-page .display-info__text {
+    width: 12.5661vw;
+  }
+  .display-page .display-info__eyebrow {
+    margin-bottom: 0.7937vw;
+  }
+  .display-page .display-info__text h3 {
+    margin-bottom: 0.5952vw;
+  }
+  .display-page .display-info:nth-child(1) .display-info__text, .display-page .display-info--route .display-info__text {
+    right: calc(100% + 3.4392vw);
+  }
+  .display-page .display-info:nth-child(2) .display-info__text, .display-page .display-info--traffic .display-info__text {
+    left: calc(100% + 3.4392vw);
+  }
+  .display-page .display-info:nth-child(3) .display-info__text, .display-page .display-info--safety .display-info__text {
+    right: calc(100% + 3.4392vw);
+  }
+  .display-page .display-info:nth-child(4) .display-info__text, .display-page .display-info--vehicle .display-info__text {
+    left: calc(100% + 3.4392vw);
+  }
+  .display-page .display-gallery {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .display-page .display-gallery__sticky {
+    width: 100%;
+    padding-top: 6vw;
+    padding-bottom: 3vw;
+  }
+  .display-page .display-gallery__heading {
+    width: min(calc(100% - 7.9365vw), 92.5926vw);
+    margin: 0 auto 3.8vw;
+  }
+  .display-page .display-gallery__eyebrow {
+    margin-bottom: 1.3228vw;
+  }
+  .display-page .display-gallery__description {
+    max-width: 23.8095vw;
+    margin-top: 1.5873vw;
+  }
+  .display-page .display-gallery__viewport {
+    width: 100%;
+  }
+  .display-page .display-gallery__track {
+    gap: 1.8vw;
+    width: max-content;
+    padding: 0 4vw;
+  }
+  .display-page .display-gallery-card__copy {
+    min-width: 0;
+    padding: 3vw;
+  }
+  .display-page .display-gallery-card__number {
+    margin-bottom: 3vw;
+  }
+  .display-page .display-gallery-card__copy p {
+    margin-top: auto;
+    padding-top: 3vw;
+  }
+  .display-page .display-gallery-card__image {
+    min-width: 0;
+    padding: 1.3vw;
+  }
+  .display-page .display-gallery-card__image img {
+    width: 100%;
+  }
+  .display-page .display-main {
+    padding-bottom: 0;
+  }
+  .display-page .display-gallery + .case-footer, .display-page .display-main + .case-footer, .display-page .case-footer {
+    margin-top: 0;
+  }
+  .display-page .dd-story__word {
+    left: 4.2vw;
+  }
+  .display-page .display-gallery__stage {
+    right: 0;
+    left: 0;
+  }
+  .display-page .display-gallery__card {
+    left: 50%;
+    width: min(70vw, 74.0741vw);
+    max-width: 74.0741vw;
+  }
+  .display-page .display-gallery__card .display-gallery__media {
+    width: 100%;
+  }
+  .display-page .display-gallery__card .display-gallery__media img {
+    width: 100%;
+  }
+  .display-page .display-gallery__progress span {
+    width: 100%;
+  }
+  .handle-page {
+    --handle-header-height: 4.03vw;
+    margin: 0;
+  }
+  .handle-page .handle-main img {
+    max-width: 100%;
+  }
+  .handle-page .handle-eyebrow {
+    margin: 0 0 1.7vw;
+  }
+  .handle-page .handle-sequence--hero {
+    margin-top: 0;
+  }
+  .handle-page .handle-sequence__stage {
+    width: 100%;
+  }
+  .handle-page .handle-sequence__frames, .handle-page .handle-sequence__frame, .handle-page .handle-sequence__shade {
+    width: 100%;
+  }
+  .handle-page .handle-sequence__copy-wrap {
+    left: 7vw;
+    width: min(41.6667vw, 46vw);
+  }
+  .handle-page .handle-sequence__copy {
+    left: 0;
+    width: 100%;
+  }
+  .handle-page .handle-sequence__copy h1, .handle-page .handle-sequence__copy h2 {
+    margin: 0;
+  }
+  .handle-page .handle-sequence__description {
+    margin: 2.5vw 0 0;
+  }
+  .handle-page .handle-sequence__footer {
+    right: 4vw;
+    left: 4vw;
+    gap: 1.3228vw;
+  }
+  .handle-page .handle-sequence__footer p {
+    margin: 0;
+  }
+  .handle-page .handle-sequence__progress span {
+    width: 0;
+  }
+  .handle-page .handle-sequence__count {
+    min-width: 3.1746vw;
+  }
+  .handle-page .handle-material__media img {
+    width: 100%;
+  }
+  .handle-page .handle-material__copy {
+    left: 7vw;
+    width: min(39.6825vw, 44vw);
+  }
+  .handle-page .handle-material__copy h2, .handle-page .handle-grip__copy h2, .handle-page .handle-section-heading h2, .handle-page .handle-system__heading h2 {
+    margin: 0;
+  }
+  .handle-page .handle-material__copy > p:last-child, .handle-page .handle-grip__copy > p:last-child, .handle-page .handle-section-heading > p:last-child, .handle-page .handle-system__heading > p:last-child {
+    max-width: 35.7143vw;
+    margin: 2.3vw 0 0;
+  }
+  .handle-page .handle-grip__frames, .handle-page .handle-grip__frame, .handle-page .handle-grip__veil {
+    width: 100%;
+  }
+  .handle-page .handle-grip__copy-wrap {
+    left: 7vw;
+    width: min(37.037vw, 43vw);
+  }
+  .handle-page .handle-grip__copy {
+    left: 0;
+    width: 100%;
+  }
+  .handle-page .handle-grip__side {
+    right: 3.8vw;
+    gap: 0.7937vw;
+    margin: 0;
+  }
+  .handle-page .handle-grip__side::before {
+    width: 2.2487vw;
+  }
+  .handle-page .handle-anatomy {
+    padding: 11vw 2.5vw 12vw;
+  }
+  .handle-page .handle-section-heading, .handle-page .handle-system__heading {
+    gap: 7vw;
+    max-width: 99.2063vw;
+    margin: 0 auto 7vw;
+  }
+  .handle-page .handle-section-heading > p:last-child, .handle-page .handle-system__heading > p:last-child {
+    margin: 0 0 0.5291vw;
+  }
+  .handle-page .handle-section-heading__title {
+    max-width: 55.5556vw;
+  }
+  .handle-page .handle-anatomy__grid {
+    gap: 1.8vw;
+    max-width: 111.1111vw;
+    margin: 0 auto;
+  }
+  .handle-page .handle-anatomy__heading {
+    gap: 2vw;
+    max-width: 111.1111vw;
+    margin-bottom: 4vw;
+  }
+  .handle-page .handle-anatomy__heading > p:last-child {
+    max-width: 41.0053vw;
+    margin: 0;
+  }
+  .handle-page .handle-anatomy__card img {
+    width: 100%;
+  }
+  .handle-page .handle-anatomy__label {
+    right: 2.4vw;
+    left: 2.4vw;
+    gap: 2.5vw;
+  }
+  .handle-page .handle-anatomy__label h3 {
+    margin: -0.3968vw 0 0.7275vw;
+  }
+  .handle-page .handle-anatomy__label p {
+    max-width: 30.4233vw;
+    margin: 0;
+  }
+  .handle-page .handle-system {
+    padding: 12vw 4vw 12vw;
+  }
+  .handle-page .handle-system__figure {
+    max-width: 99.2063vw;
+    margin: 0 auto;
+  }
+  .handle-page .handle-system__figure > img {
+    width: 100%;
+  }
+  .handle-page .handle-system__marker {
+    gap: 0.6614vw;
+    max-width: 13.8889vw;
+  }
+  .handle-page .handle-system__marker::before {
+    width: 2.2487vw;
+  }
+  .handle-page .handle-system__marker--left {
+    left: 5%;
+  }
+  .handle-page .handle-system__marker--right {
+    right: 5%;
+  }
+  .handle-page .handle-system__marker--control {
+    right: 18%;
+  }
+  .handle-page .handle-system__summary {
+    max-width: 99.2063vw;
+    margin: 0 auto;
+  }
+  .handle-page .handle-system__stat {
+    padding: 3vw;
+  }
+  .handle-page .handle-system__stat strong {
+    margin-bottom: 1.1905vw;
+  }
+  .handle-page .handle-system__stat p {
+    margin: 0;
+  }
+  .handle-page .handle-grip__side-label {
+    right: 3.8vw;
+    gap: 0.7937vw;
+  }
+  .handle-page .handle-grip__side-label i {
+    width: 2.7778vw;
+  }
+  .handle-page .handle-system__stat > span {
+    margin-bottom: 1.1905vw;
+  }
+  .hud-page .hud-main {
+    width: 100%;
+  }
+  body.hud-page .case-footer {
+    margin: 0;
+  }
+  .hud-page h1, .hud-page h2, .hud-page h3, .hud-page p {
+    margin: 0;
+  }
+  .hud-page .hud-hero {
+    width: 100%;
+    padding: 11.2434vw 0 9.2593vw;
+  }
+  .hud-page .hud-hero__inner {
+    width: calc(100% - 13.2275vw);
+    max-width: 87.3016vw;
+    margin: 0 auto;
+  }
+  .hud-page .hud-hero__copy {
+    left: 0;
+    width: 30.4233vw;
+  }
+  .hud-page .hud-hero__line {
+    width: 2.7778vw;
+    margin: 2.1164vw 0 1.5873vw;
+  }
+  .hud-page .hud-hero__visual {
+    right: 0;
+    width: min( 76%, 64.8148vw );
+  }
+  .hud-page .hud-hero__ring {
+    left: 50%;
+  }
+  .hud-page .hud-hero__ring--01 {
+    width: 88%;
+  }
+  .hud-page .hud-hero__ring--02 {
+    width: 66%;
+  }
+  .hud-page .hud-hero__ring--03 {
+    width: 43%;
+  }
+  .hud-page .hud-hero__center {
+    width: 30%;
+  }
+  .hud-page .hud-hero__description {
+    right: 0;
+    width: 35.7143vw;
+  }
+  .hud-page .hud-benefit {
+    width: 100%;
+    padding: 5.291vw 0 12.5661vw;
+  }
+  .hud-page .hud-benefit__inner {
+    width: min( calc(100% - 6.6138vw), 80.6878vw );
+    margin: 0 auto;
+  }
+  .hud-page .hud-benefit__title {
+    margin-bottom: 4.9603vw;
+  }
+  .hud-page .hud-benefit__grid {
+    gap: 1.0582vw;
+  }
+  .hud-page .hud-benefit__card {
+    padding: 1.8519vw;
+  }
+  .hud-page .hud-information {
+    width: 100%;
+    padding: 4.6296vw 0 13.2275vw;
+  }
+  .hud-page .hud-information__inner {
+    width: min( calc(100% - 6.6138vw), 82.0106vw );
+    margin: 0 auto;
+  }
+  .hud-page .hud-information__title {
+    margin-bottom: 3.9683vw;
+  }
+  .hud-page .hud-information__visual {
+    width: 100%;
+  }
+  .hud-page .hud-focus {
+    width: 100%;
+    padding: 1.3228vw 0 11.9048vw;
+  }
+  .hud-page .hud-focus__stage {
+    width: 100%;
+  }
+  .hud-page .hud-focus__side {
+    width: min( 32vw, 27.7778vw );
+  }
+  .hud-page .hud-focus__circle {
+    width: min( 27vw, 25.1323vw );
+  }
+  .hud-page .hud-focus__copy {
+    width: min( calc(100% - 6.6138vw), 82.0106vw );
+    margin: 2.9762vw auto 0;
+  }
+  .handle-page #handle-detail .handle-material__sticky {
+    width: 100%;
+  }
+  .handle-page #handle-detail .handle-material__wave-svg {
+    left: var(--material-image-left);
+    width: var(--material-image-width);
+    max-width: none;
+  }
+  .handle-page .handle-process {
+    width: 100%;
+    padding: 0 4vw 12vw;
+  }
+  .handle-page .handle-process__meta {
+    gap: 1.5873vw;
+    width: 100%;
+    max-width: 105.8201vw;
+    margin: 0 auto 4vw;
+    padding-top: 2.2vw;
+  }
+  .handle-page .handle-process__meta p, .handle-page .handle-process__meta span {
+    margin: 0;
+  }
+  .handle-page .handle-process__grid, .handle-page .handle-process__sequence {
+    gap: 4.5vw;
+    width: 100%;
+    max-width: 105.8201vw;
+    margin: 0 auto;
+  }
+  .handle-page .handle-process__item {
+    min-width: 0;
+    margin-top: 0;
+  }
+  .handle-page .handle-process__item--install, .handle-page .handle-process__item--wide-left {
+    width: 64%;
+    max-width: 71.4286vw;
+  }
+  .handle-page .handle-process__item--route, .handle-page .handle-process__item--narrow-right {
+    width: 42%;
+    max-width: 44.9735vw;
+    margin-right: 3vw;
+  }
+  .handle-page .handle-process__item--connect, .handle-page .handle-process__item--medium-left {
+    width: 55%;
+    max-width: 59.5238vw;
+    margin-left: 10vw;
+  }
+  .handle-page .handle-process__media {
+    width: 100%;
+  }
+  .handle-page .handle-process__media video {
+    width: 100%;
+    max-width: none;
+  }
+  .handle-page .handle-process__caption {
+    gap: 1.1905vw;
+    margin-top: 1vw;
+  }
+  .handle-page .handle-process__caption span, .handle-page .handle-process__caption p {
+    margin: 0;
+  }
+  .interface-page .case-footer {
+    margin-top: 0;
+  }
+  .interface-page .case-footer__brand-stage, .interface-page .case-footer__brand-lockup {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .display-outro {
+    width: 100%;
+  }
+  .display-outro__image {
+    width: 100%;
+  }
+  .display-outro__copy {
+    left: 3.9683vw;
+    max-width: 34.3915vw;
+  }
+  .display-outro__eyebrow {
+    gap: 0.9259vw;
+    margin: 0;
+  }
+  .display-outro__title {
+    margin: 0;
+  }
+  .display-outro__lead {
+    max-width: 32em;
+    margin: 1.5873vw 0 0;
+  }
+  .display-outro__links {
+    gap: 0.6614vw;
+    margin-top: 2.1164vw;
+  }
+  .display-outro__link {
+    gap: 0.9259vw;
+    padding: 0.8598vw 1.455vw;
+  }
+  .display-page .display-scenes__screen {
+    left: 34vw;
+    width: min(58vw, 71.4286vw);
+  }
+  .display-outro {
+    margin-top: 11.1vw;
+  }
+  .display-page .fan__copy {
+    left: 0;
+    right: 0;
+  }
+  .display-page .fan__copy p {
+    margin: 0;
+  }
+  .display-page .fan__copy h2 {
+    margin: 0;
+  }
+  .display-page .fan__card {
+    --w: min(30vw, 31.746vw);
+    left: 50%;
+    width: var(--w);
+    margin: 0;
+    margin-left: calc(var(--w) / -2);
+    margin-top: calc(var(--w) * -0.35);
+  }
+  .display-page .fan__card img {
+    width: 100%;
+  }
+  .display-page .fan__card figcaption {
+    margin-top: 0.7937vw;
+  }
+  .display-page .fan__card figcaption b {
+    margin-right: 0.6614vw;
+  }
+  .display-page .display-manifesto__title {
+    margin-top: 0;
+  }
+  .display-page .display-manifesto__bottom {
+    gap: 3.6vw;
+    margin-top: 0;
+    padding-top: 5vw;
+  }
+  .display-page .display-manifesto__size span {
+    left: calc(100% + 1.3vw);
+  }
+  .display-page .display-manifesto__size strong {
+    padding-right: 0.085em;
+  }
+  .display-page .display-manifesto__size strong {
+    padding-right: 0.06em;
+  }
+  .display-page .dh8__scene {
+    left: 50%;
+    width: min(100vw, 101.5873vw, 132vh);
+    margin: 0;
+  }
+  .display-page .dh8__scene > img, .display-page .dh8__scene > i {
+    width: 100%;
+    max-width: none;
+  }
+  .display-page .dh8__copy {
+    left: 0;
+    right: 0;
+    padding: 0 1.3228vw;
+  }
+  .display-page .dh8__kick {
+    margin: 0 0 1.3228vw;
+  }
+  .display-page .dh8__title {
+    left: 0;
+    right: 0;
+    margin: 0;
+  }
+  .display-page .dh8__scene {
+    width: 100vw;
+  }
+  .display-page .dh8__scene {
+    width: 100%;
+  }
+  .display-page .dh8 {
+    padding-bottom: 9vw;
+  }
+  .display-page .dh8__scene {
+    left: auto;
+    width: 100%;
+    margin-top: max( 0px, calc( clamp(6.6138vw, 13vh, 9.2593vw) + 2.4471vw + 2.4 * var(--type-hero-size, 3.3069vw) + 1.5873vw - 16vw ) );
+  }
+
+}
