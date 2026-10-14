@@ -16550,6 +16550,153 @@ body {
 }
 
 /* =========================================================
+   BRAND2 KEYWORDS — 두 번째 섹션 정리 / 2026.10.14
+   ---------------------------------------------------------
+   왼쪽 영문 키워드 · 가운데 세로 이미지 · 오른쪽 한글 설명 · 아래 진행 막대
+   ---- 가운데 이미지가 너무 세로로 김
+        전) 섹션 높이를 꽉 채움 (맥북 기준 300 × 588px, 가로:세로 약 1 : 2)
+        후) 300 × 460px (약 1 : 1.53), 위아래 가운데 정렬
+   ---- 왼쪽 영문이 화면 끝에 붙어 보이고 양쪽 여백이 달라 보임
+        전) 왼쪽 159px / 오른쪽 174px → 영문을 오른쪽으로 28px (키워드 left 0 → 28px)
+   ---- 오른쪽 한글 설명 살짝 작게
+        제목 42px → 36px / 설명 17px → 15.5px
+        (TYPOGRAPHY SYSTEM 의 !important 보다 우선하도록 선택자를 한 단계 더 구체적으로)
+   ---- 진행 막대가 화면 아래 끝에 걸쳐 보임
+        bottom 44px → 84px (화면 아래에서 약 70px 위)
+   ---- 1001px 이상(데스크톱)만 · 태블릿 · 모바일은 기존 그대로
+========================================================= */
+
+@media (min-width: 1001px) {
+
+  .brand2-page .philosophy-keywords__media {
+    align-self: center;
+
+    height: auto;
+    aspect-ratio: 300 / 460;   /* 전 섹션 높이 꽉 채움 */
+  }
+
+  /* 영문 키워드는 각각 absolute(left 0)라 칸 여백이 안 먹음 → 글자 자체를 이동 */
+  .brand2-page .philosophy-keywords__item {
+    left: 28px;                /* 전 0 */
+  }
+
+  html body.brand2-page .philosophy-keywords .philosophy-keyword-copy h2 {
+    font-size: 36px !important;     /* 전 42px */
+  }
+
+  html body.brand2-page .philosophy-keywords .philosophy-keyword-copy p {
+    font-size: 15.5px !important;   /* 전 17px */
+  }
+
+  .brand2-page .philosophy-keywords__progress {
+    bottom: 84px;              /* 전 44px */
+  }
+
+}
+
+/* 큰 화면(1513px 이상) — 위 값을 맥북 비율 그대로 (36px · 15.5px · 84px ÷ 1512) */
+@media (min-width: 1513px) {
+
+  html body.brand2-page .philosophy-keywords .philosophy-keyword-copy h2 {
+    font-size: 2.381vw !important;
+  }
+
+  html body.brand2-page .philosophy-keywords .philosophy-keyword-copy p {
+    font-size: 1.0251vw !important;
+  }
+
+  /* 아이맥에서 화면 아래까지 맥북과 같은 비율(약 1.35배) 띄우도록 보정 */
+  .brand2-page .philosophy-keywords__progress {
+    bottom: 7.91vw;
+  }
+
+}
+
+/* =========================================================
+   MOBILE HEADER — 메뉴 · 하위 메뉴 줄 맞춤 / 2026.10.14
+   ---------------------------------------------------------
+   문제 ) 휴대폰에서 위 메뉴(BRAND · INTERFACE · EXPERIENCE · ABOUT)는
+          로고 바로 뒤(왼쪽 98px)부터 글자 폭대로 붙어 있고
+          아래 하위 메뉴는 다른 고정 칸(74 · 98 · 108 · 68px)으로 왼쪽 18px 부터 시작
+          → 위아래 줄이 안 맞고, 마지막 열(문제 정의 · 사용자 분석)이 화면 밖으로 나감
+   수정 ) 로고 칸 폭을 76px 로 고정하고
+          위 메뉴 · 하위 메뉴 둘 다 "로고 뒤 ~ 오른쪽 끝"을 같은 4칸(같은 간격)으로 나눔
+          → 각 하위 메뉴 열이 해당 메뉴 바로 아래에서 시작, 화면 안에 들어옴
+   ---- 아이폰 · 카카오톡 브라우저가 글자를 자동으로 키우지 않도록 (text-size-adjust)
+   ---- 650px 이하(휴대폰)만 · 태블릿 · 데스크톱은 기존 그대로
+========================================================= */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (max-width: 650px) {
+
+  html body .site-header {
+    /* 로고 칸 · 간격 — 위 메뉴와 하위 메뉴가 같은 값을 씀 */
+    --m-logo: 76px;
+    --m-gap: 12px;
+    --m-side: 16px;
+    --m-col-gap: 8px;
+  }
+
+  html body .site-header__logo {
+    flex: 0 0 var(--m-logo);
+    width: var(--m-logo);
+  }
+
+  /* 위 메뉴 : 로고 뒤 남은 폭을 4칸으로 */
+  html body .site-header .site-header__nav.site-header__nav {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--m-col-gap);
+
+    flex: 1 1 auto;
+    min-width: 0;
+
+    margin-left: var(--m-gap);
+
+    transform: none;
+  }
+
+  html body .site-header__nav-link {
+    justify-content: flex-start;
+
+    min-width: 0;
+
+    white-space: nowrap;
+  }
+
+  /* 하위 메뉴 : 위 메뉴와 같은 시작점 · 같은 4칸 */
+  /* 기존 휴대폰 규칙이 padding 을 !important 로 지정하고 있어서 같이 !important
+     페이지별 CSS(.brand1-page · .experience-page.driving-page 등)가 더 구체적인 선택자라
+     클래스를 반복해 우선순위를 높임 (.site-header__mega 3번) */
+  html body .site-header .site-header__mega.site-header__mega.site-header__mega {
+    padding-left:
+      calc(var(--m-side) + var(--m-logo) + var(--m-gap)) !important;
+    padding-right: var(--m-side) !important;
+  }
+
+  html body .site-header .site-header__mega-grid.site-header__mega-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    column-gap: var(--m-col-gap);
+
+    width: 100%;
+  }
+
+  html body .site-header__mega-column {
+    min-width: 0;
+  }
+
+  html body .site-header__mega-links a {
+    white-space: normal;
+    word-break: keep-all;
+  }
+
+}
+
+/* =========================================================
    LARGE SCREEN LAYOUT — 맥북 비율 그대로 (자동 생성) / 2026.10.14
    ---------------------------------------------------------
    아이맥(2048px)처럼 넓은 화면에서
@@ -17766,6 +17913,12 @@ body {
   .brand1-page .brand-hero-final__media video {
     width: 100%;
     height: 100%;
+  }
+  .brand2-page .philosophy-keywords__media {
+    height: auto;
+  }
+  .brand2-page .philosophy-keywords__item {
+    left: 1.8519vw;
   }
 
 }

@@ -7764,6 +7764,90 @@ html.is-intro-active:not(.is-intro-leaving)
 }
 
 /* =========================================================
+   MOBILE HEADER — 메뉴 · 하위 메뉴 줄 맞춤 / 2026.10.14
+   ---------------------------------------------------------
+   문제 ) 휴대폰에서 위 메뉴(BRAND · INTERFACE · EXPERIENCE · ABOUT)는
+          로고 바로 뒤(왼쪽 98px)부터 글자 폭대로 붙어 있고
+          아래 하위 메뉴는 다른 고정 칸(74 · 98 · 108 · 68px)으로 왼쪽 18px 부터 시작
+          → 위아래 줄이 안 맞고, 마지막 열(문제 정의 · 사용자 분석)이 화면 밖으로 나감
+   수정 ) 로고 칸 폭을 76px 로 고정하고
+          위 메뉴 · 하위 메뉴 둘 다 "로고 뒤 ~ 오른쪽 끝"을 같은 4칸(같은 간격)으로 나눔
+          → 각 하위 메뉴 열이 해당 메뉴 바로 아래에서 시작, 화면 안에 들어옴
+   ---- 아이폰 · 카카오톡 브라우저가 글자를 자동으로 키우지 않도록 (text-size-adjust)
+   ---- 650px 이하(휴대폰)만 · 태블릿 · 데스크톱은 기존 그대로
+========================================================= */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (max-width: 650px) {
+
+  html body .site-header {
+    /* 로고 칸 · 간격 — 위 메뉴와 하위 메뉴가 같은 값을 씀 */
+    --m-logo: 76px;
+    --m-gap: 12px;
+    --m-side: 16px;
+    --m-col-gap: 8px;
+  }
+
+  html body .site-header__logo {
+    flex: 0 0 var(--m-logo);
+    width: var(--m-logo);
+  }
+
+  /* 위 메뉴 : 로고 뒤 남은 폭을 4칸으로 */
+  html body .site-header .site-header__nav.site-header__nav {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--m-col-gap);
+
+    flex: 1 1 auto;
+    min-width: 0;
+
+    margin-left: var(--m-gap);
+
+    transform: none;
+  }
+
+  html body .site-header__nav-link {
+    justify-content: flex-start;
+
+    min-width: 0;
+
+    white-space: nowrap;
+  }
+
+  /* 하위 메뉴 : 위 메뉴와 같은 시작점 · 같은 4칸 */
+  /* 기존 휴대폰 규칙이 padding 을 !important 로 지정하고 있어서 같이 !important
+     페이지별 CSS(.brand1-page · .experience-page.driving-page 등)가 더 구체적인 선택자라
+     클래스를 반복해 우선순위를 높임 (.site-header__mega 3번) */
+  html body .site-header .site-header__mega.site-header__mega.site-header__mega {
+    padding-left:
+      calc(var(--m-side) + var(--m-logo) + var(--m-gap)) !important;
+    padding-right: var(--m-side) !important;
+  }
+
+  html body .site-header .site-header__mega-grid.site-header__mega-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    column-gap: var(--m-col-gap);
+
+    width: 100%;
+  }
+
+  html body .site-header__mega-column {
+    min-width: 0;
+  }
+
+  html body .site-header__mega-links a {
+    white-space: normal;
+    word-break: keep-all;
+  }
+
+}
+
+/* =========================================================
    LARGE SCREEN LAYOUT — 맥북 비율 그대로 (자동 생성) / 2026.10.14
    ---------------------------------------------------------
    아이맥(2048px)처럼 넓은 화면에서
