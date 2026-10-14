@@ -10617,11 +10617,12 @@ body.experience-page {
    양옆 여백 최대값에 걸려 내용이 더 안 넓어지고 가운데로 모임
    → 양옆 여백이 페이지마다 300 ~ 430px 로 크게 벌어지고 서로 달라짐
      (맥북에서는 50 ~ 160px)
+   + 사진 · 칸 높이(px)는 그대로라 가로로만 길어짐
 
-   수정 ) 1513px 이상에서만 이 파일의 가로 배치 값
-          (width · max-width · padding · margin · gap · left · right · 변수)을
+   수정 ) 1513px 이상에서만 이 파일의 배치 값
+          (width · height · max/min · padding · margin · gap · left · right · 변수)을
           "맥북(1512px)에서 계산된 값 ÷ 1512" 비율(vw)로 다시 적용
-          → 아이맥에서도 맥북 화면을 그대로 1.35배 확대한 배치
+          → 아이맥에서도 맥북 화면을 그대로 1.35배 확대한 배치 · 비율
    ---- 맥북 · 태블릿 · 모바일(1512px 이하)은 이 블록이 꺼져 있어 기존 그대로
    ---- 원래 규칙 순서 그대로 다시 써서 어떤 규칙이 이기는지(cascade)도 동일
    ---- 위쪽 원본 CSS 를 고치면 이 블록도 다시 만들어야 함
@@ -10641,6 +10642,7 @@ body.experience-page {
   }
   .experience-page img {
     width: 100%;
+    height: 100%;
   }
   .driving-container {
     width: 100%;
@@ -10667,9 +10669,11 @@ body.experience-page {
   }
   .driving-hero__visual {
     width: 100%;
+    height: 37.037vw;
   }
   .driving-hero__image {
     width: 100%;
+    height: 100%;
     max-width: none;
   }
   .driving-solution {
@@ -10693,6 +10697,7 @@ body.experience-page {
   }
   .driving-solution__visual {
     width: 100%;
+    min-height: 54.2328vw;
   }
   .driving-solution__image {
     width: calc(50% - 0.3968vw);
@@ -10710,18 +10715,22 @@ body.experience-page {
   .driving-solution__image--01 {
     left: 0;
     width: calc(50% - 0.3968vw);
+    height: 42%;
   }
   .driving-solution__image--03 {
     left: 0;
     width: calc(50% - 0.3968vw);
+    height: 42%;
   }
   .driving-solution__image--02 {
     right: 0;
     width: calc(50% - 0.3968vw);
+    height: 43%;
   }
   .driving-solution__image--04 {
     right: 0;
     width: calc(50% - 0.3968vw);
+    height: 42%;
   }
   .driving-connection {
     padding-top: 15vw;
@@ -10737,11 +10746,13 @@ body.experience-page {
   }
   .driving-functions__stage {
     width: 100%;
+    min-height: 0;
   }
   .driving-feature, .driving-feature--vibration, .driving-feature--hud, .driving-feature--alert {
     left: 0;
     right: auto;
     width: 100%;
+    height: 100%;
     margin: 0;
   }
   .driving-feature__image {
@@ -10763,10 +10774,12 @@ body.experience-page {
   .driving-feature--vibration {
     left: 0;
     width: 100%;
+    height: 100%;
   }
   .driving-feature__image--vibration {
     left: 7.51%;
     width: 46.24%;
+    height: 22.31%;
   }
   .driving-feature--vibration .driving-feature__copy {
     left: 56.34%;
@@ -10777,14 +10790,17 @@ body.experience-page {
   .driving-feature--vibration::after {
     left: 94.37%;
     width: 1px;
+    height: 22.31%;
   }
   .driving-feature--hud {
     left: 0;
     width: 100%;
+    height: 100%;
   }
   .driving-feature--hud::before {
     left: 7.28%;
     width: 1px;
+    height: 50%;
   }
   .driving-feature--hud .driving-feature__copy {
     left: 12.6%;
@@ -10795,14 +10811,17 @@ body.experience-page {
   .driving-feature__image--hud {
     left: 40.61%;
     width: 53.76%;
+    height: 23.08%;
   }
   .driving-feature--alert {
     left: 0;
     width: 100%;
+    height: 100%;
   }
   .driving-feature__image--alert {
     left: 23.47%;
     width: 39.44%;
+    height: 20%;
   }
   .driving-feature--alert .driving-feature__copy {
     right: 5.63%;
@@ -10812,6 +10831,7 @@ body.experience-page {
   }
   .driving-end-space {
     width: 100%;
+    height: 5vw;
   }
   .experience-page .case-footer {
     width: 100%;
@@ -10820,12 +10840,14 @@ body.experience-page {
   }
   html, body.experience-page {
     margin-bottom: 0;
+    min-height: 100%;
   }
   .experience-page .case-footer {
     margin-bottom: 0;
   }
   .driving-page .driving-hero__image {
     width: 100%;
+    height: 100%;
     max-width: none;
   }
   body.experience-page.driving-page {
@@ -10850,6 +10872,7 @@ body.experience-page {
   }
   .safety-hero__visual {
     width: 100%;
+    height: clamp(34.3915vw, calc(40vw + 9.9206vw), 52.9101vw);
   }
   .safety-hero__heading {
     width: 100%;
@@ -10864,6 +10887,7 @@ body.experience-page {
   }
   .safety-carousel-section {
     width: 100%;
+    height: 47.619vw;
     margin-top: 8.5vw;
   }
   .safety-carousel-section__background-text {
@@ -10915,12 +10939,14 @@ body.experience-page {
   .safety-stack {
     width: min(78vw, 78.0423vw);
     max-width: 78.0423vw;
+    height: 43vw;
     margin: 0 auto;
     padding-left: 0;
     padding-right: 0;
   }
   .safety-stack__card {
     width: 27%;
+    height: auto;
   }
   .safety-stack__card--01 {
     left: 2%;
@@ -10936,17 +10962,25 @@ body.experience-page {
   }
   .safety-end-space {
     width: 100%;
+    height: 2.3vw;
+  }
+  .driving-page .driving-hero__visual {
+    height: calc(100svh - 11.9048vw);
+    min-height: 37.037vw;
   }
   .driving-page .driving-hero__image {
     width: 100%;
+    height: 100%;
     max-width: none;
   }
   .driving-page .driving-hero__liquid-image {
     width: 100%;
+    height: 100%;
     max-width: none;
   }
   .driving-page .driving-hero__liquid-svg {
     width: 0;
+    height: 0;
   }
   body.experience-page.safety-page {
     margin-bottom: 0;
@@ -10963,6 +10997,7 @@ body.experience-page {
   }
   .safety-page .safety-final__video {
     width: 100%;
+    height: 100%;
   }
   .safety-page .safety-final__copy {
     min-width: 0;
@@ -10986,14 +11021,22 @@ body.experience-page {
   }
   .safety-page .safety-hero__visual {
     width: 100%;
+    height: auto;
+    min-height: 0;
     margin: 0;
   }
   .safety-page .safety-hero__image {
     width: 100%;
+    height: auto;
     max-width: none;
+  }
+  .safety-page .safety-hero__visual {
+    height: 44vw;
+    min-height: 0;
   }
   .safety-page .safety-hero__image {
     width: 100%;
+    height: 100%;
   }
   .safety-page .safety-hero__heading {
     left: -0.8vw;
@@ -11012,6 +11055,7 @@ body.experience-page {
   .safety-page .safety-carousel::before {
     left: 0;
     right: 0;
+    height: 18vw;
   }
   .safety-page .safety-carousel__caption {
     left: 50%;
@@ -11038,6 +11082,7 @@ body.experience-page {
   .experience-page .site-header__mega-links a::after {
     left: 0;
     width: 100%;
+    height: 1px;
   }
   .experience-page .site-header {
     --header-column-brand: 6.0847vw;
@@ -11081,6 +11126,7 @@ body.experience-page {
   .experience-page .case-footer__column a::after {
     left: 0;
     width: 100%;
+    height: 1px;
   }
   .experience-page .case-footer__utility {
     margin-top: 5vw;
@@ -11091,6 +11137,7 @@ body.experience-page {
   .experience-page .case-footer__back-to-top::after {
     left: 0;
     width: 100%;
+    height: 1px;
   }
   .experience-page .case-footer__brand-stage {
     width: 100%;
@@ -11111,6 +11158,7 @@ body.experience-page {
   }
   .experience-page .case-footer__symbol span {
     width: 4vw;
+    height: 0.92vw;
   }
   .experience-page .case-footer__symbol span:nth-child(1), .experience-page .case-footer__symbol span:nth-child(3) {
     margin-left: 0.9vw;
@@ -11136,6 +11184,7 @@ body.experience-page {
   }
   .experience-page .case-footer__brand-stage {
     margin-top: 2.4vw;
+    height: 12.2vw;
   }
   .experience-page .case-footer__brand-lockup {
     width: 95vw;
@@ -11147,6 +11196,7 @@ body.experience-page {
   }
   .experience-page .case-footer__symbol span {
     width: 4vw;
+    height: 0.9vw;
   }
   .experience-page .case-footer__symbol span:nth-child(1), .experience-page .case-footer__symbol span:nth-child(3) {
     margin-left: 0.85vw;
@@ -11162,9 +11212,11 @@ body.experience-page {
   }
   .driving-page .driving-signal--vibration {
     left: calc( 94.37% - 0.5952vw );
+    height: 22.31%;
   }
   .driving-page .driving-signal--hud {
     left: calc( 7.28% - 0.5952vw );
+    height: 50%;
   }
   .driving-page .driving-signal__rail {
     left: 50%;
@@ -11173,10 +11225,12 @@ body.experience-page {
   .driving-page .driving-signal__flow {
     left: 50%;
     width: 2px;
+    height: 30%;
   }
   .driving-page .driving-signal__dot {
     left: 50%;
     width: 0.1984vw;
+    height: 0.1984vw;
   }
   .driving-page .driving-feature__copy h2 {
     margin: 0;
@@ -11209,9 +11263,14 @@ body.experience-page {
     max-width: 34em;
     margin-top: 1.455vw !important;
   }
+  .dp-a1__track {
+    height: 380vh;
+  }
   .dp-a1__sticky {
     column-gap: 4vw;
     width: min(100%, var(--dp-max));
+    height: 100vh;
+    height: 100svh;
     margin: 0 auto;
     padding: 5.291vw var(--dp-side) 0;
   }
@@ -11228,6 +11287,7 @@ body.experience-page {
   }
   .dp-hot {
     width: 0;
+    height: 0;
   }
   .dp-hot[data-k="hud"] {
     left: 26%;
@@ -11241,6 +11301,7 @@ body.experience-page {
   .dp-hot i {
     left: -1.455vw;
     width: 2.9101vw;
+    height: 2.9101vw;
   }
   .dp-hot em {
     left: 1.9841vw;
@@ -11254,9 +11315,18 @@ body.experience-page {
     column-gap: 0.6614vw;
     row-gap: 0.2646vw;
   }
+  .dp-a1__lane {
+    height: 1.455vw;
+  }
   .dp-a1__bar {
     left: 0;
     width: 0;
+  }
+  .dp-a1__note {
+    height: 0;
+  }
+  .dp-a1__row.on .dp-a1__note {
+    height: auto;
   }
   .dp-a1__sticky {
     padding: 4.7619vw var(--dp-side) 2.6455vw;
@@ -11275,9 +11345,13 @@ body.experience-page {
   }
   .driving-page .driving-signal__dot {
     width: 0.2646vw;
+    height: 0.2646vw;
   }
   .driving-page .driving-hero {
     padding-top: 7.6389vw;
+  }
+  .driving-page .driving-hero__visual {
+    height: calc(100svh - 9.2593vw);
   }
   .driving-page .driving-solution__inner {
     column-gap: 6%;
@@ -11300,6 +11374,21 @@ body.experience-page {
   .driving-page .driving-solution__copy {
     margin-bottom: 14.6164vw;
   }
+  .experience-page .site-header {
+    --header-column-brand: 2.3714vw;
+    --header-column-interface: 3.7088vw;
+    --header-column-experience: 4.1862vw;
+    --header-column-about: 2.4002vw;
+    --header-center-gap: 5.5556vw;
+  }
+  .safety-page .sh4 {
+    height: 280vh;
+  }
+  .safety-page .sh4__sticky {
+    height: 100vh;
+    height: 100svh;
+    min-height: 39.6825vw;
+  }
   .safety-page .sh4__small {
     margin: 0 0 1vw;
   }
@@ -11309,6 +11398,7 @@ body.experience-page {
   .safety-page .sh4__full::after {
     left: 0;
     right: 0;
+    height: 45%;
   }
   .safety-page .sh4__copy {
     left: 0;
@@ -11352,14 +11442,20 @@ body.experience-page {
   .driving-page .dp-a1__lane::before {
     left: 0;
     right: 0;
+    height: 1px;
+  }
+  .driving-page .dp-a1__bar {
+    height: 2px;
   }
   .driving-page .dp-a1__bar::after {
     right: -0.2646vw;
     width: 0.5291vw;
+    height: 0.5291vw;
   }
   .driving-page .dp-a1__bar::after {
     right: -2.5px;
     width: 0.3307vw;
+    height: 0.3307vw;
   }
 
 }

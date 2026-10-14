@@ -16527,6 +16527,28 @@ body.is-header-hidden:not(.is-header-peek)
     );
 }
 
+
+/* =========================================================
+   FONT — 모든 페이지 같은 서체(Pretendard Variable) / 2026.10.14
+   ---------------------------------------------------------
+   문제 ) 사이트는 웹에서 "Pretendard Variable" 만 내려받는데
+          일부 규칙이 "Pretendard" 를 먼저 찾음
+          → 이 맥북처럼 Pretendard 가 설치된 컴퓨터는 설치된 고정 두께 글꼴을 쓰고
+            (450 같은 중간 두께는 400 · 500 으로 뭉개짐)
+            설치 안 된 컴퓨터(아이맥 등)는 시스템 글꼴로 바뀌어
+            페이지마다 · 컴퓨터마다 제목 두께가 달라 보임
+   수정 ) 같은 선택자에 "Pretendard Variable" 을 맨 앞에 두고 다시 지정
+          (전 Pretendard, -apple-system ... → 후 "Pretendard Variable", Pretendard, ...)
+========================================================= */
+
+body {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.brand2-page .philosophy-keywords__item {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
 /* =========================================================
    LARGE SCREEN LAYOUT — 맥북 비율 그대로 (자동 생성) / 2026.10.14
    ---------------------------------------------------------
@@ -16535,11 +16557,12 @@ body.is-header-hidden:not(.is-header-peek)
    양옆 여백 최대값에 걸려 내용이 더 안 넓어지고 가운데로 모임
    → 양옆 여백이 페이지마다 300 ~ 430px 로 크게 벌어지고 서로 달라짐
      (맥북에서는 50 ~ 160px)
+   + 사진 · 칸 높이(px)는 그대로라 가로로만 길어짐
 
-   수정 ) 1513px 이상에서만 이 파일의 가로 배치 값
-          (width · max-width · padding · margin · gap · left · right · 변수)을
+   수정 ) 1513px 이상에서만 이 파일의 배치 값
+          (width · height · max/min · padding · margin · gap · left · right · 변수)을
           "맥북(1512px)에서 계산된 값 ÷ 1512" 비율(vw)로 다시 적용
-          → 아이맥에서도 맥북 화면을 그대로 1.35배 확대한 배치
+          → 아이맥에서도 맥북 화면을 그대로 1.35배 확대한 배치 · 비율
    ---- 맥북 · 태블릿 · 모바일(1512px 이하)은 이 블록이 꺼져 있어 기존 그대로
    ---- 원래 규칙 순서 그대로 다시 써서 어떤 규칙이 이기는지(cascade)도 동일
    ---- 위쪽 원본 CSS 를 고치면 이 블록도 다시 만들어야 함
@@ -16555,11 +16578,13 @@ body.is-header-hidden:not(.is-header-peek)
   }
   html {
     width: 100%;
+    min-height: 100%;
     margin: 0;
     padding: 0;
   }
   body {
     width: 100%;
+    min-height: 100%;
     margin: 0;
     padding: 0;
   }
@@ -16581,6 +16606,7 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .site-header__bar {
     width: 100%;
+    min-height: var(--header-height);
     padding: 0 var(--header-side-padding);
   }
   .site-header__nav {
@@ -16592,10 +16618,12 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .site-header__nav-link {
     width: max-content;
+    min-height: var(--header-height);
   }
   .site-header__nav-link::after {
     left: 0;
     width: 100%;
+    height: 1px;
   }
   .site-header__mega {
     left: 0;
@@ -16624,13 +16652,19 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .brand1-page .brand-intro-hero {
     width: 100%;
+    height: 100vh;
+    height: 100svh;
+    min-height: 100vh;
+    min-height: 100svh;
     padding: 0;
   }
   .brand1-page .brand-hero-lines {
     width: 100%;
+    height: 100%;
   }
   .brand1-page .brand-hero-lines canvas {
     width: 100%;
+    height: 100%;
   }
   .brand1-page .brand-hero-horizontal {
     width: 100%;
@@ -16643,12 +16677,15 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .brand1-page .brand-hero-final {
     width: 100%;
+    height: 100%;
   }
   .brand1-page .brand-hero-final__media {
     width: 100%;
+    height: 100%;
   }
   .brand1-page .brand-hero-final__media img {
     width: 100%;
+    height: 100%;
   }
   .brand1-page .brand-hero-final__copy {
     right: 4.2vw;
@@ -16688,12 +16725,15 @@ body.is-header-hidden:not(.is-header-peek)
   .problem-card-list {
     gap: 1.8519vw;
     width: 100%;
+    min-height: 29.7619vw;
   }
   .problem-card {
     width: 100%;
+    height: 19.8413vw;
   }
   .problem-image {
     width: 100%;
+    height: 100%;
     max-width: none;
   }
   .problem-card::before {
@@ -16708,6 +16748,9 @@ body.is-header-hidden:not(.is-header-peek)
   .problem-hover-title {
     left: 50%;
     width: calc( 100% - 2.6455vw );
+  }
+  .problem-card:hover {
+    height: 27.7778vw;
   }
   .brand-change {
     width: 100%;
@@ -16740,6 +16783,7 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .brand-slide-image img {
     width: 100%;
+    height: 100%;
   }
   .brand-slider-controls {
     gap: 1.1905vw;
@@ -16749,22 +16793,30 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .brand-slider-button {
     width: 2.7778vw;
+    height: 2.7778vw;
   }
   .brand-safe-flow {
     width: 100%;
+    min-height: 220vh;
+    min-height: 220svh;
   }
   .brand-safe-flow__stage {
     width: 100%;
+    height: 100vh;
+    height: 100svh;
   }
   .brand-safe-flow__media {
     width: 100%;
+    height: 100%;
   }
   .brand-safe-flow__video {
     width: 100%;
+    height: 100%;
     max-width: none;
   }
   .brand-safe-flow__overlay {
     width: 100%;
+    height: 100%;
   }
   .brand-safe-flow__copy {
     width: 100%;
@@ -16809,6 +16861,7 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .case-footer__symbol span {
     width: 3.2407vw;
+    height: 0.8598vw;
   }
   .case-footer__symbol span:nth-child(1), .case-footer__symbol span:nth-child(3) {
     margin-left: 0.7937vw;
@@ -16829,13 +16882,22 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .philosophy-hero {
     width: 100%;
+    height: 100vh;
+    height: 100svh;
+    min-height: 100vh;
+    min-height: 100svh;
   }
   .philosophy-hero__media {
     width: 100%;
+    height: 100%;
   }
   .philosophy-hero__media img {
     width: 100%;
+    height: 100%;
     max-width: none;
+  }
+  .philosophy-hero .philosophy-container {
+    min-height: inherit;
   }
   .philosophy-hero__copy {
     width: min(42.9894vw, 58%);
@@ -16866,10 +16928,12 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .sensory-media img {
     width: 100%;
+    height: 100%;
     max-width: none;
   }
   .sensory-media--visual-main {
     width: 100%;
+    height: 20.5026vw;
   }
   .sensory-row--haptic {
     gap: 3.3069vw;
@@ -16878,6 +16942,7 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .sensory-media--haptic-left {
     width: 100%;
+    height: 21.164vw;
   }
   .sensory-copy--haptic {
     padding-bottom: 0;
@@ -16890,6 +16955,7 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .sensory-media--haptic-right {
     width: 100%;
+    height: 12.2354vw;
   }
   .philosophy-stack-section {
     width: 100%;
@@ -16905,10 +16971,12 @@ body.is-header-hidden:not(.is-header-peek)
   .philosophy-card-stage {
     width: 100%;
     max-width: 75.3968vw;
+    height: 25.1323vw;
     margin: -1.3228vw auto 0;
   }
   .philosophy-card {
     width: 55%;
+    height: 100%;
   }
   .philosophy-card--1 {
     left: 0;
@@ -16924,6 +16992,7 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .philosophy-card__media {
     width: 100%;
+    height: 100%;
   }
   .philosophy-card.is-active {
     left: 50%;
@@ -16955,6 +17024,7 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .site-header__bar {
     width: 100%;
+    min-height: var(--header-height);
     padding: 0 var(--header-side-padding);
   }
   .site-header__logo {
@@ -16965,8 +17035,12 @@ body.is-header-hidden:not(.is-header-peek)
     left: calc( 50% + var(--header-visual-shift) );
     column-gap: var(--header-center-gap);
     width: max-content;
+    min-height: var(--header-height);
     margin: 0;
     padding: 0;
+  }
+  .site-header__nav-link {
+    min-height: var(--header-height);
   }
   .site-header__nav-link::after {
     left: 0;
@@ -16994,6 +17068,7 @@ body.is-header-hidden:not(.is-header-peek)
   .site-header__mega-links a::after {
     left: 0;
     width: 100%;
+    height: 1px;
   }
   html::-webkit-scrollbar, body::-webkit-scrollbar {
     width: 0.3968vw;
@@ -17024,6 +17099,7 @@ body.is-header-hidden:not(.is-header-peek)
   .brand1-page .case-footer__column a::after {
     left: 0;
     width: 100%;
+    height: 1px;
   }
   .brand1-page .case-footer__utility {
     margin-top: 5vw;
@@ -17034,9 +17110,11 @@ body.is-header-hidden:not(.is-header-peek)
   .brand1-page .case-footer__back-to-top::after {
     left: 0;
     width: 100%;
+    height: 1px;
   }
   .brand1-page .case-footer__brand-stage {
     width: 100%;
+    height: 12.2vw;
     margin-top: 2.4vw;
     margin-bottom: 0;
     padding-bottom: 0;
@@ -17054,6 +17132,7 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .brand1-page .case-footer__symbol span {
     width: 4vw;
+    height: 0.9vw;
   }
   .brand1-page .case-footer__symbol span:nth-child(1), .brand1-page .case-footer__symbol span:nth-child(3) {
     margin-left: 0.85vw;
@@ -17068,6 +17147,11 @@ body.is-header-hidden:not(.is-header-peek)
   .brand1-page .brand-intro-hero::after {
     right: 0;
     left: 0;
+    height: 1px;
+  }
+  .site-header {
+    --header-height: 4.0278vw;
+    --header-logo-width: 10.0694vw;
   }
   .site-header__mega-links {
     gap: 0.9722vw;
@@ -17098,6 +17182,7 @@ body.is-header-hidden:not(.is-header-peek)
   .brand1-page .case-footer__column a::after {
     left: 0;
     width: 100%;
+    height: 1px;
   }
   .brand1-page .case-footer__utility {
     margin-top: 5vw;
@@ -17108,6 +17193,7 @@ body.is-header-hidden:not(.is-header-peek)
   .brand1-page .case-footer__back-to-top::after {
     left: 0;
     width: 100%;
+    height: 1px;
   }
   .brand1-page .case-footer__brand-stage {
     width: 100%;
@@ -17128,6 +17214,7 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .brand1-page .case-footer__symbol span {
     width: 4vw;
+    height: 0.92vw;
   }
   .brand1-page .case-footer__symbol span:nth-child(1), .brand1-page .case-footer__symbol span:nth-child(3) {
     margin-left: 0.9vw;
@@ -17158,6 +17245,7 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .brand1-page .case-footer__brand-stage {
     margin-top: 2.4vw;
+    height: 12.2vw;
   }
   .brand1-page .case-footer__brand-lockup {
     width: 95vw;
@@ -17169,6 +17257,7 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .brand1-page .case-footer__symbol span {
     width: 4vw;
+    height: 0.9vw;
   }
   .brand1-page .case-footer__symbol span:nth-child(1), .brand1-page .case-footer__symbol span:nth-child(3) {
     margin-left: 0.85vw;
@@ -17179,6 +17268,7 @@ body.is-header-hidden:not(.is-header-peek)
   .brand2-page .philosophy-hero::after {
     left: 0;
     right: 0;
+    height: 1px;
   }
   .brand2-page .case-footer {
     width: 100%;
@@ -17206,6 +17296,7 @@ body.is-header-hidden:not(.is-header-peek)
   .brand2-page .case-footer__column a::after {
     left: 0;
     width: 100%;
+    height: 1px;
   }
   .brand2-page .case-footer__utility {
     margin-top: 5vw;
@@ -17216,6 +17307,7 @@ body.is-header-hidden:not(.is-header-peek)
   .brand2-page .case-footer__back-to-top::after {
     left: 0;
     width: 100%;
+    height: 1px;
   }
   .brand2-page .case-footer__brand-stage {
     width: 100%;
@@ -17236,6 +17328,7 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .brand2-page .case-footer__symbol span {
     width: 4vw;
+    height: 0.92vw;
   }
   .brand2-page .case-footer__symbol span:nth-child(1), .brand2-page .case-footer__symbol span:nth-child(3) {
     margin-left: 0.9vw;
@@ -17266,6 +17359,7 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .brand2-page .case-footer__brand-stage {
     margin-top: 2.4vw;
+    height: 12.2vw;
   }
   .brand2-page .case-footer__brand-lockup {
     width: 95vw;
@@ -17277,6 +17371,7 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .brand2-page .case-footer__symbol span {
     width: 4vw;
+    height: 0.9vw;
   }
   .brand2-page .case-footer__symbol span:nth-child(1), .brand2-page .case-footer__symbol span:nth-child(3) {
     margin-left: 0.85vw;
@@ -17297,6 +17392,9 @@ body.is-header-hidden:not(.is-header-peek)
   .brand1-page .brand-problem-section {
     padding: var(--page-section-space) 0 0 !important;
   }
+  .brand1-page .problem-card-list {
+    min-height: 22.4868vw;
+  }
   .brand1-page .brand-change {
     padding: var(--page-section-space) 0 var(--page-section-space) !important;
   }
@@ -17305,6 +17403,27 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .brand2-page .philosophy-stack-section {
     padding: var(--page-section-space) 0 var(--page-section-space) !important;
+  }
+  .brand1-page .problem-card-list {
+    min-height: 19.8413vw !important;
+  }
+  .brand1-page .problem-card {
+    height: 19.8413vw !important;
+  }
+  .brand1-page .problem-image {
+    height: 19.8413vw;
+  }
+  .brand1-page .problem-card::after {
+    height: 19.8413vw;
+  }
+  .brand1-page .problem-card:hover {
+    height: 19.8413vw !important;
+  }
+  .brand1-page .problem-card:hover .problem-image {
+    height: 27.7778vw;
+  }
+  .brand1-page .problem-card:hover::after {
+    height: 27.7778vw;
   }
   .brand1-page .brand-change {
     padding: var(--page-section-space) 0 var(--page-section-space) !important;
@@ -17320,6 +17439,18 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .brand2-page .philosophy-stack-section {
     padding: var(--page-section-space) 0 var(--page-section-space) !important;
+  }
+  .brand1-page .problem-card:hover .problem-image {
+    height: 27.7778vw;
+  }
+  .brand1-page .problem-card:hover::after {
+    height: 27.7778vw;
+  }
+  .brand1-page .problem-card-list {
+    min-height: 19.8413vw !important;
+  }
+  .brand1-page .problem-card, .brand1-page .problem-card:hover {
+    height: 19.8413vw !important;
   }
   :root {
     --page-section-space: 12vw;
@@ -17337,12 +17468,30 @@ body.is-header-hidden:not(.is-header-peek)
   .brand2-page .philosophy-stack-section {
     padding: var(--page-section-space) 0 var(--page-section-space) !important;
   }
+  .brand1-page .problem-card-list {
+    height: auto !important;
+    min-height: 29.7619vw !important;
+  }
   .brand1-page .problem-card {
     width: 100%;
+    height: 19.8413vw !important;
   }
   .brand1-page .problem-image {
     width: 100%;
+    height: 100% !important;
     max-width: none;
+  }
+  .brand1-page .problem-card::after {
+    height: auto !important;
+  }
+  .brand1-page .problem-card:hover {
+    height: 27.7778vw !important;
+  }
+  .brand1-page .problem-card:hover .problem-image {
+    height: 100% !important;
+  }
+  .brand1-page .problem-card:hover::after {
+    height: auto !important;
   }
   .brand1-page .brand-problem-section {
     padding-bottom: 4.6296vw !important;
@@ -17352,21 +17501,27 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .brand2-page .philosophy-hero__video {
     width: 100%;
+    height: 100%;
     max-width: none;
   }
   .brand2-page .philosophy-keywords {
     width: 100%;
+    min-height: 300svh;
   }
   .brand2-page .philosophy-keywords > .philosophy-container {
+    min-height: 100vh;
+    min-height: 100svh;
     padding: 8vw 0;
   }
   .brand2-page .philosophy-keywords::before {
     left: 0;
     right: 0;
+    height: 1px;
   }
   .brand2-page .philosophy-keywords__stage {
     column-gap: 4.6vw;
     width: 100%;
+    min-height: 42vw;
   }
   .brand2-page .philosophy-keywords__nav {
     gap: 0.55vw;
@@ -17379,18 +17534,22 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .brand2-page .philosophy-keywords__media {
     width: 100%;
+    height: 39vw;
   }
   .brand2-page .philosophy-keyword-media {
     width: 100%;
+    height: 100%;
     margin: 0;
   }
   .brand2-page .philosophy-keyword-media img {
     width: 100%;
+    height: 100%;
     max-width: none;
   }
   .brand2-page .philosophy-keywords__content {
     width: 100%;
     min-width: 0;
+    min-height: 19.8413vw;
   }
   .brand2-page .philosophy-keyword-copy {
     left: 0;
@@ -17418,16 +17577,23 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .brand1-page .brand-intro-hero {
     width: 100%;
+    height: 100vh;
+    height: 100svh;
+    min-height: 100vh;
+    min-height: 100svh;
     padding: 0;
   }
   .brand1-page .brand-hero-final {
     width: 100%;
+    height: 100%;
   }
   .brand1-page .brand-hero-final__media {
     width: 100%;
+    height: 100%;
   }
   .brand1-page .brand-hero-final__media img {
     width: 100%;
+    height: 100%;
   }
   .brand1-page .brand-hero-final__copy {
     right: 4.2vw;
@@ -17457,6 +17623,7 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .philosophy-accordion__image {
     width: 100%;
+    height: 100%;
     max-width: none;
   }
   .philosophy-accordion__label {
@@ -17470,6 +17637,7 @@ body.is-header-hidden:not(.is-header-peek)
   .brand2-page .philosophy-keywords__content {
     width: 100%;
     min-width: 0;
+    min-height: 19.8413vw;
   }
   .brand2-page .philosophy-keyword-copy {
     left: 0;
@@ -17491,6 +17659,7 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .brand2-page .philosophy-keywords__progress-dot {
     width: 1.1905vw;
+    height: 2px;
   }
   .brand2-page .philosophy-keywords__progress-dot.is-active {
     width: 2.5132vw;
@@ -17500,6 +17669,8 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .brand2-page .philosophy-keywords__nav {
     width: 100%;
+    height: 18vw;
+    min-height: 0;
   }
   .brand2-page .philosophy-keywords__item {
     left: 0;
@@ -17510,11 +17681,27 @@ body.is-header-hidden:not(.is-header-peek)
   .site-header__mega, .brand1-page .site-header__mega, .brand2-page .site-header__mega {
     padding-top: calc( var(--header-height) + 0.5556vw ) !important;
   }
+  .site-header__logo-mark {
+    height: 1.455vw;
+  }
+  .site-header__logo-mark {
+    height: 1.5278vw;
+  }
   .pl__pin {
     width: 100%;
+    height: 100vh;
+    height: 100svh;
+  }
+  .pl.is-on {
+    height: var(--pl-len);
+  }
+  .pl.is-on .brand-intro-hero {
+    min-height: 0;
+    height: 100%;
   }
   .pa-bg img {
     width: 100%;
+    height: 100%;
   }
   .pl-scene {
     padding: 0 6vw;
@@ -17545,6 +17732,7 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .pa-window {
     width: 2.6em;
+    height: 1em;
   }
   .pl-hint {
     left: 50%;
@@ -17552,10 +17740,12 @@ body.is-header-hidden:not(.is-header-peek)
   }
   .pl-hint i {
     width: 1px;
+    height: 2.9101vw;
   }
   .pl-hint i::after {
     left: 0;
     width: 1px;
+    height: 40%;
   }
   :root {
     --type-hero-size: 3.4722vw;
@@ -17566,8 +17756,16 @@ body.is-header-hidden:not(.is-header-peek)
   :root {
     --type-hero-brand-size: 3.1944vw;
   }
+  .site-header {
+    --header-column-brand: 2.3714vw;
+    --header-column-interface: 3.7088vw;
+    --header-column-experience: 4.1862vw;
+    --header-column-about: 2.4002vw;
+    --header-center-gap: 5.5556vw;
+  }
   .brand1-page .brand-hero-final__media video {
     width: 100%;
+    height: 100%;
   }
 
 }

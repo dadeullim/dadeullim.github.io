@@ -7771,11 +7771,12 @@ html.is-intro-active:not(.is-intro-leaving)
    양옆 여백 최대값에 걸려 내용이 더 안 넓어지고 가운데로 모임
    → 양옆 여백이 페이지마다 300 ~ 430px 로 크게 벌어지고 서로 달라짐
      (맥북에서는 50 ~ 160px)
+   + 사진 · 칸 높이(px)는 그대로라 가로로만 길어짐
 
-   수정 ) 1513px 이상에서만 이 파일의 가로 배치 값
-          (width · max-width · padding · margin · gap · left · right · 변수)을
+   수정 ) 1513px 이상에서만 이 파일의 배치 값
+          (width · height · max/min · padding · margin · gap · left · right · 변수)을
           "맥북(1512px)에서 계산된 값 ÷ 1512" 비율(vw)로 다시 적용
-          → 아이맥에서도 맥북 화면을 그대로 1.35배 확대한 배치
+          → 아이맥에서도 맥북 화면을 그대로 1.35배 확대한 배치 · 비율
    ---- 맥북 · 태블릿 · 모바일(1512px 이하)은 이 블록이 꺼져 있어 기존 그대로
    ---- 원래 규칙 순서 그대로 다시 써서 어떤 규칙이 이기는지(cascade)도 동일
    ---- 위쪽 원본 CSS 를 고치면 이 블록도 다시 만들어야 함
@@ -7786,9 +7787,11 @@ html.is-intro-active:not(.is-intro-leaving)
 
   html {
     width: 100%;
+    min-height: 100%;
   }
   body {
     width: 100%;
+    min-height: 100%;
     margin: 0;
   }
   body, h1, h2, h3, p {
@@ -7806,6 +7809,7 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .site-header__bar {
     width: 100%;
+    min-height: var(--header-height);
     padding: 0 var(--header-side-padding);
   }
   .site-header__nav {
@@ -7817,10 +7821,12 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .site-header__nav-link {
     width: max-content;
+    min-height: var(--header-height);
   }
   .site-header__nav-link::after {
     left: 0;
     width: 100%;
+    height: 1px;
   }
   .site-header__mega {
     left: 0;
@@ -7846,21 +7852,28 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .experience {
     width: 100%;
+    height: 500vh;
   }
   .experience__viewport {
     width: 100%;
+    height: 100vh;
+    height: 100svh;
   }
   .visual-stage {
     width: 100%;
+    height: 100%;
   }
   .visual-canvas {
     width: 100%;
+    height: 100%;
   }
   .visual-fallback {
     width: 100%;
+    height: 100%;
   }
   .visual-fallback__image {
     width: 100%;
+    height: 100%;
   }
   .copy-slide {
     left: 50%;
@@ -7879,6 +7892,7 @@ html.is-intro-active:not(.is-intro-leaving)
   .copy-slide[data-copy="0"] {
     left: 0;
     width: 100%;
+    height: 100%;
   }
   .copy-slide[data-copy="0"]::before, .copy-slide[data-copy="0"]::after {
     margin: 0;
@@ -7915,6 +7929,7 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .hero03-image {
     width: auto;
+    height: auto;
   }
   .hero03-image--1 {
     width: 20vw;
@@ -7934,13 +7949,16 @@ html.is-intro-active:not(.is-intro-leaving)
   .scroll-progress {
     right: 2.2487vw;
     width: 1px;
+    height: 8.5979vw;
   }
   .scroll-progress__track {
     width: 100%;
+    height: 100%;
   }
   .scroll-progress__bar {
     left: 0;
     width: 100%;
+    height: 100%;
   }
   .scene-status {
     right: 2.1164vw;
@@ -7948,13 +7966,17 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .bridge-handoff-backdrop {
     width: 100%;
+    height: 100%;
   }
   .visual-stage.is-bridge-handoff {
     left: 50%;
     width: 100vw;
+    height: 100vh;
+    height: 100svh;
   }
   .bridge-handoff-flash-image {
     width: 100%;
+    height: 100%;
   }
   .case-study {
     width: 100%;
@@ -7967,14 +7989,17 @@ html.is-intro-active:not(.is-intro-leaving)
     margin: 0 auto;
   }
   .case-product {
+    min-height: 71.4286vw;
     padding: 2.9762vw 0 6.9444vw;
   }
   .case-product__visual {
     width: min(64vw, 56.2169vw);
+    height: 41.0053vw;
     margin: -0.3307vw auto 3.3069vw;
   }
   .case-product__image {
     width: 100%;
+    height: 100%;
   }
   .case-product__content {
     gap: 2.9762vw;
@@ -7997,18 +8022,26 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .case-product__page-dot {
     width: 0.1984vw;
+    height: 0.1984vw;
   }
   .case-brand-mark {
     width: 2.3148vw;
+    height: 2.3148vw;
   }
   .case-brand-mark__line {
     left: 50%;
     width: 1px;
+    height: 1.5873vw;
   }
   .case-brand-mark--large {
     width: 2.8439vw;
+    height: 2.8439vw;
+  }
+  .case-brand-mark--large .case-brand-mark__line {
+    height: 1.7196vw;
   }
   .case-showcase {
+    min-height: 65.4762vw;
     padding: 2.9762vw 0 7.6058vw;
   }
   .case-showcase__header {
@@ -8016,13 +8049,16 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .case-showcase__canvas {
     width: min(calc(100% - 2.6455vw), 88.6243vw);
+    height: 51.5873vw;
     margin: 0 auto;
   }
   .case-main-mockup {
     left: 50%;
     width: 80%;
+    height: 38.3598vw;
   }
   .case-main-mockup__bar {
+    height: 4.1005vw;
     padding: 0 1.5212vw;
   }
   .case-main-mockup__nav {
@@ -8030,17 +8066,21 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .case-main-mockup__image-wrap {
     width: 100%;
+    height: calc(100% - 4.1005vw);
   }
   .case-main-mockup__image-wrap img {
     width: 100%;
+    height: 100%;
   }
   .case-floating-card--right {
     right: 0;
     width: 37%;
+    height: 16.5344vw;
   }
   .case-floating-card--left {
     left: 0;
     width: 50%;
+    height: 19.1799vw;
   }
   .case-floating-card--left .case-floating-card__image {
     left: -2.381vw;
@@ -8061,15 +8101,19 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .case-floating-card__image {
     min-width: 0;
+    min-height: 0;
   }
   .case-floating-card__image img {
     width: 100%;
+    height: 100%;
   }
   .case-typography {
+    min-height: 42.328vw;
     padding: 5.9524vw 0 7.2751vw;
   }
   .case-typography__grid {
     gap: 2.3148vw;
+    min-height: 27.7778vw;
   }
   .case-type-scale {
     gap: 1.8519vw;
@@ -8083,6 +8127,9 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .case-type-description {
     margin-top: 1.1905vw;
+  }
+  .case-type-side {
+    min-height: 27.7778vw;
   }
   .case-type-side__vertical {
     right: 1.3228vw;
@@ -8110,6 +8157,7 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .case-summary-card__image {
     width: 100%;
+    height: 100%;
   }
   .case-summary-card__number {
     left: 0.5952vw;
@@ -8144,6 +8192,7 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .case-footer__symbol span {
     width: 3.2407vw;
+    height: 0.8598vw;
   }
   .case-footer__symbol span:nth-child(1), .case-footer__symbol span:nth-child(3) {
     margin-left: 0.7937vw;
@@ -8157,48 +8206,60 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .case-main-mockup__image-wrap {
     width: 100%;
+    height: 100%;
   }
   .case-main-mockup__image-wrap img {
     width: 100%;
+    height: 100%;
   }
   .type-target.is-typing::after {
     width: 1px;
+    height: 0.9em;
     margin-left: 0.1984vw;
   }
   .bridge-transition {
     width: 100%;
+    height: 250vh;
     margin: 0;
     padding: 0;
   }
   .bridge-transition__sticky {
     width: 100%;
+    height: 100vh;
+    height: 100svh;
     margin: 0;
     padding: 0;
   }
   .bridge-transition__background {
     width: 100%;
+    height: 100%;
   }
   .bridge-transition__frame {
     left: 50%;
     width: var(--bridge-frame-width);
+    height: var(--bridge-frame-height);
     margin: 0;
     padding: 0;
   }
   .bridge-transition__webgl {
     width: 100%;
+    height: 100%;
   }
   .bridge-transition__image {
     width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
   }
   .bridge-transition__image img {
     width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
   }
   .bridge-transition__content {
     width: 100%;
+    height: 100%;
   }
   .bridge-transition__category {
     left: 4vw;
@@ -8223,6 +8284,11 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   img, video, canvas {
     max-width: 100%;
+  }
+  .site-header {
+    --header-height: 4.0278vw;
+    --header-logo-width: 10.0694vw;
+    --header-menu-gap: 1.25vw;
   }
   .site-header__nav, .site-header__mega-grid {
     column-gap: var(--header-menu-gap);
@@ -8261,6 +8327,7 @@ html.is-intro-active:not(.is-intro-leaving)
   .scroll-progress {
     right: 2.3611vw;
     width: max(1px, 0.0694vw);
+    height: 9.0278vw;
   }
   .scene-status {
     right: 2.2222vw;
@@ -8272,11 +8339,13 @@ html.is-intro-active:not(.is-intro-leaving)
     margin-inline: auto;
   }
   .case-product {
+    min-height: 75vw;
     padding: 3.125vw 0 7.2917vw;
   }
   .case-product__visual {
     width: 59.0278vw;
     max-width: none;
+    height: auto;
     margin: -0.3472vw auto 3.4722vw;
   }
   .case-product__content {
@@ -8299,11 +8368,20 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .case-brand-mark {
     width: 2.4306vw;
+    height: 2.4306vw;
+  }
+  .case-brand-mark__line {
+    height: 1.6667vw;
   }
   .case-brand-mark--large {
     width: 2.9861vw;
+    height: 2.9861vw;
+  }
+  .case-brand-mark--large .case-brand-mark__line {
+    height: 1.8056vw;
   }
   .case-showcase {
+    min-height: 68.75vw;
     padding: 3.125vw 0 7.9861vw;
   }
   .case-showcase__header {
@@ -8312,15 +8390,19 @@ html.is-intro-active:not(.is-intro-leaving)
   .case-showcase__canvas {
     width: var(--desktop-showcase-width);
     max-width: none;
+    height: auto;
   }
   .case-main-mockup {
     width: 80%;
+    height: auto;
   }
   .case-floating-card--right {
     width: 37%;
+    height: auto;
   }
   .case-floating-card--left {
     width: 50%;
+    height: auto;
   }
   .case-floating-card--left .case-floating-card__image {
     left: -5.37%;
@@ -8340,10 +8422,12 @@ html.is-intro-active:not(.is-intro-leaving)
     margin-top: 1.1806vw;
   }
   .case-typography {
+    min-height: 44.4444vw;
     padding: 6.25vw 0 7.6389vw;
   }
   .case-typography__grid {
     gap: 2.4306vw;
+    min-height: 29.1667vw;
   }
   .case-type-scale {
     gap: 1.9444vw;
@@ -8357,6 +8441,9 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .case-type-description {
     margin-top: 1.25vw;
+  }
+  .case-type-side {
+    min-height: 29.1667vw;
   }
   .case-type-side__vertical {
     right: 1.3889vw;
@@ -8419,6 +8506,7 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .case-footer__symbol span {
     width: 3.4028vw;
+    height: 0.9028vw;
   }
   .case-footer__symbol span:nth-child(1), .case-footer__symbol span:nth-child(3) {
     margin-left: 0.8333vw;
@@ -8449,6 +8537,7 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .site-header__bar {
     width: 100%;
+    min-height: var(--header-height);
     padding: 0 var(--header-side-padding);
   }
   .site-header__logo {
@@ -8459,8 +8548,12 @@ html.is-intro-active:not(.is-intro-leaving)
     left: 50%;
     column-gap: var(--header-center-gap);
     width: max-content;
+    min-height: var(--header-height);
     margin: 0;
     padding: 0;
+  }
+  .site-header__nav-link {
+    min-height: var(--header-height);
   }
   .site-header__nav-link::after {
     left: 50%;
@@ -8492,6 +8585,7 @@ html.is-intro-active:not(.is-intro-leaving)
   .site-header__mega-links a::after {
     left: 50%;
     width: 100%;
+    height: 1px;
   }
   .site-header {
     --header-column-brand: 6.0847vw;
@@ -8559,6 +8653,7 @@ html.is-intro-active:not(.is-intro-leaving)
   .case-footer__column a::after {
     left: 0;
     width: 100%;
+    height: 1px;
   }
   .case-footer__utility {
     margin-top: 5vw;
@@ -8569,6 +8664,7 @@ html.is-intro-active:not(.is-intro-leaving)
   .case-footer__back-to-top::after {
     left: 0;
     width: 100%;
+    height: 1px;
   }
   .case-footer__brand-stage {
     width: 100%;
@@ -8585,6 +8681,7 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .case-footer__symbol span {
     width: 4vw;
+    height: 0.92vw;
   }
   .case-footer__symbol span:nth-child(1), .case-footer__symbol span:nth-child(3) {
     margin-left: 0.9vw;
@@ -8628,6 +8725,7 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .case-footer__symbol span {
     width: 4vw;
+    height: 0.9vw;
   }
   .case-footer__symbol span:nth-child(1), .case-footer__symbol span:nth-child(3) {
     margin-left: 0.85vw;
@@ -8664,6 +8762,7 @@ html.is-intro-active:not(.is-intro-leaving)
   }
   .case-footer__brand-stage {
     margin-top: 2.4vw;
+    height: 12.2vw;
   }
   .case-footer__brand-lockup {
     width: 95vw;
@@ -8681,8 +8780,15 @@ html.is-intro-active:not(.is-intro-leaving)
   .site-header__mega {
     padding-top: calc( var(--header-height) + 0.5556vw ) !important;
   }
+  .site-header__logo-mark {
+    height: 1.455vw;
+  }
+  .site-header__logo-mark {
+    height: 1.5278vw;
+  }
   .site-intro__video {
     width: 100%;
+    height: 100%;
   }
   .site-intro__skip {
     right: var(--header-side-padding, 3vw);
@@ -8693,6 +8799,13 @@ html.is-intro-active:not(.is-intro-leaving)
     --type-title-size: 2.7778vw;
     --type-sub-size: 1.1243vw;
     --type-body-size: 0.9921vw;
+  }
+  .site-header {
+    --header-column-brand: 2.3714vw;
+    --header-column-interface: 3.7088vw;
+    --header-column-experience: 4.1862vw;
+    --header-column-about: 2.4002vw;
+    --header-center-gap: 5.5556vw;
   }
   html body .bridge-transition__description {
     width: max-content;

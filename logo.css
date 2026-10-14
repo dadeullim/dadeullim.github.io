@@ -3375,11 +3375,12 @@ body {
    양옆 여백 최대값에 걸려 내용이 더 안 넓어지고 가운데로 모임
    → 양옆 여백이 페이지마다 300 ~ 430px 로 크게 벌어지고 서로 달라짐
      (맥북에서는 50 ~ 160px)
+   + 사진 · 칸 높이(px)는 그대로라 가로로만 길어짐
 
-   수정 ) 1513px 이상에서만 이 파일의 가로 배치 값
-          (width · max-width · padding · margin · gap · left · right · 변수)을
+   수정 ) 1513px 이상에서만 이 파일의 배치 값
+          (width · height · max/min · padding · margin · gap · left · right · 변수)을
           "맥북(1512px)에서 계산된 값 ÷ 1512" 비율(vw)로 다시 적용
-          → 아이맥에서도 맥북 화면을 그대로 1.35배 확대한 배치
+          → 아이맥에서도 맥북 화면을 그대로 1.35배 확대한 배치 · 비율
    ---- 맥북 · 태블릿 · 모바일(1512px 이하)은 이 블록이 꺼져 있어 기존 그대로
    ---- 원래 규칙 순서 그대로 다시 써서 어떤 규칙이 이기는지(cascade)도 동일
    ---- 위쪽 원본 CSS 를 고치면 이 블록도 다시 만들어야 함
@@ -3419,19 +3420,23 @@ body {
   }
   .site-header__bar {
     width: 100%;
+    min-height: var(--header-height);
     padding: 0 var(--header-side-padding);
   }
   .site-header__nav {
     left: calc(50% + var(--header-visual-shift));
     column-gap: var(--header-center-gap);
     width: max-content;
+    min-height: var(--header-height);
   }
   .site-header__nav-link {
     width: max-content;
+    min-height: var(--header-height);
   }
   .site-header__nav-link::after {
     left: 0;
     width: 100%;
+    height: 1px;
   }
   .site-header__mega {
     left: 0;
@@ -3453,9 +3458,16 @@ body {
   .site-header__mega-links a::after {
     left: 0;
     width: 100%;
+    height: 1px;
+  }
+  .hero {
+    height: 100vh;
+    height: 100svh;
+    min-height: 37.037vw;
   }
   .hero video {
     width: 100%;
+    height: 100%;
   }
   .hero__still {
     gap: 2.381vw;
@@ -3473,6 +3485,7 @@ body {
   }
   .scroll::after {
     width: 1px;
+    height: 2.381vw;
   }
   main > section {
     padding: 9.2593vw 0;
@@ -3548,6 +3561,7 @@ body {
   }
   .blueprint svg {
     width: 100%;
+    height: 100%;
   }
   .steps {
     gap: 11vw;
@@ -3561,6 +3575,7 @@ body {
   }
   .step .pic video {
     width: 100%;
+    height: 100%;
   }
   .step .t {
     max-width: 30.4233vw;
@@ -3580,6 +3595,7 @@ body {
   }
   .color-block {
     padding: 1.9841vw 2.1164vw;
+    min-height: 13.2275vw;
   }
   .color-block::after {
     right: -0.3968vw;
@@ -3634,6 +3650,7 @@ body {
   .case-footer__column a::after, .case-footer__back-to-top::after {
     left: 0;
     width: 100%;
+    height: 1px;
   }
   .case-footer__utility {
     margin-top: 5vw;
@@ -3656,6 +3673,7 @@ body {
   }
   .case-footer__symbol span {
     width: 4vw;
+    height: 0.92vw;
   }
   .case-footer__symbol span:nth-child(1), .case-footer__symbol span:nth-child(3) {
     margin-left: 0.9vw;
@@ -3665,6 +3683,10 @@ body {
   }
   .case-footer__brand {
     margin: 0;
+  }
+  .site-header {
+    --header-height: 4.0278vw;
+    --header-logo-width: 10.0694vw;
   }
   .site-header__mega {
     padding-top: calc( var(--header-height) + 1.9444vw );
@@ -3690,6 +3712,7 @@ body {
   }
   .case-footer__brand-stage {
     margin-top: 2.4vw;
+    height: 12.2vw;
   }
   .case-footer__brand-lockup {
     width: 95vw;
@@ -3701,6 +3724,7 @@ body {
   }
   .case-footer__symbol span {
     width: 4vw;
+    height: .9vw;
   }
   .case-footer__symbol span:nth-child(1), .case-footer__symbol span:nth-child(3) {
     margin-left: .85vw;
@@ -3711,10 +3735,23 @@ body {
   .site-header__mega {
     padding-top: calc( var(--header-height) + .5556vw );
   }
+  .site-header__logo-mark {
+    height: 1.455vw;
+  }
+  .site-header__logo-mark {
+    height: 1.5278vw;
+  }
   :root {
     --type-title-size: 2.7778vw;
     --type-sub-size: 1.1243vw;
     --type-body-size: 0.9921vw;
+  }
+  .site-header {
+    --header-column-brand: 2.3714vw;
+    --header-column-interface: 3.7088vw;
+    --header-column-experience: 4.1862vw;
+    --header-column-about: 2.4002vw;
+    --header-center-gap: 5.5556vw;
   }
 
 }

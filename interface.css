@@ -6040,6 +6040,32 @@ body.hud-page.is-header-hidden .site-header {
   opacity: 1;
 }
 
+
+/* =========================================================
+   FONT — 모든 페이지 같은 서체(Pretendard Variable) / 2026.10.14
+   ---------------------------------------------------------
+   문제 ) 사이트는 웹에서 "Pretendard Variable" 만 내려받는데
+          일부 규칙이 "Pretendard" 를 먼저 찾음
+          → 이 맥북처럼 Pretendard 가 설치된 컴퓨터는 설치된 고정 두께 글꼴을 쓰고
+            (450 같은 중간 두께는 400 · 500 으로 뭉개짐)
+            설치 안 된 컴퓨터(아이맥 등)는 시스템 글꼴로 바뀌어
+            페이지마다 · 컴퓨터마다 제목 두께가 달라 보임
+   수정 ) 같은 선택자에 "Pretendard Variable" 을 맨 앞에 두고 다시 지정
+          (전 Pretendard, -apple-system ... → 후 "Pretendard Variable", Pretendard, ...)
+========================================================= */
+
+.display-page {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.handle-page .handle-main {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.hud-page {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
 /* =========================================================
    LARGE SCREEN LAYOUT — 맥북 비율 그대로 (자동 생성) / 2026.10.14
    ---------------------------------------------------------
@@ -6048,11 +6074,12 @@ body.hud-page.is-header-hidden .site-header {
    양옆 여백 최대값에 걸려 내용이 더 안 넓어지고 가운데로 모임
    → 양옆 여백이 페이지마다 300 ~ 430px 로 크게 벌어지고 서로 달라짐
      (맥북에서는 50 ~ 160px)
+   + 사진 · 칸 높이(px)는 그대로라 가로로만 길어짐
 
-   수정 ) 1513px 이상에서만 이 파일의 가로 배치 값
-          (width · max-width · padding · margin · gap · left · right · 변수)을
+   수정 ) 1513px 이상에서만 이 파일의 배치 값
+          (width · height · max/min · padding · margin · gap · left · right · 변수)을
           "맥북(1512px)에서 계산된 값 ÷ 1512" 비율(vw)로 다시 적용
-          → 아이맥에서도 맥북 화면을 그대로 1.35배 확대한 배치
+          → 아이맥에서도 맥북 화면을 그대로 1.35배 확대한 배치 · 비율
    ---- 맥북 · 태블릿 · 모바일(1512px 이하)은 이 블록이 꺼져 있어 기존 그대로
    ---- 원래 규칙 순서 그대로 다시 써서 어떤 규칙이 이기는지(cascade)도 동일
    ---- 위쪽 원본 CSS 를 고치면 이 블록도 다시 만들어야 함
@@ -6090,12 +6117,15 @@ body.hud-page.is-header-hidden .site-header {
   .display-page .display-hero__visual {
     width: 100%;
     max-width: none;
+    height: auto;
     margin-bottom: -2.3148vw;
   }
   .display-page .display-manifesto {
     width: 100%;
+    min-height: 100vh;
   }
   .display-page .display-manifesto__inner {
+    min-height: 100vh;
     padding: 8.2672vw 4vw 5vw;
   }
   .display-page .display-manifesto__title {
@@ -6114,15 +6144,23 @@ body.hud-page.is-header-hidden .site-header {
   }
   .display-page .display-scenes {
     width: 100%;
+    height: 540svh;
+    min-height: 540svh;
     margin: 0;
     padding: 0;
   }
   .display-page .display-scenes__visual {
     width: 100%;
+    height: 100vh;
+    height: 100svh;
+    min-height: 42.328vw;
     margin: 0;
   }
   .display-page .display-scenes__steps {
     width: 100%;
+    height: 100vh;
+    height: 100svh;
+    min-height: 42.328vw;
     margin: -100svh 0 0;
     padding: 0;
   }
@@ -6138,6 +6176,7 @@ body.hud-page.is-header-hidden .site-header {
   }
   .display-page .display-scenes__image {
     width: 100%;
+    height: 100%;
     max-width: none;
   }
   .display-page .display-scene {
@@ -6145,6 +6184,8 @@ body.hud-page.is-header-hidden .site-header {
     width: min(22vw, 23.1481vw);
     min-width: 0;
     max-width: 23.1481vw;
+    height: auto;
+    min-height: 0;
     margin: 0;
     padding: 0;
   }
@@ -6179,16 +6220,21 @@ body.hud-page.is-header-hidden .site-header {
   }
   .display-page .display-scenes__counter i {
     width: 2.9101vw;
+    height: 1px;
   }
   .display-page .display-overview {
     width: 100%;
+    min-height: 390vh;
     margin: 0;
   }
   .display-page .display-overview__sticky {
     width: 100%;
+    height: 100vh;
+    height: 100svh;
   }
   .display-page .display-overview__inner {
     width: min(calc(100% - 6.3492vw), 91.2698vw);
+    height: 100%;
     margin: 0 auto;
   }
   .display-page .display-overview__background-word {
@@ -6212,6 +6258,7 @@ body.hud-page.is-header-hidden .site-header {
   .display-page .display-overview__visual {
     left: 71%;
     width: min(54vw, 50.2646vw);
+    height: 72vh;
   }
   .display-page .display-info {
     left: 50%;
@@ -6223,6 +6270,7 @@ body.hud-page.is-header-hidden .site-header {
   }
   .display-page .display-info__image img {
     width: 100%;
+    height: auto;
   }
   .display-page .display-info__text {
     width: 12.5661vw;
@@ -6247,11 +6295,16 @@ body.hud-page.is-header-hidden .site-header {
   }
   .display-page .display-gallery {
     width: 100%;
+    height: 460vh;
+    min-height: 460vh !important;
     margin: 0;
     padding: 0;
   }
   .display-page .display-gallery__sticky {
     width: 100%;
+    height: 100vh;
+    height: 100svh;
+    min-height: 0 !important;
     padding-top: 6vw;
     padding-bottom: 3vw;
   }
@@ -6267,12 +6320,18 @@ body.hud-page.is-header-hidden .site-header {
     margin-top: 1.5873vw;
   }
   .display-page .display-gallery__viewport {
+    min-height: 0;
     width: 100%;
   }
   .display-page .display-gallery__track {
     gap: 1.8vw;
     width: max-content;
+    height: 100%;
     padding: 0 4vw;
+  }
+  .display-page .display-gallery-card {
+    height: 100%;
+    min-height: 0;
   }
   .display-page .display-gallery-card__copy {
     min-width: 0;
@@ -6287,10 +6346,12 @@ body.hud-page.is-header-hidden .site-header {
   }
   .display-page .display-gallery-card__image {
     min-width: 0;
+    min-height: 0;
     padding: 1.3vw;
   }
   .display-page .display-gallery-card__image img {
     width: 100%;
+    height: 100%;
   }
   .display-page .display-main {
     padding-bottom: 0;
@@ -6315,9 +6376,11 @@ body.hud-page.is-header-hidden .site-header {
   }
   .display-page .display-gallery__card .display-gallery__media img {
     width: 100%;
+    height: 100%;
   }
   .display-page .display-gallery__progress span {
     width: 100%;
+    height: 100%;
   }
   .handle-page {
     --handle-header-height: 4.03vw;
@@ -6326,17 +6389,24 @@ body.hud-page.is-header-hidden .site-header {
   .handle-page .handle-main img {
     max-width: 100%;
   }
+  .handle-page .handle-main {
+    min-height: 100vh;
+  }
   .handle-page .handle-eyebrow {
     margin: 0 0 1.7vw;
   }
   .handle-page .handle-sequence--hero {
+    height: 400vh;
     margin-top: 0;
   }
   .handle-page .handle-sequence__stage {
     width: 100%;
+    height: 100vh;
+    min-height: 41.0053vw;
   }
   .handle-page .handle-sequence__frames, .handle-page .handle-sequence__frame, .handle-page .handle-sequence__shade {
     width: 100%;
+    height: 100%;
   }
   .handle-page .handle-sequence__copy-wrap {
     left: 7vw;
@@ -6360,14 +6430,22 @@ body.hud-page.is-header-hidden .site-header {
   .handle-page .handle-sequence__footer p {
     margin: 0;
   }
+  .handle-page .handle-sequence__progress {
+    height: 1px;
+  }
   .handle-page .handle-sequence__progress span {
     width: 0;
+    height: 100%;
   }
   .handle-page .handle-sequence__count {
     min-width: 3.1746vw;
   }
+  .handle-page .handle-material {
+    min-height: 125vh;
+  }
   .handle-page .handle-material__media img {
     width: 100%;
+    height: 100%;
   }
   .handle-page .handle-material__copy {
     left: 7vw;
@@ -6380,8 +6458,16 @@ body.hud-page.is-header-hidden .site-header {
     max-width: 35.7143vw;
     margin: 2.3vw 0 0;
   }
+  .handle-page .handle-grip {
+    height: 270vh;
+  }
+  .handle-page .handle-grip__stage {
+    height: 100vh;
+    min-height: 41.0053vw;
+  }
   .handle-page .handle-grip__frames, .handle-page .handle-grip__frame, .handle-page .handle-grip__veil {
     width: 100%;
+    height: 100%;
   }
   .handle-page .handle-grip__copy-wrap {
     left: 7vw;
@@ -6398,6 +6484,7 @@ body.hud-page.is-header-hidden .site-header {
   }
   .handle-page .handle-grip__side::before {
     width: 2.2487vw;
+    height: 1px;
   }
   .handle-page .handle-anatomy {
     padding: 11vw 2.5vw 12vw;
@@ -6427,8 +6514,12 @@ body.hud-page.is-header-hidden .site-header {
     max-width: 41.0053vw;
     margin: 0;
   }
+  .handle-page .handle-anatomy__card {
+    min-height: min(75vw, 53.5714vw);
+  }
   .handle-page .handle-anatomy__card img {
     width: 100%;
+    height: 100%;
   }
   .handle-page .handle-anatomy__label {
     right: 2.4vw;
@@ -6447,10 +6538,13 @@ body.hud-page.is-header-hidden .site-header {
   }
   .handle-page .handle-system__figure {
     max-width: 99.2063vw;
+    min-height: min(70vw, 63.4921vw);
     margin: 0 auto;
   }
   .handle-page .handle-system__figure > img {
     width: 100%;
+    height: 100%;
+    min-height: min(70vw, 63.4921vw);
   }
   .handle-page .handle-system__marker {
     gap: 0.6614vw;
@@ -6458,6 +6552,7 @@ body.hud-page.is-header-hidden .site-header {
   }
   .handle-page .handle-system__marker::before {
     width: 2.2487vw;
+    height: 1px;
   }
   .handle-page .handle-system__marker--left {
     left: 5%;
@@ -6473,6 +6568,7 @@ body.hud-page.is-header-hidden .site-header {
     margin: 0 auto;
   }
   .handle-page .handle-system__stat {
+    min-height: 12.5661vw;
     padding: 3vw;
   }
   .handle-page .handle-system__stat strong {
@@ -6487,9 +6583,13 @@ body.hud-page.is-header-hidden .site-header {
   }
   .handle-page .handle-grip__side-label i {
     width: 2.7778vw;
+    height: 1px;
   }
   .handle-page .handle-system__stat > span {
     margin-bottom: 1.1905vw;
+  }
+  .handle-page .handle-anatomy__card {
+    min-height: 0;
   }
   .hud-page .hud-main {
     width: 100%;
@@ -6502,11 +6602,13 @@ body.hud-page.is-header-hidden .site-header {
   }
   .hud-page .hud-hero {
     width: 100%;
+    min-height: 60.8466vw;
     padding: 11.2434vw 0 9.2593vw;
   }
   .hud-page .hud-hero__inner {
     width: calc(100% - 13.2275vw);
     max-width: 87.3016vw;
+    min-height: 42.9894vw;
     margin: 0 auto;
   }
   .hud-page .hud-hero__copy {
@@ -6515,23 +6617,28 @@ body.hud-page.is-header-hidden .site-header {
   }
   .hud-page .hud-hero__line {
     width: 2.7778vw;
+    height: 1px;
     margin: 2.1164vw 0 1.5873vw;
   }
   .hud-page .hud-hero__visual {
     right: 0;
     width: min( 76%, 64.8148vw );
+    height: 31.0847vw;
   }
   .hud-page .hud-hero__ring {
     left: 50%;
   }
   .hud-page .hud-hero__ring--01 {
     width: 88%;
+    height: 88%;
   }
   .hud-page .hud-hero__ring--02 {
     width: 66%;
+    height: 66%;
   }
   .hud-page .hud-hero__ring--03 {
     width: 43%;
+    height: 43%;
   }
   .hud-page .hud-hero__center {
     width: 30%;
@@ -6555,6 +6662,7 @@ body.hud-page.is-header-hidden .site-header {
     gap: 1.0582vw;
   }
   .hud-page .hud-benefit__card {
+    min-height: 27.1164vw;
     padding: 1.8519vw;
   }
   .hud-page .hud-information {
@@ -6570,6 +6678,7 @@ body.hud-page.is-header-hidden .site-header {
   }
   .hud-page .hud-information__visual {
     width: 100%;
+    min-height: 31.0847vw;
   }
   .hud-page .hud-focus {
     width: 100%;
@@ -6577,9 +6686,11 @@ body.hud-page.is-header-hidden .site-header {
   }
   .hud-page .hud-focus__stage {
     width: 100%;
+    min-height: 31.746vw;
   }
   .hud-page .hud-focus__side {
     width: min( 32vw, 27.7778vw );
+    height: min( 27vw, 25.1323vw );
   }
   .hud-page .hud-focus__circle {
     width: min( 27vw, 25.1323vw );
@@ -6589,11 +6700,21 @@ body.hud-page.is-header-hidden .site-header {
     margin: 2.9762vw auto 0;
   }
   .handle-page #handle-detail .handle-material__sticky {
+    min-height: inherit;
     width: 100%;
+  }
+  .handle-page #handle-detail.is-haptics-ready {
+    height: var(--material-scroll-height);
+    min-height: var(--material-scroll-height);
+  }
+  .handle-page #handle-detail.is-haptics-ready .handle-material__sticky {
+    height: var(--material-pin-height);
+    min-height: 0;
   }
   .handle-page #handle-detail .handle-material__wave-svg {
     left: var(--material-image-left);
     width: var(--material-image-width);
+    height: var(--material-image-height);
     max-width: none;
   }
   .handle-page .handle-process {
@@ -6639,6 +6760,7 @@ body.hud-page.is-header-hidden .site-header {
   }
   .handle-page .handle-process__media video {
     width: 100%;
+    height: 100%;
     max-width: none;
   }
   .handle-page .handle-process__caption {
@@ -6657,9 +6779,12 @@ body.hud-page.is-header-hidden .site-header {
   }
   .display-outro {
     width: 100%;
+    height: 100vh;
+    min-height: 39.6825vw;
   }
   .display-outro__image {
     width: 100%;
+    height: 100%;
   }
   .display-outro__copy {
     left: 3.9683vw;
@@ -6691,6 +6816,13 @@ body.hud-page.is-header-hidden .site-header {
   .display-outro {
     margin-top: 11.1vw;
   }
+  .display-page .fan {
+    height: 380vh;
+  }
+  .display-page .fan__sticky {
+    height: 100vh;
+    min-height: 39.6825vw;
+  }
   .display-page .fan__copy {
     left: 0;
     right: 0;
@@ -6711,6 +6843,7 @@ body.hud-page.is-header-hidden .site-header {
   }
   .display-page .fan__card img {
     width: 100%;
+    height: auto;
   }
   .display-page .fan__card figcaption {
     margin-top: 0.7937vw;
@@ -6735,6 +6868,11 @@ body.hud-page.is-header-hidden .site-header {
   .display-page .display-manifesto__size strong {
     padding-right: 0.06em;
   }
+  .display-page .dh8 {
+    height: 100vh;
+    height: 100svh;
+    min-height: 42.328vw;
+  }
   .display-page .dh8__scene {
     left: 50%;
     width: min(100vw, 101.5873vw, 132vh);
@@ -6742,6 +6880,7 @@ body.hud-page.is-header-hidden .site-header {
   }
   .display-page .dh8__scene > img, .display-page .dh8__scene > i {
     width: 100%;
+    height: 100%;
     max-width: none;
   }
   .display-page .dh8__copy {
@@ -6751,6 +6890,9 @@ body.hud-page.is-header-hidden .site-header {
   }
   .display-page .dh8__kick {
     margin: 0 0 1.3228vw;
+  }
+  .display-page .dh8__titles {
+    height: 2.4em;
   }
   .display-page .dh8__title {
     left: 0;
@@ -6764,6 +6906,9 @@ body.hud-page.is-header-hidden .site-header {
     width: 100%;
   }
   .display-page .dh8 {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
     padding-bottom: 9vw;
   }
   .display-page .dh8__scene {

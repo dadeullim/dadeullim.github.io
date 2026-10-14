@@ -4793,6 +4793,24 @@ body.about-page.user-page{overflow-x:clip;}
   margin-top:40px;
 }
 
+
+/* =========================================================
+   FONT — 모든 페이지 같은 서체(Pretendard Variable) / 2026.10.14
+   ---------------------------------------------------------
+   문제 ) 사이트는 웹에서 "Pretendard Variable" 만 내려받는데
+          일부 규칙이 "Pretendard" 를 먼저 찾음
+          → 이 맥북처럼 Pretendard 가 설치된 컴퓨터는 설치된 고정 두께 글꼴을 쓰고
+            (450 같은 중간 두께는 400 · 500 으로 뭉개짐)
+            설치 안 된 컴퓨터(아이맥 등)는 시스템 글꼴로 바뀌어
+            페이지마다 · 컴퓨터마다 제목 두께가 달라 보임
+   수정 ) 같은 선택자에 "Pretendard Variable" 을 맨 앞에 두고 다시 지정
+          (전 Pretendard, -apple-system ... → 후 "Pretendard Variable", Pretendard, ...)
+========================================================= */
+
+.problem-page .ft {
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
 /* =========================================================
    LARGE SCREEN LAYOUT — 맥북 비율 그대로 (자동 생성) / 2026.10.14
    ---------------------------------------------------------
@@ -4801,11 +4819,12 @@ body.about-page.user-page{overflow-x:clip;}
    양옆 여백 최대값에 걸려 내용이 더 안 넓어지고 가운데로 모임
    → 양옆 여백이 페이지마다 300 ~ 430px 로 크게 벌어지고 서로 달라짐
      (맥북에서는 50 ~ 160px)
+   + 사진 · 칸 높이(px)는 그대로라 가로로만 길어짐
 
-   수정 ) 1513px 이상에서만 이 파일의 가로 배치 값
-          (width · max-width · padding · margin · gap · left · right · 변수)을
+   수정 ) 1513px 이상에서만 이 파일의 배치 값
+          (width · height · max/min · padding · margin · gap · left · right · 변수)을
           "맥북(1512px)에서 계산된 값 ÷ 1512" 비율(vw)로 다시 적용
-          → 아이맥에서도 맥북 화면을 그대로 1.35배 확대한 배치
+          → 아이맥에서도 맥북 화면을 그대로 1.35배 확대한 배치 · 비율
    ---- 맥북 · 태블릿 · 모바일(1512px 이하)은 이 블록이 꺼져 있어 기존 그대로
    ---- 원래 규칙 순서 그대로 다시 써서 어떤 규칙이 이기는지(cascade)도 동일
    ---- 위쪽 원본 CSS 를 고치면 이 블록도 다시 만들어야 함
@@ -4828,6 +4847,7 @@ body.about-page.user-page{overflow-x:clip;}
   }
   .about-main {
     width: 100%;
+    min-height: 100vh;
   }
   .about-container {
     width: 100%;
@@ -4848,6 +4868,7 @@ body.about-page.user-page{overflow-x:clip;}
   .about-page .site-header__mega-links a::after {
     left: 0;
     width: 100%;
+    height: 1px;
   }
   .about-page .site-header__mega {
     padding-top: calc( var(--header-height) + 1.9444vw ) !important;
@@ -4865,13 +4886,17 @@ body.about-page.user-page{overflow-x:clip;}
   .problem-opening__stage {
     width: 100vw;
     max-width: none;
+    height: 100vh;
+    min-height: 100svh;
     margin: 0;
   }
   .problem-opening__media {
     width: 100%;
+    height: 100%;
   }
   .problem-opening__image {
     width: 100%;
+    height: 100%;
   }
   .problem-opening__copy {
     left: 0;
@@ -4904,6 +4929,7 @@ body.about-page.user-page{overflow-x:clip;}
   }
   .problem-item__image {
     width: 100%;
+    height: 100%;
   }
   .problem-item__meta {
     gap: 0.7937vw;
@@ -4941,24 +4967,31 @@ body.about-page.user-page{overflow-x:clip;}
   }
   .problem-end-space {
     width: 100%;
+    height: 2.5vw;
   }
   .user-main {
     width: 100%;
   }
   .user-opening {
     width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
     padding: 0;
   }
   .user-opening__stage {
     width: 100vw;
     max-width: none;
+    height: 100vh;
+    min-height: 100svh;
     margin: 0;
   }
   .user-opening__media {
     width: 100%;
+    height: 100%;
   }
   .user-opening__image {
     width: 100%;
+    height: 100%;
   }
   .user-opening__title {
     margin: 0;
@@ -4983,9 +5016,11 @@ body.about-page.user-page{overflow-x:clip;}
   }
   .user-character__carousel {
     width: 100%;
+    height: 36vw;
   }
   .user-character__track {
     width: 100%;
+    height: 100%;
   }
   .user-character__slide {
     left: 50%;
@@ -4993,9 +5028,11 @@ body.about-page.user-page{overflow-x:clip;}
   }
   .user-character__media {
     width: 100%;
+    height: 100%;
   }
   .user-character__button {
     width: 2.7778vw;
+    height: 2.7778vw;
     padding: 0;
   }
   .user-character__button--prev {
@@ -5006,6 +5043,7 @@ body.about-page.user-page{overflow-x:clip;}
   }
   .user-character__description {
     width: min( calc(100% - 4.2328vw), 59.5238vw );
+    min-height: 6.6138vw;
     margin: 3vw auto 0;
   }
   .user-character__description-text {
@@ -5017,6 +5055,7 @@ body.about-page.user-page{overflow-x:clip;}
     margin: 6vw auto 0;
   }
   .user-character__keyword-line {
+    height: 1px;
     margin: 0 3vw;
   }
   .user-emotion {
@@ -5026,6 +5065,7 @@ body.about-page.user-page{overflow-x:clip;}
   }
   .user-emotion__sticky {
     width: 100%;
+    height: auto;
   }
   .user-emotion__heading {
     width: min( calc(100% - 6.6138vw), 93.9153vw );
@@ -5051,6 +5091,7 @@ body.about-page.user-page{overflow-x:clip;}
   }
   .user-emotion__image {
     width: 100%;
+    height: 100%;
   }
   .user-emotion__label {
     left: 2.2vw;
@@ -5064,16 +5105,19 @@ body.about-page.user-page{overflow-x:clip;}
   }
   .user-emotion__control {
     width: 2.7778vw;
+    height: 2.7778vw;
     padding: 0;
   }
   .user-end-space {
     width: 100%;
+    height: 7vw;
   }
   .problem-page .problem-grid-section {
     padding-bottom: 8vw;
   }
   .problem-page .problem-scenarios.dz {
     width: 100%;
+    min-height: 100vh;
     padding: 9vw 0 10vw;
   }
   .problem-page .dz-layout {
@@ -5090,8 +5134,13 @@ body.about-page.user-page{overflow-x:clip;}
     max-width: 26.455vw;
     margin: 0;
   }
+  .problem-page .dz-stage {
+    height: 62vh;
+    min-height: 23.8095vw;
+  }
   .problem-page .dz-media video {
     width: 100%;
+    height: 100%;
   }
   .problem-page .dz-label, .problem-page .dz-tag {
     padding: 0.463vw 0.7937vw;
@@ -5110,16 +5159,25 @@ body.about-page.user-page{overflow-x:clip;}
     min-width: 0;
   }
   .problem-page .dz-bar {
+    height: 2px;
     margin-bottom: 1.0582vw;
   }
   .problem-page .dz-bar i {
     width: 0;
+    height: 100%;
   }
   .problem-page .dz-tab__copy {
     margin-top: 0.5291vw;
   }
   .problem-page .problem-conclusion {
     padding-top: 10vw;
+  }
+  .user-gaze {
+    height: 340vh;
+  }
+  .user-gaze__sticky {
+    height: 100vh;
+    height: 100svh;
   }
   .user-gaze__frame {
     left: 50%;
@@ -5140,6 +5198,7 @@ body.about-page.user-page{overflow-x:clip;}
   .user-gaze__spot--wheel {
     left: calc(var(--wheel-x) - var(--wheel-rx));
     width: calc(var(--wheel-rx) * 2);
+    height: calc(var(--wheel-ry) * 2);
     right: auto;
   }
   .user-gaze__spot--wheel::after {
@@ -5159,6 +5218,7 @@ body.about-page.user-page{overflow-x:clip;}
   .user-gaze__caps {
     right: 4%;
     width: min(27.7778vw,26vw);
+    min-height: 0;
   }
   .user-gaze__cap {
     right: 0;
@@ -5176,6 +5236,7 @@ body.about-page.user-page{overflow-x:clip;}
   }
   .user-gaze__dots i {
     width: 1.8519vw;
+    height: 2px;
   }
   .user-gaze[data-cap="left"] .user-gaze__caps {
     right: auto;
@@ -5195,6 +5256,7 @@ body.about-page.user-page{overflow-x:clip;}
     left: 0;
     width: auto;
     padding: clamp(2.6455vw,6vh,3.9683vw) 4vw clamp(1.9841vw,4.5vh,2.9101vw);
+    min-height: clamp(9.9206vw,19vh,12.5661vw);
   }
   .user-gaze[data-cap="bottom"] .user-gaze__cap {
     left: 0;
@@ -5208,6 +5270,7 @@ body.about-page.user-page{overflow-x:clip;}
     left: auto;
     right: 3vw;
     width: min(26.455vw,26vw);
+    min-height: clamp(11.6402vw,21vh,13.4921vw);
     padding: 0;
   }
   .user-gaze[data-cap="corner"] .user-gaze__cap {
@@ -5230,6 +5293,7 @@ body.about-page.user-page{overflow-x:clip;}
     left: auto;
     right: 3vw;
     width: min(27.7778vw,27vw);
+    min-height: clamp(9.9206vw,18vh,11.6402vw);
   }
   .user-gaze[data-cap="anchor"] .user-gaze__cap {
     left: 0;
@@ -5242,6 +5306,10 @@ body.about-page.user-page{overflow-x:clip;}
   .problem-page .dz-layout {
     gap: 6vw;
   }
+  .problem-page .dz-stage {
+    height: auto;
+    min-height: 0;
+  }
   .problem-page .dz-desc {
     max-width: none;
   }
@@ -5253,8 +5321,15 @@ body.about-page.user-page{overflow-x:clip;}
     margin: 0;
     padding: 0;
   }
+  .problem-page .ft-figures__track {
+    height: 300vh;
+  }
+  .problem-page .ft-figures__stage {
+    height: 100vh;
+  }
   .problem-page .ft-figures__media img {
     width: 100%;
+    height: 100%;
   }
   .problem-page .ft-figures__inner {
     width: var(--ft-shell);
@@ -5280,6 +5355,7 @@ body.about-page.user-page{overflow-x:clip;}
   }
   .problem-page .ft-figures__step i {
     width: 1.8519vw;
+    height: 2px;
   }
   .problem-page .ft-figures__step.is-on i {
     width: 3.7037vw;
@@ -5301,6 +5377,7 @@ body.about-page.user-page{overflow-x:clip;}
   }
   .ud-main img, .ud-main video {
     width: 100%;
+    height: 100%;
   }
   .ud-wrap {
     width: min(calc(100% - var(--ud-side) * 2), var(--ud-max));
@@ -5315,6 +5392,7 @@ body.about-page.user-page{overflow-x:clip;}
   }
   .ud-chip i {
     width: 0.3968vw;
+    height: 0.3968vw;
   }
   .ud-next {
     gap: 0.7937vw;
@@ -5323,14 +5401,17 @@ body.about-page.user-page{overflow-x:clip;}
   }
   .ud-rings {
     width: 0;
+    height: 0;
   }
   .ud-rings i {
     left: 50%;
     width: var(--rs, 7.9365vw);
+    height: var(--rs, 7.9365vw);
     margin: calc(var(--rs, 7.9365vw) / -2) 0 0 calc(var(--rs, 7.9365vw) / -2);
   }
   .ud-sr {
     width: 1px;
+    height: 1px;
   }
   .ud-main .ud-chip {
     width: max-content;
@@ -5340,11 +5421,19 @@ body.about-page.user-page{overflow-x:clip;}
     margin-left: auto;
     margin-right: auto;
   }
+  .v2-hero {
+    height: 260vh;
+  }
+  .v2-hero__sticky {
+    height: 100vh;
+    height: 100svh;
+  }
   .v2-hero__line {
     gap: 1.6vw;
   }
   .v2-hero__slot {
     width: 15vw;
+    height: 8.4vw;
   }
   .v2-hero__win {
     left: 0;
@@ -5357,9 +5446,17 @@ body.about-page.user-page{overflow-x:clip;}
   .v2-hero__hint {
     left: 50%;
   }
+  .wd {
+    height: 260vh;
+  }
+  .wd__sticky {
+    height: 100vh;
+    height: 100svh;
+  }
   .wd__wave {
     left: 0;
     width: 100%;
+    height: 42vh;
   }
   .wd__copy {
     gap: 2.6455vw;
@@ -5370,6 +5467,13 @@ body.about-page.user-page{overflow-x:clip;}
     margin: 0;
     padding: 0;
   }
+  .v4-ctx {
+    height: 420vh;
+  }
+  .v4-ctx__sticky {
+    height: 100vh;
+    height: 100svh;
+  }
   .v4-ctx__grid {
     gap: 4vw;
   }
@@ -5377,6 +5481,7 @@ body.about-page.user-page{overflow-x:clip;}
     gap: 1.1905vw;
   }
   .v4-ctx__items {
+    min-height: 11.2434vw;
     margin-top: 1.3228vw;
   }
   .v4-ctx__item {
@@ -5384,7 +5489,11 @@ body.about-page.user-page{overflow-x:clip;}
     right: 0;
     gap: 0.6614vw;
   }
+  .v4-ctx__bar {
+    height: 2px;
+  }
   .v4-ctx__bar i {
+    height: 100%;
     width: 0;
   }
   .v4-tag {
@@ -5428,6 +5537,7 @@ body.about-page.user-page{overflow-x:clip;}
   }
   .v5-emo__track img {
     width: 18vw !important;
+    height: 10vw !important;
   }
   .v5-emo__cols {
     gap: 3vw;
@@ -5437,11 +5547,21 @@ body.about-page.user-page{overflow-x:clip;}
     gap: 0.6614vw;
     padding-top: 1.3228vw;
   }
+  .mix-end {
+    height: 1px;
+  }
   .ud-mix .user-character {
     padding-top: 9vw;
   }
   .ud-mix .v5-emo {
     padding-block: 13vw 7vw;
+  }
+  .mx-needs {
+    height: 420vh;
+  }
+  .mx-needs__sticky {
+    height: 100vh;
+    height: 100svh;
   }
   .mx-needs__head {
     left: 0;
@@ -5477,6 +5597,7 @@ body.about-page.user-page{overflow-x:clip;}
     gap: 0;
   }
   .v4-ctx__items {
+    min-height: 0;
     margin-top: 3.7037vw;
   }
   .v4-ctx__item {
