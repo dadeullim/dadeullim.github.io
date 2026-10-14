@@ -16697,6 +16697,94 @@ html {
 }
 
 /* =========================================================
+   BRAND2 KEYWORDS — 미세 조정 / 2026.10.14
+   ---------------------------------------------------------
+   ---- 왼쪽 영문 키워드 오른쪽으로 조금 더 : left 28px → 44px
+   ---- 영문 키워드 아주 살짝 크게 : 76.9px → 80.75px (5%)
+        (원래 최대값에서 멈춰 아이맥에서 덜 커지던 것도 비율로 → 5.34vw)
+   ---- 가운데 이미지 아주 살짝 크게 : 4% (300 × 460 → 312 × 478)
+        칸 크기는 그대로 두고 이미지만 키움 → 양옆 글과 간격 유지
+        (가장 긴 단어 "Connected" 끝 ↔ 이미지 사이 약 50px)
+   ---- 1001px 이상(데스크톱)만
+========================================================= */
+
+@media (min-width: 1001px) {
+
+  .brand2-page .philosophy-keywords__item {
+    left: 44px;                         /* 전 28px */
+
+    font-size: clamp(56px, 5.34vw, 9999px);  /* 전 76.9px (맥북) */
+  }
+
+  .brand2-page .philosophy-keywords__media {
+    transform: scale(1.04);
+  }
+
+}
+
+/* 큰 화면(1513px 이상) — 영문 키워드 위아래 간격도 글자와 같은 비율로
+   원래 간격 clamp(76px, 6.2vw, 104px) · clamp(152px, 12.4vw, 208px) 는 최대값에서 멈춰
+   글자(5.34vw)만 커지고 간격은 그대로 → 아이맥에서 위아래 단어가 붙음
+   → 1513px 이상에서는 최대값 없이 6.2vw · 12.4vw (맥북과 같은 비율) */
+@media (min-width: 1513px) {
+
+  .brand2-page .philosophy-keywords__nav:has( .philosophy-keywords__item:nth-child(1).is-active ) .philosophy-keywords__item:nth-child(2) {
+    transform:
+      translate3d(
+        0,
+        calc(-50% + 6.2vw),
+        0
+      );
+  }
+
+  .brand2-page .philosophy-keywords__nav:has( .philosophy-keywords__item:nth-child(1).is-active ) .philosophy-keywords__item:nth-child(3) {
+    transform:
+      translate3d(
+        0,
+        calc(-50% + 12.4vw),
+        0
+      );
+  }
+
+  .brand2-page .philosophy-keywords__nav:has( .philosophy-keywords__item:nth-child(2).is-active ) .philosophy-keywords__item:nth-child(1) {
+    transform:
+      translate3d(
+        0,
+        calc(-50% - 6.2vw),
+        0
+      );
+  }
+
+  .brand2-page .philosophy-keywords__nav:has( .philosophy-keywords__item:nth-child(2).is-active ) .philosophy-keywords__item:nth-child(3) {
+    transform:
+      translate3d(
+        0,
+        calc(-50% + 6.2vw),
+        0
+      );
+  }
+
+  .brand2-page .philosophy-keywords__nav:has( .philosophy-keywords__item:nth-child(3).is-active ) .philosophy-keywords__item:nth-child(1) {
+    transform:
+      translate3d(
+        0,
+        calc(-50% - 12.4vw),
+        0
+      );
+  }
+
+  .brand2-page .philosophy-keywords__nav:has( .philosophy-keywords__item:nth-child(3).is-active ) .philosophy-keywords__item:nth-child(2) {
+    transform:
+      translate3d(
+        0,
+        calc(-50% - 6.2vw),
+        0
+      );
+  }
+
+}
+
+/* =========================================================
    LARGE SCREEN LAYOUT — 맥북 비율 그대로 (자동 생성) / 2026.10.14
    ---------------------------------------------------------
    아이맥(2048px)처럼 넓은 화면에서
@@ -17919,6 +18007,9 @@ html {
   }
   .brand2-page .philosophy-keywords__item {
     left: 1.8519vw;
+  }
+  .brand2-page .philosophy-keywords__item {
+    left: 2.9101vw;
   }
 
 }
