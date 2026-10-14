@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="DADEULLIM Brand Philosophy"
+  >
+
+  <title>DADEULLIM — Brand Philosophy</title>
+
+
+  <!-- BRAND 1·2 공통 CSS -->
+  <link
+    rel="stylesheet"
+    href="./brand.css"
+  >
+
+
+  <!-- =====================================================
+       BRAND 2 마지막 섹션
+       확장 아코디언
+  ====================================================== -->
+
+  <style>
+
+    .brand2-page .philosophy-accordion-heading {
+      margin-bottom:
+        clamp(
+          48px,
+          4.5vw,
+          70px
+        );
+
+      text-align: left;
+    }
+
+
+    .brand2-page .philosophy-accordion {
+      --acc-gap: 12px;
+      --acc-speed: .9s;
+
+      display: flex;
+
+      flex-direction: row;
+
+      align-items: stretch;
+
+      gap:
+        var(--acc-gap);
+
+      width: 100%;
+
+      aspect-ratio:
+        2.36 / 1;
+    }
+
+
+    .brand2-page
+    .philosophy-accordion__card {
+      position: relative;
+
+      flex:
+        1
+        1
+        0;
+
+      min-width: 0;
+
+      overflow: hidden;
+
+      border-radius:
+        8px;
+
+      background:
+        #1b1d20;
+
+      cursor:
+        pointer;
+
+      transition:
+        flex-grow
+        var(--acc-speed)
+        cubic-bezier(
+          .22,
+          1,
+          .36,
+          1
+        );
+    }
+
+
+    .brand2-page
+    .philosophy-accordion__card.is-active {
+      flex-grow:
+        7.5;
+    }
+
+
+    .brand2-page
+    .philosophy-accordion__card:focus-visible {
+      outline:
+        1px solid
+        rgba(
+          244,
+          244,
+          241,
+          .6
+        );
+
+      outline-offset:
+        4px;
+    }
+
+
+    .brand2-page
+    .philosophy-accordion__image {
+      position:
+        absolute;
+
+      inset:
+        0;
+
+      display:
+        block;
+
+      width:
+        100%;
+
+      height:
+        100%;
+
+      max-width:
+        none;
+
+      object-fit:
+        cover;
+
+      object-position:
+        72%
+        50%;
+
+      filter:
+        brightness(
+          .62
+        );
+
+      transition:
+        object-position
+        var(--acc-speed)
+        cubic-bezier(
+          .22,
+          1,
+          .36,
+          1
+        ),
+
+        filter
+        .6s
+        ease;
+    }
+
+
+    .brand2-page
+    .philosophy-accordion__card.is-active
+    .philosophy-accordion__image {
+      object-position:
+        0%
+        50%;
+
+      filter:
+        none;
+    }
+
+
+    .brand2-page
+    .philosophy-accordion__card:not(.is-active):hover
+    .philosophy-accordion__image {
+      filter:
+        brightness(
+          .78
+        );
+    }
+
+
+    .brand2-page
+    .philosophy-accordion__label {
+      position:
+        absolute;
+
+      z-index:
+        2;
+
+      right:
+        0;
+
+      bottom:
+        22px;
+
+      left:
+        0;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      align-items:
+        center;
+
+      gap:
+        14px;
+
+      color:
+        #fff;
+
+      pointer-events:
+        none;
+
+      transition:
+        opacity
+        .4s
+        ease;
+    }
+
+
+    .brand2-page
+    .philosophy-accordion__label small {
+      font-size:
+        11px;
+
+      letter-spacing:
+        .16em;
+
+      opacity:
+        .75;
+    }
+
+
+    .brand2-page
+    .philosophy-accordion__label span {
+      writing-mode:
+        vertical-rl;
+
+      font-size:
+        15px;
+
+      letter-spacing:
+        .04em;
+
+      white-space:
+        nowrap;
+    }
+
+
+    .brand2-page
+    .philosophy-accordion__card.is-active
+    .philosophy-accordion__label {
+      opacity:
+        0;
+    }
+
+
+    .brand2-page
+    .philosophy-accordion-caption {
+      margin:
+        48px
+        0
+        0;
+
+      text-align:
+        right;
+    }
+
+
+    @media (max-width: 900px) {
+
+      .brand2-page
+      .philosophy-accordion {
+        flex-direction:
+          column;
+
+        aspect-ratio:
+          auto;
+      }
+
+
+      .brand2-page
+      .philosophy-accordion__card,
+
+      .brand2-page
+      .philosophy-accordion__card.is-active {
+        flex:
+          none;
+
+        aspect-ratio:
+          1.636 / 1;
+
+        cursor:
+          default;
+      }
+
+
+      .brand2-page
+      .philosophy-accordion__image,
+
+      .brand2-page
+      .philosophy-accordion__card
+      .philosophy-accordion__image {
+        object-position:
+          0%
+          50%;
+
+        filter:
+          none;
+      }
+
+
+      .brand2-page
+      .philosophy-accordion__label {
+        display:
+          none;
+      }
+
+
+      .brand2-page
+      .philosophy-accordion-caption {
+        text-align:
+          left;
+      }
+
+    }
+
+
+    @media (
+      prefers-reduced-motion:
+      reduce
+    ) {
+
+      .brand2-page
+      .philosophy-accordion__card,
+
+      .brand2-page
+      .philosophy-accordion__image {
+        transition:
+          none;
+      }
+
+    }
+
+  </style>
+
+
+  <!-- BRAND 1·2 공통 JS -->
+  <script
+    src="./brand.js"
+    defer
+  ></script>
+
+</head>
+
+
+
+<body class="brand2-page">
+
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header
+    class="site-header"
+    id="site-header"
+  >
+
+
+    <!-- TOP BAR -->
+    <div class="site-header__bar">
+
+
+      <!-- LOGO — 2026.10.06 : 클릭 시 index로 이동하면서 인트로 다시 재생 (?intro) -->
+      <a
+        class="site-header__logo"
+        href="./index.html?intro"
+        aria-label="DADEULLIM 홈"
+      >
+        <!-- LOGO IMAGE — 2026.10.06 : 텍스트(DADEULLIM) → CC2 로고 이미지로 교체 -->
+        <span class="site-header__logo-mark" aria-hidden="true"></span>
+      </a>
+
+
+      <!-- MAIN NAV -->
+      <nav
+        class="site-header__nav"
+        aria-label="메인 메뉴"
+      >
+
+        <a
+          class="site-header__nav-link is-active"
+          href="./brand1.html"
+        >
+          BRAND
+        </a>
+
+
+        <a
+          class="site-header__nav-link"
+          href="./display.html"
+        >
+          INTERFACE
+        </a>
+
+
+        <a
+          class="site-header__nav-link"
+          href="./driving.html"
+        >
+          EXPERIENCE
+        </a>
+
+
+        <a
+          class="site-header__nav-link"
+          href="./problem.html"
+        >
+          ABOUT
+        </a>
+
+      </nav>
+
+    </div>
+
+
+
+    <!-- ===================================================
+         MEGA MENU
+    ==================================================== -->
+
+    <div class="site-header__mega">
+
+      <div class="site-header__mega-grid">
+
+
+        <!-- BRAND -->
+        <div class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            BRAND
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./brand1.html">
+              다들림 소개
+            </a>
+
+            <a
+              href="./brand2.html"
+              aria-current="page"
+            >
+              브랜드 철학
+            </a>
+
+            <a href="./logo.html">
+              로고 시스템
+            </a>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- INTERFACE -->
+        <div class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            INTERFACE
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./display.html">
+              디스플레이
+            </a>
+
+            <a href="./handle.html">
+              핸들
+            </a>
+
+            <a href="./hud.html">
+              HUD
+            </a>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- EXPERIENCE -->
+        <div class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            EXPERIENCE
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./driving.html">
+              주행 경험
+            </a>
+
+            <a href="./safety.html">
+              안전 경험
+            </a>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ABOUT -->
+        <div class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            ABOUT
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./problem.html">
+              문제 정의
+            </a>
+
+            <a href="./user.html">
+              사용자 분석
+            </a>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       BRAND PHILOSOPHY
+  ====================================================== -->
+
+  <main class="brand-philosophy">
+
+
+
+    <!-- =====================================================
+         01. PHILOSOPHY HERO
+
+         처음에는 b2-1.jpg가 포스터로 보이고,
+         이후 스크롤 시 전환 영상이 재생됨.
+    ====================================================== -->
+
+    <section
+      class="philosophy-hero"
+      id="philosophy-hero"
+    >
+
+
+      <!-- HERO VIDEO -->
+      <div
+        class="philosophy-hero__media"
+        data-brand2-video-stage
+      >
+
+        <video
+          class="philosophy-hero__video"
+          data-brand2-hero-video
+          src="./images/brand2-hero-transition.mp4"
+          poster="./images/b2-1.jpg"
+          preload="metadata"
+          muted
+          playsinline
+          aria-label="다들림 브랜드 철학 전환 영상"
+        >
+
+          브라우저가 비디오 재생을 지원하지 않습니다.
+
+        </video>
+
+      </div>
+
+
+
+      <!-- HERO DARK GRADIENT -->
+      <div
+        class="philosophy-hero__overlay"
+        aria-hidden="true"
+      ></div>
+
+
+
+      <!-- HERO TEXT -->
+      <div class="philosophy-container">
+
+        <div class="philosophy-hero__copy">
+
+          <h1>
+
+            모든 이동은<br>
+
+            <span class="brand2-hero-accent">
+              같은 경험
+            </span>이어야 한다.
+
+          </h1>
+
+
+          <p>
+
+            다들림이라는 브랜드는 들을 수 있는 사람만을 위한 이동이 아니라,<br>
+
+            모든 사람이 함께하는 이동을 위해 존재합니다.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         02. BRAND KEYWORDS
+
+         Inclusive / Intuitive / Connected
+    ====================================================== -->
+
+    <section
+      class="philosophy-keywords"
+      id="philosophy-keywords"
+      data-brand2-keywords
+    >
+
+      <div class="philosophy-container">
+
+
+        <!-- KEYWORD STAGE -->
+        <div class="philosophy-keywords__stage">
+
+
+          <!-- LEFT: KEYWORD LIST -->
+          <div
+            class="philosophy-keywords__nav"
+            aria-label="다들림 브랜드 핵심 가치"
+          >
+
+
+            <!-- KEYWORD 01 -->
+            <button
+              class="philosophy-keywords__item is-active"
+              type="button"
+              data-keyword="inclusive"
+              aria-selected="true"
+            >
+              Inclusive
+            </button>
+
+
+            <!-- KEYWORD 02 -->
+            <button
+              class="philosophy-keywords__item"
+              type="button"
+              data-keyword="intuitive"
+              aria-selected="false"
+            >
+              Intuitive
+            </button>
+
+
+            <!-- KEYWORD 03 -->
+            <button
+              class="philosophy-keywords__item"
+              type="button"
+              data-keyword="connected"
+              aria-selected="false"
+            >
+              Connected
+            </button>
+
+
+          </div>
+
+
+
+          <!-- CENTER: KEYWORD IMAGES -->
+          <div class="philosophy-keywords__media">
+
+
+            <!-- IMAGE 01 -->
+            <figure
+              class="philosophy-keyword-media is-active"
+              data-keyword-media="inclusive"
+            >
+
+              <img
+                src="./images/b2-2.jpg"
+                alt="모두를 위한 감각을 표현하는 다들림 브랜드 이미지"
+              >
+
+            </figure>
+
+
+            <!-- IMAGE 02 -->
+            <figure
+              class="philosophy-keyword-media"
+              data-keyword-media="intuitive"
+            >
+
+              <img
+                src="./images/b2-3.jpg"
+                alt="직관적으로 정보를 이해하는 이동 경험 이미지"
+              >
+
+            </figure>
+
+
+            <!-- IMAGE 03 -->
+            <figure
+              class="philosophy-keyword-media"
+              data-keyword-media="connected"
+            >
+
+              <img
+                src="./images/b2-4.jpg"
+                alt="감각과 이동의 연결을 표현하는 이미지"
+              >
+
+            </figure>
+
+
+          </div>
+
+
+
+          <!-- RIGHT: KEYWORD CONTENT -->
+          <div class="philosophy-keywords__content">
+
+
+            <!-- COPY 01: INCLUSIVE -->
+            <article
+              class="philosophy-keyword-copy is-active"
+              data-keyword-copy="inclusive"
+            >
+
+              <p class="philosophy-keyword-copy__eyebrow">
+                BRAND VALUE 01
+              </p>
+
+              <h2>
+                모두를 위한 감각
+              </h2>
+
+              <p>
+
+                다들림은 특정한 하나의 감각에 의존하지 않습니다.
+
+                서로 다른 방식으로 세상을 인지하는 모두가
+
+                같은 이동 경험을 누릴 수 있도록
+
+                감각의 경계를 넓힙니다.
+
+              </p>
+
+            </article>
+
+
+
+            <!-- COPY 02: INTUITIVE -->
+            <article
+              class="philosophy-keyword-copy"
+              data-keyword-copy="intuitive"
+            >
+
+              <p class="philosophy-keyword-copy__eyebrow">
+                BRAND VALUE 02
+              </p>
+
+              <h2>
+                직관적으로 이해되는 경험
+              </h2>
+
+              <p>
+
+                소리를 시각과 촉각의 신호로 확장해
+
+                필요한 정보를 빠르고 자연스럽게 이해하도록 합니다.
+
+                복잡한 설명보다 즉각적인 감각을 통해
+
+                상황을 인지할 수 있도록 설계합니다.
+
+              </p>
+
+            </article>
+
+
+
+            <!-- COPY 03: CONNECTED -->
+            <article
+              class="philosophy-keyword-copy"
+              data-keyword-copy="connected"
+            >
+
+              <p class="philosophy-keyword-copy__eyebrow">
+                BRAND VALUE 03
+              </p>
+
+              <h2>
+                감각과 이동을 연결하다
+              </h2>
+
+              <p>
+
+                사람과 차량, 그리고 주변 환경에서 발생하는
+
+                다양한 신호를 하나의 경험으로 연결합니다.
+
+                끊김 없는 정보 전달을 통해
+
+                더 안전하고 편안한 이동을 만듭니다.
+
+              </p>
+
+            </article>
+
+
+          </div>
+
+        </div>
+
+
+
+        <!-- KEYWORD PROGRESS -->
+        <div
+          class="philosophy-keywords__progress"
+          aria-hidden="true"
+        >
+
+          <span
+            class="
+              philosophy-keywords__progress-dot
+              is-active
+            "
+            data-keyword-progress="inclusive"
+          ></span>
+
+          <span
+            class="philosophy-keywords__progress-dot"
+            data-keyword-progress="intuitive"
+          ></span>
+
+          <span
+            class="philosophy-keywords__progress-dot"
+            data-keyword-progress="connected"
+          ></span>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         03. PHILOSOPHY — 확장 아코디언
+
+         접힌 카드는 좁은 세로 띠로 보이고,
+         선택한 카드가 가로로 펼쳐짐.
+    ====================================================== -->
+
+    <section
+      class="
+        philosophy-stack-section
+        philosophy-accordion-section
+      "
+      id="philosophy-stack"
+    >
+
+      <div class="philosophy-container">
+
+
+        <!-- SECTION TITLE -->
+        <div
+          class="
+            philosophy-stack-heading
+            philosophy-accordion-heading
+          "
+        >
+
+          <h2>
+
+            기술보다 사람을<br>
+
+            모든 사람에게 동등한
+
+            <span class="brand2-stack-accent">
+              이동 경험을.
+            </span>
+
+          </h2>
+
+        </div>
+
+
+
+        <!-- ACCORDION -->
+        <div
+          class="philosophy-accordion"
+          data-philosophy-accordion
+          aria-label="다들림 브랜드 철학"
+        >
+
+
+          <!-- CARD 01 -->
+          <article
+            class="
+              philosophy-accordion__card
+              is-active
+            "
+            tabindex="0"
+            aria-expanded="true"
+          >
+
+            <img
+              class="philosophy-accordion__image"
+              src="./images/b2-5.jpg"
+              alt="모든 시작은, 사람으로부터 — 같은 길을 걷더라도 우리가 세상을 느끼는 방식은 모두 다릅니다."
+            >
+
+            <div
+              class="philosophy-accordion__label"
+              aria-hidden="true"
+            >
+
+              <small>
+                01
+              </small>
+
+              <span>
+                사람으로부터
+              </span>
+
+            </div>
+
+          </article>
+
+
+
+          <!-- CARD 02 -->
+          <article
+            class="philosophy-accordion__card"
+            tabindex="0"
+            aria-expanded="false"
+          >
+
+            <img
+              class="philosophy-accordion__image"
+              src="./images/b2-6.jpg"
+              alt="다르게 보고, 같은 정보를 — 다들림은 소리를 시각으로 확장해 누구나 필요한 정보를 동등하게 인식하도록 설계합니다."
+            >
+
+            <div
+              class="philosophy-accordion__label"
+              aria-hidden="true"
+            >
+
+              <small>
+                02
+              </small>
+
+              <span>
+                보는 방식
+              </span>
+
+            </div>
+
+          </article>
+
+
+
+          <!-- CARD 03 -->
+          <article
+            class="philosophy-accordion__card"
+            tabindex="0"
+            aria-expanded="false"
+          >
+
+            <img
+              class="philosophy-accordion__image"
+              src="./images/b2-7.jpg"
+              alt="느낌으로 닿는 정보 — 소리와 위험 정보를 진동과 패턴으로 변환해 촉각으로 전달합니다."
+            >
+
+            <div
+              class="philosophy-accordion__label"
+              aria-hidden="true"
+            >
+
+              <small>
+                03
+              </small>
+
+              <span>
+                느끼는 방식
+              </span>
+
+            </div>
+
+          </article>
+
+
+
+          <!-- CARD 04 -->
+          <article
+            class="philosophy-accordion__card"
+            tabindex="0"
+            aria-expanded="false"
+          >
+
+            <img
+              class="philosophy-accordion__image"
+              src="./images/b2-8.jpg"
+              alt="누구에게나 같은 이동의 자유를 — 서로 다른 감각을 하나의 이동 경험으로 연결합니다."
+            >
+
+            <div
+              class="philosophy-accordion__label"
+              aria-hidden="true"
+            >
+
+              <small>
+                04
+              </small>
+
+              <span>
+                이동의 자유
+              </span>
+
+            </div>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer
+    class="case-footer"
+    id="footer"
+  >
+
+
+    <!-- FOOTER INFORMATION -->
+    <div
+      class="
+        case-container
+        case-footer__top
+      "
+    >
+
+
+      <!-- PROJECT -->
+      <div
+        class="
+          case-footer__column
+          case-footer__column--project
+        "
+      >
+
+        <p class="case-footer__label">
+          PROJECT
+        </p>
+
+        <p class="case-footer__project-name">
+          DADEULLIM
+        </p>
+
+        <p class="case-footer__text">
+          Sound Experience
+        </p>
+
+        <p class="case-footer__text">
+          Graduation Project 2026
+        </p>
+
+      </div>
+
+
+
+      <!-- NAVIGATION -->
+      <div
+        class="
+          case-footer__column
+          case-footer__column--navigation
+        "
+      >
+
+        <p class="case-footer__label">
+          NAVIGATION
+        </p>
+
+        <a href="./brand1.html">
+          Brand
+        </a>
+
+        <a href="./display.html">
+          Interface
+        </a>
+
+        <a href="./driving.html">
+          Experience
+        </a>
+
+        <a href="./problem.html">
+          About
+        </a>
+
+      </div>
+
+
+
+      <!-- CREDITS -->
+      <div
+        class="
+          case-footer__column
+          case-footer__column--credits
+        "
+      >
+
+        <p class="case-footer__label">
+          CREDITS
+        </p>
+
+        <p class="case-footer__text">
+          Digital Media Design
+        </p>
+
+        <p class="case-footer__text">
+          Cheongju University
+        </p>
+
+        <p class="case-footer__text">
+          Graduation Exhibition 2026
+        </p>
+
+      </div>
+
+
+
+      <!-- CONTACT -->
+      <div
+        class="
+          case-footer__column
+          case-footer__column--contact
+        "
+      >
+
+        <p class="case-footer__label">
+          CONTACT
+        </p>
+
+        <a href="#">
+          Instagram
+        </a>
+
+        <a href="mailto:hello@dadeullim.com">
+          E-mail
+        </a>
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- ===================================================
+         BACK TO TOP
+    ==================================================== -->
+
+    <div
+      class="
+        case-container
+        case-footer__utility
+      "
+    >
+
+      <a
+        class="case-footer__back-to-top"
+        href="#philosophy-hero"
+      >
+
+        BACK TO TOP
+
+        <span aria-hidden="true">
+          ↑
+        </span>
+
+      </a>
+
+    </div>
+
+
+
+    <!-- ===================================================
+         LARGE DADEULLIM
+    ==================================================== -->
+
+    <div
+      class="case-footer__brand-stage"
+      aria-label="DADEULLIM"
+    >
+
+      <div class="case-footer__brand-lockup">
+
+
+        <!-- SYMBOL -->
+        <div
+          class="case-footer__symbol"
+          aria-hidden="true"
+        >
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+        </div>
+
+
+        <!-- LARGE BRAND -->
+        <p class="case-footer__brand">
+          DADEULLIM
+        </p>
+
+
+      </div>
+
+    </div>
+
+
+  </footer>
+
+
+</body>
+
+</html>

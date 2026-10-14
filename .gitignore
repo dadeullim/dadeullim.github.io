@@ -1,0 +1,8 @@
+# 2026.10.14 : GitHub 에 올리지 않을 파일
+
+# 맥 시스템 파일
+.DS_Store
+Icon?
+
+# Claude Code 작업 설정
+.claude/

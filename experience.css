@@ -1,0 +1,10610 @@
+/* =========================================================
+   DADEULLIM
+   EXPERIENCE PAGE
+   driving.html / safety.html COMMON CSS
+
+   DRIVING : WHITE MODE
+   SAFETY  : WHITE MODE
+   DEEP BLACK FOOTER
+========================================================= */
+
+
+/* =========================================================
+   00. ROOT
+========================================================= */
+
+:root {
+  --experience-bg: #000000;
+  --experience-text: #f3f3f3;
+  --experience-sub-text: #8c8c8c;
+  --experience-line: rgba(255, 255, 255, 0.18);
+
+  --experience-placeholder: #3b3b3b;
+  --experience-placeholder-hover: #464646;
+
+  /* DRIVING WHITE MODE */
+  --experience-light-bg: #f5f5f7;
+  --experience-light-bg-soft: #f8f8fa;
+  --experience-light-bg-muted: #eff0f2;
+  --experience-light-bg-functions: #f6f7f8;
+
+  --experience-light-text: #1d1d1f;
+  --experience-light-sub-text: #5f6065;
+  --experience-light-muted-text: #86868b;
+
+  --experience-light-line: rgba(29, 29, 31, 0.11);
+
+  --experience-light-card: #e7e8eb;
+  --experience-light-card-hover: #dfe1e4;
+
+  --experience-container: 1500px;
+
+  --experience-side: clamp(26px, 4.2vw, 68px);
+
+  --experience-ease:
+    cubic-bezier(0.22, 1, 0.36, 1);
+  --experience-box-radius: 8px;
+}
+
+
+/* =========================================================
+   01. BASE
+========================================================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+html {
+  background: #f3f3f1;
+}
+
+body.experience-page {
+  margin: 0;
+  padding: 0;
+
+  background: #f3f3f1;
+  color: var(--experience-text);
+
+  overflow-x: hidden;
+}
+
+
+.experience-page *,
+.experience-page *::before,
+.experience-page *::after {
+  box-sizing: border-box;
+}
+
+
+.experience-page img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* =========================================================
+   02. COMMON CONTAINER
+========================================================= */
+
+.driving-container {
+  width: 100%;
+
+  max-width: var(--experience-container);
+
+  margin: 0 auto;
+
+  padding-left: var(--experience-side);
+  padding-right: var(--experience-side);
+}
+
+
+/* =========================================================
+   03. HEADER
+========================================================= */
+
+.experience-page .site-header {
+  background: rgba(0, 0, 0, 0.94);
+
+  color: #ffffff;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+
+.experience-page .site-header__bar {
+  background: transparent;
+}
+
+
+.experience-page .site-header__logo,
+.experience-page .site-header__nav-link {
+  color: rgba(255, 255, 255, 0.58);
+
+  transition:
+    color 0.25s ease,
+    opacity 0.25s ease;
+}
+
+
+.experience-page .site-header__logo {
+  color: #ffffff;
+}
+
+
+.experience-page .site-header__nav-link:hover,
+.experience-page .site-header__nav-link.is-active {
+  color: #ffffff;
+}
+
+
+.experience-page .site-header__nav-link.is-active {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   HEADER MEGA MENU
+========================================================= */
+
+.experience-page .site-header__mega {
+  background: rgba(7, 7, 7, 0.98);
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.1);
+}
+
+
+.experience-page .site-header__mega-title {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+
+.experience-page .site-header__mega-links a {
+  color: rgba(255, 255, 255, 0.68);
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+.experience-page .site-header__mega-links a:hover,
+.experience-page
+.site-header__mega-links
+a[aria-current="page"] {
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   04. IMAGE PLACEHOLDER
+========================================================= */
+
+.experience-placeholder {
+  position: relative;
+
+  overflow: hidden;
+  border-radius:
+  var(--experience-box-radius);
+
+  background: var(--experience-placeholder);
+
+  transition:
+    background-color 0.5s ease,
+    transform 0.8s var(--experience-ease);
+}
+
+
+.experience-placeholder::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent 10%,
+      rgba(255, 255, 255, 0.045) 50%,
+      transparent 90%
+    );
+
+  transform: translateX(-120%);
+
+  transition:
+    transform 1.2s var(--experience-ease);
+}
+
+
+.experience-placeholder:hover {
+  background:
+    var(--experience-placeholder-hover);
+}
+
+
+.experience-placeholder:hover::after {
+  transform: translateX(120%);
+}
+
+
+/* =========================================================
+   05. MAIN
+========================================================= */
+
+.driving-main {
+  position: relative;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  background: #000000;
+}
+
+
+
+.driving-hero {
+  position: relative;
+
+  width: 100%;
+
+  padding-top:
+    clamp(150px, 10vw, 185px);
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.driving-hero__heading {
+  position: relative;
+
+  z-index: 5;
+
+  left:
+    clamp(-14px, -0.8vw, -8px);
+
+  padding-bottom: 0;
+
+  margin-bottom:
+    clamp(22px, 2vw, 34px);
+}
+
+
+.driving-hero__title {
+  margin: 0;
+
+  max-width: 100%;
+
+  color: #f5f5f5;
+
+  font-size:
+    clamp(
+      30px,
+      5.15vw,
+      78px
+    );
+
+  font-weight: 400;
+
+  line-height: 0.98;
+
+  letter-spacing: -0.055em;
+
+  word-break: keep-all;
+}
+
+
+/* =========================================================
+   HERO IMAGE
+========================================================= */
+
+.driving-hero__visual {
+  position: relative;
+
+  width: 100%;
+
+  height:
+    clamp(200px, 47vw, 560px);
+
+  display: block;
+
+  overflow: hidden;
+
+  border-radius:
+    var(--experience-box-radius);
+
+  background:
+    var(--experience-light-card);
+}
+
+
+.driving-hero__image {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  max-width: none;
+
+  object-fit: cover;
+
+  object-position:
+    center center;
+
+  border-radius:
+    inherit;
+}
+
+
+/* =========================================================
+   HERO DESCRIPTION
+========================================================= */
+
+/* =========================================================
+   07. SOLUTION
+========================================================= */
+
+.driving-solution {
+  position: relative;
+
+    padding-top:
+    clamp(280px, 23vw, 400px);
+
+  padding-bottom:
+    clamp(55px, 5vw, 82px);
+}
+
+
+
+.driving-solution__inner {
+  display: grid;
+
+  grid-template-columns:
+    35% 53%;
+
+  column-gap: 12%;
+
+  align-items: start;
+}
+
+
+/* =========================================================
+   SOLUTION COPY
+========================================================= */
+
+.driving-solution__copy {
+  padding-top: 0;
+}
+
+
+.driving-solution__eyebrow {
+  margin:
+    0 0 clamp(22px, 2.4vw, 34px);
+
+  color: #8d8d8d;
+
+  font-size:
+    clamp(13px, 0.9vw, 16px);
+
+  font-weight: 400;
+
+  line-height: 1.2;
+
+  letter-spacing: -0.01em;
+}
+
+
+.driving-solution__title {
+  margin: 0;
+
+  color: #f4f4f4;
+
+  font-size:
+    clamp(32px, 4.4vw, 80px);
+
+  font-weight: 400;
+
+  line-height: 1.12;
+
+  letter-spacing: -0.045em;
+
+  word-break: keep-all;
+
+  white-space: nowrap;
+
+  position: relative;
+  z-index: 2;
+}
+
+
+.driving-solution__description {
+  margin:
+    clamp(16px, 1.5vw, 23px)
+    0
+    0;
+
+  color: #777777;
+
+  font-size:
+    clamp(18px, 1.35vw, 22px);
+
+  font-weight: 400;
+
+  line-height: 1.55;
+
+  letter-spacing: -0.025em;
+
+  word-break: keep-all;
+}
+
+
+/* =========================================================
+   08. SOLUTION VISUAL
+========================================================= */
+
+
+.driving-solution__visual {
+  position: relative;
+
+  width: 100%;
+
+  min-height:
+    clamp(264px, 62vw, 820px);
+}
+
+
+/* =========================================================
+   SOLUTION IMAGE COMMON
+========================================================= */
+
+.driving-solution__image {
+  position: absolute;
+  width: calc(50% - 6px);
+  margin: 0;
+  background: var(--experience-placeholder);
+  transition:
+    transform 0.9s var(--experience-ease),
+    opacity 0.8s var(--experience-ease);
+}
+
+
+/* =========================================================
+   SOLUTION IMAGE META
+   번호 + 짧은 키워드
+========================================================= */
+
+.driving-solution__number,
+.driving-solution__caption {
+  position: absolute;
+  z-index: 3;
+
+  margin: 0;
+
+  color:
+    rgba(255, 255, 255, 0.94);
+
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.18),
+    0 2px 14px rgba(0, 0, 0, 0.20);
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s var(--experience-ease);
+}
+
+
+.driving-solution__number {
+  top:
+    clamp(12px, 1.1vw, 18px);
+
+  left:
+    clamp(12px, 1.1vw, 18px);
+
+  font-size:
+    clamp(20px, 1.85vw, 28px);
+
+  font-weight: 300;
+
+  line-height: 1;
+
+  letter-spacing: -0.045em;
+
+  opacity: 0.82;
+}
+
+
+.driving-solution__caption {
+  left:
+    clamp(12px, 1.1vw, 18px);
+
+  bottom:
+    clamp(12px, 1.1vw, 18px);
+
+  font-size:
+    clamp(12px, 0.95vw, 15px);
+
+  font-weight: 500;
+
+  line-height: 1;
+
+  letter-spacing: 0.06em;
+
+  text-transform: uppercase;
+
+  opacity: 0.90;
+}
+
+
+.driving-solution__image:hover
+.driving-solution__number,
+.driving-solution__image:hover
+.driving-solution__caption {
+  opacity: 1;
+}
+
+.driving-solution__image--01 {
+  top: 0;
+  left: 0;
+  width: calc(50% - 6px);
+  height: 42%;
+}
+
+.driving-solution__image--03 {
+  top: calc(42% + 12px);
+  left: 0;
+  width: calc(50% - 6px);
+  height: 42%;
+}
+
+.driving-solution__image--02 {
+  top: 13%;
+  right: 0;
+  width: calc(50% - 6px);
+  height: 43%;
+}
+
+.driving-solution__image--04 {
+  top: calc(56% + 12px);
+  right: 0;
+  width: calc(50% - 6px);
+  height: 42%;
+}
+
+/* =========================================================
+   SOLUTION HOVER
+========================================================= */
+
+.driving-solution__image:hover {
+  z-index: 10;
+
+  transform:
+    translateY(-5px);
+}
+
+
+/* =========================================================
+   09. CONNECTION MESSAGE
+========================================================= */
+
+.driving-connection {
+  position: relative;
+
+  /* SOLUTION TO CONNECTION */
+  padding-top:
+    clamp(190px, 15vw, 270px);
+
+  /* CONNECTION TO FEATURES */
+  padding-bottom:
+    clamp(35px, 3vw, 55px);
+}
+
+
+.driving-connection__text {
+  position:
+    relative;
+
+  top:
+    32px;
+
+  margin:
+    0 auto;
+
+  max-width:
+    1000px;
+
+  color:
+    var(--experience-light-text);
+
+  font-size:
+    clamp(
+      32px,
+      2.9vw,
+      46px
+    );
+
+  font-weight:
+    500;
+
+  line-height:
+    1.16;
+
+  letter-spacing:
+    -0.045em;
+
+  text-align:
+    center;
+
+  word-break:
+    keep-all;
+
+  opacity:
+    1 !important;
+}
+
+
+/* =========================================================
+   10. FUNCTIONS
+   VIBRATION / HUD / ALERT
+========================================================= */
+
+.driving-functions {
+  position: relative;
+
+  width: 100%;
+
+  padding-bottom:
+    clamp(80px, 7vw, 120px);
+}
+
+
+/* The stage follows the same proportion as the reference layout. */
+.driving-functions__stage {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 0;
+
+  aspect-ratio: 426 / 260;
+}
+
+
+/* =========================================================
+   FEATURE COMMON
+========================================================= */
+
+.driving-feature,
+.driving-feature--vibration,
+.driving-feature--hud,
+.driving-feature--alert {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: auto;
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+}
+
+
+.driving-feature__image {
+  position: absolute;
+
+  margin: 0;
+
+  background: var(--experience-placeholder);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.8s var(--experience-ease),
+    filter 0.6s ease;
+}
+
+
+.driving-feature__copy {
+  position: absolute;
+
+  z-index: 5;
+
+  margin: 0;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   FEATURE TYPOGRAPHY
+========================================================= */
+
+.driving-feature__copy h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size:
+    clamp(18px, 4.25vw, 60px);
+
+  font-weight: 400;
+
+  line-height: 0.98;
+
+  letter-spacing: -0.045em;
+}
+
+
+.driving-feature__label {
+  margin:
+    clamp(5px, 0.7vw, 10px)
+    0
+    0;
+
+  color:
+    rgba(255, 255, 255, 0.92);
+
+  font-size:
+    clamp(8px, 1.8vw, 24px);
+
+  font-weight: 400;
+
+  line-height: 1.35;
+
+  letter-spacing: -0.02em;
+}
+
+
+.driving-feature__description {
+  margin:
+    clamp(12px, 1.7vw, 24px)
+    0
+    0;
+
+  color: #828282;
+
+  font-size:
+    clamp(8px, 1.65vw, 22px);
+
+  font-weight: 400;
+
+  line-height: 1.45;
+
+  letter-spacing: -0.02em;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   11. VIBRATION
+========================================================= */
+
+.driving-feature--vibration {
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+
+.driving-feature__image--vibration {
+  top: 10%;
+  left: 7.51%;
+
+  width: 46.24%;
+  height: 22.31%;
+}
+
+
+.driving-feature--vibration
+.driving-feature__copy {
+  top: 11.7%;
+  left: 56.34%;
+
+  width: 36.8%;
+
+  margin: 0;
+  padding: 0;
+
+  text-align: left;
+
+  border: 0;
+}
+
+
+.driving-feature--vibration::after {
+  content: "";
+
+  position: absolute;
+
+  top: 16.4%;
+  left: 94.37%;
+
+  width: 1px;
+  height: 22.31%;
+
+  background:
+    rgba(255, 255, 255, 0.18);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   12. HUD
+========================================================= */
+
+.driving-feature--hud {
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+
+.driving-feature--hud::before {
+  content: "";
+
+  position: absolute;
+
+  top: 40.38%;
+  left: 7.28%;
+
+  width: 1px;
+  height: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.18);
+
+  pointer-events: none;
+}
+
+
+.driving-feature--hud
+.driving-feature__copy {
+  top: 45.5%;
+  left: 12.6%;
+
+  width: 26.2%;
+
+  margin: 0;
+  padding: 0;
+
+  text-align: right;
+
+  border: 0;
+}
+
+
+.driving-feature__image--hud {
+  top: 43.08%;
+  left: 40.61%;
+
+  width: 53.76%;
+  height: 23.08%;
+}
+
+
+/* =========================================================
+   13. ALERT
+========================================================= */
+
+.driving-feature--alert {
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+
+.driving-feature__image--alert {
+  top: 70%;
+  left: 23.47%;
+
+  width: 39.44%;
+  height: 20%;
+}
+
+
+.driving-feature--alert
+.driving-feature__copy {
+  top: 71.8%;
+  right: 5.63%;
+
+  width: 28.7%;
+
+  margin: 0;
+  padding: 0;
+
+  text-align: right;
+
+  border: 0;
+}
+
+
+/* =========================================================
+   FEATURE HOVER
+========================================================= */
+
+.driving-feature:hover
+.driving-feature__image {
+  transform:
+    scale(1.004);
+}
+
+
+/* =========================================================
+   14. END SPACE
+========================================================= */
+
+.driving-end-space {
+  width: 100%;
+
+  height:
+    clamp(45px, 5vw, 80px);
+
+  background: #000000;
+}
+
+
+/* =========================================================
+   15. SCROLL REVEAL
+========================================================= */
+
+.experience-page.has-experience-js
+[data-driving-reveal] {
+  opacity: 0;
+
+  transform:
+    translateY(40px);
+
+  transition:
+    opacity 1.1s var(--experience-ease),
+    transform 1.1s var(--experience-ease);
+}
+
+
+.experience-page.has-experience-js
+[data-driving-reveal].is-visible {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+
+/* HERO TITLE */
+
+.experience-page.has-experience-js
+[data-driving-reveal="title"] {
+  transform:
+    translateY(48px);
+}
+
+
+.experience-page.has-experience-js
+[data-driving-reveal="title"].is-visible {
+  transform:
+    translateY(0);
+}
+
+
+/* SOLUTION IMAGE */
+
+.experience-page.has-experience-js
+[data-driving-reveal="image"] {
+  transform:
+    translateY(38px)
+    scale(0.985);
+}
+
+
+.experience-page.has-experience-js
+[data-driving-reveal="image"].is-visible {
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+
+/* FEATURE IMAGE */
+
+.experience-page.has-experience-js
+[data-driving-reveal="feature-image"] {
+  transform:
+    translateY(26px);
+}
+
+
+.experience-page.has-experience-js
+[data-driving-reveal="feature-image"].is-visible {
+  transform:
+    translateY(0);
+}
+
+
+/* FEATURE COPY */
+
+.experience-page.has-experience-js
+[data-driving-reveal="feature-copy"] {
+  transform:
+    translateY(16px);
+}
+
+
+.experience-page.has-experience-js
+[data-driving-reveal="feature-copy"].is-visible {
+  transform:
+    translateY(0);
+}
+
+
+
+.experience-page .case-footer {
+  position: relative;
+
+  z-index: 10;
+
+  width: 100%;
+
+  margin: 0;
+  padding-bottom: 0;
+
+  background: #f3f3f1;
+
+  color: #111111;
+
+  border: 0;
+  border-radius: 0;
+
+  box-shadow: none;
+}
+
+
+/* FOOTER LABEL */
+
+.experience-page .case-footer__label {
+  color: #858585;
+}
+
+
+/* FOOTER LINKS */
+
+.experience-page .case-footer a {
+  color: #161616;
+
+  text-decoration: none;
+
+  transition:
+    opacity 0.25s ease,
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+.experience-page .case-footer a:hover {
+  opacity: 0.5;
+}
+
+
+/* FOOTER BUTTON */
+
+.experience-page
+.case-footer
+a.case-footer__button,
+.experience-page
+.case-footer
+a.case-footer__button:link,
+.experience-page
+.case-footer
+a.case-footer__button:visited {
+  color: #111111;
+
+  background: transparent;
+
+  border:
+    1px solid rgba(17, 17, 17, 0.65);
+
+  opacity: 1;
+}
+
+
+.experience-page
+.case-footer
+a.case-footer__button:hover {
+  color: #ffffff;
+
+  background: #111111;
+
+  border-color: #111111;
+
+  opacity: 1;
+}
+
+
+/* FOOTER BRAND */
+
+.experience-page .case-footer__brand {
+  color: #101010;
+}
+
+
+.experience-page .case-footer__meta {
+  color: #555555;
+}
+
+
+/* FOOTER SYMBOL */
+
+.experience-page
+.case-footer__symbol
+span {
+  background: #111111;
+}
+
+
+/* =========================================================
+   17. TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  :root {
+    --experience-side:
+      clamp(25px, 4vw, 44px);
+  }
+
+
+  .driving-hero {
+    padding-top:
+      clamp(40px, 4vw, 55px);
+  }
+
+
+  .driving-hero__title {
+    font-size:
+      clamp(38px, 5.9vw, 64px);
+
+    font-weight: 400;
+  }
+
+
+  .driving-solution__title {
+    font-size:
+      clamp(24px, 2.9vw, 34px);
+  }
+
+
+  .driving-solution__number {
+    top:
+      clamp(10px, 1.45vw, 16px);
+
+    left:
+      clamp(10px, 1.45vw, 16px);
+
+    font-size:
+      clamp(17px, 2.1vw, 24px);
+  }
+
+
+  .driving-solution__caption {
+    left:
+      clamp(10px, 1.45vw, 16px);
+
+    bottom:
+      clamp(10px, 1.45vw, 16px);
+
+    font-size:
+      clamp(10px, 1.2vw, 13px);
+  }
+
+
+  .driving-connection__text {
+    font-size:
+      clamp(23px, 2.7vw, 31px);
+  }
+
+}
+
+
+
+@media (max-width: 768px) {
+
+  :root {
+    --experience-side:
+      clamp(20px, 6vw, 26px);
+  }
+
+
+  /* -------------------------------------------------------
+     HERO
+  ------------------------------------------------------- */
+
+  .driving-hero {
+    padding-top:
+      clamp(35px, 9vw, 44px);
+  }
+
+
+  .driving-hero__heading {
+    margin-bottom:
+      -8px;
+  }
+
+
+  .driving-hero__title {
+    font-size:
+      clamp(27px, 6.5vw, 40px);
+
+    font-weight: 400;
+
+    line-height: 0.98;
+
+    white-space: nowrap;
+  }
+
+
+  .driving-hero__visual {
+    height:
+      clamp(200px, 47vw, 350px);
+  }
+
+
+  /* -------------------------------------------------------
+     SOLUTION
+  ------------------------------------------------------- */
+
+  .driving-solution {
+    padding-top:
+      clamp(68px, 17vw, 95px);
+
+    padding-bottom:
+
+      clamp(48px, 11vw, 65px);
+  }
+
+
+  .driving-solution__inner {
+    display: grid;
+
+    grid-template-columns:
+      35% 53%;
+
+    column-gap: 12%;
+
+    align-items: start;
+  }
+
+
+  .driving-solution__copy {
+    margin: 0;
+
+    padding: 0;
+  }
+
+
+  .driving-solution__eyebrow {
+    margin-bottom:
+      clamp(24px, 7vw, 34px);
+
+    font-size:
+      clamp(7px, 1.65vw, 9px);
+  }
+
+
+  .driving-solution__title {
+    font-size:
+      clamp(17px, 4vw, 25px);
+
+    line-height: 1.13;
+  }
+
+
+  .driving-solution__description {
+    margin-top:
+      clamp(13px, 4vw, 20px);
+
+    font-size:
+      clamp(11px, 2.3vw, 14px);
+
+    line-height: 1.5;
+  }
+
+
+  .driving-solution__visual {
+    min-height:
+      clamp(240px, 62vw, 450px);
+  }
+
+
+  .driving-solution__number {
+    top:
+      clamp(8px, 2vw, 12px);
+
+    left:
+      clamp(8px, 2vw, 12px);
+
+    font-size:
+      clamp(12px, 3vw, 17px);
+
+    opacity: 0.86;
+  }
+
+
+  .driving-solution__caption {
+    left:
+      clamp(8px, 2vw, 12px);
+
+    bottom:
+      clamp(8px, 2vw, 12px);
+
+    font-size:
+      clamp(8px, 1.9vw, 11px);
+
+    letter-spacing:
+      0.045em;
+  }
+
+
+  /* -------------------------------------------------------
+     CONNECTION
+  ------------------------------------------------------- */
+
+  .driving-connection {
+    padding-top: 5px;
+
+    padding-bottom:
+      clamp(80px, 22vw, 110px);
+  }
+
+
+  .driving-connection__text {
+    top:
+      14px;
+
+    font-size:
+      clamp(15px, 4vw, 23px);
+
+    text-align:
+      center;
+  }
+
+
+  /* -------------------------------------------------------
+     FUNCTIONS
+  ------------------------------------------------------- */
+
+  .driving-functions {
+    padding-bottom:
+      clamp(50px, 12vw, 70px);
+  }
+
+
+  .driving-functions__stage {
+    min-height: 0;
+
+    aspect-ratio: 426 / 260;
+  }
+
+
+  .driving-feature {
+    position: absolute;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+  }
+
+
+  .driving-feature__copy h2 {
+    font-size:
+      clamp(18px, 4.25vw, 32px);
+  }
+
+
+  .driving-feature__label {
+    font-size:
+      clamp(8px, 1.8vw, 14px);
+  }
+
+
+  .driving-feature__description {
+    margin-top:
+      clamp(10px, 2.8vw, 18px);
+
+    font-size:
+      clamp(8px, 1.65vw, 13px);
+  }
+
+
+  .driving-end-space {
+    height:
+      clamp(35px, 8vw, 55px);
+  }
+
+}
+
+
+/* =========================================================
+   19. VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .driving-hero__title {
+    font-size:
+      clamp(25px, 6.7vw, 32px);
+
+    font-weight: 400;
+  }
+
+
+  .driving-solution__visual {
+    min-height:
+      62vw;
+  }
+
+
+  .driving-solution__title {
+    font-size:
+      clamp(16px, 4.1vw, 20px);
+  }
+
+
+  .driving-solution__number {
+    top:
+      7px;
+
+    left:
+      7px;
+
+    font-size:
+      clamp(10px, 3.15vw, 13px);
+  }
+
+
+  .driving-solution__caption {
+    left:
+      7px;
+
+    bottom:
+      7px;
+
+    font-size:
+      clamp(7px, 1.95vw, 9px);
+  }
+
+
+  .driving-connection__text {
+    font-size:
+      clamp(15px, 3.9vw, 19px);
+  }
+
+
+  .driving-feature__copy h2 {
+    font-size:
+      clamp(15px, 4vw, 18px);
+  }
+
+}
+
+
+/* =========================================================
+   20. REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+
+  .experience-page *,
+  .experience-page *::before,
+  .experience-page *::after {
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      0.01ms !important;
+  }
+
+}
+
+/* =========================================================
+   FOOTER BOTTOM SAFEGUARD
+========================================================= */
+
+html,
+body.experience-page {
+  margin-bottom: 0;
+  min-height: 100%;
+  background: #f3f3f1;
+}
+
+.experience-page .driving-main {
+  background: #000000;
+}
+
+.experience-page .case-footer {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+
+/* =========================================================
+   =========================================================
+   DRIVING EXPERIENCE
+   WHITE MODE FINAL
+   ---------------------------------------------------------
+   순수한 #000 / #fff 대신
+   off-white / soft-black을 사용하고
+   섹션마다 미세한 명도 차이로 리듬을 만든다.
+
+   SAFETY에는 영향을 주지 않는다.
+   =========================================================
+   ========================================================= */
+
+
+/* =========================================================
+   DRIVING PAGE BASE
+========================================================= */
+
+body.experience-page.driving-page {
+  color:
+    var(--experience-light-text);
+
+  background:
+    #f1f2f4;
+}
+
+
+.driving-page .driving-main {
+  color:
+    var(--experience-light-text);
+
+  background:
+    var(--experience-light-bg);
+}
+
+
+/* =========================================================
+   DRIVING HEADER
+   LIGHT GLASS
+========================================================= */
+
+.driving-page .site-header {
+  color:
+    var(--experience-light-text);
+
+  background:
+    var(--experience-light-bg);
+
+  border-bottom:
+    1px solid
+    rgba(29, 29, 31, 0.07);
+
+  box-shadow:
+    none;
+
+  backdrop-filter:
+    none;
+
+  -webkit-backdrop-filter:
+    none;
+}
+
+
+.driving-page .site-header__bar {
+  background:
+    transparent;
+}
+
+
+.driving-page .site-header::before,
+.driving-page .site-header::after,
+.driving-page .site-header__bar::before,
+.driving-page .site-header__bar::after {
+  background:
+    none;
+
+  box-shadow:
+    none;
+
+  filter:
+    none;
+}
+
+
+.driving-page .site-header__logo {
+  color:
+    var(--experience-light-text);
+
+  text-shadow:
+    none;
+}
+
+
+.driving-page .site-header__nav-link {
+  color:
+    rgba(29, 29, 31, 0.56);
+
+  text-shadow:
+    none;
+}
+
+
+.driving-page .site-header__nav-link:hover,
+.driving-page .site-header__nav-link.is-active {
+  color:
+    var(--experience-light-text);
+}
+
+
+.driving-page .site-header__nav-link::after {
+  background:
+    var(--experience-light-text);
+}
+
+
+/* =========================================================
+   DRIVING HEADER MEGA MENU
+========================================================= */
+
+.driving-page .site-header__mega {
+  background:
+    rgba(246, 246, 248, 0.96);
+
+  border-top:
+    1px solid
+    rgba(29, 29, 31, 0.07);
+
+  border-bottom:
+    1px solid
+    rgba(29, 29, 31, 0.09);
+
+  box-shadow:
+    0 24px 55px
+    rgba(29, 29, 31, 0.07);
+
+  backdrop-filter:
+    blur(20px)
+    saturate(112%);
+
+  -webkit-backdrop-filter:
+    blur(20px)
+    saturate(112%);
+}
+
+
+.driving-page .site-header__mega-title {
+  color:
+    rgba(29, 29, 31, 0.38);
+}
+
+
+.driving-page .site-header__mega-links a {
+  color:
+    rgba(29, 29, 31, 0.62);
+}
+
+
+.driving-page .site-header__mega-links a:hover,
+.driving-page
+.site-header__mega-links
+a[aria-current="page"] {
+  color:
+    var(--experience-light-text);
+}
+
+
+.driving-page .site-header a:focus-visible {
+  outline:
+    1px solid
+    rgba(29, 29, 31, 0.58);
+}
+
+
+/* =========================================================
+   DRIVING PLACEHOLDER
+========================================================= */
+
+.driving-page .experience-placeholder {
+  background:
+    var(--experience-light-card);
+
+  box-shadow:
+    inset
+    0
+    0
+    0
+    1px
+    rgba(29, 29, 31, 0.045);
+}
+
+
+.driving-page .experience-placeholder::after {
+  background:
+    linear-gradient(
+      120deg,
+      transparent 10%,
+      rgba(255, 255, 255, 0.46) 50%,
+      transparent 90%
+    );
+}
+
+
+.driving-page .experience-placeholder:hover {
+  background:
+    var(--experience-light-card-hover);
+}
+
+
+/* =========================================================
+   01. DRIVING HERO
+   #F5F5F7
+========================================================= */
+
+.driving-page .driving-hero {
+  background:
+    var(--experience-light-bg);
+}
+
+
+.driving-page .driving-hero__title {
+  color:
+    var(--experience-light-text);
+
+  font-weight:
+    400;
+}
+
+
+/* HERO 강조 - 놓치지 않는 주행. */
+
+.driving-page .driving-hero__accent {
+  display:
+    inline-block;
+
+  background:
+    linear-gradient(
+      105deg,
+      #344b58 0%,
+      #4f7183 32%,
+      #6f98ac 64%,
+      #8fb8ca 100%
+    );
+
+  -webkit-background-clip:
+    text;
+
+  background-clip:
+    text;
+
+  -webkit-text-fill-color:
+    transparent;
+
+  color:
+    transparent;
+
+  font-weight:
+    500;
+}
+
+
+.driving-page .driving-hero__visual {
+  display: block;
+
+  overflow: hidden;
+
+  background:
+    var(--experience-light-card);
+
+  box-shadow:
+    none;
+}
+
+
+.driving-page .driving-hero__image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  max-width: none;
+
+  object-fit: cover;
+
+  object-position:
+    center center;
+}
+
+
+/* =========================================================
+   02. SOLUTION
+   HERO보다 아주 미세하게 밝은 surface
+========================================================= */
+
+.driving-page .driving-solution {
+  background:
+    var(--experience-light-bg-soft);
+
+  border-top:
+    1px solid
+    rgba(29, 29, 31, 0.035);
+}
+
+
+.driving-page .driving-solution__eyebrow {
+  color:
+    var(--experience-light-muted-text);
+}
+
+
+.driving-page .driving-solution__title {
+  color:
+    var(--experience-light-text);
+
+  font-weight:
+    400;
+}
+
+
+/* SOLUTION 강조 - 조용하게. */
+
+.driving-page .driving-solution__accent {
+  display:
+    inline-block;
+
+  background:
+    linear-gradient(
+      105deg,
+      #344b58 0%,
+      #4f7183 32%,
+      #6f98ac 64%,
+      #8fb8ca 100%
+    );
+
+  -webkit-background-clip:
+    text;
+
+  background-clip:
+    text;
+
+  -webkit-text-fill-color:
+    transparent;
+
+  color:
+    transparent;
+
+  font-weight:
+    500;
+}
+
+
+.driving-page .driving-solution__description {
+  color:
+    var(--experience-light-sub-text);
+}
+
+
+.driving-page .driving-solution__image {
+  background:
+    var(--experience-light-card);
+}
+
+
+/* =========================================================
+   03. CONNECTION
+   HERO와 같은 깨끗한 OFF-WHITE
+========================================================= */
+
+.driving-page .driving-connection {
+  background:
+    var(--experience-light-bg);
+}
+
+
+.driving-page .driving-connection__text {
+  color:
+    var(--experience-light-text);
+
+  font-weight:
+    500;
+}
+
+
+/* CONNECTION 강조 - 운전자를 인식하는 순간, */
+
+.driving-page .driving-connection__accent {
+  display:
+    inline-block;
+
+  background:
+    linear-gradient(
+      105deg,
+      #344b58 0%,
+      #4f7183 32%,
+      #6f98ac 64%,
+      #8fb8ca 100%
+    );
+
+  -webkit-background-clip:
+    text;
+
+  background-clip:
+    text;
+
+  -webkit-text-fill-color:
+    transparent;
+
+  color:
+    transparent;
+
+  font-weight:
+    600;
+}
+
+
+/* =========================================================
+   04. FUNCTIONS
+   다시 조금 밝게 전환
+========================================================= */
+
+.driving-page .driving-functions {
+  background:
+    var(--experience-light-bg-functions);
+}
+
+
+.driving-page .driving-feature__image {
+  background:
+    var(--experience-light-card);
+}
+
+
+.driving-page .driving-feature__copy h2 {
+  color:
+    var(--experience-light-text);
+}
+
+
+.driving-page .driving-feature__label {
+  color:
+    rgba(29, 29, 31, 0.88);
+}
+
+
+.driving-page .driving-feature__description {
+  color:
+    var(--experience-light-sub-text);
+}
+
+
+.driving-page
+.driving-feature--vibration::after,
+.driving-page
+.driving-feature--hud::before {
+  background:
+    var(--experience-light-line);
+}
+
+
+/* =========================================================
+   DRIVING END SPACE
+========================================================= */
+
+.driving-page .driving-end-space {
+  background:
+    var(--experience-light-bg-functions);
+}
+
+
+/* =========================================================
+   DRIVING FOOTER
+   DEEP BLACK MODE
+   순수 #000 대신 #08090A 사용
+========================================================= */
+
+.driving-page .case-footer {
+  color:
+    #f7f8f8;
+
+  background:
+    #08090a;
+
+  border-top:
+    1px solid
+    rgba(247, 248, 248, 0.08);
+}
+
+
+.driving-page .case-footer__label {
+  color:
+    rgba(247, 248, 248, 0.42);
+}
+
+
+.driving-page .case-footer a {
+  color:
+    rgba(247, 248, 248, 0.82);
+}
+
+
+.driving-page .case-footer a:hover {
+  color:
+    #f7f8f8;
+
+  opacity: 1;
+}
+
+
+.driving-page
+.case-footer
+a.case-footer__button,
+.driving-page
+.case-footer
+a.case-footer__button:link,
+.driving-page
+.case-footer
+a.case-footer__button:visited {
+  color:
+    #f7f8f8;
+
+  background:
+    transparent;
+
+  border:
+    1px solid
+    rgba(247, 248, 248, 0.42);
+}
+
+
+.driving-page
+.case-footer
+a.case-footer__button:hover {
+  color:
+    #08090a;
+
+  background:
+    #f7f8f8;
+
+  border-color:
+    #f7f8f8;
+
+  opacity: 1;
+}
+
+
+.driving-page .case-footer__brand {
+  color:
+    #f7f8f8;
+}
+
+
+.driving-page .case-footer__meta,
+.driving-page .case-footer__meta p {
+  color:
+    rgba(247, 248, 248, 0.48);
+}
+
+
+.driving-page
+.case-footer__symbol
+span {
+  background:
+    #f7f8f8;
+}
+
+
+/* =========================================================
+   DRIVING FOOTER BOTTOM
+   푸터 아래 밝은 여백이 보이지 않도록 배경 통일
+========================================================= */
+
+html:has(.driving-page) {
+  background:
+    #08090a;
+}
+
+
+body.experience-page.driving-page {
+  margin-bottom: 0;
+
+  background:
+    #08090a;
+}
+
+
+.driving-page .driving-main {
+  background:
+    var(--experience-light-bg);
+}
+
+
+.driving-page .case-footer {
+  margin-bottom: 0;
+
+  border-radius: 0;
+}
+
+
+/* =========================================================
+   SAFETY EXPERIENCE
+   safety.html
+
+   - DARK MODE
+   - SAME IMAGE PLACEHOLDER AS DRIVING
+   - ROTATING SAFETY CAROUSEL
+   - OVERLAP IMAGE STACK
+========================================================= */
+
+
+/* =========================================================
+   21. SAFETY BASE
+========================================================= */
+
+.safety-main {
+  position: relative;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  background: #000000;
+
+  color: #f3f3f3;
+}
+
+
+.safety-container {
+  width: 100%;
+
+  max-width: var(--experience-container);
+
+  margin: 0 auto;
+
+  padding-left: var(--experience-side);
+  padding-right: var(--experience-side);
+}
+
+
+
+/* =========================================================
+   22. SAFETY HERO
+========================================================= */
+
+.safety-hero {
+  position: relative;
+
+  width: 100%;
+
+  padding-top: 0;
+}
+
+
+/* HERO IMAGE */
+
+.safety-hero__visual {
+  position: relative;
+
+  width: 100%;
+
+  height:
+    clamp(520px, calc(40vw + 150px), 800px);
+
+  overflow: hidden;
+
+  background:
+    var(--experience-light-card);
+}
+
+/* HERO TITLE */
+
+.safety-hero__heading {
+  position: relative;
+
+  z-index: 5;
+
+  /* safety-container 때문에 생기는 좌우 여백 제거 */
+  width: 100%;
+  max-width: none;
+
+  padding-left: 0;
+  padding-right: 0;
+
+  /* 이미지와 제목 겹침 */
+  margin-top:
+    clamp(-85px, -5.5vw, -55px);
+}
+
+
+.safety-hero__title {
+  margin: 0;
+
+  width: 100%;
+
+  color: #f4f4f4;
+
+  /* 기존보다 크게 */
+  font-size:
+    clamp(70px, 7vw, 135px);
+
+  font-weight: 400;
+
+  line-height: 0.92;
+
+  letter-spacing: -0.06em;
+
+  white-space: nowrap;
+
+  /* 화면 왼쪽 끝에서 시작 */
+  text-align: left;
+}
+
+
+
+/* =========================================================
+   23. SAFETY CAROUSEL SECTION
+========================================================= */
+
+.safety-carousel-section {
+  position: relative;
+
+  width: 100%;
+
+  height:
+    clamp(565px, 48vw, 720px);
+
+  margin-top:
+    clamp(110px, 8.5vw, 145px);
+
+  overflow: hidden;
+
+  background: #000000;
+}
+
+
+
+/* =========================================================
+   LARGE BACKGROUND TEXT
+========================================================= */
+
+.safety-carousel-section__background {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+}
+
+
+.safety-carousel-section__background-text {
+  margin: 0;
+
+  width: 100%;
+
+  color:
+    rgba(255, 255, 255, 0.38);
+
+  font-size:
+    clamp(100px, 12vw, 210px);
+
+  font-weight: 500;
+
+  /* 기존 0.88 → 줄 사이 간격 넓힘 */
+  line-height: 1.12;
+
+  letter-spacing: -0.065em;
+
+  text-align: center;
+
+  white-space: nowrap;
+
+  filter:
+    blur(3px);
+
+  transform:
+    scale(1.03);
+}
+
+
+
+/* =========================================================
+   BLUR LAYER
+========================================================= */
+
+.safety-carousel-section__blur {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  background:
+    rgba(0, 0, 0, 0.06);
+
+  backdrop-filter:
+    blur(1.5px);
+
+  -webkit-backdrop-filter:
+    blur(1.5px);
+}
+
+
+
+/* =========================================================
+   CAROUSEL
+========================================================= */
+
+.safety-carousel {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 4;
+
+  display: flex;
+
+  align-items: center;
+
+  width: 100%;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   CONTINUOUS MARQUEE TRACK
+========================================================= */
+
+.safety-carousel__track {
+  display: flex;
+
+  align-items: center;
+
+  flex: 0 0 auto;
+
+  width: max-content;
+
+  gap: 25px;
+
+  padding:
+    clamp(36px, 3vw, 54px)
+    0;
+
+  will-change: transform;
+
+  animation:
+    safety-marquee 30s linear infinite;
+}
+
+
+/*
+  JS duplicates 1 2 3 4 once.
+  Track becomes:
+  1 2 3 4 1 2 3 4
+
+  14px gap -> half-gap correction = 7px.
+*/
+
+@keyframes safety-marquee {
+
+  from {
+    transform:
+      translate3d(0, 0, 0);
+  }
+
+  to {
+    transform:
+      translate3d(
+        calc(-50% - 7px),
+        0,
+        0
+      );
+  }
+
+}
+
+
+/* Pause only while a clicked card is centered */
+
+.safety-carousel.is-paused
+.safety-carousel__track {
+  animation-play-state:
+    paused;
+}
+
+
+/* =========================================================
+   CAROUSEL CARD
+========================================================= */
+
+.safety-carousel__card {
+  position: relative;
+
+  flex:
+    0 0 auto;
+
+  width:
+    clamp(290px, 22vw, 420px);
+
+  aspect-ratio:
+    1.55 / 1;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+
+  appearance: none;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  background:
+    var(--experience-placeholder);
+
+  color: #ffffff;
+
+  filter:
+    brightness(0.8);
+
+  transform:
+    translateY(0)
+    scale(1);
+
+  transform-origin:
+    center center;
+
+  transition:
+    transform 0.5s
+      cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.45s ease,
+    box-shadow 0.5s ease;
+
+  will-change:
+    transform,
+    filter;
+}
+
+
+/* =========================================================
+   HOVER
+   Marquee keeps flowing.
+   Only the hovered card comes forward.
+========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+
+  .safety-carousel__card:hover {
+    z-index: 30;
+
+    transform:
+      translateY(-22px)
+      scale(1.07);
+
+    filter:
+      brightness(1.12);
+
+    box-shadow:
+      0 28px 65px
+      rgba(0, 0, 0, 0.56);
+  }
+
+}
+
+
+/* =========================================================
+   CLICK FOCUS MODE
+========================================================= */
+
+.safety-carousel.has-centered-card::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 40;
+
+  background:
+    rgba(0, 0, 0, 0.5);
+
+  pointer-events: none;
+}
+
+
+/* Center card is a temporary clone created by JS */
+
+.safety-carousel__focus-card {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  z-index: 60;
+
+  width:
+    clamp(430px, 38vw, 700px);
+
+  aspect-ratio:
+    1.55 / 1;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+
+  overflow: hidden;
+
+  background:
+    var(--experience-placeholder);
+
+  color: #ffffff;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0.84);
+
+  box-shadow:
+    0 40px 100px
+    rgba(0, 0, 0, 0.72);
+
+  transition:
+    transform 0.65s
+      cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.4s ease;
+}
+
+
+.safety-carousel__focus-card.is-visible {
+  opacity: 1;
+
+  transform:
+    translate(-50%, -50%)
+    scale(1);
+}
+
+
+/* =========================================================
+   CARD NUMBER
+========================================================= */
+
+.safety-carousel__card-number {
+  position: absolute;
+
+  right: 16px;
+  bottom: 14px;
+
+  z-index: 4;
+
+  color:
+    rgba(255, 255, 255, 0.42);
+
+  font-size: 10px;
+
+  font-weight: 400;
+
+  letter-spacing:
+    0.06em;
+}
+
+
+
+/* =========================================================
+   24. SAFETY RESPONSE
+========================================================= */
+
+.safety-response {
+  position: relative;
+
+  width: 100%;
+
+  padding-top:
+    clamp(85px, 6.5vw, 120px);
+
+  padding-bottom:
+    clamp(55px, 4.6vw, 82px);
+}
+
+
+.safety-response__copy {
+  width: 100%;
+
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+
+.safety-response__title {
+  margin: 0;
+
+  color: #f1f1f1;
+
+  font-size:
+    clamp(26px, 2.7vw, 46px);
+
+  font-weight:
+    500;
+
+  line-height: 1.15;
+
+  letter-spacing:
+    -0.04em;
+}
+
+
+.safety-response__description {
+  margin:
+    clamp(8px, 0.75vw, 12px)
+    auto
+    0;
+
+  max-width:
+    720px;
+
+  color: #8a8a8a;
+
+  font-size:
+    clamp(11px, 0.9vw, 15px);
+
+  font-weight:
+    500;
+
+  line-height:
+    1.5;
+
+  letter-spacing:
+    -0.025em;
+
+  word-break:
+    keep-all;
+}
+
+
+
+/* =========================================================
+   25. SAFETY STACK SECTION
+========================================================= */
+
+.safety-stack-section {
+  position: relative;
+
+  width: 100%;
+
+  padding-bottom:
+    clamp(65px, 5.5vw, 95px);
+}
+
+
+
+/* =========================================================
+   STACK STAGE
+========================================================= */
+
+.safety-stack {
+  position: relative;
+
+  width:
+    min(78vw, 1180px);
+
+  max-width:
+    1180px;
+
+  height:
+    clamp(520px, 43vw, 700px);
+
+  margin:
+    0 auto;
+
+  padding-left: 0;
+  padding-right: 0;
+
+  overflow: visible;
+}
+
+
+
+/* =========================================================
+   STACK CARD COMMON
+========================================================= */
+
+.safety-stack__card {
+  position: absolute;
+
+  width:
+    27%;
+
+  height: auto;
+
+  aspect-ratio:
+    0.76 / 1;
+
+  background:
+    var(--experience-placeholder);
+
+  filter:
+    brightness(0.72);
+
+  box-shadow:
+    0 22px 50px
+    rgba(0, 0, 0, 0.5);
+
+  transition:
+    filter 0.55s ease,
+    transform 0.7s var(--experience-ease),
+    box-shadow 0.7s ease;
+
+  transform:
+    translateY(0);
+
+  cursor: pointer;
+
+  will-change:
+    transform,
+    filter;
+}
+
+
+
+/* =========================================================
+   STACK CARD POSITIONS
+========================================================= */
+
+.safety-stack__card--01 {
+  top: 0;
+
+  left: 2%;
+
+  z-index: 4;
+}
+
+
+.safety-stack__card--02 {
+  top: 20%;
+
+  left: 25.5%;
+
+  z-index: 5;
+}
+
+
+.safety-stack__card--03 {
+  top: 0;
+
+  left: 49%;
+
+  z-index: 6;
+}
+
+
+.safety-stack__card--04 {
+  top: 20%;
+
+  left: 72.5%;
+
+  z-index: 7;
+}
+
+
+
+/* =========================================================
+   STACK HOVER
+========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+
+  .safety-stack__card {
+    transition:
+      filter 1.15s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 1.1s ease;
+  }
+
+
+  .safety-stack__card:hover {
+    z-index: 30;
+
+    filter:
+      brightness(0.98);
+
+    transform:
+      translateY(-10px)
+      scale(1.01);
+
+    box-shadow:
+      0 30px 75px
+      rgba(0, 0, 0, 0.58);
+
+    background:
+      #414141;
+  }
+
+
+  .safety-stack:hover
+  .safety-stack__card:not(:hover) {
+    filter:
+      brightness(0.68);
+  }
+
+}
+
+
+
+/* =========================================================
+   26. SAFETY END SPACE
+========================================================= */
+
+.safety-end-space {
+  width: 100%;
+
+  height:
+    clamp(24px, 2.3vw, 38px);
+
+  background:
+    #000000;
+}
+
+
+
+/* =========================================================
+   27. SAFETY SCROLL REVEAL
+========================================================= */
+
+.experience-page.has-experience-js
+[data-safety-reveal] {
+  opacity: 0;
+
+  transform:
+    translateY(40px);
+
+  transition:
+    opacity 1.1s var(--experience-ease),
+    transform 1.1s var(--experience-ease);
+}
+
+
+.experience-page.has-experience-js
+[data-safety-reveal].is-visible {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+
+
+/* HERO */
+
+.experience-page.has-experience-js
+[data-safety-reveal="hero-image"] {
+  transform:
+    translateY(35px);
+}
+
+
+.experience-page.has-experience-js
+[data-safety-reveal="hero-title"] {
+  transform:
+    translateY(55px);
+}
+
+
+
+/* RESPONSE */
+
+.experience-page.has-experience-js
+[data-safety-reveal="response"] {
+  transform:
+    translateY(30px);
+}
+
+
+
+/* STACK */
+
+.experience-page.has-experience-js
+[data-safety-reveal="stack-card"] {
+  transform:
+    translateY(55px);
+
+  opacity: 0;
+}
+
+
+.experience-page.has-experience-js
+[data-safety-reveal="stack-card"].is-visible {
+  transform:
+    translateY(0);
+
+  opacity: 1;
+}
+
+
+
+/* =========================================================
+   28. SAFETY TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .safety-hero {
+   padding-top: 0;
+  }
+
+
+  .safety-hero__visual {
+    height:
+      clamp(340px, 45vw, 500px);
+  }
+
+
+  .safety-hero__title {
+    font-size:
+      clamp(40px, 5.6vw, 64px);
+  }
+
+
+  .safety-carousel-section {
+    height:
+      clamp(525px, 59vw, 660px);
+  }
+
+
+  .safety-carousel-section__background-text {
+    font-size:
+      clamp(90px, 12vw, 145px);
+  }
+
+
+  .safety-carousel__card {
+    width:
+      clamp(240px, 31vw, 360px);
+  }
+
+
+  .safety-stack {
+    width:
+      min(82vw, 980px);
+
+    height:
+      clamp(470px, 52vw, 610px);
+  }
+
+
+  .safety-stack__card {
+    width:
+      28%;
+  }
+
+
+  .safety-stack__card--01 {
+    left:
+      1%;
+  }
+
+
+  .safety-stack__card--02 {
+    top:
+      20%;
+
+    left:
+      24.5%;
+  }
+
+
+  .safety-stack__card--03 {
+    left:
+      48%;
+  }
+
+
+  .safety-stack__card--04 {
+    top:
+      20%;
+
+    left:
+      71.5%;
+  }
+
+}
+
+
+
+/* =========================================================
+   29. SAFETY MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .safety-hero {
+    padding-top: 0;
+  }
+
+
+  .safety-hero__visual {
+    height:
+      clamp(270px, 67vw, 420px);
+  }
+
+
+  .safety-hero__heading {
+    margin-top:
+      clamp(-34px, -7vw, -22px);
+  }
+
+
+  .safety-hero__title {
+    font-size:
+      clamp(30px, 8vw, 48px);
+  }
+
+
+
+  /* CAROUSEL */
+
+  .safety-carousel-section {
+    height:
+      clamp(440px, 96vw, 590px);
+
+    margin-top:
+      clamp(78px, 18vw, 110px);
+  }
+
+
+  .safety-carousel-section__background-text {
+    font-size:
+      clamp(64px, 17vw, 110px);
+
+    line-height:
+      0.9;
+  }
+
+
+  .safety-carousel__card {
+    width:
+      clamp(200px, 55vw, 310px);
+  }
+
+
+  .safety-carousel__track {
+    animation-duration: 24s;
+  }
+
+
+  /* RESPONSE */
+
+  .safety-response {
+    padding-top:
+      clamp(68px, 15vw, 95px);
+
+    padding-bottom:
+      clamp(46px, 10vw, 68px);
+  }
+
+
+  .safety-response__title {
+    font-size:
+      clamp(24px, 6vw, 34px);
+  }
+
+
+  .safety-response__description {
+    max-width:
+      90%;
+
+    font-size:
+      clamp(10px, 2.7vw, 13px);
+  }
+
+
+
+  /* STACK */
+
+  .safety-stack-section {
+    padding-bottom:
+      clamp(56px, 12vw, 82px);
+  }
+
+
+  .safety-stack {
+    width:
+      86vw;
+
+    height:
+      clamp(360px, 92vw, 520px);
+  }
+
+
+  .safety-stack__card {
+    width:
+      31%;
+
+    height: auto;
+
+    aspect-ratio:
+      0.72 / 1;
+  }
+
+
+  .safety-stack__card--01 {
+    top: 0;
+
+    left: 0;
+  }
+
+
+  .safety-stack__card--02 {
+    top: 23%;
+
+    left: 23%;
+  }
+
+
+  .safety-stack__card--03 {
+    top: 0;
+
+    left: 46%;
+  }
+
+
+  .safety-stack__card--04 {
+    top: 23%;
+
+    left: 69%;
+  }
+
+
+  .safety-end-space {
+    height:
+      clamp(24px, 5vw, 36px);
+  }
+
+}
+
+
+
+/* =========================================================
+   30. SAFETY VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .safety-hero__title {
+    font-size:
+      clamp(28px, 7.7vw, 38px);
+  }
+
+
+  .safety-carousel-section__background-text {
+    font-size:
+      clamp(58px, 16vw, 82px);
+  }
+
+
+  .safety-response__title {
+    font-size:
+      clamp(22px, 6vw, 28px);
+  }
+
+}
+
+
+
+/* =========================================================
+   31. SAFETY REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .safety-carousel__track {
+    animation:
+      none !important;
+  }
+
+
+  .safety-carousel__card,
+  .safety-stack__card {
+    transition:
+      none !important;
+  }
+
+}
+
+/* =========================================================
+   DRIVING FINAL HEADER / HERO SAFEGUARD
+========================================================= */
+
+.driving-page .site-header {
+  background:
+    var(--experience-light-bg) !important;
+
+  box-shadow:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+}
+
+
+.driving-page .site-header::before,
+.driving-page .site-header::after {
+  background:
+    none !important;
+
+  box-shadow:
+    none !important;
+
+  filter:
+    none !important;
+}
+
+
+.driving-page .driving-hero__visual {
+  --liquid-x:
+    50%;
+
+  --liquid-y:
+    50%;
+
+  --liquid-radius:
+    0px;
+
+  position:
+    relative;
+
+  display:
+    block;
+
+  overflow:
+    hidden;
+
+  height:
+    calc(100svh - 180px);
+
+  min-height:
+    560px;
+
+  border-radius:
+    var(--experience-box-radius);
+
+  isolation:
+    isolate;
+
+  cursor:
+    default;
+
+  touch-action:
+    pan-y;
+}
+
+
+.driving-page .driving-hero__image {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  z-index:
+    1;
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  max-width:
+    none;
+
+  object-fit:
+    cover;
+
+  object-position:
+    center center;
+
+  backface-visibility:
+    hidden;
+
+  -webkit-backface-visibility:
+    hidden;
+}
+
+
+/* =========================================================
+   DRIVING HERO — LIQUID HOVER LAYER
+   ---------------------------------------------------------
+   HTML의 data-driving-liquid / liquid-layer와 연결.
+   JS가 --liquid-x / --liquid-y / --liquid-radius 값을 갱신하면
+   커서 주변에만 물결 굴절 이미지가 드러난다.
+========================================================= */
+
+.driving-page
+.driving-hero__liquid-layer {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  z-index:
+    2;
+
+  overflow:
+    hidden;
+
+  pointer-events:
+    none;
+
+  opacity:
+    0;
+
+  -webkit-mask-image:
+    radial-gradient(
+      circle
+      var(--liquid-radius)
+      at
+      var(--liquid-x)
+      var(--liquid-y),
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.98) 34%,
+      rgba(0, 0, 0, 0.76) 54%,
+      rgba(0, 0, 0, 0.30) 72%,
+      rgba(0, 0, 0, 0) 100%
+    );
+
+  mask-image:
+    radial-gradient(
+      circle
+      var(--liquid-radius)
+      at
+      var(--liquid-x)
+      var(--liquid-y),
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.98) 34%,
+      rgba(0, 0, 0, 0.76) 54%,
+      rgba(0, 0, 0, 0.30) 72%,
+      rgba(0, 0, 0, 0) 100%
+    );
+
+  -webkit-mask-repeat:
+    no-repeat;
+
+  mask-repeat:
+    no-repeat;
+
+  transition:
+    opacity
+    0.42s
+    cubic-bezier(0.22, 1, 0.36, 1);
+
+  will-change:
+    opacity,
+    -webkit-mask-image,
+    mask-image;
+}
+
+
+/* 물결 영역 안의 복제 이미지 */
+
+.driving-page
+.driving-hero__liquid-image {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  display:
+    block;
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  max-width:
+    none;
+
+  object-fit:
+    cover;
+
+  object-position:
+    center center;
+
+  filter:
+    url("#driving-hero-liquid-filter");
+
+  transform:
+    translate3d(0, 0, 0)
+    scale(1.008);
+
+  transform-origin:
+    center center;
+
+  backface-visibility:
+    hidden;
+
+  -webkit-backface-visibility:
+    hidden;
+
+  will-change:
+    filter,
+    transform;
+}
+
+
+/* 물결이 지나가는 부분에 아주 미세한 수면 하이라이트 */
+
+.driving-page
+.driving-hero__liquid-layer::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  pointer-events:
+    none;
+
+  background:
+    radial-gradient(
+      circle
+      at
+      var(--liquid-x)
+      var(--liquid-y),
+      rgba(220, 239, 248, 0.10) 0%,
+      rgba(188, 218, 233, 0.055) 28%,
+      rgba(155, 199, 220, 0.025) 50%,
+      rgba(155, 199, 220, 0) 72%
+    );
+
+  mix-blend-mode:
+    screen;
+
+  opacity:
+    0.72;
+}
+
+
+/* JS가 mouseenter 시 붙이는 상태 */
+
+.driving-page
+.driving-hero__visual.is-liquid-active
+.driving-hero__liquid-layer {
+  opacity:
+    1;
+}
+
+
+/* SVG는 필터 리소스로만 사용 */
+
+.driving-page
+.driving-hero__liquid-svg {
+  position:
+    absolute;
+
+  width:
+    0;
+
+  height:
+    0;
+
+  overflow:
+    hidden;
+
+  pointer-events:
+    none;
+}
+
+@media (min-width: 1101px) {
+
+  .driving-page .driving-hero__title {
+    font-size:
+      clamp(
+        30px,
+        5.15vw,
+        78px
+      );
+
+    font-weight:
+      400;
+
+    line-height:
+      0.98;
+
+    letter-spacing:
+      -0.055em;
+  }
+
+}
+
+.driving-page .driving-hero__visual,
+.driving-page .driving-hero__image,
+.driving-page .driving-hero__liquid-layer,
+.driving-page .driving-hero__liquid-image {
+  border-radius:
+    0 !important;
+}
+
+
+/* =========================================================
+   DRIVING HERO LIQUID — TOUCH / REDUCED INTERACTION FALLBACK
+========================================================= */
+
+@media (hover: none), (pointer: coarse) {
+
+  .driving-page
+  .driving-hero__liquid-layer {
+    display:
+      none;
+  }
+
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .driving-page
+  .driving-hero__liquid-layer {
+    display:
+      none !important;
+
+    opacity:
+      0 !important;
+  }
+
+}
+
+
+/* =========================================================
+   =========================================================
+   SAFETY EXPERIENCE
+   WHITE MODE FINAL OVERRIDE
+   ---------------------------------------------------------
+   - 기존 SAFETY 레이아웃 / 인터랙션 유지
+   - 주행 경험과 동일한 LIGHT SYSTEM 사용
+   - 순수 #000 / #fff 대신 soft-black / off-white 사용
+   - Footer는 #08090A DEEP BLACK
+   =========================================================
+   ========================================================= */
+
+
+/* =========================================================
+   SAFETY PAGE BASE
+========================================================= */
+
+html:has(.safety-page) {
+  background:
+    #08090a;
+}
+
+
+body.experience-page.safety-page {
+  margin-bottom: 0;
+
+  color:
+    var(--experience-light-text);
+
+  background:
+    #08090a;
+}
+
+
+.safety-page .safety-main {
+  color:
+    var(--experience-light-text);
+
+  background:
+    var(--experience-light-bg);
+}
+
+
+/* =========================================================
+   SAFETY HEADER
+   DRIVING과 동일한 LIGHT HEADER
+========================================================= */
+
+.safety-page .site-header {
+  color:
+    var(--experience-light-text);
+
+  background:
+    var(--experience-light-bg) !important;
+
+  border-bottom:
+    1px solid
+    rgba(29, 29, 31, 0.07);
+
+  box-shadow:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+}
+
+
+.safety-page .site-header__bar {
+  background:
+    transparent;
+}
+
+
+.safety-page .site-header::before,
+.safety-page .site-header::after,
+.safety-page .site-header__bar::before,
+.safety-page .site-header__bar::after {
+  background:
+    none !important;
+
+  box-shadow:
+    none !important;
+
+  filter:
+    none !important;
+}
+
+
+.safety-page .site-header__logo {
+  color:
+    var(--experience-light-text);
+
+  text-shadow:
+    none;
+}
+
+
+.safety-page .site-header__nav-link {
+  color:
+    rgba(29, 29, 31, 0.56);
+
+  text-shadow:
+    none;
+}
+
+
+.safety-page .site-header__nav-link:hover,
+.safety-page .site-header__nav-link.is-active {
+  color:
+    var(--experience-light-text);
+}
+
+
+.safety-page .site-header__nav-link::after {
+  background:
+    var(--experience-light-text);
+}
+
+
+/* =========================================================
+   SAFETY HEADER MEGA MENU
+========================================================= */
+
+.safety-page .site-header__mega {
+  background:
+    rgba(246, 246, 248, 0.97);
+
+  border-top:
+    1px solid
+    rgba(29, 29, 31, 0.07);
+
+  border-bottom:
+    1px solid
+    rgba(29, 29, 31, 0.09);
+
+  box-shadow:
+    0 24px 55px
+    rgba(29, 29, 31, 0.07);
+
+  backdrop-filter:
+    blur(20px)
+    saturate(112%);
+
+  -webkit-backdrop-filter:
+    blur(20px)
+    saturate(112%);
+}
+
+
+.safety-page .site-header__mega-title {
+  color:
+    rgba(29, 29, 31, 0.38);
+}
+
+
+.safety-page .site-header__mega-links a {
+  color:
+    rgba(29, 29, 31, 0.62);
+}
+
+
+.safety-page .site-header__mega-links a:hover,
+.safety-page
+.site-header__mega-links
+a[aria-current="page"] {
+  color:
+    var(--experience-light-text);
+}
+
+
+.safety-page .site-header a:focus-visible {
+  outline:
+    1px solid
+    rgba(29, 29, 31, 0.58);
+}
+
+
+/* =========================================================
+   SAFETY PLACEHOLDER
+========================================================= */
+
+.safety-page .experience-placeholder {
+  background:
+    var(--experience-light-card);
+
+  box-shadow:
+    inset
+    0
+    0
+    0
+    1px
+    rgba(29, 29, 31, 0.045);
+}
+
+
+.safety-page .experience-placeholder::after {
+  background:
+    linear-gradient(
+      120deg,
+      transparent 10%,
+      rgba(255, 255, 255, 0.46) 50%,
+      transparent 90%
+    );
+}
+
+
+.safety-page .experience-placeholder:hover {
+  background:
+    var(--experience-light-card-hover);
+}
+
+
+/* =========================================================
+   01. SAFETY HERO
+   #F5F5F7
+========================================================= */
+
+.safety-page .safety-hero {
+  background:
+    var(--experience-light-bg);
+}
+
+
+.safety-page .safety-hero__visual {
+  background:
+    var(--experience-light-card);
+}
+
+
+.safety-page .safety-hero__title {
+  color:
+    var(--experience-light-text);
+}
+
+
+/* =========================================================
+   02. SAFETY CAROUSEL
+   HERO보다 아주 미세하게 밝은 SURFACE
+========================================================= */
+
+.safety-page .safety-carousel-section {
+  background:
+    var(--experience-light-bg-soft);
+
+  border-top:
+    1px solid
+    rgba(29, 29, 31, 0.035);
+
+  border-bottom:
+    1px solid
+    rgba(29, 29, 31, 0.035);
+}
+
+
+.safety-page
+.safety-carousel-section__background-text {
+  color:
+    rgba(29, 29, 31, 0.22);
+}
+
+
+.safety-page .safety-carousel-section__blur {
+  background:
+    rgba(248, 248, 250, 0.08);
+
+  backdrop-filter:
+    blur(1.5px);
+
+  -webkit-backdrop-filter:
+    blur(1.5px);
+}
+
+
+/* =========================================================
+   SAFETY CAROUSEL CARD
+========================================================= */
+
+.safety-page .safety-carousel__card {
+  color:
+    var(--experience-light-text);
+
+  background:
+    var(--experience-light-card);
+
+  filter:
+    brightness(0.97);
+
+  box-shadow:
+    0 16px 34px
+    rgba(29, 29, 31, 0.08);
+}
+
+
+@media (hover: hover) and (pointer: fine) {
+
+  .safety-page .safety-carousel__card:hover {
+    filter:
+      brightness(1);
+
+    box-shadow:
+      0 28px 62px
+      rgba(29, 29, 31, 0.16);
+  }
+
+}
+
+
+.safety-page
+.safety-carousel.has-centered-card::after {
+  background:
+    rgba(245, 245, 247, 0.74);
+
+  backdrop-filter:
+    blur(4px);
+
+  -webkit-backdrop-filter:
+    blur(4px);
+}
+
+
+.safety-page .safety-carousel__focus-card {
+  color:
+    var(--experience-light-text);
+
+  background:
+    var(--experience-light-card);
+
+  box-shadow:
+    0 36px 90px
+    rgba(29, 29, 31, 0.24);
+}
+
+
+.safety-page .safety-carousel__card-number {
+  color:
+    rgba(29, 29, 31, 0.40);
+}
+
+
+/* =========================================================
+   03. SAFETY RESPONSE
+========================================================= */
+
+.safety-page .safety-response {
+  background:
+    var(--experience-light-bg);
+}
+
+
+.safety-page .safety-response__title {
+  color:
+    var(--experience-light-text);
+
+  font-weight:
+    500;
+}
+
+
+/* RESPONSE ACCENT — 강하게. */
+.safety-page .safety-response__accent {
+  display:
+    inline-block;
+
+  background:
+    linear-gradient(
+      105deg,
+      #263b4a 0%,
+      #4b6677 28%,
+      #bd4b56 62%,
+      #f0645e 100%
+    );
+
+  -webkit-background-clip:
+    text;
+
+  background-clip:
+    text;
+
+  -webkit-text-fill-color:
+    transparent;
+
+  color:
+    transparent;
+
+  font-weight:
+    600;
+}
+
+
+.safety-page .safety-response__description {
+  color:
+    rgba(29, 29, 31, 0.62);
+}
+
+
+/* =========================================================
+   04. SAFETY STACK
+========================================================= */
+
+.safety-page .safety-stack-section {
+  background:
+    var(--experience-light-bg-functions);
+}
+
+
+.safety-page .safety-stack__card {
+  background:
+    var(--experience-light-card);
+
+  filter:
+    brightness(0.97);
+
+  box-shadow:
+    0 18px 42px
+    rgba(29, 29, 31, 0.11);
+}
+
+
+@media (hover: hover) and (pointer: fine) {
+
+  .safety-page .safety-stack__card:hover {
+    filter:
+      brightness(1);
+
+    background:
+      var(--experience-light-card-hover);
+
+    box-shadow:
+      0 30px 72px
+      rgba(29, 29, 31, 0.18);
+  }
+
+
+  .safety-page
+  .safety-stack:hover
+  .safety-stack__card:not(:hover) {
+    filter:
+      brightness(0.90);
+  }
+
+}
+
+
+/* =========================================================
+   05. SAFETY FINAL DETECTION
+   ---------------------------------------------------------
+   마지막 결론 섹션
+   - 왼쪽: 보행자 감지 영상
+   - 오른쪽: 작은 영문 라벨 + 타이틀 + 설명
+   - 영상은 꽉 찬 풀블리드가 아니라 컨테이너 안에서 사용
+========================================================= */
+
+.safety-page .safety-final {
+  position:
+    relative;
+
+  width:
+    100%;
+
+  padding:
+    clamp(52px, 4.6vw, 76px)
+    0
+    clamp(92px, 7.8vw, 126px);
+
+  background:
+    var(--experience-light-bg-functions);
+
+  border-top:
+    none;
+}
+
+
+.safety-page .safety-final__inner {
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(0, 1.55fr)
+    minmax(290px, 0.85fr);
+
+  align-items:
+    center;
+
+  gap:
+    clamp(46px, 5.2vw, 92px);
+}
+
+
+/* ---------------------------------------------------------
+   FINAL VIDEO
+--------------------------------------------------------- */
+
+.safety-page .safety-final__visual {
+  position:
+    relative;
+
+  width:
+    100%;
+
+  aspect-ratio:
+    16 / 9;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    var(--experience-box-radius);
+
+  background:
+    var(--experience-light-card);
+
+  box-shadow:
+    0 18px 48px
+    rgba(29, 29, 31, 0.10);
+}
+
+
+/* 마지막 영상에는 placeholder shimmer를 사용하지 않음 */
+.safety-page .safety-final__visual::after,
+.safety-page .safety-final__visual:hover::after {
+  display:
+    none !important;
+
+  content:
+    none !important;
+
+  transform:
+    none !important;
+}
+
+
+.safety-page .safety-final__video {
+  display:
+    block;
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  object-fit:
+    cover;
+
+  object-position:
+    center center;
+}
+
+
+/* ---------------------------------------------------------
+   FINAL COPY
+--------------------------------------------------------- */
+
+.safety-page .safety-final__copy {
+  min-width:
+    0;
+}
+
+
+.safety-page .safety-final__eyebrow {
+  margin:
+    0
+    0
+    clamp(12px, 1vw, 16px);
+
+  color:
+    rgba(29, 29, 31, 0.44);
+
+  font-size:
+    clamp(8px, 0.55vw, 10px);
+
+  font-weight:
+    500;
+
+  line-height:
+    1;
+
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.safety-page .safety-final__title {
+  margin:
+    0;
+
+  color:
+    var(--experience-light-text);
+
+  font-size:
+    clamp(34px, 3.5vw, 56px);
+
+  font-weight:
+    400;
+
+  line-height:
+    1.08;
+
+  letter-spacing:
+    -0.05em;
+
+  word-break:
+    keep-all;
+}
+
+
+/* "먼저 감지." 강조 */
+.safety-page .safety-final__accent {
+  display:
+    inline-block;
+
+  background:
+    linear-gradient(
+      105deg,
+      #263b4a 0%,
+      #4b6677 28%,
+      #bd4b56 62%,
+      #f0645e 100%
+    );
+
+  -webkit-background-clip:
+    text;
+
+  background-clip:
+    text;
+
+  -webkit-text-fill-color:
+    transparent;
+
+  color:
+    transparent;
+
+  font-weight:
+    600;
+}
+
+
+.safety-page .safety-final__description {
+  margin:
+    clamp(16px, 1.45vw, 22px)
+    0
+    0;
+
+  max-width:
+    560px;
+
+  color:
+    rgba(29, 29, 31, 0.62);
+
+  font-size:
+    clamp(14px, 1.05vw, 17px);
+
+  font-weight:
+    400;
+
+  line-height:
+    1.58;
+
+  letter-spacing:
+    -0.025em;
+
+  word-break:
+    keep-all;
+}
+
+
+/* ---------------------------------------------------------
+   FINAL REVEAL
+   기존 safety IntersectionObserver를 그대로 사용
+--------------------------------------------------------- */
+
+.experience-page.has-experience-js
+[data-safety-reveal="final-video"] {
+  transform:
+    translateY(34px);
+}
+
+
+.experience-page.has-experience-js
+[data-safety-reveal="final-copy"] {
+  transform:
+    translateY(28px);
+}
+
+
+/* ---------------------------------------------------------
+   TABLET
+--------------------------------------------------------- */
+
+@media (max-width: 1100px) {
+
+  .safety-page .safety-final {
+    padding:
+      clamp(48px, 5.5vw, 66px)
+      0
+      clamp(78px, 8vw, 104px);
+  }
+
+
+  .safety-page .safety-final__inner {
+    grid-template-columns:
+      minmax(0, 1.28fr)
+      minmax(250px, 0.82fr);
+
+    gap:
+      clamp(34px, 4.5vw, 54px);
+  }
+
+
+  .safety-page .safety-final__title {
+    font-size:
+      clamp(30px, 4vw, 44px);
+  }
+
+
+  .safety-page .safety-final__description {
+    font-size:
+      clamp(13px, 1.45vw, 16px);
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+--------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  .safety-page .safety-final {
+    padding:
+      clamp(44px, 10vw, 64px)
+      0
+      clamp(70px, 16vw, 96px);
+  }
+
+
+  .safety-page .safety-final__inner {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      clamp(26px, 6vw, 38px);
+  }
+
+
+  .safety-page .safety-final__visual {
+    width:
+      100%;
+
+    aspect-ratio:
+      16 / 9;
+  }
+
+
+  .safety-page .safety-final__eyebrow {
+    margin-bottom:
+      10px;
+
+    font-size:
+      clamp(8px, 2.2vw, 9px);
+  }
+
+
+  .safety-page .safety-final__title {
+    font-size:
+      clamp(28px, 7.2vw, 40px);
+
+    line-height:
+      1.08;
+  }
+
+
+  .safety-page .safety-final__description {
+    margin-top:
+      14px;
+
+    max-width:
+      92%;
+
+    font-size:
+      clamp(13px, 3.3vw, 15px);
+
+    line-height:
+      1.55;
+  }
+
+
+  .safety-page .safety-final__description br {
+    display:
+      none;
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   VERY SMALL MOBILE
+--------------------------------------------------------- */
+
+@media (max-width: 480px) {
+
+  .safety-page .safety-final__title {
+    font-size:
+      clamp(27px, 7.4vw, 34px);
+  }
+
+
+  .safety-page .safety-final__description {
+    font-size:
+      clamp(12px, 3.35vw, 14px);
+  }
+
+}
+
+
+/* =========================================================
+   SAFETY END SPACE
+========================================================= */
+
+.safety-page .safety-end-space {
+  background:
+    var(--experience-light-bg-functions);
+}
+
+
+/* =========================================================
+   SAFETY FOOTER
+   DRIVING과 동일한 DEEP BLACK
+========================================================= */
+
+.safety-page .case-footer {
+  color:
+    #f7f8f8;
+
+  background:
+    #08090a;
+
+  border-top:
+    1px solid
+    rgba(247, 248, 248, 0.08);
+
+  margin-bottom: 0;
+
+  border-radius: 0;
+}
+
+
+.safety-page .case-footer__label {
+  color:
+    rgba(247, 248, 248, 0.42);
+}
+
+
+.safety-page .case-footer a {
+  color:
+    rgba(247, 248, 248, 0.82);
+}
+
+
+.safety-page .case-footer a:hover {
+  color:
+    #f7f8f8;
+
+  opacity: 1;
+}
+
+
+.safety-page
+.case-footer
+a.case-footer__button,
+.safety-page
+.case-footer
+a.case-footer__button:link,
+.safety-page
+.case-footer
+a.case-footer__button:visited {
+  color:
+    #f7f8f8;
+
+  background:
+    transparent;
+
+  border:
+    1px solid
+    rgba(247, 248, 248, 0.42);
+}
+
+
+.safety-page
+.case-footer
+a.case-footer__button:hover {
+  color:
+    #08090a;
+
+  background:
+    #f7f8f8;
+
+  border-color:
+    #f7f8f8;
+
+  opacity: 1;
+}
+
+
+.safety-page .case-footer__brand {
+  color:
+    #f7f8f8;
+}
+
+
+.safety-page .case-footer__meta,
+.safety-page .case-footer__meta p {
+  color:
+    rgba(247, 248, 248, 0.48);
+}
+
+
+.safety-page
+.case-footer__symbol
+span {
+  background:
+    #f7f8f8;
+}
+
+
+/* =========================================================
+   SAFETY HERO FINAL
+   ---------------------------------------------------------
+   - 헤더 바로 아래부터 이미지 시작
+   - 위쪽 빈 공간까지 이미지 영역으로 사용
+   - 이미지 박스를 위로 이동시키는 방식이 아니라
+     원본 이미지 전체가 자연 비율로 모두 보이도록 처리
+   - 기존 SAFETY 제목 오버랩 구조는 유지
+========================================================= */
+
+.safety-page .safety-hero {
+  position: relative;
+
+  width: 100%;
+
+  padding-top: 0;
+}
+
+
+.safety-page .safety-hero__visual {
+  position: relative;
+
+  width: 100%;
+
+  height: auto;
+  min-height: 0;
+
+  display: block;
+
+  overflow: hidden;
+
+  margin: 0;
+
+  border-radius: 0;
+
+  background:
+    var(--experience-light-card);
+}
+
+
+.safety-page .safety-hero__image {
+  position: relative;
+
+  inset: auto;
+
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  max-width: none;
+
+  object-fit: contain;
+
+  object-position:
+    center top;
+
+  border-radius: 0;
+}
+
+
+/* 기존 tablet / mobile의 고정 height 값을 최종적으로 해제 */
+@media (max-width: 1100px) {
+
+  .safety-page .safety-hero {
+    padding-top: 0;
+  }
+
+
+  .safety-page .safety-hero__visual {
+    height: auto;
+    min-height: 0;
+  }
+
+
+  .safety-page .safety-hero__image {
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .safety-page .safety-hero {
+    padding-top: 0;
+  }
+
+
+  .safety-page .safety-hero__visual {
+    height: auto;
+    min-height: 0;
+  }
+
+
+  .safety-page .safety-hero__image {
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
+  }
+
+}
+
+
+/* =========================================================
+   SAFETY HERO REFINEMENT
+   ---------------------------------------------------------
+   - HERO hover shimmer 제거
+   - HERO 높이를 조금 줄여 하단 길이 조정
+   - 상단은 그대로 유지하고 하단만 자연스럽게 crop
+========================================================= */
+
+/* HERO에서 반짝이는 placeholder shimmer 제거 */
+.safety-page .safety-hero__visual::after {
+  display: none !important;
+  content: none !important;
+}
+
+.safety-page .safety-hero__visual:hover::after {
+  transform: none !important;
+}
+
+
+/* HERO 높이 살짝 축소 */
+.safety-page .safety-hero__visual {
+  height:
+    clamp(500px, 44vw, 680px);
+
+  min-height: 0;
+
+  overflow: hidden;
+
+  border-radius: 0;
+}
+
+
+/* 상단은 유지하고 하단만 조금 crop */
+.safety-page .safety-hero__image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  object-position:
+    center top;
+}
+
+
+/* TABLET */
+@media (max-width: 1100px) {
+
+  .safety-page .safety-hero__visual {
+    height:
+      clamp(420px, 52vw, 580px);
+  }
+
+}
+
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .safety-page .safety-hero__visual {
+    height:
+      clamp(300px, 72vw, 460px);
+  }
+
+}
+
+
+/* =========================================================
+   SAFETY HERO TITLE POSITION FINAL
+   ---------------------------------------------------------
+   제목을 기존보다 아래로 내려
+   이미지와 흰 영역 사이에 살짝 걸치도록 조정
+========================================================= */
+
+.safety-page .safety-hero__heading {
+  position: relative;
+
+  z-index: 5;
+
+  left:
+    clamp(-14px, -0.8vw, -8px);
+
+  width: 100%;
+  max-width:
+    var(--experience-container);
+
+  margin-left:
+    auto;
+
+  margin-right:
+    auto;
+
+  padding-left:
+    var(--experience-side);
+
+  padding-right:
+    var(--experience-side);
+
+  margin-top:
+    clamp(28px, 2vw, 38px);
+}
+
+
+/* TABLET */
+@media (max-width: 1100px) {
+
+  .safety-page .safety-hero__heading {
+    margin-top:
+      clamp(10px, 0.9vw, 16px);
+  }
+
+}
+
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .safety-page .safety-hero__heading {
+    margin-top:
+      clamp(8px, 1vw, 12px);
+  }
+
+}
+
+
+/* =========================================================
+   SAFETY HERO TITLE TYPOGRAPHY FINAL
+   ---------------------------------------------------------
+   DRIVING HERO TITLE과 동일한 크기 / 두께 / 행간 / 자간
+========================================================= */
+
+.safety-page .safety-hero__title {
+  margin: 0;
+
+  width: 100%;
+
+  color:
+    var(--experience-light-text);
+
+  font-size:
+    clamp(
+      30px,
+      5.8vw,
+      88px
+    );
+
+  font-weight:
+    400;
+
+  line-height:
+    0.95;
+
+  letter-spacing:
+    -0.06em;
+
+  white-space:
+    nowrap;
+
+  text-align:
+    left;
+}
+
+
+/* HERO ACCENT — 감각. */
+.safety-page .safety-hero__accent {
+  display:
+    inline-block;
+
+  background:
+    linear-gradient(
+      105deg,
+      #263b4a 0%,
+      #4b6677 28%,
+      #bd4b56 62%,
+      #f0645e 100%
+    );
+
+  -webkit-background-clip:
+    text;
+
+  background-clip:
+    text;
+
+  -webkit-text-fill-color:
+    transparent;
+
+  color:
+    transparent;
+
+  font-weight:
+    600;
+}
+
+
+/* TABLET — DRIVING과 동일 */
+@media (max-width: 1100px) {
+
+  .safety-page .safety-hero__title {
+    font-size:
+      clamp(40px, 6.4vw, 70px);
+
+    font-weight:
+      400;
+
+    line-height:
+      0.95;
+  }
+
+}
+
+
+/* MOBILE — DRIVING과 동일 */
+@media (max-width: 768px) {
+
+  .safety-page .safety-hero__title {
+    font-size:
+      clamp(28px, 7vw, 44px);
+
+    font-weight:
+      400;
+
+    line-height:
+      0.96;
+  }
+
+}
+
+
+/* VERY SMALL MOBILE — DRIVING과 동일 */
+@media (max-width: 480px) {
+
+  .safety-page .safety-hero__title {
+    font-size:
+      clamp(27px, 7.15vw, 34px);
+
+    font-weight:
+      400;
+  }
+
+}
+
+
+/* =========================================================
+   SAFETY CAROUSEL EDGE FADE
+   ---------------------------------------------------------
+   - 가운데 영역은 원래 밝기 유지
+   - 좌우 끝으로 갈수록 카드가 은은하게 어두워짐
+   - 기존 ::after 클릭 포커스 오버레이와 충돌하지 않도록
+     ::before 하나만 사용
+   - 자동 회전 / hover / 클릭 확대 인터랙션 유지
+========================================================= */
+
+.safety-page .safety-carousel::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 20;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to right,
+      rgba(29, 29, 31, 0.16) 0%,
+      rgba(29, 29, 31, 0.08) 7%,
+      rgba(29, 29, 31, 0) 17%,
+      rgba(29, 29, 31, 0) 83%,
+      rgba(29, 29, 31, 0.08) 93%,
+      rgba(29, 29, 31, 0.16) 100%
+    );
+}
+
+
+/* hover된 카드는 가장자리에서도 조금 더 또렷하게 */
+@media (hover: hover) and (pointer: fine) {
+
+  .safety-page .safety-carousel__card:hover {
+    z-index: 30;
+  }
+
+}
+
+
+/* 모바일에서는 가장자리 어두움을 조금 약하게 */
+@media (max-width: 768px) {
+
+  .safety-page .safety-carousel::before {
+    background:
+      linear-gradient(
+        to right,
+        rgba(29, 29, 31, 0.12) 0%,
+        rgba(29, 29, 31, 0.05) 8%,
+        rgba(29, 29, 31, 0) 20%,
+        rgba(29, 29, 31, 0) 80%,
+        rgba(29, 29, 31, 0.05) 92%,
+        rgba(29, 29, 31, 0.12) 100%
+      );
+  }
+
+}
+
+
+/* =========================================================
+   SAFETY CAROUSEL EDGE FADE REFINED
+   ---------------------------------------------------------
+   - 전체 배경까지 어두워 보이던 기존 overlay를 축소
+   - 카드가 지나가는 띠 영역에만 은은한 좌우 쉐이딩 적용
+   - 기본 카드 크기에 아주 미세한 차이를 줘서
+     중앙 카드가 더 또렷하게 느껴지도록 조정
+========================================================= */
+
+.safety-page .safety-carousel::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  top: 50%;
+
+  height: clamp(240px, 18vw, 320px);
+
+  transform: translateY(-50%);
+
+  z-index: 20;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to right,
+      rgba(29, 29, 31, 0.17) 0%,
+      rgba(29, 29, 31, 0.08) 7%,
+      rgba(29, 29, 31, 0.00) 15%,
+      rgba(29, 29, 31, 0.00) 85%,
+      rgba(29, 29, 31, 0.08) 93%,
+      rgba(29, 29, 31, 0.17) 100%
+    );
+}
+
+.safety-page .safety-carousel__card {
+  transform: translateY(0) scale(0.985);
+
+  filter: brightness(0.985);
+
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.35s ease,
+    box-shadow 0.35s ease,
+    opacity 0.35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+
+  .safety-page .safety-carousel__card:hover {
+    z-index: 30;
+
+    transform: translateY(-14px) scale(1.025);
+
+    filter: brightness(1);
+
+    box-shadow:
+      0 24px 54px rgba(29, 29, 31, 0.16);
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .safety-page .safety-carousel::before {
+    height: clamp(180px, 30vw, 250px);
+
+    background:
+      linear-gradient(
+        to right,
+        rgba(29, 29, 31, 0.11) 0%,
+        rgba(29, 29, 31, 0.05) 8%,
+        rgba(29, 29, 31, 0.00) 18%,
+        rgba(29, 29, 31, 0.00) 82%,
+        rgba(29, 29, 31, 0.05) 92%,
+        rgba(29, 29, 31, 0.11) 100%
+      );
+  }
+
+  .safety-page .safety-carousel__card {
+    transform: translateY(0) scale(0.99);
+  }
+
+}
+
+
+/* =========================================================
+   SAFETY CAROUSEL CENTER FOCUS — FINAL
+   ---------------------------------------------------------
+   목표:
+   - 배경에는 그라데이션이 보이지 않게
+   - 카드 자체만 좌우로 갈수록 자연스럽게 존재감 감소
+   - 가운데 영역은 선명하고 확실하게 강조
+   - 효과는 보이지만 "띠"처럼 티 나지 않게
+   - 기존 자동 회전 / hover / click focus 유지
+========================================================= */
+
+
+/* 기존 edge overlay 완전 제거 */
+.safety-page .safety-carousel::before {
+  display: none !important;
+
+  content: none !important;
+
+  background: none !important;
+}
+
+
+/* 카드가 들어있는 TRACK 자체에만 edge fade 적용 */
+.safety-page .safety-carousel__track {
+  -webkit-mask-image:
+    linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.52) 0%,
+      rgba(0, 0, 0, 0.68) 7%,
+      rgba(0, 0, 0, 0.84) 14%,
+      rgba(0, 0, 0, 0.96) 22%,
+      rgba(0, 0, 0, 1) 30%,
+      rgba(0, 0, 0, 1) 70%,
+      rgba(0, 0, 0, 0.96) 78%,
+      rgba(0, 0, 0, 0.84) 86%,
+      rgba(0, 0, 0, 0.68) 93%,
+      rgba(0, 0, 0, 0.52) 100%
+    );
+
+  mask-image:
+    linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.52) 0%,
+      rgba(0, 0, 0, 0.68) 7%,
+      rgba(0, 0, 0, 0.84) 14%,
+      rgba(0, 0, 0, 0.96) 22%,
+      rgba(0, 0, 0, 1) 30%,
+      rgba(0, 0, 0, 1) 70%,
+      rgba(0, 0, 0, 0.96) 78%,
+      rgba(0, 0, 0, 0.84) 86%,
+      rgba(0, 0, 0, 0.68) 93%,
+      rgba(0, 0, 0, 0.52) 100%
+    );
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+
+/* 기본 카드는 조금만 눌러서 중앙 대비를 확보 */
+.safety-page .safety-carousel__card {
+  transform:
+    translateY(0)
+    scale(0.97);
+
+  filter:
+    brightness(0.94)
+    saturate(0.96);
+
+  opacity: 0.96;
+
+  box-shadow:
+    0 12px 26px
+    rgba(29, 29, 31, 0.06);
+
+  transition:
+    transform 0.48s
+      cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.4s ease,
+    opacity 0.4s ease,
+    box-shadow 0.45s ease;
+}
+
+
+/* hover 시만 살짝 앞으로 — 과한 확대 제거 */
+@media (hover: hover) and (pointer: fine) {
+
+  .safety-page .safety-carousel__card:hover {
+    z-index: 30;
+
+    transform:
+      translateY(-10px)
+      scale(1.015);
+
+    filter:
+      brightness(1)
+      saturate(1);
+
+    opacity: 1;
+
+    box-shadow:
+      0 24px 52px
+      rgba(29, 29, 31, 0.14);
+  }
+
+}
+
+
+/* 클릭 중앙 카드 clone은 항상 가장 선명하게 */
+.safety-page .safety-carousel__focus-card {
+  filter:
+    brightness(1)
+    saturate(1);
+
+  opacity: 1;
+}
+
+
+/* =========================================================
+   SAFETY CAROUSEL — NO SHIMMER FINAL
+   ---------------------------------------------------------
+   hover 시 카드는 그대로 살짝 들리되,
+   experience-placeholder의 반짝이는 sweep 효과만 제거.
+========================================================= */
+
+.safety-page .safety-carousel__card::after,
+.safety-page .safety-carousel__focus-card::after {
+  display:
+    none !important;
+
+  content:
+    none !important;
+
+  background:
+    none !important;
+
+  transform:
+    none !important;
+
+  transition:
+    none !important;
+}
+
+
+.safety-page .safety-carousel__card:hover::after,
+.safety-page .safety-carousel__focus-card:hover::after {
+  display:
+    none !important;
+
+  content:
+    none !important;
+
+  background:
+    none !important;
+
+  transform:
+    none !important;
+
+  transition:
+    none !important;
+}
+
+
+/* 모바일에서는 대비를 조금 부드럽게 */
+@media (max-width: 768px) {
+
+  .safety-page .safety-carousel__track {
+    -webkit-mask-image:
+      linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.64) 0%,
+        rgba(0, 0, 0, 0.82) 12%,
+        rgba(0, 0, 0, 1) 26%,
+        rgba(0, 0, 0, 1) 74%,
+        rgba(0, 0, 0, 0.82) 88%,
+        rgba(0, 0, 0, 0.64) 100%
+      );
+
+    mask-image:
+      linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.64) 0%,
+        rgba(0, 0, 0, 0.82) 12%,
+        rgba(0, 0, 0, 1) 26%,
+        rgba(0, 0, 0, 1) 74%,
+        rgba(0, 0, 0, 0.82) 88%,
+        rgba(0, 0, 0, 0.64) 100%
+      );
+  }
+
+
+  .safety-page .safety-carousel__card {
+    transform:
+      translateY(0)
+      scale(0.98);
+
+    filter:
+      brightness(0.96)
+      saturate(0.98);
+
+    opacity: 0.98;
+  }
+
+}
+
+
+/* =========================================================
+   SAFETY STACK — NO SHIMMER FINAL
+   ---------------------------------------------------------
+   마지막 4개 세로 카드에서
+   experience-placeholder의 반짝이는 sweep 효과만 제거.
+   기존 hover 밝기 / lift / shadow 인터랙션은 유지.
+========================================================= */
+
+.safety-page .safety-stack__card::after {
+  display: none !important;
+
+  content: none !important;
+
+  background: none !important;
+
+  transform: none !important;
+
+  transition: none !important;
+}
+
+
+.safety-page .safety-stack__card:hover::after {
+  display: none !important;
+
+  content: none !important;
+
+  transform: none !important;
+}
+
+
+/* =========================================================
+   SAFETY STACK HOVER — HEAVIER / SLOWER FINAL
+   ---------------------------------------------------------
+   - 마우스 오버 전환 속도를 느리게
+   - 위로 튀는 이동량과 확대를 줄여 더 묵직하게
+   - 주변 카드 어두워지는 변화도 부드럽게
+   - 기존 shimmer 제거 상태 유지
+========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+
+  .safety-page .safety-stack__card {
+    transition:
+      transform 1.45s cubic-bezier(0.16, 1, 0.3, 1),
+      filter 1.35s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 1.4s ease;
+  }
+
+
+  .safety-page .safety-stack__card:hover {
+    z-index: 30;
+
+    transform:
+      translateY(-6px)
+      scale(1.006);
+
+    filter:
+      brightness(1);
+
+    box-shadow:
+      0 28px 62px
+      rgba(29, 29, 31, 0.16);
+
+    background:
+      var(--experience-light-card-hover);
+  }
+
+
+  .safety-page
+  .safety-stack:hover
+  .safety-stack__card:not(:hover) {
+    filter:
+      brightness(0.84);
+  }
+
+}
+
+
+/* =========================================================
+   SAFETY STACK HOVER — TRULY HEAVY FINAL
+   ---------------------------------------------------------
+   이전 버전이 아직 가볍게 느껴진 핵심 원인:
+   hover 순간 z-index가 30으로 바뀌면서 카드가
+   즉시 앞으로 튀어나오는 느낌이 있었음.
+
+   이번 버전:
+   - 카드 순서(z-index) 고정
+   - 움직임 거의 제거
+   - 천천히 밝아지고 그림자만 깊어짐
+   - 주변 카드도 천천히 눌림
+   - 전환 초반도 빠르지 않게 ease-in-out 사용
+========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+
+  .safety-page .safety-stack__card {
+    transition:
+      transform 1.9s ease-in-out,
+      filter 1.75s ease-in-out,
+      box-shadow 1.95s ease-in-out,
+      background-color 1.8s ease-in-out,
+      opacity 1.75s ease-in-out;
+  }
+
+
+  .safety-page .safety-stack__card:hover {
+    transform:
+      translateY(-2px)
+      scale(1.002);
+
+    filter:
+      brightness(1.01)
+      saturate(1);
+
+    opacity: 1;
+
+    box-shadow:
+      0 30px 68px
+      rgba(29, 29, 31, 0.18);
+
+    background:
+      var(--experience-light-card-hover);
+  }
+
+
+  /* hover해도 카드 앞뒤 순서는 갑자기 바뀌지 않게 유지 */
+  .safety-page .safety-stack__card--01:hover {
+    z-index: 4;
+  }
+
+  .safety-page .safety-stack__card--02:hover {
+    z-index: 5;
+  }
+
+  .safety-page .safety-stack__card--03:hover {
+    z-index: 6;
+  }
+
+  .safety-page .safety-stack__card--04:hover {
+    z-index: 7;
+  }
+
+
+  /* 주변 카드는 확실히 대비되지만 천천히 어두워짐 */
+  .safety-page
+  .safety-stack:hover
+  .safety-stack__card:not(:hover) {
+    filter:
+      brightness(0.88)
+      saturate(0.94);
+
+    opacity: 0.94;
+
+    transform:
+      translateY(0)
+      scale(0.996);
+  }
+
+}
+
+
+/* =========================================================
+   SAFETY CAROUSEL CLICK CAPTION
+   ---------------------------------------------------------
+   클릭된 카드가 중앙 확대될 때
+   이미지 아래에 제목 + 설명이 자연스럽게 등장하도록 구성.
+   JS에서 .is-visible 클래스를 붙였다가 제거하는 방식.
+========================================================= */
+
+.safety-page .safety-carousel__caption {
+  position: absolute;
+
+  left: 50%;
+
+  /* 더 커진 중앙 확대 이미지 아래쪽 */
+  top:
+    calc(
+      50%
+      + clamp(245px, 15.5vw, 300px)
+    );
+
+  z-index: 70;
+
+  width:
+    min(84vw, 860px);
+
+  margin: 0;
+
+  padding: 0;
+
+  text-align: center;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  transform:
+    translate(-50%, 18px);
+
+  transition:
+    opacity 0.5s
+      cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s
+      cubic-bezier(0.22, 1, 0.36, 1);
+
+  will-change:
+    opacity,
+    transform;
+}
+
+
+/* JS에서 클릭 후 붙이는 상태 */
+.safety-page
+.safety-carousel__caption.is-visible {
+  opacity: 1;
+
+  transform:
+    translate(-50%, 0);
+}
+
+
+/* CAPTION TITLE */
+
+.safety-page
+.safety-carousel__caption-title {
+  margin: 0;
+
+  color:
+    var(--experience-light-text);
+
+  font-size:
+    clamp(24px, 2.15vw, 34px);
+
+  font-weight:
+    500;
+
+  line-height:
+    1.15;
+
+  letter-spacing:
+    -0.045em;
+
+  word-break:
+    keep-all;
+}
+
+
+/* CAPTION DESCRIPTION */
+
+.safety-page
+.safety-carousel__caption-description {
+  margin:
+    clamp(10px, 0.8vw, 14px)
+    auto
+    0;
+
+  max-width:
+    780px;
+
+  color:
+    var(--experience-light-sub-text);
+
+  font-size:
+    clamp(14px, 1.15vw, 18px);
+
+  font-weight: 400;
+
+  line-height: 1.55;
+
+  letter-spacing:
+    -0.025em;
+
+  word-break:
+    keep-all;
+}
+
+
+/* 클릭 포커스 상태에서는 배경이 충분히 정리되도록 */
+.safety-page
+.safety-carousel.has-centered-card
+.safety-carousel__caption {
+  visibility: visible;
+}
+
+
+/* TABLET */
+@media (max-width: 1100px) {
+
+  .safety-page .safety-carousel__focus-card {
+    width:
+      clamp(360px, 56vw, 520px);
+  }
+
+
+  .safety-page .safety-carousel__caption {
+    top:
+      calc(
+        50%
+        + clamp(195px, 22vw, 235px)
+      );
+
+    width:
+      min(86vw, 720px);
+  }
+
+
+  .safety-page
+  .safety-carousel__caption-title {
+    font-size:
+      clamp(21px, 2.8vw, 29px);
+
+    font-weight:
+      500;
+  }
+
+
+  .safety-page
+  .safety-carousel__caption-description {
+    font-size:
+      clamp(13px, 1.65vw, 16px);
+  }
+
+}
+
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .safety-page .safety-carousel__focus-card {
+    width:
+      min(86vw, 520px);
+  }
+
+
+  .safety-page .safety-carousel__caption {
+    top:
+      calc(
+        50%
+        + clamp(155px, 39vw, 205px)
+      );
+
+    width:
+      min(90vw, 560px);
+
+    transform:
+      translate(-50%, 12px);
+  }
+
+
+  .safety-page
+  .safety-carousel__caption.is-visible {
+    transform:
+      translate(-50%, 0);
+  }
+
+
+  .safety-page
+  .safety-carousel__caption-title {
+    font-size:
+      clamp(18px, 4.8vw, 24px);
+
+    font-weight:
+      500;
+  }
+
+
+  .safety-page
+  .safety-carousel__caption-description {
+    margin-top:
+      8px;
+
+    max-width:
+      94%;
+
+    font-size:
+      clamp(12px, 3.2vw, 15px);
+
+    line-height:
+      1.5;
+  }
+
+}
+
+
+/* VERY SMALL MOBILE */
+@media (max-width: 480px) {
+
+  .safety-page .safety-carousel__focus-card {
+    width:
+      88vw;
+  }
+
+
+  .safety-page .safety-carousel__caption {
+    top:
+      calc(
+        50%
+        + clamp(138px, 43vw, 175px)
+      );
+
+    width:
+      92vw;
+  }
+
+
+  .safety-page
+  .safety-carousel__caption-title {
+    font-size:
+      clamp(17px, 5vw, 21px);
+
+    font-weight:
+      500;
+  }
+
+
+  .safety-page
+  .safety-carousel__caption-description {
+    font-size:
+      clamp(11px, 3.4vw, 14px);
+  }
+
+}
+
+
+/* =========================================================
+   SAFETY STACK — SUBTLE DEPTH SHADOW FINAL
+   ---------------------------------------------------------
+   카드가 붕 떠 보이지 않도록 그림자를 줄이고,
+   겹치는 경계만 은은하게 구분되도록 조정.
+   기존의 느리고 묵직한 hover 움직임은 그대로 유지.
+========================================================= */
+
+.safety-page .safety-stack__card {
+  box-shadow:
+    0 10px 24px rgba(29, 29, 31, 0.10),
+    0 2px 6px rgba(29, 29, 31, 0.045);
+}
+
+
+@media (hover: hover) and (pointer: fine) {
+
+  .safety-page .safety-stack__card:hover {
+    box-shadow:
+      0 16px 34px rgba(29, 29, 31, 0.13),
+      0 4px 10px rgba(29, 29, 31, 0.055);
+  }
+
+}
+
+
+/* =========================================================
+   =========================================================
+   EXPERIENCE — GLOBAL HEADER / FOOTER FINAL SYSTEM
+   driving.html + safety.html
+   ---------------------------------------------------------
+   INDEX / BRAND에서 확정한 크기, 정렬, 간격, 자동 숨김 구조 유지.
+
+   EXPERIENCE는 WHITE MODE이므로:
+   - CLOSED HEADER : 아주 옅은 OFF-WHITE GLASS
+   - OPEN MEGA     : 하나의 LIGHT GLASS PANEL
+   - TEXT          : SOFT BLACK
+   - FOOTER        : DEEP BLACK
+   =========================================================
+   ========================================================= */
+
+
+/* =========================================================
+   01. EXPERIENCE HEADER COLOR SYSTEM
+========================================================= */
+
+.experience-page {
+  --experience-header-glass-closed:
+    rgba(245, 245, 242, 0.40);
+
+  --experience-header-glass-open:
+    rgba(245, 245, 242, 0.76);
+
+  --experience-header-glass-mobile:
+    rgba(245, 245, 242, 0.88);
+
+  --experience-header-text:
+    #1d1d1f;
+
+  --experience-header-text-soft:
+    rgba(29, 29, 31, 0.58);
+
+  --experience-header-sub-text:
+    rgba(29, 29, 31, 0.62);
+
+  --experience-header-blur:
+    9px;
+
+  --experience-footer-bg:
+    #08090a;
+
+  --experience-footer-text:
+    #f4f4f1;
+}
+
+
+/* =========================================================
+   02. HEADER CLOSED STATE
+   ---------------------------------------------------------
+   WHITE MODE 페이지 위에서는 완전 흰색이 아니라
+   아주 옅은 OFF-WHITE GLASS가 보이도록 한다.
+========================================================= */
+
+.experience-page.driving-page .site-header,
+.experience-page.safety-page .site-header {
+  color:
+    var(--experience-header-text);
+
+  background:
+    var(--experience-header-glass-closed) !important;
+
+  border:
+    0 !important;
+
+  border-bottom:
+    0 !important;
+
+  box-shadow:
+    none !important;
+
+  -webkit-backdrop-filter:
+    blur(7px)
+    saturate(104%) !important;
+
+  backdrop-filter:
+    blur(7px)
+    saturate(104%) !important;
+
+  transform:
+    translate3d(0, 0, 0);
+
+  opacity:
+    1;
+
+  transition:
+    transform
+    0.48s
+    cubic-bezier(0.22, 1, 0.36, 1),
+    opacity
+    0.34s ease,
+    background-color
+    0.28s ease,
+    backdrop-filter
+    0.28s ease,
+    -webkit-backdrop-filter
+    0.28s ease;
+}
+
+
+/*
+ * MEGA가 열릴 때는 site-header 자체의 glass를 제거.
+ * MEGA 한 장만 top:0부터 전체를 덮게 해서
+ * 메뉴 아래 미세한 seam이 생기지 않도록 한다.
+ */
+
+.experience-page.driving-page
+.site-header:hover,
+.experience-page.driving-page
+.site-header:focus-within,
+.experience-page.safety-page
+.site-header:hover,
+.experience-page.safety-page
+.site-header:focus-within {
+  background:
+    transparent !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+}
+
+
+/* =========================================================
+   03. HEADER BAR
+========================================================= */
+
+.experience-page .site-header__bar,
+.experience-page
+.site-header:hover
+.site-header__bar,
+.experience-page
+.site-header:focus-within
+.site-header__bar {
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  background:
+    transparent !important;
+
+  border:
+    0 !important;
+
+  box-shadow:
+    none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+}
+
+
+/* =========================================================
+   04. HEADER LOGO / MAIN NAV
+========================================================= */
+
+.experience-page .site-header__logo {
+  color:
+    var(--experience-header-text) !important;
+
+  text-shadow:
+    none !important;
+}
+
+
+.experience-page .site-header__nav-link {
+  color:
+    var(--experience-header-text-soft) !important;
+
+  text-shadow:
+    none !important;
+}
+
+
+.experience-page
+.site-header__nav-link:hover,
+.experience-page
+.site-header__nav-link:focus-visible,
+.experience-page
+.site-header__nav-link.is-active {
+  color:
+    var(--experience-header-text) !important;
+}
+
+
+.experience-page
+.site-header__nav-link::after {
+  background:
+    currentColor !important;
+}
+
+
+/* =========================================================
+   05. HEADER MEGA — SEAMLESS LIGHT GLASS
+   ---------------------------------------------------------
+   INDEX / BRAND와 동일하게 top:0부터 시작.
+   BAR와 MEGA 사이에 별도 border / shadow를 만들지 않는다.
+========================================================= */
+
+.experience-page.driving-page
+.site-header__mega,
+.experience-page.safety-page
+.site-header__mega {
+  top:
+    0 !important;
+
+  padding:
+    calc(
+      var(--header-height) +
+      28px
+    )
+    var(--header-side-padding)
+    38px !important;
+
+  background:
+    var(--experience-header-glass-open) !important;
+
+  border:
+    0 !important;
+
+  border-top:
+    0 !important;
+
+  border-bottom:
+    0 !important;
+
+  box-shadow:
+    none !important;
+
+  -webkit-backdrop-filter:
+    blur(
+      var(--experience-header-blur)
+    )
+    saturate(106%) !important;
+
+  backdrop-filter:
+    blur(
+      var(--experience-header-blur)
+    )
+    saturate(106%) !important;
+}
+
+
+/* 상단 메뉴와 하위 메뉴의 기준점은 INDEX 값 그대로 */
+
+.experience-page .site-header__mega-grid {
+  position:
+    relative;
+}
+
+
+/* 하위 메뉴 제목은 기존 INDEX 시스템 그대로 숨김 */
+
+.experience-page .site-header__mega-title {
+  display:
+    none;
+}
+
+
+/* =========================================================
+   06. HEADER MEGA LINKS
+   ---------------------------------------------------------
+   hover 시 글자 이동 / 진해짐 없음.
+   underline만 등장.
+========================================================= */
+
+.experience-page
+.site-header__mega-links a,
+.experience-page
+.site-header__mega-links
+a[aria-current="page"] {
+  position:
+    relative;
+
+  display:
+    inline-flex;
+
+  width:
+    max-content;
+
+  color:
+    var(--experience-header-sub-text) !important;
+
+  transform:
+    none !important;
+
+  text-shadow:
+    none !important;
+
+  transition:
+    color
+    0.22s ease !important;
+}
+
+
+.experience-page
+.site-header__mega-links a::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left:
+    0;
+
+  bottom:
+    -5px;
+
+  width:
+    100%;
+
+  height:
+    1px;
+
+  background:
+    currentColor !important;
+
+  opacity:
+    1;
+
+  transform:
+    scaleX(0);
+
+  transform-origin:
+    right center;
+
+  transition:
+    transform
+    0.32s
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.experience-page
+.site-header__mega-links a:hover,
+.experience-page
+.site-header__mega-links a:focus-visible {
+  color:
+    var(--experience-header-sub-text) !important;
+
+  transform:
+    none !important;
+}
+
+
+.experience-page
+.site-header__mega-links a:hover::after,
+.experience-page
+.site-header__mega-links a:focus-visible::after {
+  transform:
+    scaleX(1);
+
+  transform-origin:
+    left center;
+}
+
+
+.experience-page
+.site-header a:focus-visible {
+  outline:
+    1px solid
+    rgba(29, 29, 31, 0.58);
+
+  outline-offset:
+    5px;
+}
+
+
+/* =========================================================
+   07. HEADER AUTO HIDE
+   ---------------------------------------------------------
+   JS 연결 클래스:
+   body.is-header-hidden
+   body.is-header-peek
+========================================================= */
+
+/* =========================================================
+   07. HEADER AUTO HIDE — LOGO ALWAYS VISIBLE
+   ---------------------------------------------------------
+   스크롤 후:
+   - DADEULLIM 로고는 항상 표시
+   - 중앙 MAIN NAV만 숨김
+   - 상단 HOT ZONE 진입 시 MAIN NAV 다시 표시
+   - MEGA MENU도 함께 숨김 / 복귀
+========================================================= */
+
+
+/* 헤더 자체는 절대 숨기지 않음 */
+
+body.experience-page.is-header-hidden
+.site-header {
+  transform:
+    translate3d(0, 0, 0);
+
+  opacity:
+    1;
+
+  visibility:
+    visible;
+}
+
+
+/* 스크롤 상태에서는 중앙 메뉴만 숨김 */
+
+body.experience-page.is-header-hidden:not(.is-header-peek)
+.site-header:not(:hover):not(:focus-within)
+.site-header__nav {
+  opacity:
+    0;
+
+  visibility:
+    hidden;
+
+  transform:
+    translateX(-50%)
+    translateY(-14px);
+
+  pointer-events:
+    none;
+}
+
+
+/* DADEULLIM 로고는 항상 유지 */
+
+body.experience-page.is-header-hidden
+.site-header__logo {
+  opacity:
+    1;
+
+  visibility:
+    visible;
+
+  pointer-events:
+    auto;
+}
+
+
+/* HOT ZONE / HOVER / FOCUS 시 중앙 메뉴 복귀 */
+
+body.experience-page.is-header-hidden.is-header-peek
+.site-header__nav,
+body.experience-page.is-header-hidden
+.site-header:hover
+.site-header__nav,
+body.experience-page.is-header-hidden
+.site-header:focus-within
+.site-header__nav {
+  opacity:
+    1;
+
+  visibility:
+    visible;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+
+  pointer-events:
+    auto;
+}
+
+
+/* 숨김 상태에서 MEGA MENU가 혼자 남지 않도록 */
+
+body.experience-page.is-header-hidden:not(.is-header-peek)
+.site-header:not(:hover):not(:focus-within)
+.site-header__mega {
+  opacity:
+    0;
+
+  visibility:
+    hidden;
+
+  pointer-events:
+    none;
+}
+
+
+/* 모바일에서는 X축 중앙 보정 사용하지 않음 */
+
+@media (max-width: 650px) {
+
+  body.experience-page.is-header-hidden:not(.is-header-peek)
+  .site-header:not(:hover):not(:focus-within)
+  .site-header__nav {
+    transform:
+      translateY(-14px);
+  }
+
+
+  body.experience-page.is-header-hidden.is-header-peek
+  .site-header__nav,
+  body.experience-page.is-header-hidden
+  .site-header:hover
+  .site-header__nav,
+  body.experience-page.is-header-hidden
+  .site-header:focus-within
+  .site-header__nav {
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+/* =========================================================
+   08. HEADER DESKTOP — INDEX EXACT SCALE
+========================================================= */
+
+@media (min-width: 1001px) {
+
+  .experience-page .site-header {
+    --header-height:
+      4.0278vw;
+
+    --header-side-padding:
+      3vw;
+
+    --header-logo-width:
+      10.0694vw;
+
+    --header-column-brand:
+      92px;
+
+    --header-column-interface:
+      120px;
+
+    --header-column-experience:
+      132px;
+
+    --header-column-about:
+      82px;
+
+    --header-center-gap:
+      clamp(
+        24px,
+        2.8vw,
+        44px
+      );
+
+    --header-visual-shift:
+      clamp(
+        18px,
+        1.8vw,
+        30px
+      );
+  }
+
+
+  .experience-page
+  .site-header__logo {
+    font-size:
+      0.8333vw;
+  }
+
+
+  .experience-page
+  .site-header__nav-link {
+    font-size:
+      0.6944vw;
+  }
+
+
+  .experience-page
+  .site-header__nav-link::after {
+    bottom:
+      0.9722vw;
+  }
+
+
+  .experience-page
+  .site-header__mega-links {
+    gap:
+      0.9722vw;
+  }
+
+
+  .experience-page
+  .site-header__mega-links a {
+    font-size:
+      0.7639vw;
+  }
+
+
+  .experience-page.driving-page
+  .site-header__mega,
+  .experience-page.safety-page
+  .site-header__mega {
+    padding-top:
+      calc(
+        var(--header-height) +
+        1.9444vw
+      ) !important;
+
+    padding-bottom:
+      2.6389vw !important;
+  }
+
+}
+
+
+/* =========================================================
+   09. HEADER TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .experience-page .site-header {
+    --header-column-brand:
+      74px;
+
+    --header-column-interface:
+      98px;
+
+    --header-column-experience:
+      108px;
+
+    --header-column-about:
+      68px;
+
+    --header-center-gap:
+      clamp(
+        18px,
+        2.8vw,
+        30px
+      );
+  }
+
+
+  .experience-page.driving-page
+  .site-header__mega,
+  .experience-page.safety-page
+  .site-header__mega {
+    padding-top:
+      calc(
+        var(--header-height) +
+        28px
+      ) !important;
+
+    padding-bottom:
+      38px !important;
+  }
+
+}
+
+
+/* =========================================================
+   10. HEADER MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .experience-page .site-header {
+    --header-visual-shift:
+      0px;
+  }
+
+
+  .experience-page
+  .site-header__mega-grid {
+    left:
+      0;
+  }
+
+
+  .experience-page.driving-page
+  .site-header__mega,
+  .experience-page.safety-page
+  .site-header__mega {
+    top:
+      0 !important;
+
+    max-height:
+      100svh;
+
+    padding:
+      calc(
+        var(--header-height) +
+        25px
+      )
+      18px
+      32px !important;
+
+    background:
+      var(--experience-header-glass-mobile) !important;
+
+    -webkit-backdrop-filter:
+      blur(
+        var(--experience-header-blur)
+      )
+      saturate(106%) !important;
+
+    backdrop-filter:
+      blur(
+        var(--experience-header-blur)
+      )
+      saturate(106%) !important;
+  }
+
+}
+
+
+/* =========================================================
+   11. EXPERIENCE FOOTER — DARK GRADUATION PROJECT SYSTEM
+   ---------------------------------------------------------
+   INDEX에서 확정한 구조 / 비율 그대로.
+   색상만 WHITE MODE 페이지에 맞춰 반전.
+========================================================= */
+
+.experience-page .case-footer {
+  position:
+    relative;
+
+  z-index:
+    10;
+
+  width:
+    100%;
+
+  margin:
+    0 !important;
+
+  padding:
+    clamp(44px, 4vw, 72px)
+    0
+    0;
+
+  padding-bottom:
+    0 !important;
+
+  overflow:
+    hidden;
+
+  color:
+    var(--experience-footer-text) !important;
+
+  background:
+    var(--experience-footer-bg) !important;
+
+  border:
+    0 !important;
+
+  border-radius:
+    0 !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+/* =========================================================
+   FOOTER TOP
+========================================================= */
+
+.experience-page
+.case-footer__top {
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+
+  gap:
+    clamp(
+      34px,
+      4vw,
+      70px
+    );
+
+  align-items:
+    start;
+}
+
+
+.experience-page
+.case-footer__column {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    flex-start;
+
+  min-width:
+    0;
+}
+
+
+.experience-page
+.case-footer__label {
+  margin:
+    0
+    0
+    16px;
+
+  color:
+    rgba(
+      244,
+      244,
+      241,
+      0.42
+    ) !important;
+
+  font-size:
+    clamp(
+      7px,
+      0.52vw,
+      10px
+    );
+
+  font-weight:
+    500;
+
+  line-height:
+    1;
+
+  letter-spacing:
+    0.04em;
+}
+
+
+.experience-page
+.case-footer__project-name,
+.experience-page
+.case-footer__text,
+.experience-page
+.case-footer__column a {
+  margin:
+    0;
+
+  color:
+    var(--experience-footer-text) !important;
+
+  font-size:
+    clamp(
+      10px,
+      0.72vw,
+      13px
+    );
+
+  font-weight:
+    400;
+
+  line-height:
+    1.65;
+
+  letter-spacing:
+    -0.02em;
+}
+
+
+.experience-page
+.case-footer__project-name {
+  margin-bottom:
+    2px;
+
+  font-weight:
+    600;
+}
+
+
+.experience-page
+.case-footer__column a {
+  position:
+    relative;
+
+  display:
+    inline-flex;
+
+  width:
+    max-content;
+
+  opacity:
+    0.78;
+
+  transition:
+    opacity
+    0.22s ease;
+}
+
+
+.experience-page
+.case-footer__column a::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left:
+    0;
+
+  bottom:
+    1px;
+
+  width:
+    100%;
+
+  height:
+    1px;
+
+  background:
+    currentColor;
+
+  transform:
+    scaleX(0);
+
+  transform-origin:
+    right center;
+
+  transition:
+    transform
+    0.32s
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.experience-page
+.case-footer__column a:hover,
+.experience-page
+.case-footer__column a:focus-visible {
+  color:
+    var(--experience-footer-text) !important;
+
+  opacity:
+    1 !important;
+}
+
+
+.experience-page
+.case-footer__column a:hover::after,
+.experience-page
+.case-footer__column a:focus-visible::after {
+  transform:
+    scaleX(1);
+
+  transform-origin:
+    left center;
+}
+
+
+/* =========================================================
+   FOOTER BACK TO TOP
+========================================================= */
+
+.experience-page
+.case-footer__utility {
+  display:
+    flex;
+
+  justify-content:
+    flex-end;
+
+  margin-top:
+    clamp(
+      44px,
+      5vw,
+      82px
+    );
+}
+
+
+.experience-page
+.case-footer__back-to-top {
+  position:
+    relative;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    8px;
+
+  color:
+    rgba(
+      244,
+      244,
+      241,
+      0.68
+    ) !important;
+
+  font-size:
+    clamp(
+      8px,
+      0.58vw,
+      11px
+    );
+
+  font-weight:
+    500;
+
+  line-height:
+    1;
+
+  letter-spacing:
+    0.02em;
+
+  opacity:
+    1 !important;
+
+  transition:
+    color
+    0.22s ease;
+}
+
+
+.experience-page
+.case-footer__back-to-top::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left:
+    0;
+
+  bottom:
+    -5px;
+
+  width:
+    100%;
+
+  height:
+    1px;
+
+  background:
+    currentColor;
+
+  transform:
+    scaleX(0);
+
+  transform-origin:
+    right center;
+
+  transition:
+    transform
+    0.3s
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.experience-page
+.case-footer__back-to-top:hover,
+.experience-page
+.case-footer__back-to-top:focus-visible {
+  color:
+    var(--experience-footer-text) !important;
+
+  opacity:
+    1 !important;
+}
+
+
+.experience-page
+.case-footer__back-to-top:hover::after,
+.experience-page
+.case-footer__back-to-top:focus-visible::after {
+  transform:
+    scaleX(1);
+
+  transform-origin:
+    left center;
+}
+
+
+/* =========================================================
+   FOOTER LARGE BRAND
+========================================================= */
+
+.experience-page
+.case-footer__brand-stage {
+  position:
+    relative;
+
+  width:
+    100%;
+
+  margin-top:
+    clamp(
+      28px,
+      3.3vw,
+      58px
+    );
+
+  margin-bottom:
+    0 !important;
+
+  padding-bottom:
+    0 !important;
+
+  overflow:
+    hidden;
+}
+
+
+.experience-page
+.case-footer__brand-lockup {
+  position:
+    relative;
+
+  display:
+    flex;
+
+  align-items:
+    flex-end;
+
+  gap:
+    clamp(
+      14px,
+      1.5vw,
+      28px
+    );
+
+  width:
+    calc(100% - 5vw);
+
+  margin:
+    0
+    auto !important;
+
+  padding-bottom:
+    0 !important;
+
+  transform:
+    translateY(
+      clamp(
+        22px,
+        2.6vw,
+        46px
+      )
+    );
+}
+
+
+.experience-page
+.case-footer__symbol {
+  flex:
+    0 0 auto;
+
+  display:
+    grid;
+
+  gap:
+    clamp(
+      4px,
+      0.42vw,
+      8px
+    );
+
+  margin-bottom:
+    0 !important;
+
+  padding-bottom:
+    clamp(
+      24px,
+      2.5vw,
+      46px
+    );
+}
+
+
+.experience-page
+.case-footer__symbol span {
+  display:
+    block;
+
+  width:
+    clamp(
+      38px,
+      4vw,
+      72px
+    );
+
+  height:
+    clamp(
+      9px,
+      0.92vw,
+      16px
+    );
+
+  border-radius:
+    clamp(
+      2px,
+      0.22vw,
+      4px
+    );
+
+  background:
+    var(--experience-footer-text) !important;
+}
+
+
+.experience-page
+.case-footer__symbol
+span:nth-child(1),
+.experience-page
+.case-footer__symbol
+span:nth-child(3) {
+  margin-left:
+    clamp(
+      9px,
+      0.9vw,
+      16px
+    );
+}
+
+
+.experience-page
+.case-footer__symbol
+span:nth-child(2) {
+  width:
+    clamp(
+      48px,
+      5vw,
+      90px
+    );
+}
+
+
+.experience-page
+.case-footer__brand {
+  flex:
+    1
+    1
+    auto;
+
+  margin:
+    0 !important;
+
+  padding:
+    0 !important;
+
+  color:
+    var(--experience-footer-text) !important;
+
+  font-family:
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size:
+    clamp(
+      128px,
+      16.4vw,
+      310px
+    );
+
+  font-weight:
+    400;
+
+  line-height:
+    0.66;
+
+  letter-spacing:
+    -0.075em;
+
+  white-space:
+    nowrap;
+}
+
+
+/* 예전 META가 남아 있어도 표시하지 않음 */
+
+.experience-page
+.case-footer__bottom-meta,
+.experience-page
+.case-footer__meta,
+.experience-page
+.case-footer__brand-row {
+  display:
+    none !important;
+}
+
+
+/* =========================================================
+   12. FOOTER DESKTOP — INDEX EXACT DIMENSIONS
+========================================================= */
+
+@media (min-width: 1001px) {
+
+  .experience-page
+  .case-footer {
+    padding:
+      3.6vw
+      0
+      0;
+  }
+
+
+  .experience-page
+  .case-footer__top {
+    grid-template-columns:
+      repeat(
+        4,
+        minmax(0, 1fr)
+      );
+
+    gap:
+      4.2vw;
+  }
+
+
+  .experience-page
+  .case-footer__label {
+    margin-bottom:
+      1.05vw;
+
+    font-size:
+      0.48vw;
+  }
+
+
+  .experience-page
+  .case-footer__project-name,
+  .experience-page
+  .case-footer__text,
+  .experience-page
+  .case-footer__column a {
+    font-size:
+      0.72vw;
+  }
+
+
+  .experience-page
+  .case-footer__utility {
+    margin-top:
+      4.2vw;
+  }
+
+
+  .experience-page
+  .case-footer__back-to-top {
+    font-size:
+      0.58vw;
+  }
+
+
+  .experience-page
+  .case-footer__brand-stage {
+    margin-top:
+      2.4vw;
+
+    height:
+      12.2vw;
+  }
+
+
+  .experience-page
+  .case-footer__brand-lockup {
+    width:
+      95vw;
+
+    gap:
+      1.4vw;
+
+    transform:
+      translateY(
+        2.55vw
+      );
+  }
+
+
+  .experience-page
+  .case-footer__symbol {
+    gap:
+      0.4vw;
+
+    padding-bottom:
+      2.05vw;
+  }
+
+
+  .experience-page
+  .case-footer__symbol span {
+    width:
+      4vw;
+
+    height:
+      0.9vw;
+
+    border-radius:
+      0.2vw;
+  }
+
+
+  .experience-page
+  .case-footer__symbol
+  span:nth-child(1),
+  .experience-page
+  .case-footer__symbol
+  span:nth-child(3) {
+    margin-left:
+      0.85vw;
+  }
+
+
+  .experience-page
+  .case-footer__symbol
+  span:nth-child(2) {
+    width:
+      5vw;
+  }
+
+
+  .experience-page
+  .case-footer__brand {
+    font-size:
+      16.4vw;
+
+    line-height:
+      0.66;
+  }
+
+}
+
+
+/* =========================================================
+   13. FOOTER TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .experience-page
+  .case-footer__top {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+
+    row-gap:
+      34px;
+  }
+
+
+  .experience-page
+  .case-footer__brand-stage {
+    height:
+      clamp(
+        90px,
+        14vw,
+        145px
+      );
+  }
+
+
+  .experience-page
+  .case-footer__brand-lockup {
+    width:
+      calc(
+        100% - 48px
+      );
+
+    transform:
+      translateY(
+        22px
+      );
+  }
+
+
+  .experience-page
+  .case-footer__brand {
+    font-size:
+      clamp(
+        94px,
+        15.5vw,
+        170px
+      );
+
+    line-height:
+      0.67;
+  }
+
+
+  .experience-page
+  .case-footer__symbol {
+    padding-bottom:
+      20px;
+  }
+
+}
+
+
+/* =========================================================
+   14. FOOTER MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .experience-page
+  .case-footer {
+    padding-top:
+      42px;
+  }
+
+
+  .experience-page
+  .case-footer__top {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+
+    gap:
+      28px
+      18px;
+  }
+
+
+  .experience-page
+  .case-footer__label {
+    margin-bottom:
+      12px;
+  }
+
+
+  .experience-page
+  .case-footer__project-name,
+  .experience-page
+  .case-footer__text,
+  .experience-page
+  .case-footer__column a {
+    font-size:
+      9px;
+
+    line-height:
+      1.6;
+  }
+
+
+  .experience-page
+  .case-footer__utility {
+    margin-top:
+      38px;
+  }
+
+
+  .experience-page
+  .case-footer__brand-stage {
+    height:
+      clamp(
+        58px,
+        17vw,
+        92px
+      );
+
+    margin-top:
+      16px;
+  }
+
+
+  .experience-page
+  .case-footer__brand-lockup {
+    width:
+      calc(
+        100% - 28px
+      );
+
+    gap:
+      10px;
+
+    transform:
+      translateY(
+        14px
+      );
+  }
+
+
+  .experience-page
+  .case-footer__symbol {
+    gap:
+      3px;
+
+    padding-bottom:
+      12px;
+  }
+
+
+  .experience-page
+  .case-footer__symbol span {
+    width:
+      26px;
+
+    height:
+      6px;
+
+    border-radius:
+      2px;
+  }
+
+
+  .experience-page
+  .case-footer__symbol
+  span:nth-child(1),
+  .experience-page
+  .case-footer__symbol
+  span:nth-child(3) {
+    margin-left:
+      6px;
+  }
+
+
+  .experience-page
+  .case-footer__symbol
+  span:nth-child(2) {
+    width:
+      32px;
+  }
+
+
+  .experience-page
+  .case-footer__brand {
+    font-size:
+      clamp(
+        54px,
+        15vw,
+        92px
+      );
+
+    line-height:
+      0.69;
+  }
+
+}
+
+
+/* =========================================================
+   15. EXPERIENCE PAGE END
+   ---------------------------------------------------------
+   큰 DADEULLIM crop 직후 페이지 종료.
+========================================================= */
+
+html:has(.experience-page) {
+  background:
+    var(--experience-footer-bg);
+}
+
+
+body.experience-page {
+  margin-bottom:
+    0;
+
+  background:
+    var(--experience-footer-bg);
+}
+
+
+.experience-page .driving-main,
+.experience-page .safety-main {
+  position:
+    relative;
+
+  z-index:
+    1;
+}
+
+
+.experience-page .case-footer {
+  position:
+    relative;
+
+  z-index:
+    10;
+}
+
+
+/* =========================================================
+   16. REDUCED MOTION — HEADER
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .experience-page .site-header {
+    transition:
+      none !important;
+  }
+
+}
+
+
+/* =========================================================
+   EXPERIENCE HEADER — TRANSPARENT CLOSED STATE FINAL
+   driving.html + safety.html
+   ---------------------------------------------------------
+   최종 기준:
+   - 마우스 오버 전: HEADER 배경 / blur 완전 없음
+   - 로고 + 메인 메뉴 글자만 표시
+   - 마우스 오버 / focus 시: MEGA가 LIGHT GLASS 한 장으로 등장
+   - BAR와 MEGA 사이 seam 없음
+   - 기존 자동 숨김 / 상단 HOT ZONE 재등장 유지
+========================================================= */
+
+
+/* =========================================================
+   01. CLOSED HEADER
+   ---------------------------------------------------------
+   기본 상태에서는 HERO / 본문 위에 별도의 판을 만들지 않는다.
+========================================================= */
+
+.experience-page.driving-page .site-header,
+.experience-page.safety-page .site-header {
+  background:
+    transparent !important;
+
+  border:
+    0 !important;
+
+  border-top:
+    0 !important;
+
+  border-bottom:
+    0 !important;
+
+  box-shadow:
+    none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+}
+
+
+/* =========================================================
+   02. HEADER BAR
+   ---------------------------------------------------------
+   상단 BAR 자체도 항상 투명.
+========================================================= */
+
+.experience-page .site-header__bar,
+.experience-page
+.site-header:hover
+.site-header__bar,
+.experience-page
+.site-header:focus-within
+.site-header__bar {
+  background:
+    transparent !important;
+
+  border:
+    0 !important;
+
+  box-shadow:
+    none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+}
+
+
+/* 가상 레이어가 남아 있더라도 완전히 제거 */
+
+.experience-page .site-header::before,
+.experience-page .site-header::after,
+.experience-page .site-header__bar::before,
+.experience-page .site-header__bar::after {
+  background:
+    none !important;
+
+  border:
+    0 !important;
+
+  box-shadow:
+    none !important;
+
+  filter:
+    none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+}
+
+
+/* =========================================================
+   03. OPEN MEGA GLASS
+   ---------------------------------------------------------
+   hover / focus 시 실제로 보이는 패널은 MEGA 하나만 사용.
+   top:0부터 BAR 뒤까지 덮으므로 한 장의 glass처럼 보인다.
+========================================================= */
+
+.experience-page.driving-page .site-header__mega,
+.experience-page.safety-page .site-header__mega {
+  top:
+    0 !important;
+
+  background:
+    rgba(
+      245,
+      245,
+      242,
+      0.76
+    ) !important;
+
+  border:
+    0 !important;
+
+  border-top:
+    0 !important;
+
+  border-bottom:
+    0 !important;
+
+  box-shadow:
+    none !important;
+
+  -webkit-backdrop-filter:
+    blur(9px)
+    saturate(106%) !important;
+
+  backdrop-filter:
+    blur(9px)
+    saturate(106%) !important;
+}
+
+
+/* =========================================================
+   04. HEADER HOVER / FOCUS
+   ---------------------------------------------------------
+   HEADER 자체에는 glass를 만들지 않는다.
+   MEGA만 glass를 담당해 seam 발생 방지.
+========================================================= */
+
+.experience-page.driving-page
+.site-header:hover,
+.experience-page.driving-page
+.site-header:focus-within,
+.experience-page.safety-page
+.site-header:hover,
+.experience-page.safety-page
+.site-header:focus-within {
+  background:
+    transparent !important;
+
+  border:
+    0 !important;
+
+  box-shadow:
+    none !important;
+
+  -webkit-backdrop-filter:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+}
+
+
+/* =========================================================
+   05. MOBILE OPEN PANEL
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .experience-page.driving-page .site-header__mega,
+  .experience-page.safety-page .site-header__mega {
+    background:
+      rgba(
+        245,
+        245,
+        242,
+        0.88
+      ) !important;
+
+    -webkit-backdrop-filter:
+      blur(9px)
+      saturate(106%) !important;
+
+    backdrop-filter:
+      blur(9px)
+      saturate(106%) !important;
+  }
+
+}
+
+
+/* =========================================================
+   EXPERIENCE HEADER — ACTIVE NAV UNDERLINE FINAL
+   ---------------------------------------------------------
+   INDEX / BRAND와 동일하게
+   현재 카테고리인 EXPERIENCE 밑줄을 항상 표시.
+   주행 / 안전 두 페이지 공통 적용.
+========================================================= */
+
+
+/* 공통 underline 색상 */
+
+.experience-page
+.site-header__nav-link::after {
+  background:
+    currentColor !important;
+}
+
+
+/* 현재 활성 메뉴는 항상 underline 표시 */
+
+.experience-page
+.site-header__nav-link.is-active::after,
+.experience-page
+.site-header__nav-link[aria-current="page"]::after {
+  opacity:
+    1 !important;
+
+  transform:
+    scaleX(1) !important;
+
+  transform-origin:
+    left center !important;
+}
+
+
+/* 비활성 메뉴는 기본적으로 underline 숨김 */
+
+.experience-page
+.site-header__nav-link:not(.is-active):not([aria-current="page"])::after {
+  opacity:
+    0;
+
+  transform:
+    scaleX(0);
+
+  transform-origin:
+    right center;
+}
+
+
+/* 비활성 메뉴는 hover / focus 때만 underline 표시 */
+
+.experience-page
+.site-header__nav-link:not(.is-active):not([aria-current="page"]):hover::after,
+.experience-page
+.site-header__nav-link:not(.is-active):not([aria-current="page"]):focus-visible::after {
+  opacity:
+    1;
+
+  transform:
+    scaleX(1);
+
+  transform-origin:
+    left center;
+}
+
+
+/* =========================================================
+   =========================================================
+   DRIVING IMAGE HOVER — SHIMMER REMOVE FINAL
+   ---------------------------------------------------------
+   주행 경험 페이지 이미지에서
+   experience-placeholder의 반짝이는 sweep 효과만 제거.
+
+   유지되는 것:
+   - 이미지 크기 / 위치
+   - 라운드
+   - solution 이미지의 translateY(-5px) hover
+   - feature 이미지의 미세 scale hover
+   - 기존 scroll reveal
+   - SAFETY 페이지 효과
+   - HEADER / FOOTER
+   =========================================================
+   ========================================================= */
+
+
+/* DRIVING 안의 placeholder shimmer 레이어 완전 제거 */
+
+.driving-page
+.experience-placeholder::after {
+  display:
+    none !important;
+
+  content:
+    none !important;
+
+  background:
+    none !important;
+
+  transform:
+    none !important;
+
+  transition:
+    none !important;
+}
+
+
+/* hover 시에도 shimmer가 다시 나타나지 않도록 고정 */
+
+.driving-page
+.experience-placeholder:hover::after {
+  display:
+    none !important;
+
+  content:
+    none !important;
+
+  background:
+    none !important;
+
+  transform:
+    none !important;
+
+  transition:
+    none !important;
+}
+
+/* =========================================================
+   =========================================================
+   DRIVING VERTICAL SIGNAL MOTION — FINAL
+   ---------------------------------------------------------
+   VIBRATION / HUD 사이의 기존 얇은 세로선을
+   정적인 1px line 대신 살아있는 signal line으로 변경.
+
+   모션:
+   - 기본 선은 아주 옅게 유지
+   - 옅은 blue gradient가 위 → 아래로 흐름
+   - 작은 원 4개가 한 묶음처럼 위 → 아래로 내려감
+   - 각 점의 delay를 짧게 두어 "점점점" 신호 느낌
+   - glow는 아주 약하게
+   - JS 없이 CSS animation만 사용
+
+   기존 레이아웃 / 이미지 / 텍스트 / hover / reveal 유지
+========================================================= */
+
+
+/* 기존 pseudo-element 세로선 제거 */
+
+.driving-page
+.driving-feature--vibration::after,
+.driving-page
+.driving-feature--hud::before {
+  display:
+    none !important;
+
+  content:
+    none !important;
+}
+
+
+/* =========================================================
+   SIGNAL COMMON
+========================================================= */
+
+.driving-page .driving-signal {
+  position:
+    absolute;
+
+  z-index:
+    4;
+
+  width:
+    18px;
+
+  pointer-events:
+    none;
+
+  overflow:
+    hidden;
+
+  opacity:
+    0.96;
+}
+
+
+/* 기존 세로선 중심에 맞춰 배치 */
+
+.driving-page
+.driving-signal--vibration {
+  top:
+    16.4%;
+
+  left:
+    calc(
+      94.37% - 9px
+    );
+
+  height:
+    22.31%;
+}
+
+
+.driving-page
+.driving-signal--hud {
+  top:
+    40.38%;
+
+  left:
+    calc(
+      7.28% - 9px
+    );
+
+  height:
+    50%;
+}
+
+
+/* =========================================================
+   BASE RAIL
+========================================================= */
+
+.driving-page
+.driving-signal__rail {
+  position:
+    absolute;
+
+  top:
+    0;
+
+  bottom:
+    0;
+
+  left:
+    50%;
+
+  width:
+    1px;
+
+  transform:
+    translateX(-50%);
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(29, 29, 31, 0.025) 0%,
+      rgba(29, 29, 31, 0.10) 11%,
+      rgba(29, 29, 31, 0.12) 50%,
+      rgba(29, 29, 31, 0.10) 89%,
+      rgba(29, 29, 31, 0.025) 100%
+    );
+}
+
+
+/* =========================================================
+   MOVING GRADIENT FLOW
+========================================================= */
+
+.driving-page
+.driving-signal__flow {
+  position:
+    absolute;
+
+  top:
+    -34%;
+
+  left:
+    50%;
+
+  width:
+    2px;
+
+  height:
+    30%;
+
+  border-radius:
+    999px;
+
+  transform:
+    translateX(-50%);
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(118, 165, 210, 0) 0%,
+      rgba(118, 165, 210, 0.10) 28%,
+      rgba(105, 166, 222, 0.36) 58%,
+      rgba(137, 184, 225, 0.17) 77%,
+      rgba(118, 165, 210, 0) 100%
+    );
+
+  box-shadow:
+    0 0 5px
+    rgba(108, 166, 220, 0.08);
+
+  animation:
+    driving-signal-flow
+    5.2s
+    linear
+    infinite;
+}
+
+
+.driving-page
+.driving-signal--hud
+.driving-signal__flow {
+  animation-duration:
+    5.8s;
+
+  animation-delay:
+    -1.35s;
+}
+
+
+/* =========================================================
+   DOT TRAIN
+========================================================= */
+
+.driving-page
+.driving-signal__dot {
+  position:
+    absolute;
+
+  top:
+    -10px;
+
+  left:
+    50%;
+
+  width:
+    3px;
+
+  height:
+    3px;
+
+  border-radius:
+    50%;
+
+  background:
+    rgba(
+      108,
+      166,
+      220,
+      0.58
+    );
+
+  box-shadow:
+    0 0 5px
+    rgba(
+      108,
+      166,
+      220,
+      0.10
+    );
+
+  opacity:
+    0;
+
+  transform:
+    translate3d(
+      -50%,
+      0,
+      0
+    );
+
+  animation:
+    driving-signal-dot
+    5.2s
+    cubic-bezier(
+      0.37,
+      0,
+      0.63,
+      1
+    )
+    infinite;
+}
+
+
+/*
+   delay 간격을 아주 짧게 잡아서
+   점 4개가 한 묶음처럼 내려오게 한다.
+ */
+
+.driving-page
+.driving-signal__dot--01 {
+  animation-delay:
+    0s;
+}
+
+
+.driving-page
+.driving-signal__dot--02 {
+  animation-delay:
+    0.14s;
+}
+
+
+.driving-page
+.driving-signal__dot--03 {
+  animation-delay:
+    0.28s;
+}
+
+
+.driving-page
+.driving-signal__dot--04 {
+  animation-delay:
+    0.42s;
+}
+
+
+/* HUD는 VIBRATION과 타이밍을 다르게 */
+
+.driving-page
+.driving-signal--hud
+.driving-signal__dot {
+  animation-duration:
+    5.8s;
+}
+
+
+.driving-page
+.driving-signal--hud
+.driving-signal__dot--01 {
+  animation-delay:
+    -1.35s;
+}
+
+
+.driving-page
+.driving-signal--hud
+.driving-signal__dot--02 {
+  animation-delay:
+    -1.19s;
+}
+
+
+.driving-page
+.driving-signal--hud
+.driving-signal__dot--03 {
+  animation-delay:
+    -1.03s;
+}
+
+
+.driving-page
+.driving-signal--hud
+.driving-signal__dot--04 {
+  animation-delay:
+    -0.87s;
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes driving-signal-flow {
+
+  0% {
+    top:
+      -34%;
+
+    opacity:
+      0;
+  }
+
+  10% {
+    opacity:
+      0.32;
+  }
+
+  44% {
+    opacity:
+      0.82;
+  }
+
+  82% {
+    opacity:
+      0.30;
+  }
+
+  100% {
+    top:
+      106%;
+
+    opacity:
+      0;
+  }
+
+}
+
+
+@keyframes driving-signal-dot {
+
+  0% {
+    top:
+      -10px;
+
+    opacity:
+      0;
+
+    transform:
+      translate3d(
+        -50%,
+        0,
+        0
+      )
+      scale(0.72);
+  }
+
+  10% {
+    opacity:
+      0.22;
+  }
+
+  30% {
+    opacity:
+      0.68;
+
+    transform:
+      translate3d(
+        calc(-50% + 0.6px),
+        0,
+        0
+      )
+      scale(1);
+  }
+
+  55% {
+    opacity:
+      0.76;
+
+    transform:
+      translate3d(
+        calc(-50% - 0.7px),
+        0,
+        0
+      )
+      scale(0.92);
+  }
+
+  78% {
+    opacity:
+      0.34;
+
+    transform:
+      translate3d(
+        calc(-50% + 0.35px),
+        0,
+        0
+      )
+      scale(0.84);
+  }
+
+  100% {
+    top:
+      calc(
+        100% + 10px
+      );
+
+    opacity:
+      0;
+
+    transform:
+      translate3d(
+        -50%,
+        0,
+        0
+      )
+      scale(0.70);
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ---------------------------------------------------------
+   작은 화면에서는 dot/glow를 더 미세하게.
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .driving-page
+  .driving-signal {
+    width:
+      14px;
+  }
+
+
+  .driving-page
+  .driving-signal--vibration {
+    left:
+      calc(
+        94.37% - 7px
+      );
+  }
+
+
+  .driving-page
+  .driving-signal--hud {
+    left:
+      calc(
+        7.28% - 7px
+      );
+  }
+
+
+  .driving-page
+  .driving-signal__dot {
+    width:
+      2.5px;
+
+    height:
+      2.5px;
+  }
+
+
+  .driving-page
+  .driving-signal__flow {
+    width:
+      1.5px;
+
+    box-shadow:
+      none;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .driving-page
+  .driving-signal__flow,
+  .driving-page
+  .driving-signal__dot {
+    animation:
+      none !important;
+
+    opacity:
+      0 !important;
+  }
+
+}
+
+/* =========================================================
+   =========================================================
+   DRIVING FUNCTIONS — TYPOGRAPHY / ALIGNMENT REFINEMENT FINAL
+   ---------------------------------------------------------
+   대상:
+   VIBRATION / HUD / ALERT
+
+   목적:
+   - 영문 기술명의 존재감을 한 단계 낮춰 더 정제된 위계 구성
+   - 한글 기능명은 500으로 올려 정보 구조를 명확하게
+   - 설명문은 조금 작고 여유 있게 정리
+   - HUD 텍스트 시작 위치를 미세하게 올려 세 블록의 시각 기준 통일
+   - 밝은 이미지가 배경에 묻히지 않도록 아주 미세한 대비 보정
+   - 기존 이미지 위치 / signal motion / reveal / hover / safety 유지
+========================================================= */
+
+
+/* =========================================================
+   01. FEATURE ENGLISH TITLE
+   VIBRATION / HUD / ALERT
+========================================================= */
+
+.driving-page .driving-feature__copy h2 {
+  margin:
+    0;
+
+  color:
+    var(--experience-light-text);
+
+  font-size:
+    clamp(
+      38px,
+      3.55vw,
+      54px
+    );
+
+  font-weight:
+    400;
+
+  line-height:
+    0.98;
+
+  letter-spacing:
+    -0.055em;
+}
+
+
+/* =========================================================
+   02. FEATURE KOREAN LABEL
+   진동 강도 / 정보 표시 / 알림 방식
+========================================================= */
+
+.driving-page .driving-feature__label {
+  margin:
+    clamp(
+      6px,
+      0.65vw,
+      10px
+    )
+    0
+    0;
+
+  color:
+    rgba(
+      29,
+      29,
+      31,
+      0.86
+    );
+
+  font-size:
+    clamp(
+      15px,
+      1.45vw,
+      21px
+    );
+
+  font-weight:
+    500;
+
+  line-height:
+    1.30;
+
+  letter-spacing:
+    -0.025em;
+}
+
+
+/* =========================================================
+   03. FEATURE DESCRIPTION
+========================================================= */
+
+.driving-page .driving-feature__description {
+  margin:
+    clamp(
+      18px,
+      1.5vw,
+      22px
+    )
+    0
+    0;
+
+  color:
+    rgba(
+      29,
+      29,
+      31,
+      0.58
+    );
+
+  font-size:
+    clamp(
+      13px,
+      1.05vw,
+      16px
+    );
+
+  font-weight:
+    400;
+
+  line-height:
+    1.55;
+
+  letter-spacing:
+    -0.02em;
+
+  white-space:
+    nowrap;
+}
+
+
+/* =========================================================
+   04. COPY POSITION BALANCE
+   ---------------------------------------------------------
+   VIBRATION / ALERT의 현재 위치는 유지.
+   HUD만 아주 미세하게 위로 올려 이미지와 제목의
+   시각적 시작 기준을 맞춘다.
+========================================================= */
+
+.driving-page
+.driving-feature--vibration
+.driving-feature__copy {
+  top:
+    11.8%;
+}
+
+
+.driving-page
+.driving-feature--hud
+.driving-feature__copy {
+  top:
+    44.9%;
+}
+
+
+.driving-page
+.driving-feature--alert
+.driving-feature__copy {
+  top:
+    71.8%;
+}
+
+
+/* =========================================================
+   05. FEATURE IMAGE TONE
+   ---------------------------------------------------------
+   전체 이미지를 진하게 만들지 않고,
+   밝은 영역이 OFF-WHITE 배경에 묻히는 정도만 보정.
+========================================================= */
+
+.driving-page
+.driving-feature__image img {
+  filter:
+    brightness(0.96)
+    contrast(1.03);
+
+  transition:
+    filter
+    0.6s
+    ease;
+}
+
+
+/* hover 시 이미지 톤은 그대로 두고 기존 container scale만 유지 */
+@media (hover: hover) and (pointer: fine) {
+
+  .driving-page
+  .driving-feature:hover
+  .driving-feature__image img {
+    filter:
+      brightness(0.965)
+      contrast(1.035);
+  }
+
+}
+
+
+/* =========================================================
+   06. TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .driving-page
+  .driving-feature__copy h2 {
+    font-size:
+      clamp(
+        32px,
+        3.8vw,
+        44px
+      );
+  }
+
+
+  .driving-page
+  .driving-feature__label {
+    font-size:
+      clamp(
+        13px,
+        1.65vw,
+        18px
+      );
+  }
+
+
+  .driving-page
+  .driving-feature__description {
+    font-size:
+      clamp(
+        11px,
+        1.28vw,
+        14px
+      );
+  }
+
+}
+
+
+/* =========================================================
+   07. MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .driving-page
+  .driving-feature__copy h2 {
+    font-size:
+      clamp(
+        18px,
+        4vw,
+        30px
+      );
+
+    font-weight:
+      400;
+
+    line-height:
+      0.98;
+  }
+
+
+  .driving-page
+  .driving-feature__label {
+    margin-top:
+      clamp(
+        4px,
+        1vw,
+        7px
+      );
+
+    font-size:
+      clamp(
+        8px,
+        1.7vw,
+        13px
+      );
+
+    font-weight:
+      500;
+  }
+
+
+  .driving-page
+  .driving-feature__description {
+    margin-top:
+      clamp(
+        10px,
+        2.6vw,
+        17px
+      );
+
+    font-size:
+      clamp(
+        8px,
+        1.55vw,
+        12px
+      );
+
+    line-height:
+      1.5;
+  }
+
+
+  .driving-page
+  .driving-feature--hud
+  .driving-feature__copy {
+    top:
+      44.9%;
+  }
+
+}
+
+
+/* =========================================================
+   08. VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+  .driving-page
+  .driving-feature__copy h2 {
+    font-size:
+      clamp(
+        15px,
+        3.85vw,
+        18px
+      );
+  }
+
+
+  .driving-page
+  .driving-feature__label {
+    font-size:
+      clamp(
+        7px,
+        1.75vw,
+        9px
+      );
+  }
+
+
+  .driving-page
+  .driving-feature__description {
+    margin-top:
+      clamp(
+        8px,
+        2.4vw,
+        12px
+      );
+
+    font-size:
+      clamp(
+        7px,
+        1.65vw,
+        9px
+      );
+  }
+
+}
+
+
+/* =========================================================
+   09. REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .driving-page
+  .driving-feature__image img {
+    transition:
+      none !important;
+  }
+
+}
+
+
+/* =========================================================
+   10. HEADER — MAIN TITLE ↔ SUB MENU GAP / 2026.10.06
+   ---------------------------------------------------------
+   메인 메뉴(BRAND / INTERFACE …)와 하위 메뉴 사이 간격 축소.
+   INDEX(style.css 02. MAIN TITLE ↔ SUB MENU GAP)와 같은 값.
+
+   데스크톱 : 1.9444vw → 0.5556vw
+   태블릿   : 28px     → 12px
+   모바일   : 25px     → 12px
+========================================================= */
+
+@media (min-width: 1001px) {
+
+  .experience-page.driving-page
+  .site-header__mega,
+  .experience-page.safety-page
+  .site-header__mega {
+    padding-top:
+      calc(
+        var(--header-height) +
+        0.5556vw
+      ) !important;
+  }
+
+}
+
+
+/* 태블릿 */
+@media (max-width: 1000px) {
+
+  .experience-page.driving-page
+  .site-header__mega,
+  .experience-page.safety-page
+  .site-header__mega {
+    padding-top:
+      calc(
+        var(--header-height) +
+        12px
+      ) !important;
+  }
+
+}
+
+
+/* 모바일 */
+@media (max-width: 650px) {
+
+  .experience-page.driving-page
+  .site-header__mega,
+  .experience-page.safety-page
+  .site-header__mega {
+    padding-top:
+      calc(
+        var(--header-height) +
+        12px
+      ) !important;
+  }
+
+}
+
+
+/* =========================================================
+   TITLE EYEBROW 제거 / 2026.10.06
+   ---------------------------------------------------------
+   제목 위 작은 소제목(eyebrow) 텍스트 숨김.
+   HTML은 그대로 두고 CSS로만 숨김
+   (JS에서 참조하는 요소가 있어 삭제하지 않음)
+=========================================================
+   DRIVING : Solution
+   SAFETY  : SAFETY DETECTION
+========================================================= */
+
+.driving-solution__eyebrow,
+.safety-final__eyebrow {
+  display:
+    none !important;
+}
+
+
+/* =========================================================
+   DRIVING ONE MOMENT — “사이렌 한 번, 세 개의 감각이 동시에.”
+   2026.10.07 추가 (123.zip drive-moment.css 정리)
+   ---------------------------------------------------------
+   주행 경험 03 섹션.
+   화면이 고정된 동안 스크롤하면 재생선이 지나가며
+   소리 입력 → 판단 → HUD → 핸들 → 디스플레이 트랙이 차례로 켜지고,
+   오른쪽 실내 사진의 해당 부위(HUD · 핸들 · 디스플레이)가 빛남.
+
+   톤 : 기존 주행 경험 페이지 — 밝은 배경 / #1d1d1f / 블루그레이 강조
+   동작 : experience.js 맨 아래 [DRIVING ONE MOMENT]
+========================================================= */
+
+
+/* =========================================================
+   01. 공통 값
+========================================================= */
+
+.driving-page {
+  --dp-bg:
+    #f5f5f7;
+
+  --dp-bg3:
+    #eff0f2;
+
+  --dp-text:
+    #1d1d1f;
+
+  --dp-sub:
+    #5f6065;
+
+  --dp-mute:
+    #86868b;
+
+  --dp-grad:
+    linear-gradient(
+      105deg,
+      #344b58 0%,
+      #4f7183 32%,
+      #6f98ac 64%,
+      #8fb8ca 100%
+    );
+
+  --dp-side:
+    clamp(26px, 4.2vw, 68px);
+
+  --dp-max:
+    1500px;
+
+  --dp-ease:
+    cubic-bezier(
+      0.16,
+      1,
+      0.3,
+      1
+    );
+
+  --dp-r:
+    8px;
+}
+
+
+/*
+ * sticky 가 동작하도록
+ * main 의 overflow: hidden → clip (보이는 결과는 같음)
+ */
+
+.driving-page .driving-main {
+  overflow:
+    clip;
+}
+
+
+.dp {
+  position:
+    relative;
+
+  color:
+    var(--dp-text);
+
+  background:
+    var(--dp-bg);
+
+  font-family:
+    "Pretendard Variable",
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+
+  -webkit-font-smoothing:
+    antialiased;
+
+  word-break:
+    keep-all;
+}
+
+
+.dp *,
+.dp *::before,
+.dp *::after {
+  box-sizing:
+    border-box;
+}
+
+
+.dp img {
+  display:
+    block;
+
+  max-width:
+    100%;
+}
+
+
+.dp p {
+  margin:
+    0;
+
+  padding:
+    0;
+}
+
+
+/* =========================================================
+   02. TITLE
+========================================================= */
+
+.dp-title {
+  margin:
+    0;
+
+  font-size:
+    clamp(30px, 3.6vw, 62px);
+
+  font-weight:
+    400;
+
+  line-height:
+    1.16;
+
+  letter-spacing:
+    -0.045em;
+}
+
+
+/* “세 개의 감각이 동시에.” — 블루그레이 그라디언트 */
+
+.dp-accent {
+  display:
+    inline-block;
+
+  background:
+    var(--dp-grad);
+
+  -webkit-background-clip:
+    text;
+
+  background-clip:
+    text;
+
+  color:
+    transparent;
+
+  font-weight:
+    500;
+}
+
+
+.dp-desc {
+  max-width:
+    34em;
+
+  margin-top:
+    clamp(16px, 1.5vw, 22px) !important;
+
+  color:
+    var(--dp-sub);
+
+  font-size:
+    clamp(16px, 1.2vw, 20px);
+
+  line-height:
+    1.6;
+
+  letter-spacing:
+    -0.025em;
+}
+
+
+/* =========================================================
+   03. LAYOUT — 스크롤 고정 무대
+========================================================= */
+
+/* 스크롤 길이 — 숫자가 클수록 천천히 */
+
+.dp-a1__track {
+  height:
+    380vh;
+}
+
+
+.dp-a1__sticky {
+  position:
+    sticky;
+
+  top:
+    0;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1.25fr);
+
+  grid-template-rows:
+    auto
+    1fr;
+
+  column-gap:
+    clamp(30px, 4vw, 70px);
+
+  align-content:
+    center;
+
+  width:
+    min(100%, var(--dp-max));
+
+  height:
+    100vh;
+
+  height:
+    100svh;
+
+  margin:
+    0 auto;
+
+  padding:
+    80px var(--dp-side) 0;
+}
+
+
+/* 왼쪽 위 : 제목 */
+
+.dp-a1 .dp-head {
+  grid-column:
+    1;
+
+  align-self:
+    end;
+
+  width:
+    100%;
+
+  margin:
+    0;
+
+  padding:
+    0 0 clamp(56px, 6vw, 88px);
+}
+
+
+/* 오른쪽 : 실내 사진 */
+
+.dp-a1__stage {
+  position:
+    relative;
+
+  grid-column:
+    2;
+
+  grid-row:
+    2;
+
+  align-self:
+    start;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    var(--dp-r);
+}
+
+
+.dp-a1__stage img {
+  width:
+    100%;
+}
+
+
+/* 왼쪽 아래 : 감각 트랙 */
+
+.dp-a1__tracks {
+  position:
+    relative;
+
+  grid-column:
+    1;
+
+  grid-row:
+    2;
+
+  display:
+    grid;
+
+  gap:
+    10px;
+
+  align-self:
+    start;
+}
+
+
+/* =========================================================
+   04. 사진 위 감각 표시 (HUD / 핸들 / 디스플레이)
+========================================================= */
+
+.dp-hot {
+  position:
+    absolute;
+
+  z-index:
+    2;
+
+  width:
+    0;
+
+  height:
+    0;
+}
+
+
+/* 사진 위 표시 위치 (%) — 원래 HTML style 에 있던 값 */
+
+.dp-hot[data-k="hud"] {
+  left:
+    26%;
+
+  top:
+    30%;
+}
+
+
+.dp-hot[data-k="wheel"] {
+  left:
+    34%;
+
+  top:
+    80%;
+}
+
+
+.dp-hot[data-k="display"] {
+  left:
+    82%;
+
+  top:
+    70%;
+}
+
+
+/* 동그라미 */
+
+.dp-hot i {
+  position:
+    absolute;
+
+  left:
+    -22px;
+
+  top:
+    -22px;
+
+  width:
+    44px;
+
+  height:
+    44px;
+
+  border:
+    1.5px solid rgba(255, 255, 255, 0.95);
+
+  border-radius:
+    50%;
+
+  box-shadow:
+    0 0 0 6px rgba(111, 152, 172, 0.28);
+
+  opacity:
+    0;
+
+  transform:
+    scale(0.6);
+
+  transition:
+    opacity
+    0.4s
+    var(--dp-ease),
+    transform
+    0.6s
+    var(--dp-ease);
+}
+
+
+/* 이름표 */
+
+.dp-hot em {
+  position:
+    absolute;
+
+  left:
+    30px;
+
+  top:
+    -11px;
+
+  padding:
+    3px 10px;
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(29, 29, 31, 0.78);
+
+  color:
+    #fff;
+
+  font-size:
+    12px;
+
+  font-style:
+    normal;
+
+  white-space:
+    nowrap;
+
+  opacity:
+    0;
+
+  transform:
+    translateX(-6px);
+
+  transition:
+    opacity
+    0.4s,
+    transform
+    0.5s
+    var(--dp-ease);
+}
+
+
+/* 켜진 상태 — JS 가 .on 추가 */
+
+.dp-hot.on i {
+  opacity:
+    1;
+
+  transform:
+    scale(1);
+
+  animation:
+    dp-ring
+    1.6s
+    ease-out
+    infinite;
+}
+
+
+.dp-hot.on em {
+  opacity:
+    1;
+
+  transform:
+    none;
+}
+
+
+@keyframes dp-ring {
+
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(111, 152, 172, 0.5);
+  }
+
+  100% {
+    box-shadow:
+      0 0 0 18px rgba(111, 152, 172, 0);
+  }
+
+}
+
+
+/* =========================================================
+   05. 감각 트랙
+========================================================= */
+
+/* 재생선 — JS 가 left 값을 움직임 */
+
+.dp-a1__head {
+  position:
+    absolute;
+
+  z-index:
+    2;
+
+  top:
+    -6px;
+
+  bottom:
+    -6px;
+
+  left:
+    96px;
+
+  width:
+    1px;
+
+  background:
+    #9a9ca2;
+}
+
+
+/* 한 줄 = 이름 | 트랙 / (아래) 설명 */
+
+.dp-a1__row {
+  display:
+    grid;
+
+  grid-template-columns:
+    86px
+    1fr;
+
+  grid-template-areas:
+    "t l"
+    ". n";
+
+  column-gap:
+    10px;
+
+  row-gap:
+    4px;
+
+  align-items:
+    center;
+}
+
+
+.dp-a1__row > p {
+  grid-area:
+    t;
+
+  color:
+    var(--dp-mute);
+
+  font-size:
+    13px;
+
+  transition:
+    color
+    0.3s;
+}
+
+
+.dp-a1__lane {
+  grid-area:
+    l;
+
+  position:
+    relative;
+
+  height:
+    22px;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    4px;
+
+  background:
+    var(--dp-bg3);
+}
+
+
+/* 채워지는 막대 — JS 가 left / width 값을 움직임 */
+
+.dp-a1__bar {
+  position:
+    absolute;
+
+  top:
+    0;
+
+  bottom:
+    0;
+
+  left:
+    0;
+
+  width:
+    0;
+
+  border-radius:
+    4px;
+
+  background:
+    var(--dp-grad);
+}
+
+
+/* 설명 — 켜질 때만 보임 */
+
+.dp-a1__note {
+  grid-area:
+    n;
+
+  height:
+    0;
+
+  overflow:
+    hidden;
+
+  color:
+    var(--dp-sub);
+
+  font-size:
+    13px;
+
+  opacity:
+    0;
+
+  transition:
+    opacity
+    0.3s;
+}
+
+
+.dp-a1__row.on > p {
+  color:
+    var(--dp-text);
+}
+
+
+.dp-a1__row.on .dp-a1__note {
+  height:
+    auto;
+
+  opacity:
+    1;
+}
+
+
+/* =========================================================
+   06. TABLET / MOBILE
+   (원본 900px → 프로젝트 공통 1000px 기준으로 맞춤)
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  /* 제목 → 사진 → 트랙 세로 배치 */
+
+  .dp-a1__sticky {
+    grid-template-columns:
+      1fr;
+
+    grid-template-rows:
+      auto
+      auto
+      auto;
+
+    gap:
+      18px;
+  }
+
+
+  .dp-a1 .dp-head,
+  .dp-a1__stage,
+  .dp-a1__tracks {
+    grid-column:
+      1;
+
+    grid-row:
+      auto;
+  }
+
+
+  .dp-a1 .dp-head {
+    padding-bottom:
+      14px;
+  }
+
+
+  /* 새 HERO 문구가 길어서 두 줄로 */
+
+  .driving-page .driving-hero__title {
+    white-space:
+      normal;
+  }
+
+
+  .driving-page .driving-hero__accent {
+    display:
+      block;
+  }
+
+}
+
+
+/* =========================================================
+   07. 모션 최소화 환경
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .dp *,
+  .dp *::before,
+  .dp *::after {
+    transition:
+      none !important;
+
+    animation:
+      none !important;
+  }
+
+}
+
+
+/* =========================================================
+   DRIVING SECTION TITLE 크기 통일 / 2026.10.07
+   ---------------------------------------------------------
+   “필요하지 않을 때는, 조용하게.” (02. SOLUTION) 제목이
+   “사이렌 한 번, 세 개의 감각이 동시에.” (03. ONE MOMENT)보다 커서
+   03 제목(.dp-title) 크기에 맞춤.
+
+   1440 기준 : 63.4px → 51.8px
+
+   ※ 데스크톱에서만 적용
+     태블릿 / 모바일은 02 섹션이 글 + 사진 좌우 배치라
+     제목 칸이 좁아서(390 기준 120px) 기존 크기 유지
+========================================================= */
+
+@media (min-width: 1001px) {
+
+  .driving-page .driving-solution__title {
+    font-size:
+      clamp(30px, 3.6vw, 62px);
+
+    line-height:
+      1.16;
+
+    letter-spacing:
+      -0.045em;
+  }
+
+}
+
+
+/* =========================================================
+   DRIVING ONE MOMENT — 표 / 사진 위치 위로 / 2026.10.07
+   ---------------------------------------------------------
+   트랙 표와 실내 사진이 화면 아래 끝에 붙어 보기 어려워서
+   전체 묶음을 화면 가운데로 올림.
+
+   1. 2번째 줄(1fr)이 남는 높이를 다 차지하던 것 → auto
+      → 제목 + 표/사진 묶음 전체가 화면 세로 가운데 정렬
+   2. 제목 아래 여백 축소 (최대 88px → 56px)
+   3. 화면 높이가 낮을 때 사진이 넘치지 않도록
+      사진 너비를 화면 높이 기준으로 제한 (비율 1588 : 991 유지 — 2026.10.07 새 사진 기준)
+========================================================= */
+
+@media (min-width: 1001px) {
+
+  .dp-a1__sticky {
+    grid-template-rows:
+      auto
+      auto;
+
+    align-content:
+      center;
+
+    padding:
+      72px var(--dp-side) 40px;
+  }
+
+
+  .dp-a1 .dp-head {
+    padding-bottom:
+      clamp(32px, 3.4vw, 56px);
+  }
+
+
+  .dp-a1__stage {
+    justify-self:
+      start;
+
+    width:
+      min(
+        100%,
+        calc(
+          (100svh - 400px) *
+          1588 / 991
+        )
+      );
+  }
+
+}
+
+
+/* =========================================================
+   DRIVING ONE MOMENT — 사진 크게 / 좌우 여백 맞춤 / 2026.10.07
+   ---------------------------------------------------------
+   위 [표 / 사진 위치 위로] 에서 사진 너비를 화면 높이로 제한했더니
+   사진이 칸을 다 못 채워 오른쪽 여백이 애매해짐.
+
+   배치 변경 :
+   - 왼쪽 칸 : 제목 + 트랙 표 (세로로 쌓음)
+   - 오른쪽 칸 : 사진이 제목 줄부터 두 줄에 걸쳐 크게, 세로 가운데
+   → 사진이 오른쪽 칸을 꽉 채워 좌우 여백이 같아짐
+   → 사진 높이가 제목 높이만큼 여유가 생겨 아래로 넘치지 않음
+========================================================= */
+
+@media (min-width: 1001px) {
+
+  .dp-a1__sticky {
+    align-items:
+      center;
+  }
+
+
+  /* 왼쪽 위 : 제목 — 아래 정렬해서 표와 붙임 */
+
+  .dp-a1 .dp-head {
+    align-self:
+      end;
+  }
+
+
+  /* 왼쪽 아래 : 표 */
+
+  .dp-a1__tracks {
+    align-self:
+      start;
+  }
+
+
+  /* 오른쪽 : 사진 — 두 줄에 걸쳐 크게 */
+
+  .dp-a1__stage {
+    grid-row:
+      1 / span 2;
+
+    align-self:
+      center;
+
+    justify-self:
+      end;
+
+    /*
+     * 칸을 꽉 채우되, 화면 높이가 아주 낮을 때만 줄임
+     * (위아래 여백 160px 남기고, 비율 1588 : 991 유지 — 새 사진 기준)
+     */
+    width:
+      min(
+        100%,
+        calc(
+          (100svh - 160px) *
+          1588 / 991
+        )
+      );
+  }
+
+}
+
+
+/* =========================================================
+   DRIVING ONE MOMENT — 사진 / 표 아래 끝 맞춤 / 2026.10.07
+   ---------------------------------------------------------
+   사진은 세로 가운데, 표는 위 정렬이라 두 아래 끝이 어긋남.
+   → 사진과 표 모두 아래 정렬해서 아래 끝을 한 줄로 맞춤
+========================================================= */
+
+@media (min-width: 1001px) {
+
+  .dp-a1__tracks {
+    align-self:
+      end;
+  }
+
+
+  .dp-a1__stage {
+    align-self:
+      end;
+  }
+
+}
+
+
+/* =========================================================
+   DRIVING SIGNAL LINE — 선 / 점 진하게 / 2026.10.07
+   ---------------------------------------------------------
+   VIBRATION / HUD / ALERT 양옆 세로선 위로
+   점이 지나가는 효과가 너무 연해서 잘 안 보임 → 진하게.
+
+   BASE RAIL     : 선 진하기   최대 0.12 → 0.24
+   MOVING FLOW   : 흐르는 빛   최대 0.36 → 0.78 / 굵기 2px → 3px
+   DOT TRAIN     : 점          3px → 4px / 색 0.58 → 0.95 / 빛 번짐 추가
+   (애니메이션 타이밍 / 위치는 그대로)
+========================================================= */
+
+/* 1. 기본 세로선 */
+
+.driving-page
+.driving-signal__rail {
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(29, 29, 31, 0.05) 0%,
+      rgba(29, 29, 31, 0.20) 11%,
+      rgba(29, 29, 31, 0.24) 50%,
+      rgba(29, 29, 31, 0.20) 89%,
+      rgba(29, 29, 31, 0.05) 100%
+    );
+}
+
+
+/* 2. 위에서 아래로 흐르는 빛 */
+
+.driving-page
+.driving-signal__flow {
+  width:
+    3px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(79, 140, 205, 0) 0%,
+      rgba(79, 140, 205, 0.28) 28%,
+      rgba(66, 136, 214, 0.78) 58%,
+      rgba(104, 160, 218, 0.40) 77%,
+      rgba(79, 140, 205, 0) 100%
+    );
+
+  box-shadow:
+    0 0 8px
+    rgba(66, 136, 214, 0.30);
+}
+
+
+/* 3. 함께 내려오는 점 4개 */
+
+.driving-page
+.driving-signal__dot {
+  width:
+    4px;
+
+  height:
+    4px;
+
+  background:
+    rgba(66, 136, 214, 0.95);
+
+  box-shadow:
+    0 0 6px
+    rgba(66, 136, 214, 0.55);
+}
+
+
+/* 모바일은 조금 작게 (기존 2.5px → 3px) */
+
+@media (max-width: 768px) {
+
+  .driving-page
+  .driving-signal__dot {
+    width:
+      3px;
+
+    height:
+      3px;
+  }
+
+
+  .driving-page
+  .driving-signal__flow {
+    width:
+      2px;
+  }
+
+}
+
+
+/* =========================================================
+   DRIVING HERO — 위 여백 줄이고 사진 넓히기 / 2026.10.07
+   ---------------------------------------------------------
+   히어로 제목이 작아지면서(74px → 50px)
+   헤더와 제목 사이가 넓어 보임 (1440 기준 92px).
+
+   - 위 여백   : 150px → 110px
+   - 사진 높이 : 100svh - 180px → 100svh - 140px
+   → 줄인 40px 만큼 사진이 커지고, 히어로 전체 높이는 그대로
+   (데스크톱만)
+========================================================= */
+
+@media (min-width: 1001px) {
+
+  .driving-page .driving-hero {
+    padding-top:
+      clamp(110px, 7.6389vw, 140px);
+  }
+
+
+  .driving-page .driving-hero__visual {
+    height:
+      calc(100svh - 140px);
+  }
+
+}
+
+
+/* =========================================================
+   DRIVING 02 SOLUTION — 사진 넓히기 + 제목 고정 / 2026.10.07
+   ---------------------------------------------------------
+   히어로 / 섹션 제목이 작아지면서
+   “필요하지 않을 때는, 조용하게.” 주변 여백이 커짐 (1440 기준)
+   - 가로 : 제목 끝 ~ 사진 사이 약 190px
+   - 세로 : 제목 아래 약 680px (사진 4장 높이 820px)
+
+   A. 사진 넓히기
+      칸 사이 간격 12% → 6%, 글 칸 457px → 약 400px
+      → 사진 칸 691px → 약 830px (카드 1장 335px → 약 400px)
+
+   B. 제목 고정 (sticky)
+      스크롤하는 동안 제목 + 설명이 화면 세로 가운데에 머물고
+      사진 4장만 지나감 → 03 ONE MOMENT 섹션과 같은 흐름
+
+   (데스크톱만 / 태블릿 · 모바일은 기존 배치 유지)
+========================================================= */
+
+@media (min-width: 1001px) {
+
+  /* A. 글 칸 : 사진 칸 비율 + 칸 사이 간격 */
+
+  .driving-page .driving-solution__inner {
+    grid-template-columns:
+      minmax(0, 0.48fr)
+      minmax(0, 1fr);
+
+    column-gap:
+      6%;
+  }
+
+
+  /* B. 제목 + 설명 고정 — 화면 세로 가운데쯤 */
+
+  .driving-page .driving-solution__copy {
+    position:
+      sticky;
+
+    top:
+      calc(50svh - 90px);
+
+    align-self:
+      start;
+  }
+
+}
+
+
+/* =========================================================
+   DRIVING ONE MOMENT — 새 사진 표시 위치 / 2026.10.07
+   ---------------------------------------------------------
+   사진 교체 : driving-alert.jpg (볼보 로고)
+            → driving-alert-cc2.jpg (다들림 CC2 버전)
+   새 사진은 구도가 달라서 표시 위치를 다시 맞춤.
+
+   HUD       : 26% / 30% → 34% / 46%  (앞유리 속도 · 경로 표시)
+   핸들 그립  : 34% / 80% → 38% / 84%  (핸들 가운데 — 오른쪽 손잡이에 두면
+                                        이름표가 디스플레이 화면과 겹침)
+   디스플레이 : 82% / 70% → 78% / 72%  (화면 가운데)
+========================================================= */
+
+.dp-hot[data-k="hud"] {
+  left:
+    34%;
+
+  top:
+    46%;
+}
+
+
+.dp-hot[data-k="wheel"] {
+  left:
+    38%;
+
+  top:
+    84%;
+}
+
+
+.dp-hot[data-k="display"] {
+  left:
+    78%;
+
+  top:
+    72%;
+}
+
+
+/* =========================================================
+   DRIVING ONE MOMENT — 재생선 제거 / 2026.10.07
+   ---------------------------------------------------------
+   트랙 표 위를 지나가는 얇은 세로선(.dp-a1__head) 숨김.
+   막대가 채워지는 모션은 그대로.
+   (JS 가 위치를 계속 계산해도 화면에는 안 보임)
+========================================================= */
+
+.dp-a1__head {
+  display:
+    none;
+}
+
+
+/* =========================================================
+   DRIVING 02 → 03 사이 여백 줄이기 / 2026.10.07
+   ---------------------------------------------------------
+   “필요하지 않을 때는, 조용하게.” 사진이 끝난 뒤
+   다음 섹션 “사이렌 한 번” 제목이 나오기까지 약 300px 비어 보임.
+   (02 아래 여백 72px + 03 내용이 화면 세로 가운데라 약 230px)
+
+   1. 02 아래 여백 72px → 40px
+      (마지막 사진 카드가 등장 모션으로 31px 더 내려와 있어서 0 은 안 됨)
+   2. 03 섹션을 위로 160px 겹쳐 올림 + 배경 투명
+      → 고정됐을 때 내용은 그대로 화면 세로 가운데,
+        사진이 끝나고 약 130px 뒤에 바로 “사이렌 한 번” 제목
+      (03 배경색 = 페이지 배경색 #f5f5f7 이라 투명해도 똑같이 보임)
+   3. 겹친 부분이 위 사진 카드를 가리지 않도록
+      03 빈 공간은 마우스가 통과
+   (데스크톱만)
+========================================================= */
+
+@media (min-width: 1001px) {
+
+  .driving-page .driving-solution {
+    padding-bottom:
+      40px;
+  }
+
+
+  .driving-page .dp-a1 {
+    /* 2026.10.07 수정 : -160px → 0 (겹침 제거 — 섹션 사이가 너무 좁아짐) */
+    margin-top:
+      0;
+
+    background:
+      transparent;
+
+    pointer-events:
+      none;
+  }
+
+
+  .driving-page .dp-a1__sticky > * {
+    pointer-events:
+      auto;
+  }
+
+}
+
+
+/* =========================================================
+   DRIVING 02 SOLUTION — 고정 제목 멈추는 위치 / 2026.10.07
+   ---------------------------------------------------------
+   제목 + 설명이 사진 4장 끝(04 HUD 아래)까지 따라 내려가던 것
+   → 왼쪽 아래 사진(03 GUIDANCE)의 가운데 높이에서 멈춤
+   → 그 뒤로는 더 내려가지 않고 섹션과 함께 올라감
+
+   방법 : sticky 요소는 margin 만큼 일찍 멈춤
+          margin-bottom = 섹션 끝 ~ “03 사진 가운데에 맞춘 제목 아래 끝”
+          1200 : 약 203px / 1440 : 약 220px / 1920 : 약 208px
+   (데스크톱만)
+========================================================= */
+
+@media (min-width: 1001px) {
+
+  .driving-page .driving-solution__copy {
+    margin-bottom:
+      clamp(200px, 15.3vw, 221px);
+  }
+
+}
+
+
+/* =========================================================
+   DRIVING MOBILE — 배치 정리 / 2026.10.07
+   ---------------------------------------------------------
+   모바일(650px 이하)에서 데스크톱 구성을 그대로 축소해서
+   글씨가 겹치거나 너무 작아지던 두 곳을 위아래로 쌓는 배치로 정리.
+
+   1. 02 SOLUTION “필요하지 않을 때는, 조용하게.”
+      글 칸(115px) + 사진 4장 좌우 배치 → 제목이 사진과 겹침
+      → 글 위 / 사진 아래로 쌓음
+
+   2. FUNCTIONS (VIBRATION / HUD / ALERT)
+      모든 요소가 절대 위치로 축소돼 사진 높이 53px / 설명 7px
+      → 사진(가로 꽉 차게) → 제목 → 설명 순서로 쌓음
+      → 양옆 세로선 + 점 효과는 모바일에서 숨김
+========================================================= */
+
+@media (max-width: 650px) {
+
+
+  /* ---------------------------------------------------------
+     1. 02 SOLUTION
+  --------------------------------------------------------- */
+
+  .driving-page .driving-solution__inner {
+    grid-template-columns:
+      1fr;
+
+    row-gap:
+      40px;
+  }
+
+
+  .driving-page .driving-solution__title {
+    white-space:
+      normal;
+  }
+
+
+  /* ---------------------------------------------------------
+     2. FUNCTIONS — 무대를 일반 흐름으로
+  --------------------------------------------------------- */
+
+  .driving-page .driving-functions {
+    height:
+      auto;
+  }
+
+
+  .driving-page .driving-functions__stage {
+    display:
+      flex;
+
+    flex-direction:
+      column;
+
+    gap:
+      64px;
+
+    height:
+      auto;
+
+    aspect-ratio:
+      auto;
+  }
+
+
+  .driving-page .driving-feature {
+    position:
+      relative;
+
+    display:
+      flex;
+
+    flex-direction:
+      column;
+
+    gap:
+      22px;
+
+    height:
+      auto;
+  }
+
+
+  .driving-page .driving-feature__image,
+  .driving-page .driving-feature__copy {
+    position:
+      static;
+
+    inset:
+      auto;
+
+    width:
+      100%;
+
+    height:
+      auto;
+
+    transform:
+      none;
+  }
+
+
+  /* 사진 : 가로 꽉 차게 / 같은 비율로 — 세 개 모두 사진이 먼저 (HUD 는 HTML 순서가 반대) */
+
+  .driving-page .driving-feature__image {
+    order:
+      1;
+
+    aspect-ratio:
+      16 / 10;
+
+    overflow:
+      hidden;
+  }
+
+
+  .driving-page .driving-feature__image-file {
+    width:
+      100%;
+
+    height:
+      100%;
+
+    object-fit:
+      cover;
+  }
+
+
+  /* 글 : VIBRATION 같은 큰 영문 / 진동 강도 / 설명 */
+
+  .driving-page .driving-feature__copy {
+    order:
+      2;
+
+    text-align:
+      left;
+  }
+
+
+  .driving-page .driving-feature__copy h2 {
+    font-size:
+      34px;
+  }
+
+
+  .driving-page .driving-feature__label {
+    margin-top:
+      10px;
+
+    font-size:
+      16px;
+  }
+
+
+  .driving-page .driving-feature__description {
+    margin-top:
+      12px;
+
+    font-size:
+      var(--type-body-size, 14px);
+
+    font-weight:
+      400;
+  }
+
+
+  /* 양옆 세로선 + 점 효과 숨김 */
+
+  .driving-page .driving-signal {
+    display:
+      none;
+  }
+
+}
+
+
+/* =========================================================
+   HEADER NAV — 메뉴 간격 동일하게 / 2026.10.07
+   ---- style.css 같은 블록과 동일 (08. HEADER DESKTOP의 px 칸 너비를 덮어씀)
+   ---- 메뉴 사이 간격 98 · 106 · 112px → 80px로 통일 (1440 기준)
+========================================================= */
+
+@media (min-width: 1001px) {
+
+  .experience-page .site-header {
+    --header-column-brand: 2.3714vw;      /* 전 92px  */
+    --header-column-interface: 3.7088vw;  /* 전 120px */
+    --header-column-experience: 4.1862vw; /* 전 132px */
+    --header-column-about: 2.4002vw;      /* 전 82px  */
+
+    --header-center-gap: 5.5556vw;        /* 전 clamp(24px, 2.8vw, 44px) + 칸 여백 */
+  }
+
+}
+
+
+/* =========================================================
+   SAFETY HERO — 글자 속 이미지 / 2026.10.10
+   ---------------------------------------------------------
+   전) 영상(safety-hero.mp4) + 아래 제목 (.safety-hero)
+       → HTML 교체 / 기존 .safety-hero CSS 는 대상이 없어 동작 안 함
+   후) 안전히어로4 (안전히어로4_코드.zip → experience.css 로 정리)
+       1. 큰 '감각.' 글자 안에 사진이 비침
+       2. 스크롤하면 글자 자리에서 사진 전체가 창문처럼 열림
+       3. 마지막에 제목 "위험을 놓치지 않는 감각."
+
+   --p : 섹션 스크롤 진행 0 → 1   (experience.js 맨 아래가 넣어 줌)
+   --k : 사진이 열리는 정도 0 → 1  (p 의 앞 60% 동안)
+
+   ---- 사이트 규칙에 맞춘 부분
+        제목 크기 : clamp(30px, 5.8vw, 88px) → var(--type-hero-size) (다른 HERO 와 같은 50px)
+        제목 굵기 : 400 / 강조 600 → var(--type-weight) 400 으로 통일
+        SCROLL 안내 : 다른 페이지처럼 숨김
+   ---- 조절
+        천천히 열리게      : .sh4 height 280vh → 360vh
+        사진이 열리는 시점  : experience.js 의 p * 1.6 (클수록 빨리 열림)
+        제목 나오는 시점    : .sh4__copy 의 (var(--p) - 0.55) 의 0.55 (작을수록 빨리)
+        사진 바꾸기        : .sh4__sticky 의 --img
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   00. main 의 overflow
+   hidden 이 sticky(화면 고정)를 막아서 → 세로는 풀고 가로만 자름
+   (전 overflow: hidden)
+--------------------------------------------------------- */
+
+.safety-page .safety-main {
+  overflow: visible;
+  overflow-x: clip;
+}
+
+
+/* ---------------------------------------------------------
+   01. 섹션 / 고정 화면
+--------------------------------------------------------- */
+
+.safety-page .sh4 {
+  position: relative;
+
+  /* 길수록 천천히 열림 */
+  height: 280vh;
+
+  background: var(--experience-light-bg, #f5f5f7);
+}
+
+.safety-page .sh4__sticky {
+  --img: url("./images/safety-hero.jpg");
+
+  position: sticky;
+  top: 0;
+
+  height: 100vh;
+  height: 100svh;
+  min-height: 600px;
+
+  overflow: hidden;
+}
+
+
+/* ---------------------------------------------------------
+   02. 큰 글자 + 작은 문장
+--------------------------------------------------------- */
+
+.safety-page .sh4__words {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  opacity: calc(1 - var(--p, 0) * 3);
+}
+
+.safety-page .sh4__small {
+  margin: 0 0 1vw;
+
+  color: var(--experience-light-sub-text, #5f6065);
+
+  font-size: clamp(22px, 2.6vw, 40px);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+
+  /* 처음 들어올 때 살짝 떠오름 */
+  animation: sh4-in 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s both;
+}
+
+.safety-page .sh4__big {
+  margin: 0;
+
+  font-size: 33vw;
+  font-weight: 800;
+  line-height: 0.82;
+  letter-spacing: -0.08em;
+
+  /* 글자 모양으로 사진을 오려냄
+     fixed 라서 아래 '열린 사진'과 위치가 딱 맞음 */
+  background:
+    var(--img)
+    center / cover
+    fixed;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+
+  animation: sh4-in 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes sh4-in {
+
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   03. 글자 자리에서 사진 전체가 열림
+--------------------------------------------------------- */
+
+.safety-page .sh4__full {
+  position: absolute;
+  inset: 0;
+
+  background:
+    var(--img)
+    center / cover;
+
+  clip-path:
+    inset(
+      calc((1 - var(--k, 0)) * 34%)
+      calc((1 - var(--k, 0)) * 22%)
+      round calc((1 - var(--k, 0)) * 8px)
+    );
+
+  opacity: clamp(0, calc(var(--p, 0) * 6), 1);
+}
+
+/* 아래쪽을 배경색으로 흐리게 → 제목이 잘 읽힘 */
+.safety-page .sh4__full::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 45%;
+
+  background:
+    linear-gradient(
+      0deg,
+      rgba(245, 245, 247, 0.95),
+      rgba(245, 245, 247, 0)
+    );
+
+  opacity: var(--k, 0);
+}
+
+
+/* ---------------------------------------------------------
+   04. 제목 — 다른 HERO 와 같은 크기 · 굵기
+--------------------------------------------------------- */
+
+.safety-page .sh4__copy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10vh;
+
+  max-width: var(--experience-container, 1500px);
+
+  margin: 0 auto;
+  padding: 0 var(--experience-side, clamp(26px, 4.2vw, 68px));
+
+  opacity: clamp(0, calc((var(--p, 0) - 0.55) * 4), 1);
+
+  transform:
+    translateY(
+      calc((1 - clamp(0, calc((var(--p, 0) - 0.55) * 4), 1)) * 30px)
+    );
+}
+
+.safety-page .sh4__title {
+  margin: 0;
+
+  color: var(--experience-light-text, #1d1d1f);
+
+  font-size: var(--type-hero-size, clamp(30px, 5.8vw, 88px));
+  font-weight: var(--type-weight, 400);
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+
+  white-space: nowrap;
+}
+
+.safety-page .sh4__accent {
+  display: inline-block;
+
+  font-weight: var(--type-weight, 400);   /* 원본 600 */
+
+  background:
+    linear-gradient(
+      105deg,
+      #263b4a 0%,
+      #4b6677 28%,
+      #bd4b56 62%,
+      #f0645e 100%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+
+/* ---------------------------------------------------------
+   05. SCROLL 안내 — 숨김 (원본 스타일은 남겨 둠)
+--------------------------------------------------------- */
+
+.safety-page .sh4__hint {
+  display: none;
+
+  position: absolute;
+  left: 50%;
+  bottom: 40px;
+
+  margin: 0;
+
+  color: var(--experience-light-muted-text, #86868b);
+
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+
+  opacity: calc(1 - var(--p, 0) * 6);
+
+  transform: translateX(-50%);
+}
+
+
+/* ---------------------------------------------------------
+   06. MOBILE — 휴대폰은 fixed 배경이 안 돼서 일반 배경으로
+   (제목 크기는 --type-hero-size 가 화면별로 바뀜)
+--------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  .safety-page .sh4 {
+    height: 240vh;
+  }
+
+  .safety-page .sh4__big {
+    font-size: 46vw;
+
+    background-attachment: scroll;
+  }
+
+  .safety-page .sh4__title {
+    white-space: normal;
+    word-break: keep-all;
+  }
+
+  .safety-page .sh4__copy {
+    bottom: 14vh;
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   07. 움직임 줄이기 설정 사용자
+--------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .safety-page .sh4__big,
+  .safety-page .sh4__small {
+    animation: none;
+  }
+
+}
+
+
+/* =========================================================
+   SAFETY HERO — '감각.' 크기 줄임 / 2026.10.10
+   ---- 33vw → 26vw (모바일 46vw → 38vw)
+   ---- 마지막 '.' 이 자간(-0.08em) 때문에 오른쪽이 잘려 보여서
+        오른쪽에 자간만큼 여백 (사진이 글자 끝까지 칠해지게)
+========================================================= */
+
+.safety-page .sh4__big {
+  font-size: 26vw;          /* 전 33vw */
+
+  padding-right: 0.08em;
+}
+
+@media (max-width: 768px) {
+
+  .safety-page .sh4__big {
+    font-size: 38vw;        /* 전 46vw */
+  }
+
+}
+
+/* 2026.10.10 : 중앙 미세 조정
+   보내준 화면(1000px 폭)에서 '감각.' 실제 글자 중심이 위 문장보다 약 6~7px 왼쪽
+   → 오른쪽 여백 0.08em → 0.03em (글자가 오른쪽으로 약 0.025em 이동, 점은 안 잘림) */
+.safety-page .sh4__big {
+  padding-right: 0.03em;
+}
+
+/* =========================================================
+   SAFETY HERO — '감각.' 시각 보정 / 2026.10.10
+   ---- 수치상 가운데(마침표 포함)여도 마침표가 오른쪽 무게를 만들어
+        '감각' 두 글자가 왼쪽으로 쏠려 보임 (1024 화면 기준 약 32px)
+   ---- 시각 보정 : '감각' 두 글자를 가운데에 두고 마침표는 오른쪽에 걸쳐 둠
+        왼쪽 여백 0.27em / 오른쪽 0.03em → 글자 전체가 0.12em 오른쪽으로
+        (em 단위라 화면 크기가 바뀌어도 같은 비율로 보정됨)
+========================================================= */
+
+.safety-page .sh4__big {
+  padding-left: 0.27em;
+  padding-right: 0.03em;
+}
+
+/* 2026.10.10 : '위험을 놓치지 않는' ↔ '감각.' 사이 간격 넓힘
+   margin-bottom 1vw(1440 기준 14px) → clamp(28px, 2.8vw, 52px)(1440 기준 40px) */
+.safety-page .sh4__small {
+  margin-bottom: clamp(28px, 2.8vw, 52px);
+}
+
+/* 2026.10.10 : 간격 · 위치 다시 조정
+   ---- 간격 : clamp(28px, 2.8vw, 52px) 너무 넓음 → clamp(20px, 1.9vw, 34px) (1440 기준 27px)
+   ---- 위치 : '감각.' 살짝 왼쪽으로
+        왼쪽 여백 0.27em → 0.21em (오른쪽 이동량 0.12em → 0.09em) */
+.safety-page .sh4__small {
+  margin-bottom: clamp(20px, 1.9vw, 34px);
+}
+
+.safety-page .sh4__big {
+  padding-left: 0.21em;
+}
+
+/* 2026.10.10 : '감각.' 살짝 더 왼쪽 — 왼쪽 여백 0.21em → 0.15em (오른쪽 이동량 0.09em → 0.06em) */
+.safety-page .sh4__big {
+  padding-left: 0.15em;
+}
+
+
+/* =========================================================
+   SAFETY HERO — '감각.' → 사진 전환 자연스럽게 / 2026.10.10 (되돌림)
+   ---- 글자 영역에서 사진이 차오른 뒤 넓어지는 방식 → 원래 열림 모션이 더 나아서 삭제
+   ---- 원래 모션(위 [SAFETY HERO — 글자 속 이미지] 03번) 그대로 사용
+========================================================= */
+
+/* 2026.10.10 : '감각.' 마침표만 살짝 작게 — 글자 크기 1em → 0.78em
+   (글자 속 사진은 부모 .sh4__big 이 칠해 줘서 그대로 이어짐) */
+.safety-page .sh4__dot {
+  font-size: 0.78em;
+}
+
+/* 2026.10.10 : 마침표 오른쪽이 잘림
+   원인 — 마침표에도 자간 -0.08em 이 적용돼서 글자 칸이 점보다 좁아짐
+          (글자 속 사진은 칸 안쪽까지만 칠해짐)
+   수정 — 마침표만 자간 0 → 칸이 점 전체를 덮음
+          칸이 넓어진 만큼 글자가 왼쪽으로 밀리니 왼쪽 여백으로 같은 위치 유지
+          (0.15em → 0.21em) */
+.safety-page .sh4__dot {
+  letter-spacing: 0;
+}
+
+.safety-page .sh4__big {
+  padding-left: 0.21em;
+}
+
+
+/* =========================================================
+   DRIVING ONE MOMENT — 감각 트랙 막대 연하게 / 2026.10.14
+   ---------------------------------------------------------
+   전) 높이 22px 진한 그라데이션 막대가 꽉 차서 너무 강함
+   후) '신호선' 느낌
+       - 회색 바탕 칸 → 가운데 얇은 선 1px (흐린 회색)
+       - 채워지는 막대 → 2px 선, 왼쪽은 투명 → 끝으로 갈수록 진해짐
+       - 막대 끝에 작은 점 + 은은한 빛 (신호가 지나가는 위치)
+       - 움직임 · 순서 · 길이는 그대로 (JS 그대로)
+========================================================= */
+
+/* 칸 : 회색 바탕 없애고 가운데 얇은 선만 */
+.driving-page .dp-a1__lane {
+  overflow: visible;
+
+  background: none;
+}
+
+.driving-page .dp-a1__lane::before {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+
+  height: 1px;
+
+  background: rgba(29, 29, 31, 0.1);
+
+  transform: translateY(-50%);
+}
+
+/* 채워지는 막대 : 2px 선 */
+.driving-page .dp-a1__bar {
+  top: 50%;
+  bottom: auto;
+
+  height: 2px;
+
+  border-radius: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(79, 113, 131, 0) 0%,
+      rgba(79, 113, 131, 0.45) 45%,
+      #4f7183 100%
+    );
+
+  transform: translateY(-50%);
+}
+
+/* 막대 끝 점 — 신호가 지금 지나가는 자리 */
+.driving-page .dp-a1__bar::after {
+  content: "";
+
+  position: absolute;
+  right: -4px;
+  top: 50%;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #4f7183;
+
+  box-shadow:
+    0 0 0 4px rgba(111, 152, 172, 0.18),
+    0 0 14px rgba(111, 152, 172, 0.55);
+
+  transform: translateY(-50%);
+
+  opacity: 0;
+
+  transition: opacity 0.3s ease;
+}
+
+.driving-page .dp-a1__row.on .dp-a1__bar::after {
+  opacity: 1;
+}
+
+/* 2026.10.14 : 막대 끝 점 더 작게
+   8px → 5px / 바깥 빛 테두리 4px → 3px · 번짐 14px → 10px 로 함께 줄임 */
+.driving-page .dp-a1__bar::after {
+  right: -2.5px;
+
+  width: 5px;
+  height: 5px;
+
+  box-shadow:
+    0 0 0 3px rgba(111, 152, 172, 0.16),
+    0 0 10px rgba(111, 152, 172, 0.45);
+}

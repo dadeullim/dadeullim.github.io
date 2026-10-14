@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="DADEULLIM HUD Interface"
+  >
+
+  <title>
+    DADEULLIM — HUD
+  </title>
+
+
+  <!-- =====================================================
+       INDEX 공통 CSS
+       HEADER / FOOTER
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="./style.css"
+  >
+
+
+  <!-- =====================================================
+       DISPLAY / HANDLE / HUD 공통 CSS
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="./interface.css"
+  >
+
+
+  <!-- =====================================================
+       DISPLAY / HANDLE / HUD 공통 JS
+  ====================================================== -->
+
+  <script
+    src="./interface.js"
+    defer
+  ></script>
+
+</head>
+
+
+
+<body class="interface-page hud-page">
+
+
+  <!-- =====================================================
+       HEADER
+       DADEULLIM COMMON HEADER
+  ====================================================== -->
+
+  <header
+    class="site-header"
+    id="site-header"
+  >
+
+    <div class="site-header__bar">
+
+
+      <!-- LOGO — 2026.10.06 : 클릭 시 index로 이동하면서 인트로 다시 재생 (?intro) -->
+
+      <a
+        class="site-header__logo"
+        href="./index.html?intro"
+        aria-label="DADEULLIM 홈"
+      >
+        <!-- LOGO IMAGE — 2026.10.06 : 텍스트(DADEULLIM) → CC2 로고 이미지로 교체 -->
+        <span class="site-header__logo-mark" aria-hidden="true"></span>
+      </a>
+
+
+      <!-- MAIN NAV -->
+
+      <nav
+        class="site-header__nav"
+        aria-label="메인 메뉴"
+      >
+
+        <a
+          class="site-header__nav-link"
+          href="./brand1.html"
+        >
+          BRAND
+        </a>
+
+        <a
+          class="site-header__nav-link is-active"
+          href="./display.html"
+        >
+          INTERFACE
+        </a>
+
+        <a
+          class="site-header__nav-link"
+          href="./driving.html"
+        >
+          EXPERIENCE
+        </a>
+
+        <a
+          class="site-header__nav-link"
+          href="./problem.html"
+        >
+          ABOUT
+        </a>
+
+      </nav>
+
+    </div>
+
+
+    <!-- ===================================================
+         MEGA MENU
+    ==================================================== -->
+
+    <div class="site-header__mega">
+
+      <div class="site-header__mega-grid">
+
+
+        <!-- BRAND -->
+
+        <div class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            BRAND
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./brand1.html">
+              다들림 소개
+            </a>
+
+            <a href="./brand2.html">
+              브랜드 철학
+            </a>
+
+            <a href="./logo.html">
+              로고 시스템
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- INTERFACE -->
+
+        <div class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            INTERFACE
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./display.html">
+              디스플레이
+            </a>
+
+            <a href="./handle.html">
+              핸들
+            </a>
+
+            <a
+              href="./hud.html"
+              aria-current="page"
+            >
+              HUD
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- EXPERIENCE -->
+
+        <div class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            EXPERIENCE
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./driving.html">
+              주행 경험
+            </a>
+
+            <a href="./safety.html">
+              안전 경험
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- ABOUT -->
+
+        <div class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            ABOUT
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./problem.html">
+              문제 정의
+            </a>
+
+            <a href="./user.html">
+              사용자 분석
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       HUD MAIN
+  ====================================================== -->
+
+  <main class="hud-main">
+
+
+    <!-- ===================================================
+         01. HUD HERO
+    ==================================================== -->
+
+    <section
+      class="hud-hero"
+      id="hud-hero"
+    >
+
+      <div class="hud-hero__inner">
+
+
+        <!-- LEFT -->
+
+        <div class="hud-hero__copy hud-reveal">
+
+          <h1 class="hud-hero__title">
+            HEAD-UP<br>
+            DISPLAY
+          </h1>
+
+          <div class="hud-hero__line"></div>
+
+          <p class="hud-hero__sub">
+            시선은 도로에,<br>
+            정보는 눈앞에
+          </p>
+
+        </div>
+
+
+        <!-- CENTER VISUAL -->
+
+        <div
+          class="hud-hero__visual hud-reveal"
+          role="img"
+          aria-label="HUD 메인 이미지 영역"
+        >
+        </div>
+
+
+        <!-- RIGHT TEXT -->
+
+        <p class="hud-hero__description hud-reveal">
+          전방을 바라보는 시선 그대로,<br>
+          주행에 필요한 핵심 정보를 전면 유리에 제공합니다.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         02. BENEFIT
+    ==================================================== -->
+
+    <section
+      class="hud-benefit"
+      id="hud-benefit"
+    >
+
+      <div class="hud-benefit__inner">
+
+        <h2 class="hud-benefit__title hud-reveal">
+          운전자가 고개를 돌리지 않고,<br>
+          주행 정보를 확인할 수 있도록.
+        </h2>
+
+
+        <div class="hud-benefit__grid">
+
+
+          <article class="hud-benefit__card">
+
+            <div class="hud-benefit__card-bg"></div>
+
+            <p>
+              직관적인 안내
+            </p>
+
+          </article>
+
+
+          <article class="hud-benefit__card">
+
+            <div class="hud-benefit__card-bg"></div>
+
+            <p>
+              상황별 우선 표시
+            </p>
+
+          </article>
+
+
+          <article class="hud-benefit__card">
+
+            <div class="hud-benefit__card-bg"></div>
+
+            <p>
+              안전한 운전 지원
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         03. ALL INFORMATION
+    ==================================================== -->
+
+    <section
+      class="hud-information"
+      id="hud-information"
+    >
+
+      <div class="hud-information__inner">
+
+        <h2 class="hud-information__title hud-reveal">
+          모든 정보가,<br>
+          한눈에
+        </h2>
+
+
+        <div
+          class="hud-information__visual hud-reveal"
+          role="img"
+          aria-label="HUD 정보 화면 이미지 영역"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         04. HUD FOCUS
+    ==================================================== -->
+
+    <section
+      class="hud-focus"
+      id="hud-focus"
+    >
+
+      <div class="hud-focus__stage">
+
+
+        <!-- LEFT HALF -->
+
+        <div
+          class="hud-focus__side hud-focus__side--left"
+          aria-hidden="true"
+        ></div>
+
+
+        <!-- CENTER -->
+
+        <div class="hud-focus__center">
+
+          <div class="hud-focus__circle">
+
+            <span>
+              HUD
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- RIGHT HALF -->
+
+        <div
+          class="hud-focus__side hud-focus__side--right"
+          aria-hidden="true"
+        ></div>
+
+      </div>
+
+
+      <div class="hud-focus__copy hud-reveal">
+
+        <h2>
+          시선은 도로에 머물고,<br>
+          필요한 정보만 눈앞에 나타납니다.
+        </h2>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =====================================================
+       FOOTER
+       DADEULLIM COMMON FOOTER
+  ====================================================== -->
+
+  <footer
+    class="case-footer"
+    id="footer"
+  >
+
+
+    <!-- ===================================================
+         FOOTER INFORMATION
+    ==================================================== -->
+
+    <div
+      class="case-container case-footer__top"
+    >
+
+
+      <!-- PROJECT -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--project
+        "
+      >
+
+        <p class="case-footer__label">
+          PROJECT
+        </p>
+
+        <p class="case-footer__project-name">
+          DADEULLIM
+        </p>
+
+        <p class="case-footer__text">
+          Sound Experience
+        </p>
+
+        <p class="case-footer__text">
+          Graduation Project 2026
+        </p>
+
+      </div>
+
+
+      <!-- NAVIGATION -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--navigation
+        "
+      >
+
+        <p class="case-footer__label">
+          NAVIGATION
+        </p>
+
+        <a href="./brand1.html">
+          Brand
+        </a>
+
+        <a href="./display.html">
+          Interface
+        </a>
+
+        <a href="./driving.html">
+          Experience
+        </a>
+
+        <a href="./problem.html">
+          About
+        </a>
+
+      </div>
+
+
+      <!-- CREDITS -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--credits
+        "
+      >
+
+        <p class="case-footer__label">
+          CREDITS
+        </p>
+
+        <p class="case-footer__text">
+          Digital Media Design
+        </p>
+
+        <p class="case-footer__text">
+          Cheongju University
+        </p>
+
+        <p class="case-footer__text">
+          Graduation Exhibition 2026
+        </p>
+
+      </div>
+
+
+      <!-- CONTACT -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--contact
+        "
+      >
+
+        <p class="case-footer__label">
+          CONTACT
+        </p>
+
+        <a href="#">
+          Instagram
+        </a>
+
+        <a href="mailto:hello@dadeullim.com">
+          E-mail
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================
+         BACK TO TOP
+    ==================================================== -->
+
+    <div
+      class="case-container case-footer__utility"
+    >
+
+      <a
+        class="case-footer__back-to-top"
+        href="#hud-hero"
+      >
+
+        BACK TO TOP
+
+        <span aria-hidden="true">
+          ↑
+        </span>
+
+      </a>
+
+    </div>
+
+
+    <!-- ===================================================
+         LARGE DADEULLIM
+    ==================================================== -->
+
+    <div
+      class="case-footer__brand-stage"
+      aria-label="DADEULLIM"
+    >
+
+      <div class="case-footer__brand-lockup">
+
+
+        <!-- SYMBOL -->
+
+        <div
+          class="case-footer__symbol"
+          aria-hidden="true"
+        >
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+        </div>
+
+
+        <!-- LARGE WORDMARK -->
+
+        <p class="case-footer__brand">
+          DADEULLIM
+        </p>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="DADEULLIM Problem Definition"
+  >
+
+  <title>
+    DADEULLIM — 문제 정의
+  </title>
+
+
+  <!-- =====================================================
+       INDEX COMMON CSS
+       HEADER / FOOTER
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="./style.css"
+  >
+
+
+  <!-- =====================================================
+       ABOUT COMMON CSS
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="./about.css"
+  >
+
+
+  <!-- =====================================================
+       COMMON JS
+  ====================================================== -->
+
+  <script
+    src="./script.js"
+    defer
+  ></script>
+
+
+  <!-- =====================================================
+       ABOUT JS
+  ====================================================== -->
+
+  <script
+    src="./about.js"
+    defer
+  ></script>
+
+</head>
+
+
+<body class="about-page problem-page">
+
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header
+    class="site-header"
+    id="site-header"
+  >
+
+
+    <!-- ===================================================
+         HEADER BAR
+    ==================================================== -->
+
+    <div class="site-header__bar">
+
+
+      <!-- LOGO — 2026.10.06 : 클릭 시 index로 이동하면서 인트로 다시 재생 (?intro) -->
+
+      <a
+        class="site-header__logo"
+        href="./index.html?intro"
+        aria-label="DADEULLIM 홈"
+      >
+        <!-- LOGO IMAGE — 2026.10.06 : 텍스트(DADEULLIM) → CC2 로고 이미지로 교체 -->
+        <span class="site-header__logo-mark" aria-hidden="true"></span>
+      </a>
+
+
+      <!-- MAIN NAV -->
+
+      <nav
+        class="site-header__nav"
+        aria-label="메인 메뉴"
+      >
+
+
+        <a
+          class="site-header__nav-link"
+          href="./brand1.html"
+        >
+          BRAND
+        </a>
+
+
+        <a
+          class="site-header__nav-link"
+          href="./display.html"
+        >
+          INTERFACE
+        </a>
+
+
+        <a
+          class="site-header__nav-link"
+          href="./driving.html"
+        >
+          EXPERIENCE
+        </a>
+
+
+        <a
+          class="site-header__nav-link is-active"
+          href="./problem.html"
+          aria-current="page"
+        >
+          ABOUT
+        </a>
+
+
+      </nav>
+
+
+    </div>
+
+
+
+    <!-- ===================================================
+         MEGA MENU
+    ==================================================== -->
+
+    <div class="site-header__mega">
+
+
+      <div class="site-header__mega-grid">
+
+
+
+        <!-- BRAND -->
+
+        <div class="site-header__mega-column">
+
+
+          <div class="site-header__mega-links">
+
+
+            <a href="./brand1.html">
+              다들림 소개
+            </a>
+
+
+            <a href="./brand2.html">
+              브랜드 철학
+            </a>
+
+
+            <a href="./logo.html">
+              로고 시스템
+            </a>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- INTERFACE -->
+
+        <div class="site-header__mega-column">
+
+
+          <div class="site-header__mega-links">
+
+
+            <a href="./display.html">
+              디스플레이
+            </a>
+
+
+            <a href="./handle.html">
+              핸들
+            </a>
+
+
+            <a href="./hud.html">
+              HUD
+            </a>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- EXPERIENCE -->
+
+        <div class="site-header__mega-column">
+
+
+          <div class="site-header__mega-links">
+
+
+            <a href="./driving.html">
+              주행 경험
+            </a>
+
+
+            <a href="./safety.html">
+              안전 경험
+            </a>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- ABOUT -->
+
+        <div class="site-header__mega-column">
+
+
+          <div class="site-header__mega-links">
+
+
+            <a
+              href="./problem.html"
+              aria-current="page"
+            >
+              문제 정의
+            </a>
+
+
+            <a href="./user.html">
+              사용자 분석
+            </a>
+
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+  </header>
+
+
+
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main class="about-main problem-main">
+
+
+
+    <!-- ===================================================
+         01. PROBLEM OPENING
+    ==================================================== -->
+
+    <section
+      class="problem-opening"
+      id="problem-opening"
+    >
+
+
+      <div class="about-container">
+
+
+        <div
+          class="problem-opening__stage"
+          data-about-parallax
+        >
+
+
+          <!-- =================================================
+               HERO IMAGE
+          ================================================== -->
+
+          <div
+            class="problem-opening__media"
+            data-about-reveal="opening-media"
+          >
+
+
+            <img
+              class="problem-opening__image"
+              src="./images/problem-hero.jpg"
+              alt="도로 위 청각 정보와 위험 요소를 시각화한 다들림 문제 정의 히어로 이미지"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            >
+
+
+          </div>
+
+
+
+          <div class="problem-opening__copy">
+
+
+            <p
+              class="
+                problem-opening__eyebrow
+                problem-opening__intro-item
+              "
+            >
+              SOUND-AWARE MOBILITY
+            </p>
+
+
+            <h1
+              class="
+                problem-opening__title
+                problem-opening__intro-item
+              "
+            >
+
+              도로의 위험 신호는,<br>
+
+              여전히
+              <span class="problem-opening__accent">
+                ‘소리’
+              </span>에 의존.
+
+            </h1>
+
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- ===================================================
+         02. INTRO MESSAGE
+    ==================================================== -->
+
+    <section
+      class="problem-intro"
+      id="problem-intro"
+    >
+
+
+      <div class="about-container">
+
+
+        <p
+          class="problem-intro__text"
+          data-about-reveal="intro"
+        >
+
+          소리 중심의 주행은,<br>
+
+          모두에게 같은 정보를 주지 않습니다.
+
+        </p>
+
+
+      </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- ===================================================
+         03. PROBLEM GRID
+    ==================================================== -->
+
+    <section
+      class="problem-grid-section"
+      id="problem-grid"
+    >
+
+
+      <div class="about-container">
+
+
+        <div class="problem-grid">
+
+
+
+          <!-- =================================================
+               CARD 01
+          ================================================== -->
+
+          <article
+            class="problem-item"
+            data-problem-card
+            data-about-reveal="card"
+          >
+
+
+            <div
+              class="
+                problem-item__media
+                about-placeholder
+              "
+            >
+
+
+              <img
+                class="problem-item__image"
+                src="./images/problem-01-siren.jpg"
+                alt="사이드미러를 통해 뒤에서 접근하는 긴급 차량을 확인하는 도로 상황"
+                loading="lazy"
+                decoding="async"
+              >
+
+
+            </div>
+
+
+
+            <div class="problem-item__meta">
+
+
+              <div class="problem-item__copy">
+
+
+                <h2>
+                  긴급사이렌 인지의 어려움
+                </h2>
+
+
+                <p>
+                  긴급 차량의 접근을 빠르게 알아채기 어렵습니다.
+                </p>
+
+
+              </div>
+
+
+
+              <span
+                class="problem-item__arrow"
+                aria-hidden="true"
+              >
+                ↗
+              </span>
+
+
+            </div>
+
+
+          </article>
+
+
+
+
+          <!-- =================================================
+               CARD 02
+          ================================================== -->
+
+          <article
+            class="problem-item"
+            data-problem-card
+            data-about-reveal="card"
+          >
+
+
+            <div
+              class="
+                problem-item__media
+                about-placeholder
+              "
+            >
+
+
+              <img
+                class="problem-item__image"
+                src="./images/problem-02-warning.jpg"
+                alt="차량과 오토바이, 도로 작업 차량이 뒤섞인 복잡한 도심 교통 상황"
+                loading="lazy"
+                decoding="async"
+              >
+
+
+            </div>
+
+
+
+            <div class="problem-item__meta">
+
+
+              <div class="problem-item__copy">
+
+
+                <h2>
+                  도로 위 경고음 인지의 한계
+                </h2>
+
+
+                <p>
+                  차량의 경적과 주변 소음을 즉시 구분하기 어렵습니다.
+                </p>
+
+
+              </div>
+
+
+
+              <span
+                class="problem-item__arrow"
+                aria-hidden="true"
+              >
+                ↗
+              </span>
+
+
+            </div>
+
+
+          </article>
+
+
+
+
+          <!-- =================================================
+               CARD 03
+          ================================================== -->
+
+          <article
+            class="problem-item"
+            data-problem-card
+            data-about-reveal="card"
+          >
+
+
+            <div
+              class="
+                problem-item__media
+                about-placeholder
+              "
+            >
+
+
+              <img
+                class="problem-item__image"
+                src="./images/problem-03-timing.jpg"
+                alt="주행 중 횡단보도로 진입하는 보행자를 순간적으로 마주한 운전자 시점"
+                loading="lazy"
+                decoding="async"
+              >
+
+
+            </div>
+
+
+
+            <div class="problem-item__meta">
+
+
+              <div class="problem-item__copy">
+
+
+                <h2>
+                  대응 시점 판단의 어려움
+                </h2>
+
+
+                <p>
+                  위험의 방향과 시점을 빠르게 판단하기 어렵습니다.
+                </p>
+
+
+              </div>
+
+
+
+              <span
+                class="problem-item__arrow"
+                aria-hidden="true"
+              >
+                ↗
+              </span>
+
+
+            </div>
+
+
+          </article>
+
+
+
+
+          <!-- =================================================
+               CARD 04
+          ================================================== -->
+
+          <article
+            class="problem-item"
+            data-problem-card
+            data-about-reveal="card"
+          >
+
+
+            <div
+              class="
+                problem-item__media
+                about-placeholder
+              "
+            >
+
+
+              <img
+                class="problem-item__image"
+                src="./images/problem-04-interior.jpg"
+                alt="어두운 차량 내부에서 창밖의 긴급 차량과 도로 상황을 바라보는 운전자 시점"
+                loading="lazy"
+                decoding="async"
+              >
+
+
+            </div>
+
+
+
+            <div class="problem-item__meta">
+
+
+              <div class="problem-item__copy">
+
+
+                <h2>
+                  차량 내부소리 정보의 단절
+                </h2>
+
+
+                <p>
+                  차량이 이동 중인 경고 정보를 놓치기 쉽습니다.
+                </p>
+
+
+              </div>
+
+
+
+              <span
+                class="problem-item__arrow"
+                aria-hidden="true"
+              >
+                ↗
+              </span>
+
+
+            </div>
+
+
+          </article>
+
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- ===================================================
+         04. FIGURES — 수치로 보는 문제 (82% · 1.5m · 55m)
+         2026.10.07 추가 (문제정의 .zip) — 03 PROBLEM GRID 다음
+         - 화면이 고정된 동안 스크롤하면 세 장면이 차례로 넘어감
+           82% 사이렌 → 1.5m 차간 거리 → 55m 시선 이탈
+         - 장면에 들어올 때마다 숫자가 0부터 다시 올라감
+         - 오른쪽 단계 표시 (사이렌 / 차간 거리 / 시선 이탈)
+         - 스타일 : about.css 맨 아래 [PROBLEM FIGURES]
+         - 동작   : about.js  맨 아래 [PROBLEM FIGURES]
+         - 스크롤 길이 : about.css .ft-figures__track 의 height
+    ==================================================== -->
+
+    <section
+      class="ft ft-figures"
+      id="problem-figures"
+      data-figures
+    >
+
+
+      <!-- 스크롤 길이를 만드는 바깥 래퍼 -->
+      <div
+        class="ft-figures__track"
+        data-figures-track
+      >
+
+
+        <!-- 화면에 고정되는 무대 -->
+        <div class="ft-figures__stage">
+
+
+          <!-- 배경 사진 3장 (장면마다 바뀜) -->
+          <div class="ft-figures__media">
+
+            <img
+              class="is-on"
+              src="./images/problem-01-siren.jpg"
+              alt=""
+              data-figure-media
+            >
+
+            <img
+              src="./images/problem-02-warning.jpg"
+              alt=""
+              data-figure-media
+            >
+
+            <img
+              src="./images/problem-03-timing.jpg"
+              alt=""
+              data-figure-media
+            >
+
+          </div>
+
+
+          <!-- 글씨가 잘 보이도록 왼쪽을 어둡게 -->
+          <div class="ft-figures__scrim"></div>
+
+
+          <div class="ft-figures__inner">
+
+
+            <!-- 1. 82% — 사이렌 -->
+            <article
+              class="ft-figure is-on"
+              data-figure
+            >
+
+              <p class="ft-figure__value">
+                <span data-count="82">82</span><span class="ft-figure__unit">%</span>
+              </p>
+
+              <h2 class="ft-figure__name">
+                소리로만 전달되는 위험
+              </h2>
+
+              <p class="ft-figure__text">
+                <!--
+                  2026.10.07 : 두 줄로 줄임
+                  (기존 : 사이렌과 경적, 차량 내부 경고음까지. 주행 중 마주하는 위험의 대부분이
+                          시각 신호 없이 소리로만 전해집니다.)
+                -->
+                주행 중 마주하는 위험의 대부분은<br>
+                시각 신호 없이 소리로만 전해집니다.
+              </p>
+
+            </article>
+
+
+            <!-- 2. 1.5m — 차간 거리 -->
+            <article
+              class="ft-figure"
+              data-figure
+            >
+
+              <p class="ft-figure__value">
+                <span
+                  data-count="1.5"
+                  data-count-decimals="1"
+                >1.5</span><span class="ft-figure__unit">m</span>
+              </p>
+
+              <h2 class="ft-figure__name">
+                0.05초가 만드는 거리
+              </h2>
+
+              <p class="ft-figure__text">
+                <!--
+                  2026.10.07 : 두 줄로 줄임
+                  (기존 : … 시속 100km에서는 그 짧은 차이가 1.5m의 제동 거리 격차로 이어집니다.)
+                -->
+                청각은 시각보다 약 0.05초 먼저 반응합니다.<br>
+                시속 100km에서는 1.5m의 제동 거리 차이입니다.
+              </p>
+
+            </article>
+
+
+            <!-- 3. 55m — 시선 이탈 -->
+            <article
+              class="ft-figure"
+              data-figure
+            >
+
+              <p class="ft-figure__value">
+                <span data-count="55">55</span><span class="ft-figure__unit">m</span>
+              </p>
+
+              <h2 class="ft-figure__name">
+                눈을 돌린 2초의 거리
+              </h2>
+
+              <p class="ft-figure__text">
+                <!--
+                  2026.10.07 : 두 줄로 줄임
+                  (기존 마지막 줄 : 시각으로 소리를 메우는 일의 대가입니다.)
+                -->
+                들리지 않는 위험을 눈으로 찾는 2초 동안,<br>
+                차는 55m를 무방비로 달립니다.
+              </p>
+
+            </article>
+
+
+            <!-- 오른쪽 단계 표시 -->
+            <div class="ft-figures__steps">
+
+              <span
+                class="ft-figures__step is-on"
+                data-figure-step
+              ><i></i>사이렌</span>
+
+              <span
+                class="ft-figures__step"
+                data-figure-step
+              ><i></i>차간 거리</span>
+
+              <span
+                class="ft-figures__step"
+                data-figure-step
+              ><i></i>시선 이탈</span>
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- ===================================================
+         05. DRIVING SCENARIOS — 자동 전환 탭
+    ==================================================== -->
+
+    <section
+      class="problem-scenarios dz is-paused"
+      id="problem-scenarios"
+      aria-labelledby="problem-scenarios-title"
+    >
+
+
+      <div class="about-container dz-layout">
+
+
+
+        <!-- LEFT TEXT -->
+
+        <div class="dz-text">
+
+
+          <h2
+            class="dz-title"
+            id="problem-scenarios-title"
+          >
+
+            위험은 앞에서도,<br>
+
+            뒤에서도 다가옵니다.
+
+          </h2>
+
+
+          <p class="dz-desc">
+
+            <!-- 2026.10.07 : 문장 단위로 줄바꿈 -->
+            앞차와의 간격이 줄어들고, 뒤에서는 구급차가 접근합니다.<br>
+
+            도로 위에서 놓치기 쉬운 두 순간을 살펴보세요.
+
+          </p>
+
+
+        </div>
+
+
+
+
+        <!-- RIGHT -->
+
+        <div class="dz-right">
+
+
+          <div class="dz-stage">
+
+
+
+            <!-- FRONT -->
+
+            <div
+              class="dz-media is-on"
+              id="problem-scenario-front"
+              role="tabpanel"
+              aria-labelledby="problem-tab-front"
+              aria-hidden="false"
+            >
+
+
+              <video
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-hidden="true"
+              >
+
+                <source
+                  src="./images/problem-risk-front-distance.mp4"
+                  type="video/mp4"
+                >
+
+              </video>
+
+
+              <span
+                class="dz-label"
+                aria-hidden="true"
+              >
+                FRONT ↑
+              </span>
+
+
+            </div>
+
+
+
+
+            <!-- REAR -->
+
+            <div
+              class="dz-media"
+              id="problem-scenario-rear"
+              role="tabpanel"
+              aria-labelledby="problem-tab-rear"
+              aria-hidden="true"
+            >
+
+
+              <video
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-hidden="true"
+              >
+
+                <source
+                  src="./images/problem-risk-emergency-approach.mp4"
+                  type="video/mp4"
+                >
+
+              </video>
+
+
+              <span
+                class="dz-label"
+                aria-hidden="true"
+              >
+                REAR ↓
+              </span>
+
+
+              <span
+                class="dz-tag"
+                aria-hidden="true"
+              >
+                🔇 사이렌 — 들리지 않음
+              </span>
+
+
+            </div>
+
+
+          </div>
+
+
+
+
+          <!-- TABS -->
+
+          <div
+            class="dz-tabs"
+            role="tablist"
+            aria-label="위험 상황 영상 선택"
+          >
+
+
+
+            <!-- FRONT TAB -->
+
+            <button
+              class="dz-tab is-on"
+              type="button"
+              id="problem-tab-front"
+              role="tab"
+              aria-controls="problem-scenario-front"
+              aria-selected="true"
+              tabindex="0"
+            >
+
+
+              <span
+                class="dz-bar"
+                aria-hidden="true"
+              >
+                <i></i>
+              </span>
+
+
+              <span class="dz-tab__title">
+                앞차와의 간격이 좁아지는 순간
+              </span>
+
+
+              <span class="dz-tab__copy">
+
+                <!--
+                  2026.10.07 : 문구 줄임 — 두 줄 / 한 줄에 한 문장
+                  (기존 : 앞차가 감속하며 차간거리가 줄어듭니다.
+                          전방을 살피면서 주변의 움직임까지 확인해야 할 때 대응이 늦어질 수 있습니다.)
+                -->
+                앞차가 감속하며 차간거리가 줄어듭니다.<br>
+
+                주변을 함께 살피다 보면 대응이 늦어집니다.
+
+              </span>
+
+
+            </button>
+
+
+
+
+            <!-- REAR TAB -->
+
+            <button
+              class="dz-tab"
+              type="button"
+              id="problem-tab-rear"
+              role="tab"
+              aria-controls="problem-scenario-rear"
+              aria-selected="false"
+              tabindex="-1"
+            >
+
+
+              <span
+                class="dz-bar"
+                aria-hidden="true"
+              >
+                <i></i>
+              </span>
+
+
+              <span class="dz-tab__title">
+                뒤에서 구급차가 접근하는 순간
+              </span>
+
+
+              <span class="dz-tab__copy">
+
+                <!--
+                  2026.10.07 : 문구 줄임 — 두 줄 / 한 줄에 한 문장
+                  (기존 : 사이렌을 듣기 어려우면 긴급 차량이 다가오는 방향과 거리를
+                          알아차리기 어렵습니다. 길을 비켜야 할 순간을 놓칠 수 있습니다.)
+                -->
+                사이렌이 들리지 않으면 접근을 알기 어렵습니다.<br>
+
+                길을 비켜야 할 순간을 놓칠 수 있습니다.
+
+              </span>
+
+
+            </button>
+
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- ===================================================
+         06. PROBLEM CONCLUSION
+    ==================================================== -->
+
+    <section
+      class="problem-conclusion"
+      id="problem-conclusion"
+    >
+
+
+      <div class="problem-conclusion__copy">
+
+
+
+        <!-- =================================================
+             TOP TEXT
+        ================================================== -->
+
+        <p
+          class="
+            problem-conclusion__korean
+            problem-conclusion__korean--top
+          "
+          data-about-reveal="conclusion"
+        >
+
+          문제는 듣지 못하는 것이 아니라,
+
+        </p>
+
+
+
+
+        <!-- =================================================
+             ENGLISH MARQUEE
+        ================================================== -->
+
+        <div
+          class="problem-marquee"
+          aria-label="Direction Priority Action"
+        >
+
+
+          <div
+            class="problem-marquee__track"
+            data-problem-marquee
+          >
+
+
+            <span>
+              ( DIRECTION / PRIORITY / ACTION )
+            </span>
+
+
+            <span aria-hidden="true">
+              ( DIRECTION / PRIORITY / ACTION )
+            </span>
+
+
+            <span aria-hidden="true">
+              ( DIRECTION / PRIORITY / ACTION )
+            </span>
+
+
+            <span aria-hidden="true">
+              ( DIRECTION / PRIORITY / ACTION )
+            </span>
+
+
+          </div>
+
+
+        </div>
+
+
+
+
+        <!-- =================================================
+             BOTTOM TEXT
+        ================================================== -->
+
+        <p
+          class="
+            problem-conclusion__korean
+            problem-conclusion__korean--bottom
+          "
+          data-about-reveal="conclusion"
+        >
+
+          정보가
+
+          <span class="problem-conclusion__accent">
+            전달되는 방식
+          </span>
+
+          입니다.
+
+        </p>
+
+
+      </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- ===================================================
+         END SPACE
+    ==================================================== -->
+
+    <div
+      class="problem-end-space"
+      aria-hidden="true"
+    ></div>
+
+
+  </main>
+
+
+
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer
+    class="case-footer"
+    id="footer"
+  >
+
+
+
+    <!-- ===================================================
+         FOOTER TOP
+    ==================================================== -->
+
+    <div
+      class="
+        case-container
+        case-footer__top
+      "
+    >
+
+
+
+      <!-- PROJECT -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--project
+        "
+      >
+
+
+        <p class="case-footer__label">
+          PROJECT
+        </p>
+
+
+        <p class="case-footer__project-name">
+          DADEULLIM
+        </p>
+
+
+        <p class="case-footer__text">
+          Sound Experience
+        </p>
+
+
+        <p class="case-footer__text">
+          Graduation Project 2026
+        </p>
+
+
+      </div>
+
+
+
+      <!-- NAVIGATION -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--navigation
+        "
+      >
+
+
+        <p class="case-footer__label">
+          NAVIGATION
+        </p>
+
+
+        <a href="./brand1.html">
+          Brand
+        </a>
+
+
+        <a href="./display.html">
+          Interface
+        </a>
+
+
+        <a href="./driving.html">
+          Experience
+        </a>
+
+
+        <a href="./problem.html">
+          About
+        </a>
+
+
+      </div>
+
+
+
+      <!-- CREDITS -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--credits
+        "
+      >
+
+
+        <p class="case-footer__label">
+          CREDITS
+        </p>
+
+
+        <p class="case-footer__text">
+          Digital Media Design
+        </p>
+
+
+        <p class="case-footer__text">
+          Cheongju University
+        </p>
+
+
+        <p class="case-footer__text">
+          Graduation Exhibition 2026
+        </p>
+
+
+      </div>
+
+
+
+      <!-- CONTACT -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--contact
+        "
+      >
+
+
+        <p class="case-footer__label">
+          CONTACT
+        </p>
+
+
+        <a href="#">
+          Instagram
+        </a>
+
+
+        <a href="mailto:hello@dadeullim.com">
+          E-mail
+        </a>
+
+
+      </div>
+
+
+    </div>
+
+
+
+
+    <!-- ===================================================
+         BACK TO TOP
+    ==================================================== -->
+
+    <div
+      class="
+        case-container
+        case-footer__utility
+      "
+    >
+
+
+      <a
+        class="case-footer__back-to-top"
+        href="#problem-opening"
+      >
+
+        BACK TO TOP
+
+        <span aria-hidden="true">
+          ↑
+        </span>
+
+      </a>
+
+
+    </div>
+
+
+
+
+    <!-- ===================================================
+         LARGE DADEULLIM
+    ==================================================== -->
+
+    <div
+      class="case-footer__brand-stage"
+      aria-label="DADEULLIM"
+    >
+
+
+      <div class="case-footer__brand-lockup">
+
+
+
+        <div
+          class="case-footer__symbol"
+          aria-hidden="true"
+        >
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+        </div>
+
+
+
+        <p class="case-footer__brand">
+          DADEULLIM
+        </p>
+
+
+      </div>
+
+
+    </div>
+
+
+  </footer>
+
+
+</body>
+
+</html>

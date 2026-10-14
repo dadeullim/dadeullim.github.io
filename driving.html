@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="DADEULLIM Driving Experience"
+  >
+
+  <title>
+    DADEULLIM — Driving Experience
+  </title>
+
+
+  <!-- =====================================================
+       INDEX 공통 CSS
+       HEADER / FOOTER
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="./style.css"
+  >
+
+
+  <!-- =====================================================
+       DRIVING / SAFETY 공통 CSS
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="./experience.css"
+  >
+
+
+  <!-- =====================================================
+       DRIVING / SAFETY 공통 JS
+  ====================================================== -->
+
+  <script
+    src="./experience.js"
+    defer
+  ></script>
+
+</head>
+
+
+<body class="experience-page driving-page">
+
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header
+    class="site-header"
+    id="site-header"
+  >
+
+
+    <!-- ===================================================
+         HEADER BAR
+    ==================================================== -->
+
+    <div class="site-header__bar">
+
+
+      <!-- LOGO — 2026.10.06 : 클릭 시 index로 이동하면서 인트로 다시 재생 (?intro) -->
+
+      <a
+        class="site-header__logo"
+        href="./index.html?intro"
+        aria-label="DADEULLIM 홈"
+      >
+        <!-- LOGO IMAGE — 2026.10.06 : 텍스트(DADEULLIM) → CC2 로고 이미지로 교체 -->
+        <span class="site-header__logo-mark" aria-hidden="true"></span>
+      </a>
+
+
+      <!-- MAIN NAV -->
+
+      <nav
+        class="site-header__nav"
+        aria-label="메인 메뉴"
+      >
+
+
+        <a
+          class="site-header__nav-link"
+          href="./brand1.html"
+        >
+          BRAND
+        </a>
+
+
+        <a
+          class="site-header__nav-link"
+          href="./display.html"
+        >
+          INTERFACE
+        </a>
+
+
+        <a
+          class="site-header__nav-link is-active"
+          href="./driving.html"
+          aria-current="page"
+        >
+          EXPERIENCE
+        </a>
+
+
+        <a
+          class="site-header__nav-link"
+          href="./problem.html"
+        >
+          ABOUT
+        </a>
+
+
+      </nav>
+
+
+    </div>
+
+
+
+    <!-- ===================================================
+         MEGA MENU
+    ==================================================== -->
+
+    <div class="site-header__mega">
+
+
+      <div class="site-header__mega-grid">
+
+
+
+        <!-- BRAND -->
+
+        <div class="site-header__mega-column">
+
+
+          <p class="site-header__mega-title">
+            BRAND
+          </p>
+
+
+          <div class="site-header__mega-links">
+
+
+            <a href="./brand1.html">
+              다들림 소개
+            </a>
+
+
+            <a href="./brand2.html">
+              브랜드 철학
+            </a>
+
+
+            <a href="./logo.html">
+              로고 시스템
+            </a>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- INTERFACE -->
+
+        <div class="site-header__mega-column">
+
+
+          <p class="site-header__mega-title">
+            INTERFACE
+          </p>
+
+
+          <div class="site-header__mega-links">
+
+
+            <a href="./display.html">
+              디스플레이
+            </a>
+
+
+            <a href="./handle.html">
+              핸들
+            </a>
+
+
+            <a href="./hud.html">
+              HUD
+            </a>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- EXPERIENCE -->
+
+        <div class="site-header__mega-column">
+
+
+          <p class="site-header__mega-title">
+            EXPERIENCE
+          </p>
+
+
+          <div class="site-header__mega-links">
+
+
+            <a
+              href="./driving.html"
+              aria-current="page"
+            >
+              주행 경험
+            </a>
+
+
+            <a href="./safety.html">
+              안전 경험
+            </a>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- ABOUT -->
+
+        <div class="site-header__mega-column">
+
+
+          <p class="site-header__mega-title">
+            ABOUT
+          </p>
+
+
+          <div class="site-header__mega-links">
+
+
+            <a href="./problem.html">
+              문제 정의
+            </a>
+
+
+            <a href="./user.html">
+              사용자 분석
+            </a>
+
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+  </header>
+
+
+
+
+
+  <!-- =====================================================
+       DRIVING EXPERIENCE MAIN
+  ====================================================== -->
+
+  <main class="driving-main">
+
+
+
+
+
+    <!-- =====================================================
+         01. HERO
+    ====================================================== -->
+
+    <section
+      class="driving-hero"
+      id="driving-hero"
+    >
+
+
+      <!-- HERO TITLE -->
+
+      <div
+        class="
+          driving-container
+          driving-hero__heading
+        "
+      >
+
+
+        <h1
+          class="driving-hero__title"
+          data-driving-reveal="title"
+        >
+
+          <!-- 2026.10.07 문구 변경 : 도로의 신호를 / 놓치지 않는 주행. -->
+          출발부터 도착까지,
+
+          <span class="driving-hero__accent">
+            모든 소리가 닿는 주행.
+          </span>
+
+        </h1>
+
+
+      </div>
+
+
+
+      <!-- =================================================
+           HERO IMAGE
+           LIQUID / WATER
+      ================================================== -->
+
+      <div
+        class="driving-hero__visual"
+        data-driving-image="hero"
+        data-parallax="hero"
+        data-driving-liquid
+      >
+
+
+        <!-- BASE IMAGE -->
+
+        <img
+          class="driving-hero__image"
+          src="./images/driving-hero.jpg"
+          alt="도로 위 다들림 주행 경험 메인 이미지"
+        >
+
+        <!-- OLD LIQUID LAYER -->
+
+        <div
+          class="driving-hero__liquid-layer"
+          aria-hidden="true"
+          data-driving-liquid-layer
+        >
+
+
+          <img
+            class="driving-hero__liquid-image"
+            src="./images/driving-hero.jpg"
+            alt=""
+          >
+
+
+        </div>
+
+
+
+        <!-- SVG FILTER -->
+
+        <svg
+          class="driving-hero__liquid-svg"
+          width="0"
+          height="0"
+          aria-hidden="true"
+          focusable="false"
+        >
+
+
+          <defs>
+
+
+            <filter
+              id="driving-hero-liquid-filter"
+              x="-20%"
+              y="-20%"
+              width="140%"
+              height="140%"
+              color-interpolation-filters="sRGB"
+            >
+
+
+              <feTurbulence
+                data-driving-liquid-turbulence
+                type="fractalNoise"
+                baseFrequency="0.010 0.022"
+                numOctaves="2"
+                seed="8"
+                stitchTiles="stitch"
+                result="drivingLiquidNoise"
+              />
+
+
+              <feDisplacementMap
+                data-driving-liquid-displacement
+                in="SourceGraphic"
+                in2="drivingLiquidNoise"
+                scale="0"
+                xChannelSelector="R"
+                yChannelSelector="G"
+                result="drivingLiquidDistorted"
+              />
+
+
+              <feGaussianBlur
+                in="drivingLiquidDistorted"
+                stdDeviation="0.12"
+                result="drivingLiquidSoft"
+              />
+
+
+              <feBlend
+                in="SourceGraphic"
+                in2="drivingLiquidSoft"
+                mode="normal"
+              />
+
+
+            </filter>
+
+
+          </defs>
+
+
+        </svg>
+
+
+      </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- =====================================================
+         02. SOLUTION
+    ====================================================== -->
+
+    <section
+      class="driving-solution"
+      id="driving-solution"
+    >
+
+
+      <div
+        class="
+          driving-container
+          driving-solution__inner
+        "
+      >
+
+
+
+        <!-- =================================================
+             LEFT TEXT
+        ================================================== -->
+
+        <div
+          class="driving-solution__copy"
+          data-driving-reveal="solution-copy"
+        >
+
+
+          <p class="driving-solution__eyebrow">
+            Solution
+          </p>
+
+
+          <h2 class="driving-solution__title">
+
+            필요하지 않을 때는,<br>
+
+            <span class="driving-solution__accent">
+              조용하게.
+            </span>
+
+          </h2>
+
+
+          <p class="driving-solution__description">
+            다들림은 필요한 순간에만 정보를 전달합니다.
+          </p>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             RIGHT IMAGE COMPOSITION
+        ================================================== -->
+
+        <div
+          class="driving-solution__visual"
+          data-driving-mosaic
+        >
+
+
+
+          <!-- =================================================
+               IMAGE 01
+          ================================================== -->
+
+          <div
+            class="
+              driving-solution__image
+              driving-solution__image--01
+              experience-placeholder
+            "
+            data-driving-card="1"
+            data-driving-reveal="image"
+          >
+
+
+            <img
+              class="driving-solution__image-file"
+              src="./images/driving-1.jpg"
+              alt="핸들 촉각 피드백을 통한 주행 경험"
+            >
+
+
+            <span
+              class="driving-solution__number"
+              aria-hidden="true"
+            >
+              01
+            </span>
+
+
+            <p class="driving-solution__caption">
+              HAPTIC
+            </p>
+
+
+          </div>
+
+
+
+          <!-- =================================================
+               IMAGE 02
+          ================================================== -->
+
+          <div
+            class="
+              driving-solution__image
+              driving-solution__image--02
+              experience-placeholder
+            "
+            data-driving-card="2"
+            data-driving-reveal="image"
+          >
+
+
+            <img
+              class="driving-solution__image-file"
+              src="./images/driving-2.jpg"
+              alt="차량 디스플레이를 통한 주행 정보 경험"
+            >
+
+
+            <span
+              class="driving-solution__number"
+              aria-hidden="true"
+            >
+              02
+            </span>
+
+
+            <p class="driving-solution__caption">
+              DISPLAY
+            </p>
+
+
+          </div>
+
+
+
+          <!-- =================================================
+               IMAGE 03
+          ================================================== -->
+
+          <div
+            class="
+              driving-solution__image
+              driving-solution__image--03
+              experience-placeholder
+            "
+            data-driving-card="3"
+            data-driving-reveal="image"
+          >
+
+
+            <img
+              class="driving-solution__image-file"
+              src="./images/driving-3.jpg"
+              alt="주행 상황에 맞는 경로 안내 경험"
+            >
+
+
+            <span
+              class="driving-solution__number"
+              aria-hidden="true"
+            >
+              03
+            </span>
+
+
+            <p class="driving-solution__caption">
+              GUIDANCE
+            </p>
+
+
+          </div>
+
+
+
+          <!-- =================================================
+               IMAGE 04
+          ================================================== -->
+
+          <div
+            class="
+              driving-solution__image
+              driving-solution__image--04
+              experience-placeholder
+            "
+            data-driving-card="4"
+            data-driving-reveal="image"
+          >
+
+
+            <img
+              class="driving-solution__image-file"
+              src="./images/driving-4.jpg"
+              alt="HUD를 활용한 주행 정보 전달 경험"
+            >
+
+
+            <span
+              class="driving-solution__number"
+              aria-hidden="true"
+            >
+              04
+            </span>
+
+
+            <p class="driving-solution__caption">
+              HUD
+            </p>
+
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- =====================================================
+         03. ONE MOMENT — 사이렌 한 번, 세 개의 감각이 동시에.
+         2026.10.07 추가 (123.zip)
+         - 화면이 고정된 동안 스크롤하면 재생선이 지나가며
+           소리 입력 → 판단 → HUD → 핸들 → 디스플레이 순서로 켜짐
+         - 켜진 감각에 맞춰 사진 위 HUD / 핸들 / 디스플레이 표시
+         - 스타일 : experience.css 맨 아래 [DRIVING ONE MOMENT]
+         - 동작   : experience.js  맨 아래 [DRIVING ONE MOMENT]
+         - 스크롤 길이 / 사진 위 표시 위치 : experience.css 에서 조절
+    ====================================================== -->
+
+    <section
+      class="dp dp-anatomy dp-a1"
+      id="driving-moment"
+    >
+
+      <!-- 스크롤 길이를 만드는 바깥 래퍼 -->
+      <div class="dp-a1__track">
+
+        <!-- 화면에 고정되는 무대 -->
+        <div class="dp-a1__sticky">
+
+
+          <!-- TITLE -->
+          <header class="dp-head">
+
+            <h2 class="dp-title">
+              사이렌 한 번,<br>
+
+              <span class="dp-accent">
+                세 개의 감각이 동시에.
+              </span>
+            </h2>
+
+            <p class="dp-desc">
+              소리 하나가 들어오면 HUD · 핸들 · 디스플레이가 함께 반응합니다.
+            </p>
+
+          </header>
+
+
+          <!-- 실내 사진 + 감각 표시 -->
+          <div class="dp-a1__stage">
+
+            <!-- 2026.10.07 : 볼보 로고 이미지 → 다들림(CC2) 버전으로 교체 -->
+            <img
+              src="./images/driving-alert-cc2.jpg"
+              alt="HUD와 디스플레이가 보이는 차량 실내"
+            >
+
+            <span
+              class="dp-hot"
+              data-k="hud"
+            >
+              <i></i>
+              <em>HUD</em>
+            </span>
+
+            <span
+              class="dp-hot"
+              data-k="wheel"
+            >
+              <i></i>
+              <em>핸들 그립</em>
+            </span>
+
+            <span
+              class="dp-hot"
+              data-k="display"
+            >
+              <i></i>
+              <em>디스플레이</em>
+            </span>
+
+          </div>
+
+
+          <!-- 감각 트랙 -->
+          <div class="dp-a1__tracks">
+
+            <!-- 재생선 -->
+            <i class="dp-a1__head"></i>
+
+
+            <!-- 1. 소리 입력 -->
+            <div
+              class="dp-a1__row"
+              data-k="sound"
+            >
+              <p>소리 입력</p>
+
+              <div class="dp-a1__lane">
+                <i class="dp-a1__bar"></i>
+              </div>
+
+              <span class="dp-a1__note">
+                뒤쪽에서 사이렌 파형이 들어옵니다.
+              </span>
+            </div>
+
+
+            <!-- 2. 판단 -->
+            <div
+              class="dp-a1__row"
+              data-k="judge"
+            >
+              <p>판단</p>
+
+              <div class="dp-a1__lane">
+                <i class="dp-a1__bar"></i>
+              </div>
+
+              <span class="dp-a1__note">
+                소리 종류(구급차)와 방향(오른쪽 뒤)을 분류합니다.
+              </span>
+            </div>
+
+
+            <!-- 3. HUD -->
+            <div
+              class="dp-a1__row"
+              data-k="hud"
+            >
+              <p>HUD</p>
+
+              <div class="dp-a1__lane">
+                <i class="dp-a1__bar"></i>
+              </div>
+
+              <span class="dp-a1__note">
+                전면 유리에 사이렌 아이콘과 방향을 띄웁니다.
+              </span>
+            </div>
+
+
+            <!-- 4. 핸들 -->
+            <div
+              class="dp-a1__row"
+              data-k="wheel"
+            >
+              <p>핸들</p>
+
+              <div class="dp-a1__lane">
+                <i class="dp-a1__bar"></i>
+              </div>
+
+              <span class="dp-a1__note">
+                오른쪽 그립의 모터 3개가 긴급 패턴으로 진동합니다.
+              </span>
+            </div>
+
+
+            <!-- 5. 디스플레이 -->
+            <div
+              class="dp-a1__row"
+              data-k="display"
+            >
+              <p>디스플레이</p>
+
+              <div class="dp-a1__lane">
+                <i class="dp-a1__bar"></i>
+              </div>
+
+              <span class="dp-a1__note">
+                “구급차 접근 · 우측으로 양보” 안내를 보여 줍니다.
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+
+
+    <!-- =====================================================
+         04. CONNECTION MESSAGE
+    ====================================================== -->
+
+    <section
+      class="driving-connection"
+      id="driving-connection"
+    >
+
+
+      <div class="driving-container">
+
+
+        <p
+          class="driving-connection__text"
+          data-driving-reveal="connection"
+        >
+
+          운전자를
+
+          <span class="driving-connection__accent">
+            인식하는 순간,
+          </span><br>
+
+          다들림은 시작됩니다.
+
+        </p>
+
+
+      </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- =====================================================
+         05. CONNECTED EXPERIENCE
+    ====================================================== -->
+
+    <section
+      class="driving-functions"
+      id="driving-functions"
+    >
+
+
+      <div
+        class="
+          driving-container
+          driving-functions__stage
+        "
+      >
+
+
+
+        <!-- =================================================
+             VIBRATION
+        ================================================== -->
+
+        <article
+          class="
+            driving-feature
+            driving-feature--vibration
+          "
+          data-driving-feature="vibration"
+        >
+
+
+
+          <!-- IMAGE -->
+
+          <div
+            class="
+              driving-feature__image
+              driving-feature__image--vibration
+              experience-placeholder
+            "
+            data-driving-reveal="feature-image"
+          >
+
+
+            <img
+              class="driving-feature__image-file"
+              src="./images/driving-vibration.jpg"
+              alt="진동 강도 조절 주행 경험 이미지"
+            >
+
+
+          </div>
+
+
+
+          <!-- TEXT -->
+
+          <div
+            class="driving-feature__copy"
+            data-driving-reveal="feature-copy"
+          >
+
+
+            <h2>
+              VIBRATION
+            </h2>
+
+
+            <p class="driving-feature__label">
+              진동 강도
+            </p>
+
+
+            <p class="driving-feature__description">
+              사용자에 맞는 촉각 강도로 조절
+            </p>
+
+
+          </div>
+
+
+
+          <!-- SIGNAL -->
+
+          <div
+            class="
+              driving-signal
+              driving-signal--vibration
+            "
+            aria-hidden="true"
+          >
+
+
+            <span class="driving-signal__rail"></span>
+
+
+            <span class="driving-signal__flow"></span>
+
+
+            <span
+              class="
+                driving-signal__dot
+                driving-signal__dot--01
+              "
+            ></span>
+
+
+            <span
+              class="
+                driving-signal__dot
+                driving-signal__dot--02
+              "
+            ></span>
+
+
+            <span
+              class="
+                driving-signal__dot
+                driving-signal__dot--03
+              "
+            ></span>
+
+
+            <span
+              class="
+                driving-signal__dot
+                driving-signal__dot--04
+              "
+            ></span>
+
+
+          </div>
+
+
+        </article>
+
+
+
+
+
+        <!-- =================================================
+             HUD
+        ================================================== -->
+
+        <article
+          class="
+            driving-feature
+            driving-feature--hud
+          "
+          data-driving-feature="hud"
+        >
+
+
+
+          <!-- TEXT -->
+
+          <div
+            class="driving-feature__copy"
+            data-driving-reveal="feature-copy"
+          >
+
+
+            <h2>
+              HUD
+            </h2>
+
+
+            <p class="driving-feature__label">
+              정보 표시
+            </p>
+
+
+            <p class="driving-feature__description">
+              상황에 맞는 정보를 시야에 표시
+            </p>
+
+
+          </div>
+
+
+
+          <!-- IMAGE -->
+
+          <div
+            class="
+              driving-feature__image
+              driving-feature__image--hud
+              experience-placeholder
+            "
+            data-driving-reveal="feature-image"
+          >
+
+
+            <img
+              class="driving-feature__image-file"
+              src="./images/driving-hud.jpg"
+              alt="HUD 정보 표시 주행 경험 이미지"
+            >
+
+
+          </div>
+
+
+
+          <!-- SIGNAL -->
+
+          <div
+            class="
+              driving-signal
+              driving-signal--hud
+            "
+            aria-hidden="true"
+          >
+
+
+            <span class="driving-signal__rail"></span>
+
+
+            <span class="driving-signal__flow"></span>
+
+
+            <span
+              class="
+                driving-signal__dot
+                driving-signal__dot--01
+              "
+            ></span>
+
+
+            <span
+              class="
+                driving-signal__dot
+                driving-signal__dot--02
+              "
+            ></span>
+
+
+            <span
+              class="
+                driving-signal__dot
+                driving-signal__dot--03
+              "
+            ></span>
+
+
+            <span
+              class="
+                driving-signal__dot
+                driving-signal__dot--04
+              "
+            ></span>
+
+
+          </div>
+
+
+        </article>
+
+
+
+
+
+        <!-- =================================================
+             ALERT
+        ================================================== -->
+
+        <article
+          class="
+            driving-feature
+            driving-feature--alert
+          "
+          data-driving-feature="alert"
+        >
+
+
+
+          <!-- IMAGE -->
+
+          <div
+            class="
+              driving-feature__image
+              driving-feature__image--alert
+              experience-placeholder
+            "
+            data-driving-reveal="feature-image"
+          >
+
+
+            <!-- 2026.10.07 : 볼보 로고 이미지 → 다들림(CC2) 버전으로 교체 -->
+            <img
+              class="driving-feature__image-file"
+              src="./images/driving-alert-cc2.jpg"
+              alt="위험 알림 방식 주행 경험 이미지"
+            >
+
+
+          </div>
+
+
+
+          <!-- TEXT -->
+
+          <div
+            class="driving-feature__copy"
+            data-driving-reveal="feature-copy"
+          >
+
+
+            <h2>
+              ALERT
+            </h2>
+
+
+            <p class="driving-feature__label">
+              알림 방식
+            </p>
+
+
+            <p class="driving-feature__description">
+              상황에 맞는 방식으로 위험을 전달
+            </p>
+
+
+          </div>
+
+
+        </article>
+
+
+      </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- =====================================================
+         FOOTER 전 공간
+    ====================================================== -->
+
+    <div
+      class="driving-end-space"
+      aria-hidden="true"
+    ></div>
+
+
+  </main>
+
+
+
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer
+    class="case-footer"
+    id="footer"
+  >
+
+
+
+    <div
+      class="
+        case-container
+        case-footer__top
+      "
+    >
+
+
+
+      <!-- PROJECT -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--project
+        "
+      >
+
+
+        <p class="case-footer__label">
+          PROJECT
+        </p>
+
+
+        <p class="case-footer__project-name">
+          DADEULLIM
+        </p>
+
+
+        <p class="case-footer__text">
+          Sound Experience
+        </p>
+
+
+        <p class="case-footer__text">
+          Graduation Project 2026
+        </p>
+
+
+      </div>
+
+
+
+      <!-- NAVIGATION -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--navigation
+        "
+      >
+
+
+        <p class="case-footer__label">
+          NAVIGATION
+        </p>
+
+
+        <a href="./brand1.html">
+          Brand
+        </a>
+
+
+        <a href="./display.html">
+          Interface
+        </a>
+
+
+        <a href="./driving.html">
+          Experience
+        </a>
+
+
+        <a href="./problem.html">
+          About
+        </a>
+
+
+      </div>
+
+
+
+      <!-- CREDITS -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--credits
+        "
+      >
+
+
+        <p class="case-footer__label">
+          CREDITS
+        </p>
+
+
+        <p class="case-footer__text">
+          Digital Media Design
+        </p>
+
+
+        <p class="case-footer__text">
+          Cheongju University
+        </p>
+
+
+        <p class="case-footer__text">
+          Graduation Exhibition 2026
+        </p>
+
+
+      </div>
+
+
+
+      <!-- CONTACT -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--contact
+        "
+      >
+
+
+        <p class="case-footer__label">
+          CONTACT
+        </p>
+
+
+        <a href="#">
+          Instagram
+        </a>
+
+
+        <a href="mailto:hello@dadeullim.com">
+          E-mail
+        </a>
+
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- ===================================================
+         BACK TO TOP
+    ==================================================== -->
+
+    <div
+      class="
+        case-container
+        case-footer__utility
+      "
+    >
+
+
+      <a
+        class="case-footer__back-to-top"
+        href="#driving-hero"
+      >
+
+        BACK TO TOP
+
+        <span aria-hidden="true">
+          ↑
+        </span>
+
+      </a>
+
+
+    </div>
+
+
+
+    <!-- ===================================================
+         LARGE DADEULLIM
+    ==================================================== -->
+
+    <div
+      class="case-footer__brand-stage"
+      aria-label="DADEULLIM"
+    >
+
+
+      <div class="case-footer__brand-lockup">
+
+
+
+        <div
+          class="case-footer__symbol"
+          aria-hidden="true"
+        >
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+        </div>
+
+
+
+        <p class="case-footer__brand">
+          DADEULLIM
+        </p>
+
+
+      </div>
+
+
+    </div>
+
+
+  </footer>
+
+
+
+</body>
+
+</html>

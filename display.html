@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="DADEULLIM Display Interface"
+  >
+
+  <title>
+    DADEULLIM — Display
+  </title>
+
+
+  <!-- =====================================================
+       COMMON CSS
+       HEADER / FOOTER
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="./style.css"
+  >
+
+
+  <!-- =====================================================
+       DISPLAY / HANDLE / HUD
+       COMMON CSS
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="./interface.css"
+  >
+
+
+  <!-- =====================================================
+       DISPLAY / HANDLE / HUD
+       COMMON JS
+  ====================================================== -->
+
+  <script
+    src="./interface.js"
+    defer
+  ></script>
+</head>
+
+
+<body class="interface-page display-page">
+
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header
+    class="site-header"
+    id="site-header"
+  >
+
+    <!-- ===================================================
+         HEADER BAR
+    ==================================================== -->
+
+    <div class="site-header__bar">
+
+      <!-- LOGO — 2026.10.06 : 클릭 시 index로 이동하면서 인트로 다시 재생 (?intro) -->
+
+      <a
+        class="site-header__logo"
+        href="./index.html?intro"
+        aria-label="DADEULLIM 홈"
+      >
+        <!-- LOGO IMAGE — 2026.10.06 : 텍스트(DADEULLIM) → CC2 로고 이미지로 교체 -->
+        <span class="site-header__logo-mark" aria-hidden="true"></span>
+      </a>
+
+
+      <!-- MAIN NAV -->
+
+      <nav
+        class="site-header__nav"
+        aria-label="메인 메뉴"
+      >
+
+        <a
+          class="site-header__nav-link"
+          href="./brand1.html"
+        >
+          BRAND
+        </a>
+
+        <a
+          class="site-header__nav-link is-active"
+          href="./display.html"
+          aria-current="page"
+        >
+          INTERFACE
+        </a>
+
+        <a
+          class="site-header__nav-link"
+          href="./driving.html"
+        >
+          EXPERIENCE
+        </a>
+
+        <a
+          class="site-header__nav-link"
+          href="./problem.html"
+        >
+          ABOUT
+        </a>
+
+      </nav>
+
+    </div>
+
+
+    <!-- ===================================================
+         MEGA MENU
+    ==================================================== -->
+
+    <div class="site-header__mega">
+
+      <div class="site-header__mega-grid">
+
+
+        <!-- BRAND -->
+
+        <div class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            BRAND
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./brand1.html">
+              다들림 소개
+            </a>
+
+            <a href="./brand2.html">
+              브랜드 철학
+            </a>
+
+            <a href="./logo.html">
+              로고 시스템
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- INTERFACE -->
+
+        <div class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            INTERFACE
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a
+              href="./display.html"
+              aria-current="page"
+            >
+              디스플레이
+            </a>
+
+            <a href="./handle.html">
+              핸들
+            </a>
+
+            <a href="./hud.html">
+              HUD
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- EXPERIENCE -->
+
+        <div class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            EXPERIENCE
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./driving.html">
+              주행 경험
+            </a>
+
+            <a href="./safety.html">
+              안전 경험
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- ABOUT -->
+
+        <div class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            ABOUT
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./problem.html">
+              문제 정의
+            </a>
+
+            <a href="./user.html">
+              사용자 분석
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       DISPLAY MAIN
+  ====================================================== -->
+
+  <main class="display-main">
+
+
+    <!-- =====================================================
+         01. HERO — 위험 순간
+         2026.10.10 : 기존 HERO(d-1.png + 뒤 DISPLAY 영문) → 디스플레이히어로8 로 교체
+         평소 → 즉시 정지(빨간 빛) → 평소 → 긴급차 양보(분홍 빛) 반복
+         사진 속 화면만 바뀌고, 대시보드에 비치는 빛과 제목이 함께 바뀜
+         스타일 : interface.css 맨 아래 [DISPLAY HERO — 위험 순간]
+         동작   : interface.js  맨 아래 [DISPLAY HERO — 위험 순간]
+    ====================================================== -->
+
+    <section
+      class="dh8"
+      id="display-hero"
+      data-dh8
+      data-mode="0"
+    >
+
+
+      <!-- 사진 + 화면 (화면은 사진 각도에 맞춰 기울여 둔 이미지) -->
+
+      <figure class="dh8__scene">
+
+        <img
+          class="dh8__cockpit"
+          src="./images/dh8-cockpit.webp"
+          alt="어두운 차 안, 대시보드 위의 다들림 디스플레이"
+          width="1536"
+          height="1024"
+        >
+
+        <i
+          class="dh8__glow"
+          aria-hidden="true"
+        ></i>
+
+        <!-- 2026.10.10 : 평소 화면도 선명한 이미지로 덮음 (사진 속 화면은 1536px 이라 흐림) -->
+        <img
+          class="dh8__scr dh8__scr--base"
+          src="./images/dh8-scr-base.webp"
+          alt=""
+          aria-hidden="true"
+        >
+
+        <img
+          class="dh8__scr dh8__scr--stop"
+          src="./images/dh8-scr-stop.webp"
+          alt=""
+          aria-hidden="true"
+        >
+
+        <img
+          class="dh8__scr dh8__scr--yield"
+          src="./images/dh8-scr-yield.webp"
+          alt=""
+          aria-hidden="true"
+        >
+
+        <i
+          class="dh8__glare"
+          aria-hidden="true"
+        ></i>
+
+      </figure>
+
+
+      <!-- 위험일 때 화면 가장자리 붉게 -->
+
+      <i
+        class="dh8__edge"
+        aria-hidden="true"
+      ></i>
+
+
+      <!-- 글 -->
+
+      <div class="dh8__copy">
+
+        <!-- 지금 상태 (평소 / 즉시 정지 / 긴급차) — JS 가 바꿈 -->
+        <p
+          class="dh8__kick"
+          data-dh8-kick
+        >
+          평소
+        </p>
+
+        <div class="dh8__titles">
+
+          <h1
+            class="dh8__title is-on"
+            data-dh8-title="0"
+          >
+            필요한 정보만,
+            <span class="dh8__blue">가장 앞에서.</span>
+          </h1>
+
+          <p
+            class="dh8__title"
+            data-dh8-title="1"
+            aria-hidden="true"
+          >
+            가장 급한 소리부터,<br>
+            <span class="dh8__red">가장 크게.</span>
+          </p>
+
+          <p
+            class="dh8__title"
+            data-dh8-title="2"
+            aria-hidden="true"
+          >
+            사이렌을<br>
+            <span class="dh8__pink">눈으로 봅니다.</span>
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- 2026.10.10 : 순서 변경 — MANIFESTO(소리는 눈앞의 정보로 · 11.0) ↔ DISPLAY FAN
+         전) HERO → MANIFESTO → FAN → OVERVIEW
+         후) HERO → FAN → MANIFESTO → OVERVIEW -->
+
+    <!-- =====================================================
+         03. DISPLAY FAN — 부채처럼 펼쳐지는 화면들
+         2026.10.10 : 기존 DISPLAY SCENES(01 DRIVE ~ 05 SOS, 장면 sticky)
+         삭제 → 12345.zip 부채 섹션으로 교체
+         스크롤하면 접힌 화면 9장이 부채처럼 펼쳐지며 한 장씩 강조
+         스타일 : interface.css 맨 아래 [DISPLAY FAN]
+         동작   : interface.js  맨 아래 [DISPLAY FAN]
+    ====================================================== -->
+
+    <section
+      class="fan"
+      data-fan
+    >
+
+      <div class="fan__sticky">
+
+        <div class="fan__copy">
+
+          <p>02 — 화면들</p>
+
+          <h2>
+            펼쳐 보면,<br>
+            모두 같은 언어.
+          </h2>
+
+        </div>
+
+        <figure class="fan__card">
+          <img
+            src="./images/display-fan/ui-drive.webp"
+            alt="길 안내 화면"
+          >
+          <figcaption><b>01</b>길 안내</figcaption>
+        </figure>
+
+        <figure class="fan__card">
+          <img
+            src="./images/display-fan/ui-lane.webp"
+            alt="차선 변경 주의 화면"
+          >
+          <figcaption><b>02</b>차선 변경 주의</figcaption>
+        </figure>
+
+        <figure class="fan__card">
+          <img
+            src="./images/display-fan/ui-stop.webp"
+            alt="즉시 정지 화면"
+          >
+          <figcaption><b>03</b>즉시 정지</figcaption>
+        </figure>
+
+        <figure class="fan__card">
+          <img
+            src="./images/display-fan/ui-yield.webp"
+            alt="긴급차 양보 화면"
+          >
+          <figcaption><b>04</b>긴급차 양보</figcaption>
+        </figure>
+
+        <figure class="fan__card">
+          <img
+            src="./images/display-fan/ui-weather.webp"
+            alt="날씨 화면"
+          >
+          <figcaption><b>05</b>날씨</figcaption>
+        </figure>
+
+        <figure class="fan__card">
+          <img
+            src="./images/display-fan/ui-music.webp"
+            alt="음악 화면"
+          >
+          <figcaption><b>06</b>음악</figcaption>
+        </figure>
+
+        <figure class="fan__card">
+          <img
+            src="./images/display-fan/ui-home.webp"
+            alt="대기 화면"
+          >
+          <figcaption><b>07</b>대기 화면</figcaption>
+        </figure>
+
+        <figure class="fan__card">
+          <img
+            src="./images/display-fan/ui-car.webp"
+            alt="차량 상태 화면"
+          >
+          <figcaption><b>08</b>차량 상태</figcaption>
+        </figure>
+
+        <figure class="fan__card">
+          <img
+            src="./images/display-fan/ui-search.webp"
+            alt="목적지 검색 화면"
+          >
+          <figcaption><b>09</b>목적지 검색</figcaption>
+        </figure>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         02. MANIFESTO
+
+         소리는
+         눈앞의 정보로.
+    ====================================================== -->
+
+    <section
+      class="display-manifesto"
+      id="display-manifesto"
+    >
+
+      <div class="display-manifesto__inner">
+
+        <!-- EYEBROW -->
+
+        <p class="display-manifesto__eyebrow">
+          SEE WHAT YOU COULDN'T HEAR
+        </p>
+
+
+        <!-- TITLE -->
+
+        <h2 class="display-manifesto__title">
+          소리는<br>
+
+          <span>
+            눈앞의 정보로.
+          </span>
+        </h2>
+
+
+        <!-- BOTTOM -->
+
+        <div class="display-manifesto__bottom">
+
+          <!-- DESCRIPTION -->
+
+          <!-- 2026.10.10 : 가운데 정렬에서 줄 길이가 들쭉날쭉해서 4줄(빈 줄 포함) → 2줄로 정리 -->
+          <p class="display-manifesto__description">
+            운전 중 놓치기 쉬운 소리와 위험 신호를 시각 정보로 전환하여,<br>
+            필요한 순간 가장 먼저 확인할 수 있도록 전달합니다.
+          </p>
+
+
+          <!-- SIZE -->
+
+          <!-- 2026.10.10 : 화면에 들어오면 0.0 → 11.0 으로 올라가는 숫자 (interface.js [MANIFESTO COUNT]) -->
+          <div class="display-manifesto__size">
+
+            <strong data-count-to="11.0">
+              11.0
+            </strong>
+
+            <span>
+              DIAGONAL<br>
+              DISPLAY
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         04. OVERVIEW
+
+         모든 정보가, 한눈에.
+
+         처음
+         TITLE LEFT
+         STACK RIGHT
+
+         ↓ SCROLL
+
+         TITLE CENTER
+
+         ↓
+
+         TITLE 아래부터
+         화면 4개 펼쳐짐
+    ====================================================== -->
+
+    <section
+      class="display-overview"
+      id="display-overview"
+    >
+
+      <!-- STICKY -->
+
+      <div class="display-overview__sticky">
+
+        <div class="display-overview__inner">
+
+
+          <!-- =================================================
+               LARGE BACKGROUND WORD
+          ================================================== -->
+
+          <p
+            class="display-overview__background-word"
+            aria-hidden="true"
+          >
+            DISPLAY
+          </p>
+
+
+          <!-- =================================================
+               TITLE
+          ================================================== -->
+
+          <div class="display-overview__intro">
+
+            <p class="display-overview__eyebrow">
+              DISPLAY / 01
+            </p>
+
+            <h2 class="display-overview__title">
+              모든 정보가,<br>
+              한눈에.
+            </h2>
+
+            <p class="display-overview__description">
+              운전에 필요한 모든 정보를 시각적으로 전달하여<br>
+              더 안전하고 스마트한 드라이빙을 경험하세요.
+            </p>
+
+          </div>
+
+
+          <!-- =================================================
+               VISUAL STACK
+
+               현재는 아래 네 이미지 사용.
+               나중에 이미지 SRC만 교체하면 됨.
+          ================================================== -->
+
+          <div class="display-overview__visual">
+
+
+            <!-- =================================================
+                 01 ROUTE
+
+                 Reference처럼 제일 앞쪽
+            ================================================== -->
+
+            <article
+              class="
+                display-info
+                display-info--route
+              "
+            >
+
+              <div class="display-info__image">
+
+                <img
+                  src="./images/screen-navigation.png"
+                  alt="경로 안내 및 장소 탐색 디스플레이 화면"
+                >
+
+              </div>
+
+              <div class="display-info__text">
+
+                <span class="display-info__eyebrow">
+                  01 / ROUTE
+                </span>
+
+                <h3>
+                  경로 안내 및 변경
+                </h3>
+
+                <p>
+                  최적의 이동 경로와<br>
+                  변경 정보를 제공합니다.
+                </p>
+
+              </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 02 TRAFFIC
+            ================================================== -->
+
+            <article
+              class="
+                display-info
+                display-info--traffic
+              "
+            >
+
+              <div class="display-info__image">
+
+                <img
+                  src="./images/screen-media.png"
+                  alt="미디어와 정보가 표시된 다들림 디스플레이 화면"
+                >
+
+              </div>
+
+              <div class="display-info__text">
+
+                <span class="display-info__eyebrow">
+                  02 / TRAFFIC
+                </span>
+
+                <h3>
+                  실시간 교통 정보
+                </h3>
+
+                <p>
+                  교통 흐름과 주변 상황을<br>
+                  실시간으로 확인합니다.
+                </p>
+
+              </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 03 SAFETY
+            ================================================== -->
+
+            <article
+              class="
+                display-info
+                display-info--safety
+              "
+            >
+
+              <div class="display-info__image">
+
+                <img
+                  src="./images/screen-smartcare.png"
+                  alt="스마트 케어 안전 설정 디스플레이 화면"
+                >
+
+              </div>
+
+              <div class="display-info__text">
+
+                <span class="display-info__eyebrow">
+                  03 / SAFETY
+                </span>
+
+                <h3>
+                  안전 알림
+                </h3>
+
+                <p>
+                  위험 상황과 주요 알림을<br>
+                  빠르게 전달합니다.
+                </p>
+
+              </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 04 VEHICLE
+            ================================================== -->
+
+            <article
+              class="
+                display-info
+                display-info--vehicle
+              "
+            >
+
+              <div class="display-info__image">
+
+                <img
+                  src="./images/screen-weather.png"
+                  alt="날씨와 일정 정보가 표시된 다들림 디스플레이 화면"
+                >
+
+              </div>
+
+              <div class="display-info__text">
+
+                <span class="display-info__eyebrow">
+                  04 / VEHICLE
+                </span>
+
+                <h3>
+                  차량 상태 정보
+                </h3>
+
+                <p>
+                  차량의 현재 상태와<br>
+                  필요한 정보를 한눈에 확인합니다.
+                </p>
+
+              </div>
+
+            </article>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         05. DISPLAY OUTRO — 03 연결
+         2026.10.08 : 마지막 가로 스크롤 갤러리(display-gallery,
+         EXPLORE THE DISPLAY · 01 MEDIA ~ 04 SMART CARE) 삭제 → 이 섹션으로 교체
+         화면에 들어오면 둥근 카드 → 풀블리드로 열림
+         스타일 : interface.css 맨 아래 [DISPLAY OUTRO]
+         동작   : interface.js  맨 아래 [DISPLAY OUTRO]
+    ====================================================== -->
+
+    <section
+      class="display-outro"
+      data-display-outro
+    >
+
+      <img
+        class="display-outro__image"
+        src="./images/display-outro-hand.jpg"
+        alt="홈 화면을 터치하는 운전자의 손"
+      >
+
+      <div class="display-outro__copy">
+
+        <p class="display-outro__eyebrow">
+          <span>03</span>
+          연결
+        </p>
+
+        <h2 class="display-outro__title">
+          화면에서 끝나지 않습니다.
+        </h2>
+
+        <p class="display-outro__lead">
+          같은 신호가 핸들의 진동과 HUD로 함께 전달됩니다.
+        </p>
+
+        <nav
+          class="display-outro__links"
+          aria-label="다른 인터페이스 보기"
+        >
+
+          <a
+            class="display-outro__link display-outro__link--primary"
+            href="./handle.html"
+          >
+            핸들
+            <span aria-hidden="true">→</span>
+          </a>
+
+          <a
+            class="display-outro__link"
+            href="./hud.html"
+          >
+            HUD
+            <span aria-hidden="true">→</span>
+          </a>
+
+        </nav>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         중요
+
+         display-end-space 없음.
+
+         마지막 DISPLAY 섹션이 끝나면
+         바로 기존 공통 footer로 연결.
+    ====================================================== -->
+
+  </main>
+
+
+
+  <!-- =====================================================
+       FOOTER
+       현재 DADEULLIM 공통 FOOTER
+  ====================================================== -->
+
+  <footer
+    class="case-footer"
+    id="footer"
+  >
+
+
+    <!-- ===================================================
+         FOOTER TOP
+    ==================================================== -->
+
+    <div
+      class="
+        case-container
+        case-footer__top
+      "
+    >
+
+
+      <!-- =================================================
+           PROJECT
+      ================================================== -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--project
+        "
+      >
+
+        <p class="case-footer__label">
+          PROJECT
+        </p>
+
+        <p class="case-footer__project-name">
+          DADEULLIM
+        </p>
+
+        <p class="case-footer__text">
+          Sound Experience
+        </p>
+
+        <p class="case-footer__text">
+          Graduation Project 2026
+        </p>
+
+      </div>
+
+
+      <!-- =================================================
+           NAVIGATION
+      ================================================== -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--navigation
+        "
+      >
+
+        <p class="case-footer__label">
+          NAVIGATION
+        </p>
+
+        <a href="./brand1.html">
+          Brand
+        </a>
+
+        <a href="./display.html">
+          Interface
+        </a>
+
+        <a href="./driving.html">
+          Experience
+        </a>
+
+        <a href="./problem.html">
+          About
+        </a>
+
+      </div>
+
+
+      <!-- =================================================
+           CREDITS
+      ================================================== -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--credits
+        "
+      >
+
+        <p class="case-footer__label">
+          CREDITS
+        </p>
+
+        <p class="case-footer__text">
+          Digital Media Design
+        </p>
+
+        <p class="case-footer__text">
+          Cheongju University
+        </p>
+
+        <p class="case-footer__text">
+          Graduation Exhibition 2026
+        </p>
+
+      </div>
+
+
+      <!-- =================================================
+           CONTACT
+      ================================================== -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--contact
+        "
+      >
+
+        <p class="case-footer__label">
+          CONTACT
+        </p>
+
+        <a href="#">
+          Instagram
+        </a>
+
+        <a href="mailto:hello@dadeullim.com">
+          E-mail
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================
+         BACK TO TOP
+    ==================================================== -->
+
+    <div
+      class="
+        case-container
+        case-footer__utility
+      "
+    >
+
+      <a
+        class="case-footer__back-to-top"
+        href="#display-hero"
+      >
+
+        BACK TO TOP
+
+        <span aria-hidden="true">
+          ↑
+        </span>
+
+      </a>
+
+    </div>
+
+
+    <!-- ===================================================
+         LARGE DADEULLIM
+    ==================================================== -->
+
+    <div
+      class="case-footer__brand-stage"
+      aria-label="DADEULLIM"
+    >
+
+      <div class="case-footer__brand-lockup">
+
+        <!-- SYMBOL -->
+
+        <div
+          class="case-footer__symbol"
+          aria-hidden="true"
+        >
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+        </div>
+
+
+        <!-- WORDMARK -->
+
+        <p class="case-footer__brand">
+          DADEULLIM
+        </p>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+</body>
+</html>

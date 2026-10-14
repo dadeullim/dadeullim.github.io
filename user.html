@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="DADEULLIM User Analysis"
+  >
+
+  <title>
+    DADEULLIM — 사용자 정의
+  </title>
+
+
+  <!-- =====================================================
+       INDEX COMMON CSS
+       HEADER / FOOTER
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="./style.css"
+  >
+
+
+  <!-- =====================================================
+       ABOUT COMMON CSS
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="./about.css"
+  >
+
+
+  <!-- =====================================================
+       COMMON JS
+  ====================================================== -->
+
+  <script
+    src="./script.js"
+    defer
+  ></script>
+
+
+  <!-- =====================================================
+       ABOUT JS
+  ====================================================== -->
+
+  <script
+    src="./about.js"
+    defer
+  ></script>
+
+</head>
+
+
+<body class="about-page user-page ud-page ud-page--mix">
+
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header
+    class="site-header"
+    id="site-header"
+  >
+
+
+    <!-- ===================================================
+         HEADER BAR
+    ==================================================== -->
+
+    <div class="site-header__bar">
+
+
+      <!-- LOGO — 2026.10.06 : 클릭 시 index로 이동하면서 인트로 다시 재생 (?intro) -->
+
+      <a
+        class="site-header__logo"
+        href="./index.html?intro"
+        aria-label="DADEULLIM 홈"
+      >
+        <!-- LOGO IMAGE — 2026.10.06 : 텍스트(DADEULLIM) → CC2 로고 이미지로 교체 -->
+        <span class="site-header__logo-mark" aria-hidden="true"></span>
+      </a>
+
+
+      <!-- MAIN NAV -->
+
+      <nav
+        class="site-header__nav"
+        aria-label="메인 메뉴"
+      >
+
+
+        <a
+          class="site-header__nav-link"
+          href="./brand1.html"
+        >
+          BRAND
+        </a>
+
+
+        <a
+          class="site-header__nav-link"
+          href="./display.html"
+        >
+          INTERFACE
+        </a>
+
+
+        <a
+          class="site-header__nav-link"
+          href="./driving.html"
+        >
+          EXPERIENCE
+        </a>
+
+
+        <a
+          class="site-header__nav-link is-active"
+          href="./problem.html"
+        >
+          ABOUT
+        </a>
+
+
+      </nav>
+
+
+    </div>
+
+
+
+    <!-- ===================================================
+         MEGA MENU
+    ==================================================== -->
+
+    <div class="site-header__mega">
+
+
+      <div class="site-header__mega-grid">
+
+
+
+        <!-- BRAND -->
+
+        <div class="site-header__mega-column">
+
+
+          <p class="site-header__mega-title">
+            BRAND
+          </p>
+
+
+          <div class="site-header__mega-links">
+
+
+            <a href="./brand1.html">
+              다들림 소개
+            </a>
+
+
+            <a href="./brand2.html">
+              브랜드 철학
+            </a>
+
+
+            <a href="./logo.html">
+              로고 시스템
+            </a>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- INTERFACE -->
+
+        <div class="site-header__mega-column">
+
+
+          <p class="site-header__mega-title">
+            INTERFACE
+          </p>
+
+
+          <div class="site-header__mega-links">
+
+
+            <a href="./display.html">
+              디스플레이
+            </a>
+
+
+            <a href="./handle.html">
+              핸들
+            </a>
+
+
+            <a href="./hud.html">
+              HUD
+            </a>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- EXPERIENCE -->
+
+        <div class="site-header__mega-column">
+
+
+          <p class="site-header__mega-title">
+            EXPERIENCE
+          </p>
+
+
+          <div class="site-header__mega-links">
+
+
+            <a href="./driving.html">
+              주행 경험
+            </a>
+
+
+            <a href="./safety.html">
+              안전 경험
+            </a>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- ABOUT -->
+
+        <div class="site-header__mega-column">
+
+
+          <p class="site-header__mega-title">
+            ABOUT
+          </p>
+
+
+          <div class="site-header__mega-links">
+
+
+            <a href="./problem.html">
+              문제 정의
+            </a>
+
+
+            <a
+              href="./user.html"
+              aria-current="page"
+            >
+              사용자 분석
+            </a>
+
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+  </header>
+
+
+
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <!-- 2026.10.07 : 사용자 정의 조합안 — data-mix : 섹션마다 배경색이 천천히 섞임 -->
+  <main
+    class="about-main user-main ud-main ud-mix"
+    data-mix
+  >
+
+
+
+    <!-- =====================================================
+         01. HERO — 문장 속 작은 창이 화면 전체로 커짐
+         2026.10.07 사용자 정의 조합안 (dadeulrim_user_mix_final.zip)
+         - 스크롤하면 “우리가 정의한 [창] 운전자,” 가운데 창이
+           화면 전체로 커지며 영상이 보이고, 마지막에 정의 문장 등장
+         - 스타일 : about.css 맨 아래 [USER DEFINITION]
+         - 동작   : about.js  맨 아래 [USER DEFINITION]
+    ====================================================== -->
+
+    <section
+      class="v2-hero"
+      data-v2-hero
+      data-mix-bg="dark"
+    >
+
+      <div class="v2-hero__sticky">
+
+
+        <!-- 제목 — 가운데 빈칸(slot) 자리에서 창이 시작 -->
+        <h1
+          class="v2-hero__line"
+          aria-label="우리가 정의한 운전자,"
+        >
+
+          <span
+            class="v2-hero__word v2-hero__word--l"
+            data-v2-l
+          >우리가 정의한</span>
+
+          <span
+            class="v2-hero__slot"
+            aria-hidden="true"
+          ></span>
+
+          <span
+            class="v2-hero__word v2-hero__word--r"
+            data-v2-r
+          ><span class="ud-accent--glass">운전자,</span></span>
+
+        </h1>
+
+
+        <!-- 창 — 영상 + 커진 뒤 나오는 정의 문장 -->
+        <div
+          class="v2-hero__win"
+          data-v2-win
+        >
+
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+            aria-hidden="true"
+          >
+            <source
+              src="./images/user-hero.mp4"
+              type="video/mp4"
+            >
+          </video>
+
+          <div
+            class="v2-hero__shade"
+            data-v2-shade
+          ></div>
+
+          <div
+            class="v2-hero__after"
+            data-v2-after
+          >
+            <p class="ud-eyebrow">
+              User Definition · 사용자 정의
+            </p>
+
+            <p class="ud-h2">
+              들리지 않는 도로 위에서도,<br>
+              <span class="ud-accent--glass">스스로 운전하는 사람.</span>
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- 스크롤 안내 -->
+        <p
+          class="v2-hero__hint ud-eyebrow"
+          data-v2-hint
+        >
+          Scroll
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+
+
+    <!-- =====================================================
+         02. DEFINITION — 소리 파형이 잦아들며 문장이 나타남
+         2026.10.07 수정 (0.zip wave-definition)
+         - 화면이 고정된 동안 스크롤하면 가운데 파형이 점점 잦아들고
+           정의 문장 → 해시태그 순서로 나타남 (가운데 정렬)
+         - 이전 버전(단어가 하나씩 켜짐)에서 교체
+         - 스타일 : about.css [USER DEFINITION] 03
+         - 동작   : about.js  [USER DEFINITION] 02
+    ====================================================== -->
+
+    <section
+      class="wd"
+      data-wd
+      data-mix-bg="dark"
+    >
+
+      <div class="wd__sticky">
+
+
+        <!-- 소리 파형 (선 3개) — JS 가 모양을 계속 그림 -->
+        <svg
+          class="wd__wave"
+          viewBox="0 0 1440 300"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <defs>
+            <linearGradient
+              id="wdGrad"
+              x1="0"
+              x2="1"
+              y1="0"
+              y2="0"
+            >
+              <!--
+                2026.10.07 : 히어로 “운전자,” 글자 색(--ud-glass)과 맞춤
+                파랑 #9fbcf0 → 아이보리 #eeeae0 → 골드 #ecc28e
+                (기존 : 블루그레이 #6f98ac → #cfe3ec)
+              -->
+              <stop offset="0" stop-color="#9fbcf0" stop-opacity="0"/>
+              <stop offset=".2" stop-color="#9fbcf0"/>
+              <stop offset=".5" stop-color="#eeeae0"/>
+              <stop offset=".8" stop-color="#ecc28e"/>
+              <stop offset="1" stop-color="#ecc28e" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+
+          <path
+            data-wd-wave
+            fill="none"
+            stroke="url(#wdGrad)"
+            stroke-width="1.6"
+          />
+          <path
+            data-wd-wave
+            fill="none"
+            stroke="url(#wdGrad)"
+            stroke-width="1"
+            opacity=".5"
+          />
+          <path
+            data-wd-wave
+            fill="none"
+            stroke="url(#wdGrad)"
+            stroke-width=".8"
+            opacity=".28"
+          />
+        </svg>
+
+
+        <!-- 정의 문장 + 해시태그 (차례로 나타남) -->
+        <div class="wd__copy">
+
+          <p
+            class="wd__text"
+            data-wd-fade
+          >
+            다들림의 사용자는<br>
+            <span class="wd__accent">시선과 손끝으로</span><br>
+            도로를 읽는 운전자입니다.
+          </p>
+
+          <ul
+            class="wd__tags"
+            data-wd-fade
+          >
+            <li>#청각장애운전자</li>
+            <li>#직접운전</li>
+            <li>#시각촉각확인</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+
+
+    <!-- =====================================================
+         03. 사용자 특성 (기존 섹션 그대로)
+         사진 3장 캐러셀 + 설명
+    ====================================================== -->
+
+    <section
+      data-mix-bg="night"
+      class="user-character"
+      id="user-character"
+    >
+
+
+
+      <!-- SECTION TITLE -->
+
+      <div class="user-character__heading">
+
+
+        <h2>
+
+          그들의
+
+          <span class="user-character__accent">
+            시선
+          </span>
+
+          으로 바라보는 것.
+
+        </h2>
+
+
+      </div>
+
+
+
+      <!-- =================================================
+           CAROUSEL
+      ================================================== -->
+
+      <div
+        class="user-character__carousel"
+        data-user-carousel
+      >
+
+
+
+        <!-- PREV -->
+
+        <button
+          class="
+            user-character__button
+            user-character__button--prev
+          "
+          type="button"
+          aria-label="이전 사용자 분석"
+          data-user-prev
+        >
+
+          <span aria-hidden="true">
+            ‹
+          </span>
+
+        </button>
+
+
+
+        <!-- VIEWPORT -->
+
+        <div class="user-character__viewport">
+
+
+          <div
+            class="user-character__track"
+            data-user-track
+          >
+
+
+
+            <!-- SLIDE 01 -->
+
+            <article
+              class="
+                user-character__slide
+                is-active
+              "
+              data-user-slide
+              data-user-index="0"
+            >
+
+
+              <div class="user-character__media">
+
+
+                <img
+                  class="user-character__image"
+                  src="./images/user-character-01.jpg"
+                  alt="청각장애 운전자가 일상 속에서 직접 차량을 운전하는 모습"
+                  loading="lazy"
+                  decoding="async"
+                >
+
+
+              </div>
+
+
+            </article>
+
+
+
+            <!-- SLIDE 02 -->
+
+            <article
+              class="user-character__slide"
+              data-user-slide
+              data-user-index="1"
+            >
+
+
+              <div class="user-character__media">
+
+
+                <img
+                  class="user-character__image"
+                  src="./images/user-character-02.jpg"
+                  alt="운전자가 차량 디스플레이를 통해 목적지를 확인하고 이동을 계획하는 모습"
+                  loading="lazy"
+                  decoding="async"
+                >
+
+
+              </div>
+
+
+            </article>
+
+
+
+            <!-- SLIDE 03 -->
+
+            <article
+              class="user-character__slide"
+              data-user-slide
+              data-user-index="2"
+            >
+
+
+              <div class="user-character__media">
+
+
+                <img
+                  class="user-character__image"
+                  src="./images/user-character-03.jpg"
+                  alt="운전자가 주행 중 주변 차량과 도로 상황을 확인하는 모습"
+                  loading="lazy"
+                  decoding="async"
+                >
+
+
+              </div>
+
+
+            </article>
+
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- NEXT -->
+
+        <button
+          class="
+            user-character__button
+            user-character__button--next
+          "
+          type="button"
+          aria-label="다음 사용자 분석"
+          data-user-next
+        >
+
+          <span aria-hidden="true">
+            ›
+          </span>
+
+        </button>
+
+
+      </div>
+
+
+
+      <!-- =================================================
+           DESCRIPTION
+      ================================================== -->
+
+      <div
+        class="user-character__description"
+        aria-live="polite"
+      >
+
+
+
+        <p
+          class="
+            user-character__description-text
+            is-active
+          "
+          data-user-description
+          data-user-description-index="0"
+        >
+
+          청각장애 운전자도 일상 속에서 직접 차량을 운전하며<br>
+
+          다양한 도로 환경과 주행 상황을 스스로 경험합니다.
+
+        </p>
+
+
+
+        <p
+          class="user-character__description-text"
+          data-user-description
+          data-user-description-index="1"
+        >
+
+          출퇴근, 약속, 여행처럼 일상의 이동을 스스로 계획하고<br>
+
+          목적지까지 주체적으로 이동합니다.
+
+        </p>
+
+
+
+        <p
+          class="user-character__description-text"
+          data-user-description
+          data-user-description-index="2"
+        >
+
+          주행 중 주변 차량과 도로 상황을 확인하고,<br>
+
+          변화하는 상황에 맞춰 필요한 판단과 대응을 직접 수행합니다.
+
+        </p>
+
+
+      </div>
+
+
+
+      <!-- =================================================
+           KEYWORDS
+      ================================================== -->
+
+      <div
+        class="user-character__keywords"
+        aria-hidden="true"
+      >
+
+
+        <div class="user-character__keyword">
+
+          <span>
+            직접 운전하고
+          </span>
+
+        </div>
+
+
+        <div class="user-character__keyword-line"></div>
+
+
+        <div class="user-character__keyword">
+
+          <span>
+            일상을 이동하며
+          </span>
+
+        </div>
+
+
+        <div class="user-character__keyword-line"></div>
+
+
+        <div class="user-character__keyword">
+
+          <span>
+            스스로 판단한다
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- =====================================================
+         04. CONTEXT — 장면 위에 소리가 나는 위치가 링으로 표시됨
+         스크롤에 따라 장면 4개가 차례로 바뀜
+         (링 / 이름표 위치 : about.css [USER DEFINITION] 04)
+    ====================================================== -->
+
+    <section
+      class="v4-ctx v4-ctx--dark"
+      data-v4-ctx
+      data-mix-bg="gray"
+    >
+
+      <div class="v4-ctx__sticky">
+
+        <div class="ud-wrap v4-ctx__grid">
+
+
+          <!-- 왼쪽 : 제목 + 장면 설명 -->
+          <div class="v4-ctx__text">
+
+            <p class="ud-eyebrow">
+              Context
+            </p>
+
+            <h2 class="ud-h2 v4-ctx__title">
+              소리가 먼저 도착하는 순간,<br>
+              <span class="ud-accent">운전자에게는 닿지 않습니다.</span>
+            </h2>
+
+            <div class="v4-ctx__items">
+
+              <article
+                class="v4-ctx__item is-on"
+                data-v4-item
+              >
+                <span class="ud-num">01 / 04</span>
+                <h3 class="ud-h3">구급차가 교차로로 들어올 때</h3>
+                <p class="ud-body">사이렌은 멀리서부터 들려오지만, 신호가 바뀌어도 접근을 알아채기 어렵습니다.</p>
+              </article>
+
+              <article
+                class="v4-ctx__item"
+                data-v4-item
+              >
+                <span class="ud-num">02 / 04</span>
+                <h3 class="ud-h3">이륜차가 옆으로 다가올 때</h3>
+                <p class="ud-body">소리로 먼저 알 수 있는 접근을, 미러와 창밖을 번갈아 보며 직접 찾아야 합니다.</p>
+              </article>
+
+              <article
+                class="v4-ctx__item"
+                data-v4-item
+              >
+                <span class="ud-num">03 / 04</span>
+                <h3 class="ud-h3">대형차가 차로를 바꿀 때</h3>
+                <p class="ud-body">짧게 울린 경적 하나를 놓치면, 양보와 판단이 한 박자 늦어집니다.</p>
+              </article>
+
+              <article
+                class="v4-ctx__item"
+                data-v4-item
+              >
+                <span class="ud-num">04 / 04</span>
+                <h3 class="ud-h3">멀리서 긴급차량이 다가올 때</h3>
+                <p class="ud-body">길을 터야 하는 순간을 늦게 알아채, 주변 차량의 흐름 속에서 혼자 멈칫합니다.</p>
+              </article>
+
+            </div>
+
+            <!-- 진행 막대 -->
+            <div
+              class="v4-ctx__bar"
+              aria-hidden="true"
+            ><i data-v4-bar></i></div>
+
+          </div>
+
+
+          <!-- 오른쪽 : 장면 4개 (링 = 소리 나는 위치) -->
+          <div class="v4-ctx__stage">
+
+            <!-- 1. 교차로 구급차 -->
+            <div
+              class="v4-scene is-on"
+              data-v4-scene
+            >
+              <img
+                src="./images/user-scene-01-intersection.jpg"
+                alt="교차로로 들어오는 구급차와 이륜차"
+                loading="lazy"
+              >
+              <span class="ud-rings"><i></i><i></i><i></i></span>
+              <span class="v4-tag">사이렌 · 오른쪽 앞</span>
+            </div>
+
+            <!-- 2. 옆 차로 이륜차 -->
+            <div
+              class="v4-scene"
+              data-v4-scene
+            >
+              <img
+                src="./images/user-scene-02-bike.jpg"
+                alt="옆 차로로 다가오는 이륜차"
+                loading="lazy"
+              >
+              <span class="ud-rings"><i></i><i></i><i></i></span>
+              <span class="v4-tag">엔진음 · 앞 오른쪽</span>
+            </div>
+
+            <!-- 3. 양옆 대형 트럭 -->
+            <div
+              class="v4-scene"
+              data-v4-scene
+            >
+              <img
+                src="./images/user-scene-04-lane.jpg"
+                alt="양옆의 대형 트럭 사이를 달리는 차량"
+                loading="lazy"
+              >
+              <span class="ud-rings"><i></i><i></i><i></i></span>
+              <span class="v4-tag">경적 · 왼쪽 옆</span>
+            </div>
+
+            <!-- 4. 횡단보도 앞 / 멀리 구급차 -->
+            <div
+              class="v4-scene"
+              data-v4-scene
+            >
+              <img
+                src="./images/user-scene-03-crosswalk.jpg"
+                alt="횡단보도 앞에 선 차량과 멀리서 다가오는 구급차"
+                loading="lazy"
+              >
+              <span class="ud-rings"><i></i><i></i><i></i></span>
+              <span class="v4-tag v4-tag--r">사이렌 · 왼쪽 멀리</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+
+
+    <!-- =====================================================
+         05. 시선 분석 (기존 섹션 그대로)
+         HUD → DISPLAY → HANDLE
+    ====================================================== -->
+
+    <section
+      data-mix-bg="dark"
+      class="user-gaze"
+      id="user-gaze"
+      data-user-gaze
+      data-cap="anchor"
+    >
+
+
+      <div class="user-gaze__sticky">
+
+
+
+        <!-- =================================================
+             COCKPIT FRAME
+        ================================================== -->
+
+        <div
+          class="user-gaze__frame"
+          role="img"
+          aria-label="운전석에서 본 HUD, 센터 디스플레이, 핸들"
+        >
+
+
+
+          <!-- 기본 운전석 사진 -->
+
+          <div class="user-gaze__base"></div>
+
+
+          <!-- 어두운 오버레이 -->
+
+          <div class="user-gaze__shade"></div>
+
+
+
+
+          <!-- =================================================
+               밝아지는 영역
+               HUD / DISPLAY / HANDLE
+          ================================================== -->
+
+          <div
+            class="user-gaze__lit"
+            data-gaze-lit
+            style="
+              --t:6.5%;
+              --r:39%;
+              --b:80%;
+              --l:42%;
+            "
+          ></div>
+
+
+          <div
+            class="user-gaze__lit"
+            data-gaze-lit
+            style="
+              --t:26.5%;
+              --r:20%;
+              --b:19.5%;
+              --l:33.5%;
+            "
+          ></div>
+
+
+          <div
+            class="
+              user-gaze__lit
+              user-gaze__lit--wheel
+            "
+            data-gaze-lit
+          ></div>
+
+
+
+
+          <!-- =================================================
+               SPOT / LABEL
+          ================================================== -->
+
+          <span
+            class="
+              user-gaze__spot
+              user-gaze__spot--top
+            "
+            data-gaze-spot
+            data-label="HUD"
+            style="
+              --t:6.5%;
+              --r:39%;
+              --b:80%;
+              --l:42%;
+            "
+          ></span>
+
+
+          <span
+            class="
+              user-gaze__spot
+              user-gaze__spot--top
+            "
+            data-gaze-spot
+            data-label="DISPLAY"
+            style="
+              --t:26.5%;
+              --r:20%;
+              --b:19.5%;
+              --l:33.5%;
+            "
+          ></span>
+
+
+          <span
+            class="
+              user-gaze__spot
+              user-gaze__spot--wheel
+            "
+            data-gaze-spot
+            data-label="HANDLE"
+          ></span>
+
+
+
+
+          <!-- =================================================
+               DESKTOP CALLOUT
+          ================================================== -->
+
+          <!--
+            2026.10.07 : 섹션 제목을 없애면서 설명 위치는 원래대로
+            핸들 설명만 --cy 83% → 79% (살짝 위로)
+          -->
+          <div
+            class="user-gaze__callout"
+            data-gaze-cap="0"
+            style="
+              --cx:62%;
+              --cy:15%;
+              --cw:25%;
+            "
+          >
+
+
+            <span class="user-gaze__from">
+              앞차의 경적과 주변 소리를,
+            </span>
+
+
+            <span class="user-gaze__seen">
+              앞유리 위에서 <br>
+              눈으로 봅니다.
+            </span>
+
+
+          </div>
+
+
+
+          <div
+            class="user-gaze__callout"
+            data-gaze-cap="1"
+            style="
+              --cx:81%;
+              --cy:38%;
+              --cw:18%;
+            "
+          >
+
+
+            <span class="user-gaze__from">
+              사이렌과 경고음을,
+            </span>
+
+
+            <span class="user-gaze__seen">
+              시선을 내려 <br>
+              화면으로 확인합니다.
+            </span>
+
+
+          </div>
+
+
+
+          <div
+            class="user-gaze__callout"
+            data-gaze-cap="2"
+            style="
+              --cx:35%;
+              --cy:79%;
+              --cw:26%;
+            "
+          >
+
+
+            <span class="user-gaze__from">
+              방향지시음과 알림음을,
+            </span>
+
+
+            <span class="user-gaze__seen">
+              핸들을 잡은 <br>
+              손끝으로 느낍니다.
+            </span>
+
+
+          </div>
+
+
+        </div>
+
+
+
+
+        <!-- =================================================
+             SECTION TITLE
+        ================================================== -->
+
+        <!-- 2026.10.07 : 섹션 제목 + 설명 숨김 (about.css [USER GAZE — 제목 숨김]) -->
+        <div class="user-gaze__head">
+
+
+          <h2 class="user-gaze__title">
+
+            들리지 않는 만큼,<br>
+
+            <span class="user-gaze__accent">
+              시선과 손끝으로
+            </span>
+
+            확인합니다.
+
+          </h2>
+
+
+          <p class="user-gaze__lead">
+
+            운전자의 시선과 손은,<br>
+
+            이미 이곳에 머물러 있습니다.
+
+          </p>
+
+
+        </div>
+
+
+
+
+        <!-- PROGRESS DOTS -->
+
+        <div
+          class="user-gaze__dots"
+          aria-hidden="true"
+        >
+
+          <i></i>
+          <i></i>
+          <i></i>
+
+        </div>
+
+
+
+
+        <!-- =================================================
+             MOBILE / NARROW CAPTION
+        ================================================== -->
+
+        <div
+          class="user-gaze__caps"
+          aria-live="polite"
+        >
+
+
+
+          <div
+            class="user-gaze__cap"
+            data-gaze-cap="0"
+          >
+
+
+            <span class="user-gaze__from">
+              앞차의 경적과 주변 소리를,
+            </span>
+
+
+            <span class="user-gaze__seen">
+              앞유리 위에서 <br>
+              눈으로 봅니다.
+            </span>
+
+
+          </div>
+
+
+
+          <div
+            class="user-gaze__cap"
+            data-gaze-cap="1"
+          >
+
+
+            <span class="user-gaze__from">
+              사이렌과 경고음을,
+            </span>
+
+
+            <span class="user-gaze__seen">
+              시선을 내려 <br>
+              화면으로 확인합니다.
+            </span>
+
+
+          </div>
+
+
+
+          <div
+            class="user-gaze__cap"
+            data-gaze-cap="2"
+          >
+
+
+            <span class="user-gaze__from">
+              방향지시음과 알림음을,
+            </span>
+
+
+            <span class="user-gaze__seen">
+              핸들을 잡은 <br>
+              손끝으로 느낍니다.
+            </span>
+
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+
+
+
+    <!-- =====================================================
+         06. EMOTION — 단어와 이미지가 한 줄로 흐름
+         스크롤에 따라 TENSION · FOCUS · ISOLATION 줄이 옆으로 흐름
+    ====================================================== -->
+
+    <section
+      class="ud-sec v5-emo"
+      data-v5-emo
+      data-mix-bg="dark"
+    >
+
+      <div class="ud-wrap">
+
+        <header class="v5-head">
+
+          <p
+            class="ud-eyebrow"
+            data-reveal
+          >
+            Emotion
+          </p>
+
+          <h2
+            class="ud-h2"
+            data-reveal
+          >
+            운전 중 사용자는<br>
+            이런 <span class="ud-accent--warm">감정을 경험</span>합니다.
+          </h2>
+
+        </header>
+
+      </div>
+
+
+      <!-- 옆으로 흐르는 단어 + 이미지 줄 -->
+      <div
+        class="v5-emo__line"
+        aria-hidden="true"
+      >
+        <div
+          class="v5-emo__track"
+          data-v5-emo-track
+        >
+          <span class="v5-emo__w v5-emo__w--warm">TENSION</span>
+          <img
+            src="./images/user-emotion-01-tension.jpg"
+            alt=""
+            loading="lazy"
+          >
+          <span class="v5-emo__w">FOCUS</span>
+          <img
+            src="./images/user-emotion-02-focus.jpg"
+            alt=""
+            loading="lazy"
+          >
+          <span class="v5-emo__w">ISOLATION</span>
+          <img
+            src="./images/user-emotion-03-isolation.jpg"
+            alt=""
+            loading="lazy"
+          >
+        </div>
+      </div>
+
+
+      <!-- 감정 3가지 설명 -->
+      <ol class="ud-wrap v5-emo__cols">
+
+        <li data-reveal>
+          <span class="ud-num">01 TENSION</span>
+          <h3 class="ud-h3">긴장</h3>
+          <p class="ud-body">언제 울릴지 모르는 소리에 대비해, 주행 내내 주변을 살핍니다.</p>
+        </li>
+
+        <li data-reveal>
+          <span class="ud-num">02 FOCUS</span>
+          <h3 class="ud-h3">집중</h3>
+          <p class="ud-body">소리 대신 눈으로 모든 것을 확인하느라, 시선이 쉴 틈이 없습니다.</p>
+        </li>
+
+        <li data-reveal>
+          <span class="ud-num">03 ISOLATION</span>
+          <h3 class="ud-h3">고립</h3>
+          <p class="ud-body">모두가 들은 소리를 나만 모른 채 지나가는 순간이 생깁니다.</p>
+        </li>
+
+      </ol>
+
+    </section>
+
+
+
+
+
+    <!-- =====================================================
+         07. NEEDS — 고정 화면 3단계
+         ① 이미지가 화면 가득 커짐
+         ② 어둡게 흐려지며 세 가지 포인트 (어디서 / 무엇이 / 얼마나)
+         ③ 마무리 문장 + 인터페이스 보러가기
+    ====================================================== -->
+
+    <section
+      class="mx-needs"
+      data-mx-needs
+      data-mix-bg="gray"
+    >
+
+      <div class="mx-needs__sticky">
+
+
+        <header
+          class="mx-needs__head"
+          data-mx-head
+        >
+          <p class="ud-eyebrow">
+            Needs
+          </p>
+
+          <h2 class="ud-h2">
+            그래서, 이 운전자에게 <span class="ud-accent">필요한 것.</span>
+          </h2>
+        </header>
+
+
+        <figure
+          class="mx-needs__media"
+          data-mx-media
+        >
+          <img
+            src="./images/user-scene-05-sensing.jpg"
+            alt="소리를 감지하는 링이 퍼지는 차량 뒷모습"
+            data-mx-img
+          >
+          <span
+            class="mx-needs__veil"
+            data-mx-veil
+          ></span>
+        </figure>
+
+
+        <!-- ② 세 가지 포인트 -->
+        <ol
+          class="mx-needs__points"
+          data-mx-points
+        >
+          <li>
+            <span class="ud-num">WHERE · HUD</span>
+            <b>어디서</b>
+            <p>소리가 들려오는 방향을,<br>시선이 머무는 앞유리 위에서.</p>
+          </li>
+
+          <li>
+            <span class="ud-num">WHAT · DISPLAY</span>
+            <b>무엇이</b>
+            <p>사이렌인지 경적인지,<br>소리의 종류를 화면에서 바로.</p>
+          </li>
+
+          <li>
+            <span class="ud-num">HOW URGENT · HANDLE</span>
+            <b>얼마나</b>
+            <p>위험의 크기를,<br>핸들을 잡은 손끝의 진동으로.</p>
+          </li>
+        </ol>
+
+
+        <!-- ③ 마무리 -->
+        <div
+          class="mx-needs__end"
+          data-mx-end
+        >
+          <p class="ud-h2">
+            듣지 않아도,<br>
+            <span class="ud-accent">먼저 아는 운전자.</span>
+          </p>
+
+          <a
+            class="ud-next"
+            href="./display.html"
+          >
+            다들림 인터페이스 보러가기 <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- 배경색 섞기 끝 지점 (푸터 앞에서 다시 검정) -->
+    <div
+      class="mix-end"
+      data-mix-bg="dark"
+      aria-hidden="true"
+    ></div>
+
+
+  </main>
+
+
+
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer
+    class="case-footer"
+    id="footer"
+  >
+
+
+    <div
+      class="
+        case-container
+        case-footer__top
+      "
+    >
+
+
+
+      <!-- PROJECT -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--project
+        "
+      >
+
+
+        <p class="case-footer__label">
+          PROJECT
+        </p>
+
+
+        <p class="case-footer__project-name">
+          DADEULLIM
+        </p>
+
+
+        <p class="case-footer__text">
+          Sound Experience
+        </p>
+
+
+        <p class="case-footer__text">
+          Graduation Project 2026
+        </p>
+
+
+      </div>
+
+
+
+      <!-- NAVIGATION -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--navigation
+        "
+      >
+
+
+        <p class="case-footer__label">
+          NAVIGATION
+        </p>
+
+
+        <a href="./brand1.html">
+          Brand
+        </a>
+
+
+        <a href="./display.html">
+          Interface
+        </a>
+
+
+        <a href="./driving.html">
+          Experience
+        </a>
+
+
+        <a href="./problem.html">
+          About
+        </a>
+
+
+      </div>
+
+
+
+      <!-- CREDITS -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--credits
+        "
+      >
+
+
+        <p class="case-footer__label">
+          CREDITS
+        </p>
+
+
+        <p class="case-footer__text">
+          Digital Media Design
+        </p>
+
+
+        <p class="case-footer__text">
+          Cheongju University
+        </p>
+
+
+        <p class="case-footer__text">
+          Graduation Exhibition 2026
+        </p>
+
+
+      </div>
+
+
+
+      <!-- CONTACT -->
+
+      <div
+        class="
+          case-footer__column
+          case-footer__column--contact
+        "
+      >
+
+
+        <p class="case-footer__label">
+          CONTACT
+        </p>
+
+
+        <a href="#">
+          Instagram
+        </a>
+
+
+        <a href="mailto:hello@dadeullim.com">
+          E-mail
+        </a>
+
+
+      </div>
+
+
+    </div>
+
+
+
+
+    <!-- ===================================================
+         BACK TO TOP
+    ==================================================== -->
+
+    <div
+      class="
+        case-container
+        case-footer__utility
+      "
+    >
+
+
+      <a
+        class="case-footer__back-to-top"
+        href="#user-opening"
+      >
+
+        BACK TO TOP
+
+        <span aria-hidden="true">
+          ↑
+        </span>
+
+      </a>
+
+
+    </div>
+
+
+
+
+    <!-- ===================================================
+         LARGE DADEULLIM
+    ==================================================== -->
+
+    <div
+      class="case-footer__brand-stage"
+      aria-label="DADEULLIM"
+    >
+
+
+      <div class="case-footer__brand-lockup">
+
+
+
+        <div
+          class="case-footer__symbol"
+          aria-hidden="true"
+        >
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+        </div>
+
+
+
+        <p class="case-footer__brand">
+          DADEULLIM
+        </p>
+
+
+      </div>
+
+
+    </div>
+
+
+  </footer>
+
+
+</body>
+
+</html>

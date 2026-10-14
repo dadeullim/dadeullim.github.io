@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="DADEULLIM Logo System"
+  >
+
+  <title>DADEULLIM — Logo System</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="./logo.css"
+  >
+</head>
+
+
+<body class="logo-page">
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header
+    class="site-header"
+    id="site-header"
+  >
+
+    <div class="site-header__bar">
+
+      <!-- LOGO — 2026.10.06 : 클릭 시 index로 이동하면서 인트로 다시 재생 (?intro) -->
+      <a
+        class="site-header__logo"
+        href="./index.html?intro"
+        aria-label="DADEULLIM 홈"
+      >
+        <!-- LOGO IMAGE — 2026.10.06 : 텍스트(DADEULLIM) → CC2 로고 이미지로 교체 -->
+        <span class="site-header__logo-mark" aria-hidden="true"></span>
+      </a>
+
+
+      <!-- MAIN NAV -->
+      <nav
+        class="site-header__nav"
+        aria-label="메인 메뉴"
+      >
+
+        <a
+          class="site-header__nav-link is-active"
+          href="./brand1.html"
+        >
+          BRAND
+        </a>
+
+        <a
+          class="site-header__nav-link"
+          href="./display.html"
+        >
+          INTERFACE
+        </a>
+
+        <a
+          class="site-header__nav-link"
+          href="./driving.html"
+        >
+          EXPERIENCE
+        </a>
+
+        <a
+          class="site-header__nav-link"
+          href="./problem.html"
+        >
+          ABOUT
+        </a>
+
+      </nav>
+
+    </div>
+
+
+    <!-- MEGA MENU -->
+    <div class="site-header__mega">
+
+      <nav
+        class="site-header__mega-grid"
+        aria-label="상세 메뉴"
+      >
+
+        <!-- BRAND -->
+        <section class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            BRAND
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./brand1.html">
+              다들림 소개
+            </a>
+
+            <a href="./brand2.html">
+              브랜드 철학
+            </a>
+
+            <a
+              href="./logo.html"
+              aria-current="page"
+            >
+              로고 시스템
+            </a>
+
+          </div>
+
+        </section>
+
+
+        <!-- INTERFACE -->
+        <section class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            INTERFACE
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./display.html">
+              디스플레이
+            </a>
+
+            <a href="./handle.html">
+              핸들
+            </a>
+
+            <a href="./hud.html">
+              HUD
+            </a>
+
+          </div>
+
+        </section>
+
+
+        <!-- EXPERIENCE -->
+        <section class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            EXPERIENCE
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./driving.html">
+              주행 경험
+            </a>
+
+            <a href="./safety.html">
+              안전 경험
+            </a>
+
+          </div>
+
+        </section>
+
+
+        <!-- ABOUT -->
+        <section class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            ABOUT
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./problem.html">
+              문제 정의
+            </a>
+
+            <a href="./user.html">
+              사용자 분석
+            </a>
+
+          </div>
+
+        </section>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       HERO
+       영상 재생 종료 후 로고 이미지로 전환
+  ====================================================== -->
+
+  <section
+    class="hero"
+    id="top"
+  >
+
+    <div class="hero__still">
+
+      <img
+        class="hero__logo"
+        id="hero-logo"
+        src="./images/logo.png"
+        alt="DADEULLIM 로고"
+      >
+
+      <p class="hero__tagline">
+        모든 소리가 닿을 수 있도록
+      </p>
+
+    </div>
+
+
+    <video
+      id="hero-video"
+      src="./images/hero.mp4"
+      autoplay
+      muted
+      playsinline
+      preload="auto"
+    ></video>
+
+
+    <button
+      class="hero__replay"
+      id="hero-replay"
+      type="button"
+    >
+      ↻ REPLAY
+    </button>
+
+
+    <div
+      class="scroll"
+      aria-hidden="true"
+    >
+      SCROLL
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main>
+
+
+    <!-- ===================================================
+         INTRO
+    ==================================================== -->
+
+    <section class="intro">
+
+      <div
+        class="wrap"
+        style="text-align:center"
+      >
+
+        <p class="eyebrow reveal">
+          BRAND IDENTITY
+        </p>
+
+        <p class="big reveal">
+          모든 소리가<br>
+          <span>닿을 수 있도록</span>
+        </p>
+
+        <p
+          class="lead reveal"
+          style="margin:28px auto 0"
+        >
+          다들림은 청각장애인을 위한 이동 서비스입니다.<br>
+          놓치기 쉬운 소리를 눈과 진동으로 바꿔,
+          이동의 순간마다 안전하게 연결합니다.
+        </p>
+
+        <img
+          class="logo reveal"
+          src="./images/logo.png"
+          alt="DADEULLIM 로고"
+        >
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         01. CONCEPT
+    ==================================================== -->
+
+    <section id="concept">
+
+      <div class="wrap">
+
+        <p class="eyebrow reveal">
+          CONCEPT
+        </p>
+
+        <h2 class="reveal">
+          세 가지 의미가<br>
+          하나의 형태로
+        </h2>
+
+
+        <div class="concept-rows">
+
+          <!-- 01 -->
+          <div
+            class="concept-row curtain"
+            data-num="01"
+          >
+
+            <span class="num">
+              01
+            </span>
+
+            <div class="concept-row__body">
+
+              <h3>
+                자동차 실루엣
+              </h3>
+
+              <p>
+                자동차의 형태를 최소한의 곡선으로 표현하여
+                모빌리티 서비스를 직관적으로 전달합니다.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- 02 -->
+          <div
+            class="concept-row curtain"
+            data-num="02"
+          >
+
+            <span class="num">
+              02
+            </span>
+
+            <div class="concept-row__body">
+
+              <div class="glyph">
+                ㄷㄷㄹ
+              </div>
+
+              <p>
+                다들림의 초성(ㄷㄷㄹ)을 모티브로 하여
+                연결된 차량 형태의 움직임을 형상화합니다.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- 03 -->
+          <div
+            class="concept-row curtain"
+            data-num="03"
+          >
+
+            <span class="num">
+              03
+            </span>
+
+            <div class="concept-row__body">
+
+              <h3>
+                전달의 흐름
+              </h3>
+
+              <p>
+                좌에서 우로 이어지는 곡선과 그라데이션은
+                소리가 닿는 확장성과 연결을 표현합니다.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         02. CONSTRUCTION
+    ==================================================== -->
+
+    <section
+      class="construction"
+      id="construction"
+    >
+
+      <div class="wrap">
+
+        <p class="eyebrow reveal">
+          LOGO CONSTRUCTION
+        </p>
+
+        <h2 class="reveal">
+          정교한 그리드 위에<br>
+          설계된 비율
+        </h2>
+
+        <p class="lead reveal">
+          X 단위를 기준으로 한 그리드 시스템으로
+          워드마크와 웨이브의 비례를 정의합니다.
+        </p>
+
+
+        <div class="split">
+
+          <div class="split__side">
+
+            <div class="specs reveal-left">
+
+              <div>
+                <b
+                  data-count="9"
+                  data-decimals="0"
+                  data-suffix="X"
+                >
+                  9X
+                </b>
+
+                <span>
+                  워드마크 폭
+                </span>
+              </div>
+
+
+              <div>
+                <b
+                  data-count="3.6"
+                  data-decimals="1"
+                  data-suffix="X"
+                >
+                  3.6X
+                </b>
+
+                <span>
+                  전체 높이
+                </span>
+              </div>
+
+
+              <div>
+                <b
+                  data-count="2"
+                  data-decimals="0"
+                  data-suffix="X"
+                >
+                  2X
+                </b>
+
+                <span>
+                  문자 높이
+                </span>
+              </div>
+
+
+              <div>
+                <b
+                  data-count="2.5"
+                  data-decimals="1"
+                  data-suffix="X"
+                >
+                  2.5X
+                </b>
+
+                <span>
+                  좌우 여백
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="split__main">
+
+            <div class="figure reveal-right">
+
+              <img
+                src="./images/construction.png"
+                alt="DADEULLIM 로고 구조 분석 및 그리드 시스템"
+              >
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="details">
+
+          <!-- ROUND CORNER -->
+          <div class="detail reveal-left">
+
+            <div class="pic">
+
+              <img
+                src="./images/corner.png"
+                alt="DADEULLIM 로고 라운드 코너 디테일"
+              >
+
+            </div>
+
+            <div class="cap">
+
+              <h4>
+                라운드 코너
+              </h4>
+
+              <em>
+                R = 0.4X
+              </em>
+
+            </div>
+
+          </div>
+
+
+          <!-- ANGLE -->
+          <div class="detail reveal-right">
+
+            <div class="pic">
+
+              <img
+                src="./images/angle.png"
+                alt="DADEULLIM 로고 사선 커팅각 디테일"
+              >
+
+            </div>
+
+            <div class="cap">
+
+              <h4>
+                사선 커팅각
+              </h4>
+
+              <em>
+                60°
+              </em>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         03. WAVE CONSTRUCTION
+    ==================================================== -->
+
+    <section id="wave">
+
+      <!-- BLUEPRINT BACKGROUND -->
+      <div
+        class="blueprint"
+        aria-hidden="true"
+      >
+
+        <span
+          class="blueprint__v"
+          style="left:16%"
+        ></span>
+
+        <span
+          class="blueprint__v"
+          style="left:50%"
+        ></span>
+
+        <span
+          class="blueprint__v"
+          style="left:84%"
+        ></span>
+
+
+        <svg
+          viewBox="0 0 1440 1600"
+          preserveAspectRatio="xMidYMid slice"
+        >
+
+          <circle
+            class="bp-dash"
+            cx="250"
+            cy="300"
+            r="260"
+          />
+
+          <circle
+            cx="250"
+            cy="300"
+            r="170"
+          />
+
+          <path
+            class="bp-dash"
+            d="M-120 760 C 300 520, 760 980, 1180 700 S 1620 420, 1700 520"
+          />
+
+          <path
+            d="M-80 1180 C 340 980, 700 1360, 1120 1120 S 1560 880, 1660 960"
+          />
+
+          <circle
+            class="bp-dash"
+            cx="1180"
+            cy="1320"
+            r="300"
+          />
+
+          <line
+            class="bp-dash"
+            x1="0"
+            y1="760"
+            x2="1440"
+            y2="760"
+          />
+
+          <line
+            class="bp-dash"
+            x1="0"
+            y1="1180"
+            x2="1440"
+            y2="1180"
+          />
+
+        </svg>
+
+      </div>
+
+
+      <div class="wrap">
+
+        <p class="eyebrow reveal">
+          WAVE CONSTRUCTION
+        </p>
+
+        <h2 class="reveal">
+          원에서 시작된<br>
+          소리의 곡선
+        </h2>
+
+        <p class="lead reveal">
+          원호의 결합과 접선 연결로 만들어진 상단 웨이브는<br>
+          자동차의 지붕선이자 퍼져나가는 소리의 파동이 됩니다.
+        </p>
+
+
+        <div
+          class="steps"
+          id="timeline"
+        >
+
+          <!-- STEP 01 -->
+          <div class="step">
+
+            <span
+              class="step__ghost"
+              aria-hidden="true"
+            >
+              Circle
+            </span>
+
+            <div class="pic reveal-left">
+
+              <video
+                src="./images/wave1.mp4"
+                poster="./images/wave1.png"
+                muted
+                loop
+                playsinline
+                preload="auto"
+              ></video>
+
+            </div>
+
+            <div class="t reveal-right">
+
+              <span class="num">
+                01
+              </span>
+
+              <h4>
+                기본 원형 설정
+              </h4>
+
+              <p>
+                웨이브의 출발점은 하나의 원입니다.
+                곡률의 기준이 되는 원을 먼저 세우고,
+                그 위에 시각적 변형이 일어날 기준점을 잡습니다.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- STEP 02 -->
+          <div class="step">
+
+            <span
+              class="step__ghost"
+              aria-hidden="true"
+            >
+              Arc
+            </span>
+
+            <div class="pic reveal-right">
+
+              <video
+                src="./images/wave2.mp4"
+                poster="./images/wave2.png"
+                muted
+                loop
+                playsinline
+                preload="auto"
+              ></video>
+
+            </div>
+
+            <div class="t reveal-left">
+
+              <span class="num">
+                02
+              </span>
+
+              <h4>
+                원호 결합
+              </h4>
+
+              <p>
+                기준 원에서 뽑아낸 원호들을 겹쳐
+                메인 곡선을 만듭니다.
+                서로 다른 반지름의 호가 만나면서
+                소리가 퍼져나가는 듯한 흐름이 생깁니다.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- STEP 03 -->
+          <div class="step">
+
+            <span
+              class="step__ghost"
+              aria-hidden="true"
+            >
+              Tangent
+            </span>
+
+            <div class="pic reveal-left">
+
+              <video
+                src="./images/wave3.mp4"
+                poster="./images/wave3.png"
+                muted
+                loop
+                playsinline
+                preload="auto"
+              ></video>
+
+            </div>
+
+            <div class="t reveal-right">
+
+              <span class="num">
+                03
+              </span>
+
+              <h4>
+                접선 연결
+              </h4>
+
+              <p>
+                상승부와 하강부가 꺾이지 않도록
+                접선으로 이어 붙입니다.
+                끊기는 지점 없이 하나의 선으로
+                자연스럽게 흐르게 하는 과정입니다.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- STEP 04 -->
+          <div class="step">
+
+            <span
+              class="step__ghost"
+              aria-hidden="true"
+            >
+              Wave
+            </span>
+
+            <div class="pic reveal-right">
+
+              <video
+                src="./images/wave4.mp4"
+                poster="./images/wave4.png"
+                muted
+                loop
+                playsinline
+                preload="auto"
+              ></video>
+
+            </div>
+
+            <div class="t reveal-left">
+
+              <span class="num">
+                04
+              </span>
+
+              <h4>
+                최종 웨이브
+              </h4>
+
+              <p>
+                두께의 강약을 정리해 최종 형태를 완성합니다.
+                얇게 시작해 두껍게 뻗어나가는 흐름이
+                멀리까지 닿는 소리의 확장을 표현합니다.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         04. COLOR
+    ==================================================== -->
+
+    <section
+      class="color"
+      id="color"
+    >
+
+      <div class="wrap">
+
+        <p class="eyebrow reveal">
+          COLOR
+        </p>
+
+        <h2 class="reveal">
+          깊은 밤에서<br>
+          맑은 신호로
+        </h2>
+
+        <p class="lead reveal">
+          딥 네이비에서 시그널 블루로 이어지는
+          그라데이션은 멀리까지 닿는 소리의 확장을 상징합니다.
+        </p>
+
+
+        <div class="color-blocks">
+
+          <button
+            class="color-block burst"
+            type="button"
+            style="background:#0B0A4F"
+            data-hex="#0B0A4F"
+          >
+
+            <span class="color-block__name">
+              Deep Navy
+            </span>
+
+            <span class="color-block__hex">
+              #0B0A4F · 클릭하여 복사
+            </span>
+
+          </button>
+
+
+          <button
+            class="color-block burst"
+            type="button"
+            style="background:#1670FF"
+            data-hex="#1670FF"
+          >
+
+            <span class="color-block__name">
+              Signal Blue
+            </span>
+
+            <span class="color-block__hex">
+              #1670FF · 클릭하여 복사
+            </span>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         05. APPLICATION
+    ==================================================== -->
+
+    <section id="application">
+
+      <div class="wrap">
+
+        <p class="eyebrow reveal">
+          APPLICATION
+        </p>
+
+        <h2 class="reveal">
+          어떤 배경에서도<br>
+          또렷하게
+        </h2>
+
+        <p class="lead reveal">
+          <!-- 문구 수정 2026.10.07 : 블루 계열 → 블루·블랙 계열 -->
+          밝은 배경에는 그라데이션 로고를,
+          블루·블랙 계열 배경에는 화이트 로고를 사용합니다.
+        </p>
+
+
+        <div class="bento">
+
+          <!-- 순서 변경 2026.10.07 : 밝은 배경(그라데이션 로고) → 진한 배경(화이트 로고) -->
+
+          <!-- WHITE -->
+          <div class="app-item reveal-scale">
+
+            <div class="app a1">
+
+              <img
+                src="./images/logo.png"
+                alt="White 배경의 DADEULLIM 로고"
+              >
+
+            </div>
+
+            <span class="label">
+              WHITE
+            </span>
+
+          </div>
+
+
+          <!-- LIGHT GRAY -->
+          <div class="app-item reveal-scale">
+
+            <div class="app a2">
+
+              <img
+                src="./images/logo.png"
+                alt="Light Gray 배경의 DADEULLIM 로고"
+              >
+
+            </div>
+
+            <span class="label">
+              LIGHT GRAY
+            </span>
+
+          </div>
+
+
+          <!-- SIGNAL BLUE -->
+          <div class="app-item reveal-scale">
+
+            <div class="app a4">
+
+              <img
+                src="./images/logo-white.png"
+                alt="Signal Blue 배경의 DADEULLIM 화이트 로고"
+              >
+
+            </div>
+
+            <span class="label">
+              SIGNAL BLUE
+            </span>
+
+          </div>
+
+
+          <!-- NEAR BLACK (2026.10.07 : SOFT BLUE → NEAR BLACK 변경) -->
+          <div class="app-item reveal-scale">
+
+            <div class="app a3">
+
+              <img
+                src="./images/logo-white.png"
+                alt="Near Black 배경의 DADEULLIM 화이트 로고"
+              >
+
+            </div>
+
+            <span class="label">
+              NEAR BLACK
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer
+    class="case-footer"
+    id="footer"
+  >
+
+    <!-- FOOTER INFORMATION -->
+    <div class="case-container case-footer__top">
+
+      <!-- PROJECT -->
+      <div class="case-footer__column">
+
+        <p class="case-footer__label">
+          PROJECT
+        </p>
+
+        <p class="case-footer__project-name">
+          DADEULLIM
+        </p>
+
+        <p class="case-footer__text">
+          Sound Experience
+        </p>
+
+        <p class="case-footer__text">
+          Graduation Project 2026
+        </p>
+
+      </div>
+
+
+      <!-- NAVIGATION -->
+      <div class="case-footer__column">
+
+        <p class="case-footer__label">
+          NAVIGATION
+        </p>
+
+        <a href="./brand1.html">
+          Brand
+        </a>
+
+        <a href="./display.html">
+          Interface
+        </a>
+
+        <a href="./driving.html">
+          Experience
+        </a>
+
+        <a href="./problem.html">
+          About
+        </a>
+
+      </div>
+
+
+      <!-- CREDITS -->
+      <div class="case-footer__column">
+
+        <p class="case-footer__label">
+          CREDITS
+        </p>
+
+        <p class="case-footer__text">
+          Digital Media Design
+        </p>
+
+        <p class="case-footer__text">
+          Cheongju University
+        </p>
+
+        <p class="case-footer__text">
+          Graduation Exhibition 2026
+        </p>
+
+      </div>
+
+
+      <!-- CONTACT -->
+      <div class="case-footer__column">
+
+        <p class="case-footer__label">
+          CONTACT
+        </p>
+
+        <a href="#">
+          Instagram
+        </a>
+
+        <a href="mailto:hello@dadeullim.com">
+          E-mail
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- BACK TO TOP -->
+    <div class="case-container case-footer__utility">
+
+      <a
+        class="case-footer__back-to-top"
+        href="#top"
+      >
+        BACK TO TOP
+
+        <span aria-hidden="true">
+          ↑
+        </span>
+      </a>
+
+    </div>
+
+
+    <!-- LARGE DADEULLIM -->
+    <div
+      class="case-footer__brand-stage"
+      aria-label="DADEULLIM"
+    >
+
+      <div class="case-footer__brand-lockup">
+
+        <div
+          class="case-footer__symbol"
+          aria-hidden="true"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <p class="case-footer__brand">
+          DADEULLIM
+        </p>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- COLOR COPY TOAST -->
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
+
+
+  <!-- JAVASCRIPT -->
+  <script src="./logo.js"></script>
+
+</body>
+
+</html>

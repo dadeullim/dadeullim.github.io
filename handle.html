@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="DADEULLIM Handle Interface"
+  >
+
+  <title>
+    DADEULLIM — Handle
+  </title>
+
+
+  <!-- =====================================================
+       INDEX 공통 CSS
+       HEADER / FOOTER
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="./style.css"
+  >
+
+
+  <!-- =====================================================
+       DISPLAY / HANDLE / HUD 공통 CSS
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="./interface.css"
+  >
+
+
+  <!-- =====================================================
+       DISPLAY / HANDLE / HUD 공통 JS
+  ====================================================== -->
+
+  <script
+    src="./interface.js"
+    defer
+  ></script>
+
+</head>
+
+
+<body class="interface-page handle-page">
+
+
+  <!-- =====================================================
+       HEADER
+       DADEULLIM COMMON HEADER
+  ====================================================== -->
+
+  <header
+    class="site-header"
+    id="site-header"
+  >
+
+    <div class="site-header__bar">
+
+      <!-- LOGO — 2026.10.06 : 클릭 시 index로 이동하면서 인트로 다시 재생 (?intro) -->
+
+      <a
+        class="site-header__logo"
+        href="./index.html?intro"
+        aria-label="DADEULLIM 홈"
+      >
+        <!-- LOGO IMAGE — 2026.10.06 : 텍스트(DADEULLIM) → CC2 로고 이미지로 교체 -->
+        <span class="site-header__logo-mark" aria-hidden="true"></span>
+      </a>
+
+
+      <!-- MAIN NAV -->
+
+      <nav
+        class="site-header__nav"
+        aria-label="메인 메뉴"
+      >
+
+        <a
+          class="site-header__nav-link"
+          href="./brand1.html"
+        >
+          BRAND
+        </a>
+
+        <a
+          class="site-header__nav-link is-active"
+          href="./display.html"
+        >
+          INTERFACE
+        </a>
+
+        <a
+          class="site-header__nav-link"
+          href="./driving.html"
+        >
+          EXPERIENCE
+        </a>
+
+        <a
+          class="site-header__nav-link"
+          href="./problem.html"
+        >
+          ABOUT
+        </a>
+
+      </nav>
+
+    </div>
+
+
+    <!-- ===================================================
+         MEGA MENU
+    ==================================================== -->
+
+    <div class="site-header__mega">
+
+      <div class="site-header__mega-grid">
+
+
+        <!-- BRAND -->
+
+        <div class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            BRAND
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./brand1.html">
+              다들림 소개
+            </a>
+
+            <a href="./brand2.html">
+              브랜드 철학
+            </a>
+
+            <a href="./logo.html">
+              로고 시스템
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- INTERFACE -->
+
+        <div class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            INTERFACE
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./display.html">
+              디스플레이
+            </a>
+
+            <a
+              href="./handle.html"
+              aria-current="page"
+            >
+              핸들
+            </a>
+
+            <a href="./hud.html">
+              HUD
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- EXPERIENCE -->
+
+        <div class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            EXPERIENCE
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./driving.html">
+              주행 경험
+            </a>
+
+            <a href="./safety.html">
+              안전 경험
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- ABOUT -->
+
+        <div class="site-header__mega-column">
+
+          <p class="site-header__mega-title">
+            ABOUT
+          </p>
+
+          <div class="site-header__mega-links">
+
+            <a href="./problem.html">
+              문제 정의
+            </a>
+
+            <a href="./user.html">
+              사용자 분석
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       HANDLE MAIN
+
+       HAPTIC HANDLE LITE 구조 유지
+       PRODUCT NAV 제거
+  ====================================================== -->
+
+  <main class="handle-main">
+
+
+    <!-- ===================================================
+         01.
+         HANDLE OVERVIEW
+         FRONT → LEFT → RIGHT
+    ==================================================== -->
+
+    <section
+      class="handle-sequence handle-sequence--hero"
+      id="handle-overview"
+      data-handle-hero
+      aria-label="햅틱 핸들 외관 탐색"
+    >
+
+      <div class="handle-sequence__stage">
+
+
+        <!-- ===============================================
+             IMAGE SEQUENCE
+
+             01 FRONT
+             02 LEFT
+             03 RIGHT
+        ================================================ -->
+
+        <div
+          class="handle-sequence__frames"
+          aria-hidden="true"
+        >
+
+          <img
+            class="handle-sequence__frame is-active"
+            src="./images/handle-01-front.png"
+            alt=""
+            decoding="async"
+            fetchpriority="high"
+            data-handle-frame
+          >
+
+          <img
+            class="handle-sequence__frame"
+            src="./images/handle-02-left.png"
+            alt=""
+            loading="eager"
+            decoding="async"
+            data-handle-frame
+          >
+
+          <img
+            class="handle-sequence__frame"
+            src="./images/handle-03-right.png"
+            alt=""
+            loading="eager"
+            decoding="async"
+            data-handle-frame
+          >
+
+        </div>
+
+
+        <!-- BACKGROUND SHADE -->
+
+        <div
+          class="handle-sequence__shade"
+          aria-hidden="true"
+        ></div>
+
+
+        <!-- ===============================================
+             HERO COPY
+        ================================================ -->
+
+        <div class="handle-sequence__copy-wrap">
+
+
+          <!-- FRONT -->
+
+          <article
+            class="handle-sequence__copy is-active"
+            data-handle-copy
+          >
+
+            <p class="handle-eyebrow">
+              DADEULLIM HAPTIC / 01
+            </p>
+
+            <h1>
+              위험의 방향을<br>
+
+              <span>
+                손끝으로
+                <strong class="handle-title-emphasis">
+                  먼저.
+                </strong>
+              </span>
+            </h1>
+
+            <p class="handle-sequence__description">
+              소리로 놓칠 수 있는 위험을 좌우 진동으로 전환해,<br>
+              시선을 도로에 둔 채 방향을 인지합니다.
+            </p>
+
+          </article>
+
+
+          <!-- LEFT -->
+
+          <article
+            class="handle-sequence__copy"
+            data-handle-copy
+          >
+
+            <p class="handle-eyebrow">
+              FORM / LEFT VIEW
+            </p>
+
+            <h2>
+              손에 닿는 형태부터<br>
+
+              <span class="handle-title-emphasis">
+                정교하게.
+              </span>
+            </h2>
+
+            <p class="handle-sequence__description">
+              부드러운 곡률과 이중 소재가 손의 위치를 자연스럽게 잡고,<br>
+              필요한 순간 진동을 또렷하게 전달합니다.
+            </p>
+
+          </article>
+
+
+          <!-- RIGHT -->
+
+          <article
+            class="handle-sequence__copy"
+            data-handle-copy
+          >
+
+            <p class="handle-eyebrow">
+              FORM / RIGHT VIEW
+            </p>
+
+            <h2>
+              어느 방향에서도<br>
+
+              <span class="handle-title-emphasis">
+                같은 감각.
+              </span>
+            </h2>
+
+            <p class="handle-sequence__description">
+              좌우 대칭 구조로 그립의 압력과 진동 전달 범위를 맞춰,<br>
+              방향이 달라도 일관된 피드백을 제공합니다.
+            </p>
+
+          </article>
+
+        </div>
+
+
+        <!-- ===============================================
+             HERO BOTTOM PROGRESS
+        ================================================ -->
+
+        <div class="handle-sequence__footer">
+
+          <p>
+            SCROLL TO EXPLORE
+          </p>
+
+          <div
+            class="handle-sequence__progress"
+            aria-hidden="true"
+          >
+            <span data-handle-progress></span>
+          </div>
+
+          <p
+            class="handle-sequence__count"
+            aria-live="polite"
+          >
+            <span data-handle-current>
+              01
+            </span>
+
+            / 03
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         02.
+         MATERIAL DETAIL
+    ==================================================== -->
+
+    <section
+      class="handle-material"
+      id="handle-detail"
+      data-handle-section
+      data-handle-material
+    >
+
+      <!-- CSS에서 sticky로 고정할 화면: 이미지 → 파동 → 다음 섹션 -->
+
+      <div
+        class="handle-material__sticky"
+        data-material-sticky
+      >
+
+
+        <!-- IMAGE -->
+
+        <div class="handle-material__media">
+
+          <img
+            data-material-image
+            src="./images/handle-04-rim.webp"
+            alt="블랙 가죽과 아이스 블루 라인이 적용된 핸들 상단 디테일"
+            loading="lazy"
+            decoding="async"
+          >
+
+        </div>
+
+
+        <!--
+          파동 전용 오버레이. 기존 이미지를 중복 삽입하지 않습니다.
+          후속 CSS/JS에서 hidden 해제 및 스크롤 구간 연결.
+
+          JS는 원본 좌표 1676×938과 이미지의 cover / object-position /
+          scale(1.01)을 함께 반영해 SVG 위치·크기를 맞춥니다.
+
+          발생점: CX=833, CY=1271, R=916, ANG=[-40, 0, 40].
+          대기 중에는 오버레이를 숨기고 활성 구간에서만 pulse를 실행합니다.
+        -->
+
+        <div
+          class="handle-material__haptics"
+          data-material-haptics
+          hidden
+          aria-hidden="true"
+        >
+
+          <svg
+            class="handle-material__wave-svg"
+            data-material-wave-svg
+            viewBox="0 0 1676 938"
+            xmlns="http://www.w3.org/2000/svg"
+            focusable="false"
+            aria-hidden="true"
+          >
+
+            <defs>
+
+              <radialGradient id="handle-material-blob">
+
+                <stop
+                  offset="0"
+                  stop-color="#c1e2e7"
+                  stop-opacity=".78"
+                />
+
+                <stop
+                  offset=".34"
+                  stop-color="#c1e2e7"
+                  stop-opacity=".3"
+                />
+
+                <stop
+                  offset=".68"
+                  stop-color="#c1e2e7"
+                  stop-opacity=".08"
+                />
+
+                <stop
+                  offset="1"
+                  stop-color="#c1e2e7"
+                  stop-opacity="0"
+                />
+
+              </radialGradient>
+
+
+              <radialGradient id="handle-material-halo">
+
+                <stop
+                  offset="0"
+                  stop-color="#c1e2e7"
+                  stop-opacity=".72"
+                />
+
+                <stop
+                  offset=".45"
+                  stop-color="#c1e2e7"
+                  stop-opacity=".24"
+                />
+
+                <stop
+                  offset="1"
+                  stop-color="#c1e2e7"
+                  stop-opacity="0"
+                />
+
+              </radialGradient>
+
+
+              <clipPath id="handle-material-frame">
+
+                <rect
+                  x="0"
+                  y="0"
+                  width="1676"
+                  height="938"
+                />
+
+              </clipPath>
+
+            </defs>
+
+
+            <g clip-path="url(#handle-material-frame)">
+
+              <!-- ring() / bloom()이 생성하는 파동 -->
+
+              <g data-material-waves></g>
+
+              <!-- pulse()가 사용하는 세 지점의 halo / dot -->
+
+              <g data-material-dots></g>
+
+            </g>
+
+          </svg>
+
+        </div>
+
+
+        <!-- COPY -->
+
+        <div
+          class="handle-material__copy"
+          data-handle-reveal
+        >
+
+          <p class="handle-eyebrow">
+            MATERIAL / 02
+          </p>
+
+          <h2>
+            감각은 손이 닿는<br>
+
+            <span>
+              바로 그 자리에서.
+            </span>
+          </h2>
+
+          <p>
+            매트한 블랙 가죽,
+            미세 타공 아이보리 그립,
+            그리고 얇은 블루 라인.
+
+            서로 다른 촉감과 명확한 경계가
+            안정적인 그립 위치를 안내합니다.
+          </p>
+
+        </div>
+
+      </div><!-- /.handle-material__sticky -->
+
+    </section>
+
+
+
+    <!-- ===================================================
+         03.
+         LEFT / RIGHT FEEDBACK
+    ==================================================== -->
+
+    <section
+      class="handle-grip handle-grip-sequence"
+      id="handle-feedback"
+      data-handle-grip
+      data-handle-section
+      aria-label="좌우 방향성 진동 피드백"
+    >
+
+      <div
+        class="handle-grip__stage handle-grip-sequence__stage"
+      >
+
+
+        <!-- ===============================================
+             GRIP IMAGE SEQUENCE
+             LEFT → RIGHT
+        ================================================ -->
+
+        <div
+          class="handle-grip__frames handle-grip-sequence__frames"
+          aria-hidden="true"
+        >
+
+          <img
+            class="handle-grip__frame handle-grip-sequence__frame is-active"
+            src="./images/handle-05-left-grip.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            data-grip-frame
+          >
+
+          <img
+            class="handle-grip__frame handle-grip-sequence__frame"
+            src="./images/handle-06-right-grip.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            data-grip-frame
+          >
+
+        </div>
+
+
+        <!-- ===============================================
+             GRIP COPY
+        ================================================ -->
+
+        <div
+          class="handle-grip__copy-wrap handle-grip-sequence__copy"
+        >
+
+
+          <!-- LEFT -->
+
+          <article
+            class="handle-grip__copy handle-grip-copy is-active"
+            data-grip-copy
+          >
+
+            <p class="handle-eyebrow">
+              LEFT FEEDBACK / 03
+            </p>
+
+            <h2>
+              왼쪽에서 오는 위험은<br>
+
+              <span class="handle-title-emphasis">
+                왼손으로.
+              </span>
+            </h2>
+
+            <p>
+              왼쪽 그립 내부의 세 개 모터가 동시에 반응해
+              운전자가 방향을 생각하기 전에
+              먼저 느끼도록 합니다.
+            </p>
+
+          </article>
+
+
+          <!-- RIGHT -->
+
+          <article
+            class="handle-grip__copy handle-grip-copy"
+            data-grip-copy
+          >
+
+            <p class="handle-eyebrow">
+              RIGHT FEEDBACK / 03
+            </p>
+
+            <h2>
+              오른쪽의 움직임은<br>
+
+              <span class="handle-title-emphasis">
+                오른손으로.
+              </span>
+            </h2>
+
+            <p>
+              위험이 감지된 방향의 그립만 진동해
+              복잡한 시각 정보 없이도
+              즉각적인 판단을 돕습니다.
+            </p>
+
+          </article>
+
+        </div>
+
+
+        <!-- LEFT / RIGHT GUIDE -->
+
+        <div
+          class="handle-grip__side-label handle-grip-sequence__side-label"
+          aria-hidden="true"
+        >
+
+          <span>
+            L
+          </span>
+
+          <i></i>
+
+          <span>
+            R
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         04.
+         HAPTIC ANATOMY
+         LEFT / RIGHT 3 MOTORS
+    ==================================================== -->
+
+    <section
+      class="handle-anatomy"
+      data-handle-section
+    >
+
+
+      <!-- SECTION HEADING -->
+
+      <header
+        class="handle-section-heading handle-anatomy__heading"
+        data-handle-reveal
+      >
+
+        <div class="handle-section-heading__title">
+
+          <p class="handle-eyebrow">
+            HAPTIC STRUCTURE
+          </p>
+
+          <h2>
+            한쪽에 세 번,<br>
+
+            <span>
+              양쪽에 여섯 번.
+            </span>
+          </h2>
+
+        </div>
+
+        <p>
+          그립의 곡선을 따라 배치된 코인 진동 모터가
+          손바닥 전체에 균일한 진동을 전달합니다.
+        </p>
+
+      </header>
+
+
+      <!-- MOTOR CARDS -->
+
+      <div class="handle-anatomy__grid">
+
+
+        <!-- LEFT -->
+
+        <article
+          class="handle-anatomy__card handle-anatomy-card"
+          data-handle-reveal
+        >
+
+          <img
+            src="./images/handle-07-left-cutaway.webp"
+            alt="왼쪽 그립 내부에 배치된 코인 진동 모터 세 개"
+            loading="lazy"
+            decoding="async"
+          >
+
+          <div class="handle-anatomy__label">
+
+            <span class="handle-anatomy__index">
+              L / 03
+            </span>
+
+            <div>
+
+              <h3>
+                왼쪽 위험을 전달하는 세 개의 진동점
+              </h3>
+
+              <p>
+                LEFT GRIP · COIN VIBRATION MOTOR × 3
+              </p>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- RIGHT -->
+
+        <article
+          class="handle-anatomy__card handle-anatomy-card"
+          data-handle-reveal
+        >
+
+          <img
+            src="./images/handle-08-right-cutaway.webp"
+            alt="오른쪽 그립 내부에 배치된 코인 진동 모터 세 개"
+            loading="lazy"
+            decoding="async"
+          >
+
+          <div class="handle-anatomy__label">
+
+            <span class="handle-anatomy__index">
+              R / 03
+            </span>
+
+            <div>
+
+              <h3>
+                오른쪽 위험을 전달하는 세 개의 진동점
+              </h3>
+
+              <p>
+                RIGHT GRIP · COIN VIBRATION MOTOR × 3
+              </p>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         ASSEMBLY PROCESS FILMS
+         INSTALL / ROUTE / CONNECT
+    ==================================================== -->
+
+    <section
+      class="handle-process"
+      id="handle-process"
+      data-handle-section
+      data-handle-process
+      aria-label="햅틱 핸들 제작 과정"
+    >
+
+
+      <!-- PROCESS META -->
+
+      <div
+        class="handle-process__meta"
+        data-handle-reveal
+      >
+
+        <p>
+          ASSEMBLY PROCESS
+        </p>
+
+        <span>
+          INSTALL · ROUTE · CONNECT
+        </span>
+
+      </div>
+
+
+      <!-- PROCESS FILMS
+           01 : LARGE / LEFT
+           02 : SMALL / RIGHT
+           03 : MEDIUM / LEFT
+      -->
+
+      <div
+        class="handle-process__grid handle-process__sequence"
+        aria-label="햅틱 핸들 조립 공정 영상"
+      >
+
+
+        <!-- 01 / INSTALL -->
+
+        <article
+          class="handle-process__item handle-process__item--install handle-process__item--wide-left"
+          data-handle-process-item
+          data-process-delay="0"
+        >
+
+          <div class="handle-process__media">
+
+            <video
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+              disablepictureinpicture
+              controlslist="nodownload noplaybackrate"
+              data-handle-process-video
+              aria-label="핸들 내부에 진동 모터를 장착하는 과정"
+            >
+
+              <source
+                src="./images/handle-process-01-install.mp4"
+                type="video/mp4"
+              >
+
+              브라우저에서 영상을 재생할 수 없습니다.
+
+            </video>
+
+          </div>
+
+          <div class="handle-process__caption">
+
+            <span>
+              01 / INSTALL
+            </span>
+
+            <p>
+              VIBRATION MOTOR ASSEMBLY
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- 02 / ROUTE -->
+
+        <article
+          class="handle-process__item handle-process__item--route handle-process__item--narrow-right"
+          data-handle-process-item
+          data-process-delay="450"
+        >
+
+          <div class="handle-process__media">
+
+            <video
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+              disablepictureinpicture
+              controlslist="nodownload noplaybackrate"
+              data-handle-process-video
+              aria-label="핸들 내부 배선을 정리하는 과정"
+            >
+
+              <source
+                src="./images/handle-process-02-route.mp4"
+                type="video/mp4"
+              >
+
+              브라우저에서 영상을 재생할 수 없습니다.
+
+            </video>
+
+          </div>
+
+          <div class="handle-process__caption">
+
+            <span>
+              02 / ROUTE
+            </span>
+
+            <p>
+              INTERNAL WIRE ROUTING
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- 03 / CONNECT -->
+
+        <article
+          class="handle-process__item handle-process__item--connect handle-process__item--medium-left"
+          data-handle-process-item
+          data-process-delay="900"
+        >
+
+          <div class="handle-process__media">
+
+            <video
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+              disablepictureinpicture
+              controlslist="nodownload noplaybackrate"
+              data-handle-process-video
+              aria-label="아두이노 제어보드에 핸들 배선을 연결하는 과정"
+            >
+
+              <source
+                src="./images/handle-process-03-connect.mp4"
+                type="video/mp4"
+              >
+
+              브라우저에서 영상을 재생할 수 없습니다.
+
+            </video>
+
+          </div>
+
+          <div class="handle-process__caption">
+
+            <span>
+              03 / CONNECT
+            </span>
+
+            <p>
+              ARDUINO CONTROL CONNECTION
+            </p>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         05.
+         CONTROL SYSTEM
+    ==================================================== -->
+
+    <section
+      class="handle-system"
+      id="handle-system"
+      data-handle-section
+    >
+
+
+      <!-- SYSTEM HEADING -->
+
+      <header
+        class="handle-system__heading"
+        data-handle-reveal
+      >
+
+        <div class="handle-section-heading__title">
+
+          <p class="handle-eyebrow">
+            CONTROL SYSTEM / 04
+          </p>
+
+          <h2>
+            여섯 개의 모터,<br>
+
+            <span>
+              하나의 판단.
+            </span>
+          </h2>
+
+        </div>
+
+        <p>
+          중앙 제어부가 위험의 방향을 판단하고
+          좌우 모터를 개별 제어해,
+          시각을 방해하지 않는
+          촉각 정보로 변환합니다.
+        </p>
+
+      </header>
+
+
+      <!-- SYSTEM IMAGE -->
+
+      <figure
+        class="handle-system__figure"
+        data-handle-reveal
+      >
+
+        <img
+          src="./images/handle-09-system.webp"
+          alt="좌우 코인 진동 모터 여섯 개와 중앙 아두이노 제어부가 연결된 햅틱 핸들 시스템"
+          loading="lazy"
+          decoding="async"
+        >
+
+
+        <!-- MARKERS -->
+
+        <figcaption class="handle-system__markers">
+
+          <span
+            class="handle-system__marker handle-system__marker--left"
+          >
+            LEFT / 3 MOTORS
+          </span>
+
+          <span
+            class="handle-system__marker handle-system__marker--control"
+          >
+            CONTROL UNIT
+          </span>
+
+          <span
+            class="handle-system__marker handle-system__marker--right"
+          >
+            RIGHT / 3 MOTORS
+          </span>
+
+        </figcaption>
+
+      </figure>
+
+
+      <!-- SYSTEM PROCESS -->
+
+      <div
+        class="handle-system__summary"
+        data-handle-reveal
+      >
+
+
+        <!-- INPUT -->
+
+        <article class="handle-system__stat">
+
+          <span>
+            01 / INPUT
+          </span>
+
+          <strong>
+            위험 방향 감지
+          </strong>
+
+          <p>
+            차량의 감지 정보가 중앙 제어부로 전달됩니다.
+          </p>
+
+        </article>
+
+
+        <!-- PROCESS -->
+
+        <article class="handle-system__stat">
+
+          <span>
+            02 / PROCESS
+          </span>
+
+          <strong>
+            좌우 신호 분리
+          </strong>
+
+          <p>
+            제어부가 위험 위치에 맞춰
+            작동할 모터를 선택합니다.
+          </p>
+
+        </article>
+
+
+        <!-- OUTPUT -->
+
+        <article class="handle-system__stat">
+
+          <span>
+            03 / OUTPUT
+          </span>
+
+          <strong>
+            촉각 피드백 전달
+          </strong>
+
+          <p>
+            해당 방향의 세 모터가
+            손끝에 즉시 진동을 전달합니다.
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =====================================================
+       FOOTER
+       DADEULLIM COMMON FOOTER
+  ====================================================== -->
+
+  <footer
+    class="case-footer"
+    id="footer"
+  >
+
+
+    <!-- ===================================================
+         FOOTER INFORMATION
+    ==================================================== -->
+
+    <div
+      class="case-container case-footer__top"
+    >
+
+
+      <!-- PROJECT -->
+
+      <div class="case-footer__column">
+
+        <p class="case-footer__label">
+          PROJECT
+        </p>
+
+        <p class="case-footer__project-name">
+          DADEULLIM
+        </p>
+
+        <p class="case-footer__text">
+          Sound Experience
+        </p>
+
+        <p class="case-footer__text">
+          Graduation Project 2026
+        </p>
+
+      </div>
+
+
+      <!-- NAVIGATION -->
+
+      <div class="case-footer__column">
+
+        <p class="case-footer__label">
+          NAVIGATION
+        </p>
+
+        <a href="./brand1.html">
+          Brand
+        </a>
+
+        <a href="./display.html">
+          Interface
+        </a>
+
+        <a href="./driving.html">
+          Experience
+        </a>
+
+        <a href="./problem.html">
+          About
+        </a>
+
+      </div>
+
+
+      <!-- CREDITS -->
+
+      <div class="case-footer__column">
+
+        <p class="case-footer__label">
+          CREDITS
+        </p>
+
+        <p class="case-footer__text">
+          Digital Media Design
+        </p>
+
+        <p class="case-footer__text">
+          Cheongju University
+        </p>
+
+        <p class="case-footer__text">
+          Graduation Exhibition 2026
+        </p>
+
+      </div>
+
+
+      <!-- CONTACT -->
+
+      <div class="case-footer__column">
+
+        <p class="case-footer__label">
+          CONTACT
+        </p>
+
+        <a href="#">
+          Instagram
+        </a>
+
+        <a href="mailto:hello@dadeullim.com">
+          E-mail
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===================================================
+         BACK TO TOP
+    ==================================================== -->
+
+    <div
+      class="case-container case-footer__utility"
+    >
+
+      <a
+        class="case-footer__back-to-top"
+        href="#handle-overview"
+      >
+
+        BACK TO TOP
+
+        <span aria-hidden="true">
+          ↑
+        </span>
+
+      </a>
+
+    </div>
+
+
+    <!-- ===================================================
+         LARGE DADEULLIM
+    ==================================================== -->
+
+    <div
+      class="case-footer__brand-stage"
+      aria-label="DADEULLIM"
+    >
+
+      <div class="case-footer__brand-lockup">
+
+
+        <!-- SYMBOL -->
+
+        <div
+          class="case-footer__symbol"
+          aria-hidden="true"
+        >
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+        </div>
+
+
+        <!-- LARGE WORDMARK -->
+
+        <p class="case-footer__brand">
+          DADEULLIM
+        </p>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+</body>
+
+</html>

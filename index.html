@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="DADEULLIM sound experience project" name="description"/>
+<title>
+    DADEULLIM — Sound Experience
+  </title>
+<link href="./style.css" rel="stylesheet"/>
+<!-- =====================================================
+       INTRO 준비 — 2026.10.06
+       화면이 그려지기 전에 인트로 재생 여부를 먼저 결정
+       (HERO가 잠깐 보였다가 인트로가 덮는 깜빡임 방지)
+       - 이 탭에서 이미 인트로를 봤다면 재생하지 않음
+       - 단, 로고 클릭(index.html?intro)으로 들어오면 항상 재생
+       - 실제 재생 / 종료 동작은 script.js 맨 아래 [인트로]
+  ====================================================== -->
+<script>
+    (function () {
+      var played = false;
+
+      try {
+        played = sessionStorage.getItem("dadeullim-intro-played") === "1";
+      } catch (error) {}
+
+      /* 로고 클릭으로 들어온 경우 (2026.10.06 추가) */
+      var fromLogo = /[?&]intro(=|&|$)/.test(window.location.search);
+
+      if (fromLogo) {
+        /* 주소창에는 ?intro 남기지 않음 → index.html 로 정리 */
+        window.history.replaceState(null, "", window.location.pathname);
+      }
+
+      if (!played || fromLogo) {
+        document.documentElement.classList.add("is-intro-active");
+      }
+    })();
+  </script>
+</head>
+<body>
+<!-- =====================================================
+       INTRO — 2026.10.06
+       - 처음 접속했을 때만 인트로 영상 재생 (같은 탭에서는 1회)
+       - 상단 로고 클릭 시에는 다시 재생 (2026.10.06 추가)
+       - 영상이 끝나기 직전 패널이 위로 걷히면서 HERO 시작
+       - 영상 파일 : ./images/intro-v12.mp4 (2026.10.14 변경, 전 ./images/intro.mp4)
+  ====================================================== -->
+<div aria-label="DADEULLIM 인트로" class="site-intro" id="site-intro" role="dialog">
+<!-- 2026.10.14 : 인트로 영상 intro.mp4 → intro-v12.mp4 (기존 파일은 images/intro.mp4 로 남겨 둠)
+     새 영상은 마지막 장면이 HERO 01 화면과 같음 → 패널이 걷히지 않고 그대로 겹쳐 사라짐 -->
+<video class="site-intro__video" id="site-intro-video" muted="" playsinline="" preload="auto" src="./images/intro-v12.mp4"></video>
+<!-- SKIP 버튼 -->
+<button class="site-intro__skip" id="site-intro-skip" type="button">
+        SKIP
+      </button>
+</div>
+<!-- =====================================================
+       HEADER
+  ====================================================== -->
+<header class="site-header" id="site-header">
+<div class="site-header__bar">
+<!-- LOGO — 2026.10.06 : 클릭 시 index로 이동하면서 인트로 다시 재생 (?intro) -->
+<a aria-label="DADEULLIM 홈" class="site-header__logo" href="./index.html?intro">
+        <!-- LOGO IMAGE — 2026.10.06 : 텍스트(DADEULLIM) → CC2 로고 이미지로 교체 -->
+        <span class="site-header__logo-mark" aria-hidden="true"></span>
+      </a>
+<!-- MAIN NAV -->
+<nav aria-label="메인 메뉴" class="site-header__nav">
+<a class="site-header__nav-link" href="./brand1.html">
+          BRAND
+        </a>
+<a class="site-header__nav-link" href="./display.html">
+          INTERFACE
+        </a>
+<a class="site-header__nav-link" href="./driving.html">
+          EXPERIENCE
+        </a>
+<a class="site-header__nav-link" href="./problem.html">
+          ABOUT
+        </a>
+</nav>
+</div>
+<!-- MEGA MENU -->
+<div class="site-header__mega">
+<nav aria-label="상세 메뉴" class="site-header__mega-grid">
+<!-- BRAND -->
+<section class="site-header__mega-column">
+<p class="site-header__mega-title">
+            BRAND
+          </p>
+<div class="site-header__mega-links">
+<a href="./brand1.html">다들림 소개</a>
+<a href="./brand2.html">브랜드 철학</a>
+<a href="./logo.html">로고 시스템</a>
+</div>
+</section>
+<!-- INTERFACE -->
+<section class="site-header__mega-column">
+<p class="site-header__mega-title">
+            INTERFACE
+          </p>
+<div class="site-header__mega-links">
+<a href="./display.html">디스플레이</a>
+<a href="./handle.html">핸들</a>
+<a href="./hud.html">HUD</a>
+</div>
+</section>
+<!-- EXPERIENCE -->
+<section class="site-header__mega-column">
+<p class="site-header__mega-title">
+            EXPERIENCE
+          </p>
+<div class="site-header__mega-links">
+<a href="./driving.html">주행 경험</a>
+<a href="./safety.html">안전 경험</a>
+</div>
+</section>
+<!-- ABOUT -->
+<section class="site-header__mega-column">
+<p class="site-header__mega-title">
+            ABOUT
+          </p>
+<div class="site-header__mega-links">
+<a href="./problem.html">문제 정의</a>
+<a href="./user.html">사용자 분석</a>
+</div>
+</section>
+</nav>
+</div>
+</header>
+<!-- =====================================================
+       MAIN
+  ====================================================== -->
+<main>
+<!-- ===================================================
+         HERO
+    ==================================================== -->
+<section class="experience" id="experience">
+<div class="experience__viewport">
+<!-- HERO BACKGROUND -->
+<div aria-hidden="true" class="visual-stage" id="visual-stage">
+<canvas class="visual-canvas" id="visual-canvas"></canvas>
+<!-- FALLBACK IMAGE -->
+<!-- 2026.10.07 : 원본(5000~7000px) 대신 웹용으로 줄인 -web.jpg (2560px) 사용 — 모바일 WebGL 표시 / 렉 개선 -->
+<div class="visual-fallback" id="visual-fallback">
+<img alt="" class="visual-fallback__image is-active" data-background-index="0" src="./images/01-web.jpg"/>
+<img alt="" class="visual-fallback__image" data-background-index="1" src="./images/02-web.jpg"/>
+<img alt="" class="visual-fallback__image" data-background-index="2" src="./images/03-web.jpg"/>
+</div>
+<div class="visual-shade"></div>
+</div>
+<!-- HERO COPY -->
+<div class="copy-stage" id="copy-stage">
+<!-- SCENE 01 -->
+<article aria-hidden="false" class="copy-slide is-active" data-copy="0">
+<p class="copy-slide__sound copy-slide__sound--top">
+              SOUND EXPERIENCE
+            </p>
+<p class="copy-slide__sound copy-slide__sound--top">
+              SOUND EXPERIENCE
+            </p>
+<h1 class="copy-slide__title copy-slide__title--hero">
+              <span class="w" style="--w:0s">보이지</span>
+              <span class="w" style="--w:.06s">않는</span>
+              <span class="w" style="--w:.12s">소리까지,</span>
+              <br/>
+              <span class="w" style="--w:.20s">움직임의</span>
+              <span class="w" style="--w:.26s">감각이</span>
+              <span class="w" style="--w:.32s">되다.</span>
+            </h1>
+</article>
+<!-- SCENE 02 -->
+<article aria-hidden="true" class="copy-slide" data-copy="1">
+<h2 class="copy-slide__title copy-slide__title--hero02">
+              <span class="w" style="--w:0s">더</span>
+              <span class="w" style="--w:.06s">먼저</span>
+              <span class="w hero02-emphasis" style="--w:.12s">느끼고,</span>
+              <span class="w" style="--w:.20s">더</span>
+              <span class="w" style="--w:.26s">빠르게</span>
+              <span class="w hero02-emphasis hero02-emphasis--final" style="--w:.34s">닿도록.</span>
+            </h2>
+</article>
+<!-- SCENE 03 -->
+<article aria-hidden="true" class="copy-slide" data-copy="2">
+<h2 class="copy-slide__title copy-slide__title--hero03">
+<span class="hero03-line hero03-line--1">
+                <span class="w" style="--w:0s">안전을</span>
+                <span class="w" style="--w:.07s">새롭게</span>
+              </span>
+<span class="hero03-line hero03-line--2">
+                <span class="w" style="--w:.16s">감각하게</span>
+                <span class="w" style="--w:.23s">하는</span>
+                <span class="w" style="--w:.30s">다들림만의</span>
+              </span>
+<span class="hero03-line hero03-line--3">
+                <span class="w" style="--w:.40s">기술</span>
+              </span>
+</h2>
+<img alt="" class="hero03-image hero03-image--1" src="./images/03-1.png"/>
+<img alt="" class="hero03-image hero03-image--2" src="./images/03-2.png"/>
+<img alt="" class="hero03-image hero03-image--3" src="./images/03-3.png"/>
+</article>
+</div>
+<!-- PROGRESS -->
+<div aria-hidden="true" class="scroll-progress">
+<span class="scroll-progress__track">
+<span class="scroll-progress__bar" id="scroll-progress-bar"></span>
+</span>
+</div>
+<!-- SCENE NUMBER -->
+<p aria-hidden="true" class="scene-status" id="scene-status">
+<span id="scene-current">
+            01
+          </span>
+<span>/</span>
+<span>
+            03
+          </span>
+</p>
+</div>
+</section>
+<!-- ===================================================
+         BRIDGE TRANSITION
+    ==================================================== -->
+<section class="bridge-transition" id="bridge-transition">
+<div class="bridge-transition__sticky">
+<div class="bridge-transition__background"></div>
+<!-- TEXT -->
+<div class="bridge-transition__content">
+<!-- SCENE 01 -->
+<article class="bridge-transition__scene is-active" data-bridge-scene="0">
+<p class="bridge-transition__category">
+              ( 문제 인식 )
+            </p>
+<h2 class="bridge-transition__title">
+              다들림은 소리가<br/>
+              놓치는 지점에서<br/>
+              시작합니다.
+            </h2>
+<p class="bridge-transition__number">
+              01
+            </p>
+<!-- 2026.10.08 : 줄바꿈 위치 직접 지정(<br>) — 단어 중간에서 끊기지 않게 -->
+<p class="bridge-transition__description">
+              도로의 중요한 신호는 여전히 소리에 의존합니다.<br>
+              다들림은 그 과정에서 놓치기 쉬운 정보에 주목
+            </p>
+</article>
+<!-- SCENE 02 -->
+<article class="bridge-transition__scene" data-bridge-scene="1">
+<p class="bridge-transition__category">
+              ( 다들림의 해결 방식 )
+            </p>
+<h2 class="bridge-transition__title">
+              다들림은 소리를<br/>
+              정보로 바꿉니다.
+            </h2>
+<p class="bridge-transition__number">
+              02
+            </p>
+<!-- 2026.10.08 : 줄바꿈 위치 직접 지정(<br>) — 단어 중간에서 끊기지 않게 -->
+<p class="bridge-transition__description">
+              경적, 사이렌, 차량 경고음을 명확한 시각 정보와<br>
+              진동 신호로 변환
+            </p>
+</article>
+<!-- SCENE 03 -->
+<article class="bridge-transition__scene" data-bridge-scene="2">
+<p class="bridge-transition__category">
+              ( 새로운 주행 경험 )
+            </p>
+<h2 class="bridge-transition__title">
+              시선과 상황을,<br/>
+              놓치지 않도록.
+            </h2>
+<p class="bridge-transition__number">
+              03
+            </p>
+<!-- 2026.10.08 : 줄바꿈 위치 직접 지정(<br>) — 단어 중간에서 끊기지 않게 -->
+<p class="bridge-transition__description">
+              HUD, 차량 인터페이스와 진동을 통해<br>
+              주행 흐름을 방해하지 않고 필요한 정보를 전달
+            </p>
+</article>
+</div>
+<!-- IMAGE FRAME -->
+<!-- 2026.10.07 : 원본(5000~7000px) 대신 웹용으로 줄인 -web.jpg (2560px) 사용 — 모바일 WebGL 표시 / 렉 개선 -->
+<div class="bridge-transition__frame" id="bridge-transition-frame">
+<figure class="bridge-transition__image bridge-transition__image--carry" data-bridge-carry="">
+<img alt="" src="./images/03-web.jpg"/>
+</figure>
+<figure class="bridge-transition__image bridge-transition__image--flash" data-bridge-flash="">
+<img alt="" id="bridge-flash-image" src="./images/02-1-web.jpg"/>
+</figure>
+<figure class="bridge-transition__image" data-bridge-image="0">
+<img alt="DADEULLIM visual 01" src="./images/02-1-web.jpg"/>
+</figure>
+<figure class="bridge-transition__image" data-bridge-image="1">
+<img alt="DADEULLIM visual 02" src="./images/02-2-web.jpg"/>
+</figure>
+<figure class="bridge-transition__image" data-bridge-image="2">
+<img alt="DADEULLIM visual 03" src="./images/02-3.jpg"/>
+</figure>
+</div>
+<p class="bridge-transition__counter" id="bridge-transition-counter">
+          01 / 03
+        </p>
+</div>
+</section>
+<!-- ===================================================
+         CASE STUDY
+    ==================================================== -->
+<div class="case-study" id="case-study">
+<!-- =================================================
+           PRODUCT
+      ================================================== -->
+<section class="case-product">
+<div class="case-container case-product__top">
+<p class="case-micro-label">
+            2026
+          </p>
+<p class="case-micro-label case-micro-label--right">
+            SEOUL<br/>
+            REPUBLIC OF KOREA
+          </p>
+</div>
+<div class="case-product__visual">
+<img alt="DADEULLIM headset" class="case-product__image" src="./images/04.jpg"/>
+</div>
+<div class="case-container case-product__content">
+<div class="case-product__identity">
+<div aria-hidden="true" class="case-brand-mark">
+<span class="case-brand-mark__circle"></span>
+<span class="case-brand-mark__line case-brand-mark__line--one"></span>
+<span class="case-brand-mark__line case-brand-mark__line--two"></span>
+<span class="case-brand-mark__line case-brand-mark__line--three"></span>
+</div>
+<div>
+<h2 class="case-product__brand">
+                dadeullim
+              </h2>
+<p class="case-product__type">
+                Sound identity
+              </p>
+</div>
+</div>
+<p class="case-product__label">
+            About
+          </p>
+<div class="case-product__description">
+<p>
+              다들림의 핸들 진동 시스템은 위험 정보를 촉각으로 전달해
+              운전자가 상황을 빠르고 직관적으로 인지하도록 돕습니다.
+              위험이 감지된 방향의 핸들이 진동해 위험 방향을 즉각 알려줍니다.
+            </p>
+<p>
+              위험도가 높을수록 진동의 강도가 강해져 긴급도를 구분할 수 있으며,<br/>
+              시각과 청각 정보에만 의존하지 않고 촉각까지 활용해<br/>
+              더욱 안전하고 직관적인 주행 경험을 제공합니다.
+              정면이나 후방과 같이 방향을 특정하기 어려운 위험 상황에서는
+              핸들 중앙을 중심으로 진동을 전달합니다.
+            </p>
+</div>
+</div>
+</section>
+<!-- =================================================
+           SHOWCASE
+      ================================================== -->
+<section class="case-showcase">
+<div class="case-container case-showcase__header">
+<p class="case-section-number">
+            02
+          </p>
+<h2 class="case-showcase__title">
+            More page
+          </h2>
+<p class="case-showcase__caption">
+            Digital experience
+          </p>
+</div>
+<div class="case-showcase__canvas">
+<!-- MAIN MOCKUP -->
+<article class="case-main-mockup">
+<div class="case-main-mockup__bar">
+<span class="case-main-mockup__logo">
+                dadeullim
+              </span>
+<nav aria-label="목업 메뉴" class="case-main-mockup__nav">
+<span>
+                  Products
+                </span>
+<span>
+                  Technology
+                </span>
+<span>
+                  Sound
+                </span>
+<span>
+                  About
+                </span>
+</nav>
+</div>
+<div class="case-main-mockup__image-wrap">
+<img alt="DADEULLIM website mockup" src="./images/05.jpg"/>
+</div>
+</article>
+<!-- RIGHT CARD -->
+<article class="case-floating-card case-floating-card--right">
+<div class="case-floating-card__number">
+              03
+            </div>
+<div class="case-floating-card__copy">
+<p class="case-floating-card__eyebrow">
+                스마트 주행 안내
+              </p>
+<h3>
+                길 위의 정보를<br/>
+                한눈에
+              </h3>
+<p>
+                실시간 경로와 주변 정보를 직관적으로 제공해<br/>
+                운전자가 더욱 편리하고 안정적으로 이동할 수 있도록 돕습니다.
+              </p>
+</div>
+<div class="case-floating-card__image">
+<img alt="DADEULLIM product mockup" src="./images/06.jpg"/>
+</div>
+</article>
+<!-- LEFT CARD -->
+<article class="case-floating-card case-floating-card--left">
+<div class="case-floating-card__number">
+              04
+            </div>
+<div class="case-floating-card__image">
+<img alt="DADEULLIM microphone mockup" src="./images/07.jpg"/>
+</div>
+<div class="case-floating-card__copy">
+<p class="case-floating-card__eyebrow">
+                통합 주행 시스템
+              </p>
+<h3>
+                주행에 필요한 모든<br/>
+                정보를 한곳에
+              </h3>
+<p>
+                차량 상태부터 날씨, 미디어까지 다양한 정보를 하나의 화면에 구성해<br/>
+                운전 중 필요한 기능을 빠르고 편리하게 확인할 수 있습니다.
+              </p>
+</div>
+</article>
+</div>
+</section>
+<!-- =================================================
+           TYPOGRAPHY
+      ================================================== -->
+<section class="case-typography">
+<div class="case-container case-typography__grid">
+<div class="case-type-scale">
+<span>
+              56px
+            </span>
+<span>
+              34px
+            </span>
+<span>
+              16px
+            </span>
+<span>
+              12px
+            </span>
+</div>
+<div class="case-type-main">
+<p class="case-type-category">
+              Display
+            </p>
+<h2>
+              HEAD - UP
+            </h2>
+<div class="case-type-main__bottom">
+<p class="case-type-weight">
+                시선은 도로에,<br/>
+                정보는 눈앞에.
+              </p>
+<p class="case-type-statement">
+                주행에 필요한 핵심 정보를 운전자의 시야 안에 직관적으로 표시해,<br/>
+                시선을 분산시키지 않고 더 빠르고 안전하게 상황을 인지할 수 있도록 합니다.
+              </p>
+</div>
+</div>
+<div class="case-type-side">
+<p class="case-type-side__vertical">
+              03 Head-Up Display
+            </p>
+<p class="case-type-side__roman">
+              Roman
+            </p>
+<div aria-hidden="true" class="case-brand-mark case-brand-mark--large">
+<span class="case-brand-mark__circle"></span>
+<span class="case-brand-mark__line case-brand-mark__line--one"></span>
+<span class="case-brand-mark__line case-brand-mark__line--two"></span>
+<span class="case-brand-mark__line case-brand-mark__line--three"></span>
+</div>
+</div>
+</div>
+</section>
+<!-- =================================================
+           CORE VALUE
+      ================================================== -->
+<section class="case-summary">
+<div class="case-container">
+<div class="case-summary__heading">
+<p class="case-section-number">
+              04
+            </p>
+<h2>
+              CORE VALUE
+            </h2>
+</div>
+<div class="case-summary__cards">
+<!-- 01 -->
+<article class="case-summary-card">
+<div class="case-summary-card__visual">
+<img alt="" class="case-summary-card__image" src="./images/04-1.png"/>
+<span class="case-summary-card__number">
+                  01
+                </span>
+<span class="case-summary-card__keyword">
+                  접근성
+                </span>
+</div>
+<div class="case-summary-card__info">
+<h3>
+                  IDENTITY
+                </h3>
+<p>
+                  Brand system
+                </p>
+</div>
+</article>
+<!-- 02 -->
+<article class="case-summary-card">
+<div class="case-summary-card__visual">
+<img alt="" class="case-summary-card__image" src="./images/04-2.png"/>
+<span class="case-summary-card__number">
+                  02
+                </span>
+<span class="case-summary-card__keyword">
+                  안전성
+                </span>
+</div>
+<div class="case-summary-card__info">
+<h3>
+                  PRODUCT
+                </h3>
+<p>
+                  Audio design
+                </p>
+</div>
+</article>
+<!-- 03 -->
+<article class="case-summary-card">
+<div class="case-summary-card__visual">
+<img alt="" class="case-summary-card__image" src="./images/04-3.png"/>
+<span class="case-summary-card__number">
+                  03
+                </span>
+<span class="case-summary-card__keyword">
+                  직관성
+                </span>
+</div>
+<div class="case-summary-card__info">
+<h3>
+                  DIGITAL
+                </h3>
+<p>
+                  Web experience
+                </p>
+</div>
+</article>
+<!-- 04 -->
+<article class="case-summary-card">
+<div class="case-summary-card__visual">
+<img alt="" class="case-summary-card__image" src="./images/04-4.png"/>
+<span class="case-summary-card__number">
+                  04
+                </span>
+<span class="case-summary-card__keyword">
+                  즉시성
+                </span>
+</div>
+<div class="case-summary-card__info">
+<h3>
+                  INTERFACE
+                </h3>
+<p>
+                  User interaction
+                </p>
+</div>
+</article>
+<!-- 05 -->
+<article class="case-summary-card">
+<div class="case-summary-card__visual">
+<img alt="" class="case-summary-card__image" src="./images/04-5.png"/>
+<span class="case-summary-card__number">
+                  05
+                </span>
+<span class="case-summary-card__keyword">
+                  포용성
+                </span>
+</div>
+<div class="case-summary-card__info">
+<h3>
+                  EXPERIENCE
+                </h3>
+<p>
+                  Sound and emotion
+                </p>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- =================================================
+           FOOTER
+      ================================================== -->
+<footer class="case-footer" id="footer">
+<!-- FOOTER INFORMATION -->
+<div class="case-container case-footer__top">
+<!-- PROJECT -->
+<div class="case-footer__column case-footer__column--project">
+<p class="case-footer__label">
+              PROJECT
+            </p>
+<p class="case-footer__project-name">
+              DADEULLIM
+            </p>
+<p class="case-footer__text">
+              Sound Experience
+            </p>
+<p class="case-footer__text">
+              Graduation Project 2026
+            </p>
+</div>
+<!-- NAVIGATION -->
+<div class="case-footer__column case-footer__column--navigation">
+<p class="case-footer__label">
+              NAVIGATION
+            </p>
+<a href="./brand1.html">
+              Brand
+            </a>
+<a href="./display.html">
+              Interface
+            </a>
+<a href="./driving.html">
+              Experience
+            </a>
+<a href=./problem.html>
+              About
+            </a>
+</div>
+<!-- CREDITS -->
+<div class="case-footer__column case-footer__column--credits">
+<p class="case-footer__label">
+              CREDITS
+            </p>
+<p class="case-footer__text">
+              Digital Media Design
+            </p>
+<p class="case-footer__text">
+              Cheongju University
+            </p>
+<p class="case-footer__text">
+              Graduation Exhibition 2026
+            </p>
+</div>
+<!-- CONTACT -->
+<div class="case-footer__column case-footer__column--contact">
+<p class="case-footer__label">
+              CONTACT
+            </p>
+<a href="#">
+              Instagram
+            </a>
+<a href="mailto:hello@dadeullim.com">
+              E-mail
+            </a>
+</div>
+</div>
+<!-- BACK TO TOP -->
+<div class="case-container case-footer__utility">
+<a class="case-footer__back-to-top" href="#experience">
+            BACK TO TOP
+
+            <span aria-hidden="true">
+              ↑
+            </span>
+</a>
+</div>
+<!-- LARGE DADEULLIM
+             이 영역이 푸터의 마지막 요소임 -->
+<div aria-label="DADEULLIM" class="case-footer__brand-stage">
+<div class="case-footer__brand-lockup">
+<div aria-hidden="true" class="case-footer__symbol">
+<span></span>
+<span></span>
+<span></span>
+</div>
+<p class="case-footer__brand">
+              DADEULLIM
+            </p>
+</div>
+</div>
+</footer>
+</div>
+</main>
+<!-- JAVASCRIPT -->
+<script src="./script.js"></script>
+</body>
+</html>
