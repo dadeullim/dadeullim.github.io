@@ -55,7 +55,11 @@
 
 
 
-<body class="interface-page hud-page">
+<!-- 2026.10.17 : HUD 시안 16 으로 교체
+     body 클래스 hud-page → hud16-page
+     (interface-page 는 유지 → 헤더 숨김/보임 동작 그대로,
+      기존 hud-page 스타일 · 스크립트는 꺼짐) -->
+<body class="interface-page hud16-page">
 
 
   <!-- =====================================================
@@ -243,208 +247,234 @@
 
 
   <!-- =====================================================
-       HUD MAIN
+       HUD MAIN — 시안 16 (2026.10.17)
+       hud16_code.zip → 우리 방식으로 정리
+       1. 히어로 : 완성된 HUD 한 장 → 스크롤하면 비스듬히 누우며 다섯 겹으로 펼쳐짐
+       2. Sound → Sight : 소리가 단어(시각)로 바뀌는 연결 구간
+       3. 다섯 단어 섹션 (Siren · Horn · Stop · Gap · Merge) — interface.js 가 #words 안에 만듦
+       4. 마지막 문장
+       스타일 : interface.css 맨 아래 [HUD 16]
+       동작   : interface.js  맨 아래 [HUD 16]
+       이미지 : images/hud16/
   ====================================================== -->
 
-  <main class="hud-main">
+  <main class="hud16">
 
 
-    <!-- ===================================================
-         01. HUD HERO
-    ==================================================== -->
+    <!-- =================================================
+         01. HERO — 다섯 겹의 정보
+    ================================================== -->
 
     <section
-      class="hud-hero"
-      id="hud-hero"
+      class="hx3"
+      id="hx3"
+      aria-label="HUD 레이어 구조"
     >
 
-      <div class="hud-hero__inner">
+      <div class="hx3__pin">
 
+        <!-- 2026.10.17 : 레퍼런스(모듈 분해도 · 스펙 시트) 무드로 변경
+             왼쪽 위 : 큰 HUD + 작은 두 줄 라벨 → 그 아래 한글 제목
+             오른쪽 위 : 큰 레이어 번호(01 → 05, interface.js 가 바꿈)
+             아래 : 4칸 스펙 (OVERVIEW · LAYERS · SIGNAL · POSITION) -->
+        <div class="hx3__head">
 
-        <!-- LEFT -->
+          <div class="hx3__mark" aria-hidden="true">
+            <span class="hx3__mark-big">HUD</span>
+            <!-- 2026.10.17 : 작은 라벨(HEAD-UP DISPLAY) 없앰 -->
+          </div>
 
-        <div class="hud-hero__copy hud-reveal">
+          <!-- 소제목 — 다른 페이지처럼 숨김 (interface.css) -->
+          <span class="eyebrow">
+            INTERFACE · HEAD-UP DISPLAY
+          </span>
 
-          <h1 class="hud-hero__title">
-            HEAD-UP<br>
-            DISPLAY
+          <h1 class="balance">
+            한 장처럼 보이는<br>
+            다섯 겹의 정보.
           </h1>
 
-          <div class="hud-hero__line"></div>
-
-          <p class="hud-hero__sub">
-            시선은 도로에,<br>
-            정보는 눈앞에
-          </p>
-
         </div>
 
 
-        <!-- CENTER VISUAL -->
+        <!-- HUD 레이어 5장 (JS 가 펼침) -->
 
         <div
-          class="hud-hero__visual hud-reveal"
-          role="img"
-          aria-label="HUD 메인 이미지 영역"
-        >
-        </div>
-
-
-        <!-- RIGHT TEXT -->
-
-        <p class="hud-hero__description hud-reveal">
-          전방을 바라보는 시선 그대로,<br>
-          주행에 필요한 핵심 정보를 전면 유리에 제공합니다.
-        </p>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- ===================================================
-         02. BENEFIT
-    ==================================================== -->
-
-    <section
-      class="hud-benefit"
-      id="hud-benefit"
-    >
-
-      <div class="hud-benefit__inner">
-
-        <h2 class="hud-benefit__title hud-reveal">
-          운전자가 고개를 돌리지 않고,<br>
-          주행 정보를 확인할 수 있도록.
-        </h2>
-
-
-        <div class="hud-benefit__grid">
-
-
-          <article class="hud-benefit__card">
-
-            <div class="hud-benefit__card-bg"></div>
-
-            <p>
-              직관적인 안내
-            </p>
-
-          </article>
-
-
-          <article class="hud-benefit__card">
-
-            <div class="hud-benefit__card-bg"></div>
-
-            <p>
-              상황별 우선 표시
-            </p>
-
-          </article>
-
-
-          <article class="hud-benefit__card">
-
-            <div class="hud-benefit__card-bg"></div>
-
-            <p>
-              안전한 운전 지원
-            </p>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- ===================================================
-         03. ALL INFORMATION
-    ==================================================== -->
-
-    <section
-      class="hud-information"
-      id="hud-information"
-    >
-
-      <div class="hud-information__inner">
-
-        <h2 class="hud-information__title hud-reveal">
-          모든 정보가,<br>
-          한눈에
-        </h2>
-
-
-        <div
-          class="hud-information__visual hud-reveal"
-          role="img"
-          aria-label="HUD 정보 화면 이미지 영역"
-        ></div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- ===================================================
-         04. HUD FOCUS
-    ==================================================== -->
-
-    <section
-      class="hud-focus"
-      id="hud-focus"
-    >
-
-      <div class="hud-focus__stage">
-
-
-        <!-- LEFT HALF -->
-
-        <div
-          class="hud-focus__side hud-focus__side--left"
+          class="hx3__scene"
           aria-hidden="true"
-        ></div>
+        >
 
+          <div
+            class="hx3__stack"
+            id="hx3Stack"
+          >
 
-        <!-- CENTER -->
+            <!-- 01 차로 · 노면 위 -->
+            <div
+              class="hx3__pl p1"
+              style="--i:0"
+            >
+              <img
+                src="./images/hud16/hero-L-lane-red.webp"
+                alt=""
+              >
+              <i class="hx3__anchor"></i>
+              <span class="hx3__tag"><b>01</b>차로 · 노면 위</span>
+            </div>
 
-        <div class="hud-focus__center">
+            <!-- 02 속도 · 고정 -->
+            <div
+              class="hx3__pl p2"
+              style="--i:1"
+            >
+              <img
+                src="./images/hud16/hero-L-speed.webp"
+                alt=""
+              >
+              <i class="hx3__anchor"></i>
+              <span class="hx3__tag"><b>02</b>속도 · 고정</span>
+            </div>
 
-          <div class="hud-focus__circle">
+            <!-- 03 경로 안내 -->
+            <div
+              class="hx3__pl p3"
+              style="--i:2"
+            >
+              <img
+                src="./images/hud16/hero-L-nav.webp"
+                alt=""
+              >
+              <i class="hx3__anchor"></i>
+              <span class="hx3__tag"><b>03</b>경로 안내</span>
+            </div>
 
-            <span>
-              HUD
-            </span>
+            <!-- 04 소리 상태 -->
+            <div
+              class="hx3__pl p4"
+              style="--i:3"
+            >
+              <img
+                src="./images/hud16/hero-L-ear-siren.webp"
+                alt=""
+              >
+              <i class="hx3__anchor"></i>
+              <span class="hx3__tag"><b>04</b>소리 상태</span>
+            </div>
+
+            <!-- 05 상황 경고 -->
+            <div
+              class="hx3__pl p5"
+              style="--i:4"
+            >
+              <img
+                src="./images/hud16/hero-L-alert-siren.webp"
+                alt=""
+              >
+              <i class="hx3__anchor"></i>
+              <span class="hx3__tag"><b>05</b>상황 경고</span>
+            </div>
 
           </div>
 
         </div>
 
 
-        <!-- RIGHT HALF -->
-
-        <div
-          class="hud-focus__side hud-focus__side--right"
-          aria-hidden="true"
-        ></div>
+        <!-- 2026.10.17 : 아래 4칸 스펙(OVERVIEW · LAYERS · SIGNAL · POSITION) · 선 없앰 -->
 
       </div>
 
+    </section>
 
-      <div class="hud-focus__copy hud-reveal">
 
-        <h2>
-          시선은 도로에 머물고,<br>
-          필요한 정보만 눈앞에 나타납니다.
+    <!-- =================================================
+         02. SOUND → SIGHT
+    ================================================== -->
+
+    <section
+      class="br"
+      id="br"
+      aria-label="소리에서 시각으로"
+    >
+
+      <!-- 2026.10.17 : 작은 라벨(FROM LAYERS TO WORDS · 05 WORDS) 없앰 -->
+
+      <!-- 2026.10.17 : 아래에 따로 있던 제목 · 설명(br__foot)을 위로 올려 한 섹션으로 합침
+           순서 : 라벨 → 제목 · 설명 → Sound — Sight 선 → 선의 의미 -->
+      <div class="br__head">
+
+        <h2 class="rv balance">
+          들리지 않는 소리를,<br>
+          눈앞의 단어로 바꿉니다.
         </h2>
 
+        <p
+          class="rv"
+          data-d="1"
+        >
+          경적, 사이렌, 급정거의 순간. 다들림 HUD는 소리가 전하던 의미를 색과 위치, 짧은 문장으로 옮겨 전방 유리 위에 띄웁니다.
+        </p>
+
       </div>
+
+      <div class="br__line">
+
+        <p class="br__w br__w--sound">
+          Sound
+        </p>
+
+        <nav
+          class="br__track"
+          aria-label="다섯 단어 바로가기"
+        >
+
+          <span
+            class="br__rule"
+            aria-hidden="true"
+          ></span>
+
+          <div class="br__ticks">
+            <a href="#w1"><span>01 Siren</span></a>
+            <a href="#w2"><span>02 Horn</span></a>
+            <a href="#w3"><span>03 Stop</span></a>
+            <a href="#w4"><span>04 Gap</span></a>
+            <a href="#w5"><span>05 Merge</span></a>
+          </div>
+
+        </nav>
+
+        <p class="br__w br__w--sight">
+          Sight
+        </p>
+
+      </div>
+
+      <!-- 2026.10.17 : 선이 차오르는 의미 설명 (연한 회색) -->
+      <p class="br__note rv">
+        소리(Sound)가 시각(Sight)으로 바뀌는 길. 선 위의 다섯 지점은 다들림 HUD가 소리를 단어로 바꿔 보여 주는 다섯 순간입니다.
+      </p>
+
+    </section>
+
+
+    <!-- =================================================
+         03. 다섯 단어 — interface.js [HUD 16] 이 채움
+    ================================================== -->
+
+    <div id="words"></div>
+
+
+    <!-- =================================================
+         04. END
+    ================================================== -->
+
+    <section class="end">
+
+      <p class="lines">
+        <span class="ln"><span>시선은 도로에 머물고,</span></span>
+        <span class="ln"><span>필요한 정보만 눈앞에.</span></span>
+      </p>
+
+      <!-- 2026.10.17 : 작은 라벨(DADEULLIM HEAD-UP DISPLAY) 없앰 -->
 
     </section>
 
@@ -596,7 +626,7 @@
 
       <a
         class="case-footer__back-to-top"
-        href="#hud-hero"
+        href="#hx3"
       >
 
         BACK TO TOP
