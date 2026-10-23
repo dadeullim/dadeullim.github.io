@@ -55,7 +55,8 @@
 
 
 
-<!-- 2026.10.17 : HUD 시안 16 으로 교체
+<!-- 2026.10.18 : 히어로 → 시안 E, 다섯 겹 섹션 → 시안 A (아래 [HUD 최종])
+     2026.10.17 : HUD 시안 16 으로 교체
      body 클래스 hud-page → hud16-page
      (interface-page 는 유지 → 헤더 숨김/보임 동작 그대로,
       기존 hud-page 스타일 · 스크립트는 꺼짐) -->
@@ -262,124 +263,134 @@
 
 
     <!-- =================================================
-         01. HERO — 다섯 겹의 정보
+         [HUD 최종] 2026.10.18
+         00. HERO — 시안 E (빛나는 표본)
+         가운데 영상만 빛나고 가장자리는 배경으로 녹음, 아래로 하프미러 반사
+         전) .hv (액자 영상 + 선 사이 큰 문장 + 오른쪽 HUD 글자)
+         스타일 : interface.css 맨 아래 [HUD 최종] / 동작 : interface.js [HUD 최종]
     ================================================== -->
 
     <section
-      class="hx3"
-      id="hx3"
+      class="hf-hero"
+      id="hfHero"
+      aria-label="HUD 투사 영상"
+    >
+
+      <!-- 2026.10.18 : 작은 영어 소제목(Interface — Head-Up Display) 없앰 -->
+
+      <h1 class="hf-hero__title">운전자의 시선 위에 소리를 띄웁니다.</h1>
+
+      <div class="hf-spec">
+
+        <!-- 영상 -->
+        <div class="hf-spec__v">
+          <video
+            src="./images/hud-hero.mp4"
+            poster="./images/hud-hero-poster.jpg"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+            aria-hidden="true"
+          ></video>
+        </div>
+
+        <!-- 반사 (같은 영상을 뒤집어 엷게) -->
+        <div
+          class="hf-spec__r"
+          aria-hidden="true"
+        >
+          <video
+            src="./images/hud-hero.mp4"
+            poster="./images/hud-hero-poster.jpg"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+          ></video>
+        </div>
+
+        <span class="hf-spec__hz" aria-hidden="true"></span>
+
+      </div>
+
+      <!-- 아래 세 칸 -->
+      <div class="hf-row">
+        <div>
+          <span class="hf-meta">01 Where</span>
+          <b>전방 유리, 시선 높이</b>
+          <p>고개를 돌리지 않아도 읽히는 자리.</p>
+        </div>
+        <div>
+          <span class="hf-meta">02 What</span>
+          <b>위험한 소리를 한 단어로</b>
+          <p>사이렌 · 경적 · 급정거 · 차간거리 · 끼어들기.</p>
+        </div>
+        <div>
+          <span class="hf-meta">03 How</span>
+          <b>다섯 겹의 정보</b>
+          <p>차로 · 속도 · 경로 · 소리 · 경고.</p>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         [HUD 최종] 2026.10.18
+         01. 다섯 겹 — 시안 A
+         왼쪽 : 고정 무대(누운 HUD) + 세로 목록(05~01) + 지금 번호
+         오른쪽 : 설명 블록이 한 장씩 지나감 — 화면 가운데 블록의 겹만 밝아짐
+         전) #hx3 (떠다니는 라벨 · 오른쪽 위 큰 번호 · 가운데 가로줄)
+         HUD 다섯 장 · 목록 · 01~05 설명은 interface.js 가 채움
+    ================================================== -->
+
+    <section
+      class="ha-ly"
+      id="haLy"
       aria-label="HUD 레이어 구조"
     >
 
-      <div class="hx3__pin">
-
-        <!-- 2026.10.17 : 레퍼런스(모듈 분해도 · 스펙 시트) 무드로 변경
-             왼쪽 위 : 큰 HUD + 작은 두 줄 라벨 → 그 아래 한글 제목
-             오른쪽 위 : 큰 레이어 번호(01 → 05, interface.js 가 바꿈)
-             아래 : 4칸 스펙 (OVERVIEW · LAYERS · SIGNAL · POSITION) -->
-        <div class="hx3__head">
-
-          <div class="hx3__mark" aria-hidden="true">
-            <span class="hx3__mark-big">HUD</span>
-            <!-- 2026.10.17 : 작은 라벨(HEAD-UP DISPLAY) 없앰 -->
-          </div>
-
-          <!-- 소제목 — 다른 페이지처럼 숨김 (interface.css) -->
-          <span class="eyebrow">
-            INTERFACE · HEAD-UP DISPLAY
-          </span>
-
-          <h1 class="balance">
-            한 장처럼 보이는<br>
-            다섯 겹의 정보.
-          </h1>
-
-        </div>
-
-
-        <!-- HUD 레이어 5장 (JS 가 펼침) -->
-
+      <!-- 왼쪽 고정 무대 -->
+      <div class="ha-stage">
         <div
-          class="hx3__scene"
+          class="hf-stack"
+          id="haStack"
           aria-hidden="true"
+        ></div>
+        <ol
+          class="ha-rail hf-meta"
+          id="haRail"
+          aria-hidden="true"
+        ></ol>
+        <p class="ha-count hf-meta"><b id="haCount">00</b> / 05 Layers</p>
+      </div>
+
+      <!-- 오른쪽 설명 블록 (01~05 는 JS 가 사이에 넣음) -->
+      <div
+        class="ha-steps"
+        id="haSteps"
+      >
+
+        <article
+          class="ha-st"
+          data-k="-1"
         >
+          <p class="hf-meta">Layer Structure</p>
+          <h2>한 장처럼 보이는<br>다섯 겹의 정보.</h2>
+          <p class="ha-d">차로 · 속도 · 경로 · 소리 · 경고. 서로 다른 거리에 놓인 다섯 장이 겹쳐 하나의 HUD가 됩니다.</p>
+        </article>
 
-          <div
-            class="hx3__stack"
-            id="hx3Stack"
-          >
-
-            <!-- 01 차로 · 노면 위 -->
-            <div
-              class="hx3__pl p1"
-              style="--i:0"
-            >
-              <img
-                src="./images/hud16/hero-L-lane-red.webp"
-                alt=""
-              >
-              <i class="hx3__anchor"></i>
-              <span class="hx3__tag"><b>01</b>차로 · 노면 위</span>
-            </div>
-
-            <!-- 02 속도 · 고정 -->
-            <div
-              class="hx3__pl p2"
-              style="--i:1"
-            >
-              <img
-                src="./images/hud16/hero-L-speed.webp"
-                alt=""
-              >
-              <i class="hx3__anchor"></i>
-              <span class="hx3__tag"><b>02</b>속도 · 고정</span>
-            </div>
-
-            <!-- 03 경로 안내 -->
-            <div
-              class="hx3__pl p3"
-              style="--i:2"
-            >
-              <img
-                src="./images/hud16/hero-L-nav.webp"
-                alt=""
-              >
-              <i class="hx3__anchor"></i>
-              <span class="hx3__tag"><b>03</b>경로 안내</span>
-            </div>
-
-            <!-- 04 소리 상태 -->
-            <div
-              class="hx3__pl p4"
-              style="--i:3"
-            >
-              <img
-                src="./images/hud16/hero-L-ear-siren.webp"
-                alt=""
-              >
-              <i class="hx3__anchor"></i>
-              <span class="hx3__tag"><b>04</b>소리 상태</span>
-            </div>
-
-            <!-- 05 상황 경고 -->
-            <div
-              class="hx3__pl p5"
-              style="--i:4"
-            >
-              <img
-                src="./images/hud16/hero-L-alert-siren.webp"
-                alt=""
-              >
-              <i class="hx3__anchor"></i>
-              <span class="hx3__tag"><b>05</b>상황 경고</span>
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- 2026.10.17 : 아래 4칸 스펙(OVERVIEW · LAYERS · SIGNAL · POSITION) · 선 없앰 -->
+        <article
+          class="ha-st"
+          data-k="9"
+        >
+          <p class="hf-meta">Composite</p>
+          <h2>다시 한 장으로.</h2>
+          <p class="ha-d">운전자는 다섯 겹을 따로 읽지 않습니다. 필요한 겹만 밝아지고, 나머지는 물러납니다.</p>
+        </article>
 
       </div>
 
@@ -626,7 +637,7 @@
 
       <a
         class="case-footer__back-to-top"
-        href="#hx3"
+        href="#hfHero"
       >
 
         BACK TO TOP

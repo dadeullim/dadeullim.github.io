@@ -7109,55 +7109,26 @@ document.addEventListener(
 document.addEventListener("DOMContentLoaded", () => {
   if (!document.querySelector(".hud16")) return;
 
-  (() => {
-    /* 2026.10.17 : 히어로 — 스크롤로 펼치던 것(화면 전체가 붙잡힘) → 영상처럼 시간으로 자동 재생 · 반복
-       한 장 그대로 1.6초 → 5.5초 동안 펼쳐짐 → 3.2초 머묾 → 2.2초 동안 다시 한 장으로
-       화면에 보일 때만 돌아감 / 움직임 줄이기 설정이면 펼친 상태로 멈춤 */
-    /* 2026.10.17 : 정면 → 눕는 동작 빼고, 처음부터 비스듬히 누운 한 묶음에서 시작해 펼쳐짐
-       (P_MIN 0.2 = 기울기 끝난 뒤 · 펼치기 직전) */
-    /* 2026.10.17 : 다시 스크롤로 펼침 (전 시간으로 자동 재생 · 반복)
-       누운 한 묶음(P_MIN) → 스크롤 85% 지점에서 다 펼쳐짐(P_MAX) → 끝까지 유지 */
-    const P_MIN = 0.2, P_MAX = 0.74;
-    const fns = [];
-    const sec = document.getElementById("hx3");
-    DD.heroP = P_MIN;
-    DD.heroLoop = (fn) => fns.push(fn);
-    DD.onFrame(() => {
-      const k = Math.min(1, DD.progress(sec) / 0.85);
-      DD.heroP = DD.reduced ? P_MAX : P_MIN + (P_MAX - P_MIN) * k;
-      fns.forEach((f) => f());
-    });
-  })();
+  /* =====================================================
+     [HUD 최종] 2026.10.18 — 히어로 : 시안 E / 두 번째 섹션 : 시안 A
+     전) 영상 히어로(.hv) + 다섯 겹 섹션(#hx3 · 떠다니는 라벨 · 가운데 가로줄)
+     후) 가운데 빛나는 영상 + 하프미러 반사(.hf-hero)
+         다섯 겹 : 왼쪽 고정 무대 + 오른쪽으로 지나가는 설명 블록 (#haLy)
+     스타일 : interface.css 맨 아래 [HUD 최종]
+  ===================================================== */
 
   (() => {
-    /* 처음 : 정면에서 본 완성된 HUD 한 장
-       스크롤 : 비스듬히 누우며 다섯 장으로 펼쳐짐 → 끝까지 유지 */
-    const { progress, seg, smooth, lerp, onFrame } = DD;
-    const sec = document.getElementById("hx3");
-    const stack = document.getElementById("hx3Stack");
-    const state = document.getElementById("hx3State");
-    let last = "";
-    /* 2026.10.17 : onFrame(스크롤) → DD.heroLoop(시간) / progress(sec) → DD.heroP */
-    DD.heroLoop(() => {
-      const p = DD.heroP;
-      const mob = innerWidth < 640;
-      const tilt = 1;   /* 2026.10.17 : 처음부터 누운 상태 고정 (전 smooth(seg(p, 0.04, 0.42)) — 정면에서 눕는 동작) */
-      const open = smooth(seg(p, 0.2, 0.62));
-      stack.style.setProperty("--rx", (58 * tilt).toFixed(2) + "deg");
-      stack.style.setProperty("--rz", (-28 * tilt).toFixed(2) + "deg");
-      stack.style.setProperty("--sc", lerp(mob ? .8 : .78, mob ? .78 : .72, tilt).toFixed(3));
-      stack.style.setProperty("--lx", lerp(mob ? 50 : 54, mob ? 50 : 54, tilt)   /* 2026.10.17 : HUD 가운데보다 살짝 오른쪽 (전 50 · 처음 66 → 60%) */.toFixed(2) + "%");
-      stack.style.setProperty("--ty", lerp(mob ? 60 : 54, mob ? 62 : 70, tilt).toFixed(2) + "%");   /* 2026.10.17 : 펼치면 위 헤더 밑까지 차도록 (전 74 · 66) */
-      stack.style.setProperty("--open", open.toFixed(3));
-      stack.style.setProperty("--edge", seg(tilt, 0.15, 0.6).toFixed(3));
-      stack.style.setProperty("--tag", seg(open, 0.7, 1).toFixed(3));
-      /* 2026.10.17 : "SCROLL · 01 LAYER" → "01 LAYER" (SCROLL 안내 없애기 규칙) */
-      const t = open > 0.7 ? "05 LAYERS" : "01 LAYER";
-      /* 2026.10.17 : 아래 레이어 표시(#hx3State)를 없애서 있을 때만 */
-      if (state && t !== last) { state.textContent = t; last = t; }
-    });
+    /* 히어로 : 반사 영상을 원본 시간에 맞춤 (1초마다 어긋나면 맞춤) */
+    const v1 = document.querySelector(".hf-spec__v video");
+    const v2 = document.querySelector(".hf-spec__r video");
+    if (!v1 || !v2) return;
+    if (DD.reduced) { [v1, v2].forEach((v) => { v.removeAttribute("autoplay"); v.pause(); }); return; }
+    setInterval(() => {
+      if (Math.abs(v1.currentTime - v2.currentTime) > 0.08) v2.currentTime = v1.currentTime;
+    }, 1000);
   })();
-  
+
+
   (() => {
     const W = [
       { w: "Siren", c: "var(--ink)", lc: "var(--red)", img: "w-siren", lv: "DANGER", t: "1:35", dir: "우측 20m", src: "구급차 사이렌", h: "사이렌이 울리면,<br>방향부터 보입니다.", p: "귀 아이콘에서 음파가 번지고, 차량 아이콘의 오른쪽 호가 붉게 차오릅니다. 어디서 오는지 먼저 알아야 길을 비켜 줄 수 있기 때문입니다." },
@@ -7223,99 +7194,106 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   })();
-  
+
   (() => {
-    /* 히어로 : 같은 장면을 복제해 하프미러 반사로 */
-    /* 2026.10.17 : 히어로 아래 바닥 띠(반사 · 수평선) 없앰 → 반사 만들기 건너뜀
-       (브릿지 · 단어 반사 표시(refl)만 아래에서 그대로) */
-    document.querySelectorAll(".br__w, .w__word").forEach((el) => { el.classList.add("refl"); el.dataset.t = el.textContent; });
-    return;
-    const pin = document.querySelector(".hx3__pin");
-    const scene = pin.querySelector(".hx3__scene");
-    const m = document.createElement("div");
-    m.className = "hx3__mirror"; m.setAttribute("aria-hidden", "true");
-    const clone = scene.cloneNode(true);
-    clone.querySelector("#hx3Stack").id = "hx3StackMirror";
-    clone.querySelectorAll(".hx3__tag").forEach((t) => t.remove());
-    m.append(clone);
-    pin.insertBefore(m, scene);
-    const h = document.createElement("span"); h.className = "hx3__horizon"; pin.append(h);
-    const src = document.getElementById("hx3Stack"), dst = document.getElementById("hx3StackMirror");
-    const sp = [...src.querySelectorAll(".hx3__pl")], dp = [...dst.querySelectorAll(".hx3__pl")];
-    /* 2026.10.17 : 반사 복사본 동기화
-       전) requestAnimationFrame 으로 매 프레임 쉬지 않고 복사 (화면이 멈춰 있어도 계속 돌아 무거움)
-       후) 스크롤 · 화면 크기 변경 때만, 원본 위치가 정해진 다음 프레임에 한 번 복사 */
-    const copy = () => { dst.setAttribute("style", src.getAttribute("style") || ""); sp.forEach((p, i) => dp[i] && dp[i].setAttribute("style", p.getAttribute("style") || "")); };
-    DD.onFrame(() => requestAnimationFrame(copy));
-    /* 브릿지 · 단어 반사 */
+    /* 브릿지 · 단어 반사 표시 (그대로) */
     document.querySelectorAll(".br__w, .w__word").forEach((el) => { el.classList.add("refl"); el.dataset.t = el.textContent; });
   })();
-  
-  
+
+
   (() => {
-    /* 하나씩 펼쳐짐 : 1층 위로 2층부터 차례로 한 칸씩 떠오름 (누적), 그때마다 라벨이 크게 들어와 자리를 잡음 */
-    const { progress, seg, smooth } = DD;
-    const sec = document.getElementById("hx3");
-    const pin = sec.querySelector(".hx3__pin");
-    const stack = document.getElementById("hx3Stack");
-    const pls = [...stack.querySelectorAll(".hx3__pl")];
-    const anchors = pls.map((p) => p.querySelector(".hx3__anchor"));
-    const names = ["차로 · 노면 위", "속도 · 고정", "경로 안내", "소리 상태", "상황 경고"];
-    const labs = names.map((t, i) => {
-      const l = document.createElement("span");
-      l.className = "hx3__lab"; l.setAttribute("aria-hidden", "true");
-      l.innerHTML = `<b>0${i + 1}</b>${t}`;
-      pin.append(l); return l;
+    /* [HUD 최종] 다섯 겹 — 시안 A
+       섹션 진행도 0 ~ 0.10 : 정면 한 장 → 비스듬히 누움
+                   0.03 ~ 0.18 : 아래 판부터 차례로 펼쳐짐
+       오른쪽 설명 블록 중 화면 가운데에 온 블록의 겹만 밝아짐 (나머지 흐리게)
+                   0.86 ~ 0.97 : 다시 정면 한 장으로 */
+    const sec = document.getElementById("haLy");
+    if (!sec) return;
+    const { seg, smooth, progress, onFrame, reduced } = DD;
+
+    const LAYERS = [
+      { n: "01", en: "Lane",  ko: "차로 · 노면 위", d: "위험이 있는 차로를 색으로 칠합니다.",       img: "hero-L-lane-red",    z: "노면 위" },
+      { n: "02", en: "Speed", ko: "속도 · 고정",   d: "속도와 제한 속도는 늘 같은 자리에 둡니다.", img: "hero-L-speed",       z: "하단 고정" },
+      { n: "03", en: "Route", ko: "경로 안내",     d: "다음 회전과 남은 거리를 보여 줍니다.",       img: "hero-L-nav",         z: "좌측 상단" },
+      { n: "04", en: "Sound", ko: "소리 상태",     d: "소리를 감지했는지 귀 아이콘으로 알립니다.", img: "hero-L-ear-siren",   z: "좌측" },
+      { n: "05", en: "Alert", ko: "상황 경고",     d: "무엇이, 어느 방향에서 오는지 한 단어로.",   img: "hero-L-alert-siren", z: "우측 상단" }
+    ];
+
+    /* 다섯 장 */
+    const stk = document.getElementById("haStack");
+    stk.innerHTML = LAYERS.map((l) =>
+      `<div class="hf-pl"><img src="${DD.asset}${l.img}.webp" alt="" draggable="false"></div>`).join("");
+    const pls = [...stk.children];
+
+    /* 설명 블록 01~05 — 첫 블록(소개)과 마지막 블록(다시 한 장으로) 사이에 */
+    const steps = document.getElementById("haSteps"), outro = steps.lastElementChild;
+    LAYERS.forEach((l, i) => {
+      const a = document.createElement("article");
+      a.className = "ha-st";
+      a.dataset.k = i;
+      a.innerHTML = `
+        <p class="hf-meta"><span class="ha-en">${l.en}</span> — Layer ${l.n} / 05</p>
+        <h3>${l.ko}</h3>
+        <p class="ha-d">${l.d}</p>
+        <dl>
+          <div><dt>위치</dt><dd>${l.z}</dd></div>
+          <div><dt>순서</dt><dd>${l.n} · 아래에서 ${i + 1}번째</dd></div>
+        </dl>`;
+      steps.insertBefore(a, outro);
     });
-    const read = document.createElement("p");
-    read.className = "hx3__read"; read.setAttribute("aria-hidden", "true");
-    /* 2026.10.17 : 오른쪽 위 큰 번호 — 처음엔 05 (다섯 겹 전체), 펼쳐지면 01 → 05 (전 01 · 차로 · 노면 위) */
-    read.innerHTML = `<span class="n">05</span><span class="t">LAYERS</span>`;
-    pin.append(read);
-    const rn = read.querySelector(".n"), rt = read.querySelector(".t");
-    /* 2026.10.17 : 설명이 제목 밑(.hx3__desc)으로 옮겨져서 선택자 변경 (전 .hx3__foot p) */
-    /* 2026.10.17 : 아래 4칸 스펙(.hx3__spec) 전체를 흐리게 (전 .hx3__desc) */
-    const head = pin.querySelector(".hx3__head"), foot = pin.querySelector(".hx3__spec");
-    /* 단계 : 기울기 0.04–0.26 → 01 표시 0.26 → 02~05 차례로 */
-    const S = [0.26, 0.36, 0.46, 0.56, 0.66];
-    let cur = -1;
-    /* 2026.10.17 : 스크롤 → 시간 (DD.heroLoop · DD.heroP) */
-    DD.heroLoop(() => {
-      const p = DD.heroP;
-      /* 2026.10.17 : CSS 의 min(…) 값은 숫자로 못 읽어 늘 84 가 되던 것 → 여기서 직접 계산
-         폰 44 · 태블릿 60 · 데스크톱 min(104px, 11.5vh) (큰 화면은 맥북 비율대로 키움) */
-      const sc = Math.max(1, innerWidth / 1512);
-      const gap = innerWidth <= 640 ? 44 : innerWidth <= 1100 ? 60 : Math.min(104 * sc, innerHeight * 0.115);   /* 전 min(100, 13vh) · min(72, 9.5vh) */
+    const arts = [...steps.children];
+
+    /* 왼쪽 세로 목록 · 번호 */
+    const rail = document.getElementById("haRail");
+    rail.innerHTML = LAYERS.map((l) => `<li>${l.n} ${l.en}</li>`).join("");
+    const railLi = [...rail.children];
+    const cnt = document.getElementById("haCount");
+
+    /* 펼침 정도 0~1 → 다섯 장 각각 (아래 판부터 차례로) */
+    const stagger = (t, spread = 0.5) =>
+      LAYERS.map((_, i) => smooth(seg(t, (i - 1) / 4 * spread, (i - 1) / 4 * spread + (1 - spread))));
+
+    onFrame(() => {
+      const p = progress(sec);
+      const mob = innerWidth < 900;
+
+      /* 지금 화면 가운데(폰은 아래쪽)에 가장 가까운 블록 */
+      let on = arts[0], best = Infinity;
+      arts.forEach((a) => {
+        const r = a.getBoundingClientRect();
+        const d = Math.abs(r.top + r.height / 2 - innerHeight * (mob ? 0.8 : 0.5));
+        if (d < best) { best = d; on = a; }
+      });
+      arts.forEach((a) => a.classList.toggle("is-on", a === on));
+      let k = +on.dataset.k;
+      if (k > 4) k = -1;
+
+      const tilt = reduced ? 1 : smooth(seg(p, 0, 0.1));
+      const back = smooth(seg(p, 0.86, 0.97));
+      const open = stagger(reduced ? 1 : seg(p, 0.03, 0.18)).map((o) => o * (1 - back));
+      const gap = mob ? 46 : Math.min(96, innerHeight * 0.1);
+      const edge = tilt * (1 - back);
+
+      stk.style.setProperty("--rx", (56 * tilt * (1 - back)).toFixed(2) + "deg");
+      stk.style.setProperty("--rz", (-30 * tilt * (1 - back)).toFixed(2) + "deg");
+      stk.style.setProperty("--sc", "1");
+      /* 펼친 높이의 가운데를 원점으로 — 펼쳐져도 무대 가운데에 머묾 */
+      const total = open.slice(1).reduce((a, b) => a + b, 0);
       let acc = 0;
       pls.forEach((pl, i) => {
-        if (i > 0) acc += smooth(seg(p, S[i] - 0.06, S[i] + 0.02));
-        pl.style.setProperty("--z", (acc * gap).toFixed(1) + "px");
+        if (i > 0) acc += open[i];
+        pl.style.setProperty("--z", ((acc - total / 2) * gap).toFixed(1) + "px");
+        pl.style.setProperty("--edge", edge.toFixed(3));
+        const lit = k < 0 || i === k;
+        pl.style.setProperty("--o", lit ? "1" : "0.16");
+        pl.classList.toggle("is-cur", i === k);
+        pl.classList.toggle("is-dim", !lit);
       });
-      let k = -1; S.forEach((t, i) => { if (p >= t) k = i; });
-      const pr = pin.getBoundingClientRect();
-      /* 2026.10.17 : 라벨이 화면 오른쪽 밖으로 나가거나 오른쪽 아래 큰 번호(05)와 겹치지 않게 x 를 막음 */
-      const rr = read.getBoundingClientRect();
-      labs.forEach((l, i) => {
-        const r = anchors[i].getBoundingClientRect();
-        const w = l.offsetWidth, y = r.top - pr.top;
-        let lim = pr.width - 40 - w;
-        if (y + 12 > rr.top - pr.top - 16) lim = Math.min(lim, rr.left - pr.left - w - 32);
-        l.style.setProperty("--x", Math.min(r.left - pr.left + 18, lim).toFixed(1) + "px");
-        l.style.setProperty("--y", (r.top - pr.top).toFixed(1) + "px");
-        l.classList.toggle("is-on", i <= k);
-        l.classList.toggle("is-cur", i === k);
-      });
-      /* 2026.10.17 : 처음부터 보임 (전 0.22 부터 나타남) */
-      const ro = 1 - smooth(seg(p, 0.86, 0.94));
-      read.style.setProperty("--read-o", ro.toFixed(3));
-      /* 2026.10.17 : 자동 재생이라 제목 · 스펙은 흐려지지 않게 (전 펼쳐질 때 흐려짐) */
-      if (k !== cur) {
-        cur = k;
-        read.classList.add("is-swap");
-        /* 2026.10.17 : 맨 위로 돌아오면 다시 05 LAYERS */
-        setTimeout(() => { rn.textContent = k < 0 ? "05" : "0" + (k + 1); rt.textContent = k < 0 ? "LAYERS" : names[k]; read.classList.remove("is-swap"); }, 160);
-      }
+
+      railLi.forEach((li, i) => li.classList.toggle("is-on", i === k));
+      cnt.textContent = k >= 0 ? LAYERS[k].n : "00";
     });
   })();
-  
+
+
 });
