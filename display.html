@@ -251,118 +251,148 @@
 
 
     <!-- =====================================================
-         01. HERO — 위험 순간
-         2026.10.10 : 기존 HERO(d-1.png + 뒤 DISPLAY 영문) → 디스플레이히어로8 로 교체
-         평소 → 즉시 정지(빨간 빛) → 평소 → 긴급차 양보(분홍 빛) 반복
-         사진 속 화면만 바뀌고, 대시보드에 비치는 빛과 제목이 함께 바뀜
-         스타일 : interface.css 맨 아래 [DISPLAY HERO — 위험 순간]
-         동작   : interface.js  맨 아래 [DISPLAY HERO — 위험 순간]
+         01. HERO — 위험 단계 / 2026.10.27
+         디스플레이_히어로1안_위험단계.zip 바탕
+         전) 위험 순간 (.dh8 — 어두운 차 안, 평소 → 즉시 정지 → 평소 → 긴급차 양보)
+         후) 햇살 드는 새 실내 사진 + 사진 속 화면이 평소 → 주의 → 경고 → 위험 으로 2.2초마다 바뀜 (처음 3.4초)
+             제목 · 강조 색 · 화면 주변 빛 · 아래 단계 표시가 함께 바뀜
+             카메라가 화면 쪽으로 천천히 다가갔다 물러남(돌리 인)
+         ---- 스타일 : interface.css [DISPLAY HERO — 위험 단계] / 동작 : interface.js [DISPLAY HERO — 위험 단계]
+         ---- 이미지 : images/display-hero/ (실내 사진 1장 + 사진 속 화면 4장)
+         ---- 옛 .dh8 코드는 interface.css · js 에 남아 있지만 대상이 없어 동작 안 함
     ====================================================== -->
 
     <section
-      class="dh8"
+      class="dh9"
       id="display-hero"
-      data-dh8
-      data-mode="0"
+      data-dh9
+      data-state="0"
+      aria-label="다들림 디스플레이"
     >
 
 
-      <!-- 사진 + 화면 (화면은 사진 각도에 맞춰 기울여 둔 이미지) -->
+      <!-- 사진 + 사진 속 화면 (화면 위치 % 는 사진 기준) -->
 
-      <figure class="dh8__scene">
+      <figure class="dh9__scene">
 
         <img
-          class="dh8__cockpit"
-          src="./images/dh8-cockpit.webp"
-          alt="어두운 차 안, 대시보드 위의 다들림 디스플레이"
-          width="1536"
-          height="1024"
+          class="dh9__photo"
+          src="./images/display-hero/hero-cockpit.webp"
+          alt="햇살이 드는 차 안, 대시보드 가운데 다들림 디스플레이"
+          width="5016"
+          height="2823"
         >
 
+        <!-- 0 평소 — 길 안내 -->
+        <img
+          class="dh9__scr is-on"
+          data-dh9-s="0"
+          src="./images/display-hero/hero-scr-drive.webp"
+          alt=""
+          aria-hidden="true"
+          style="left:43.321%;top:24.619%;width:22.289%;height:25.965%"
+        >
+
+        <!-- 1 주의 — 차선 변경 -->
+        <img
+          class="dh9__scr"
+          data-dh9-s="1"
+          src="./images/display-hero/hero-scr-lane.webp"
+          alt=""
+          aria-hidden="true"
+          style="left:43.321%;top:24.619%;width:22.289%;height:25.965%"
+        >
+
+        <!-- 2 경고 — 긴급차 양보 -->
+        <img
+          class="dh9__scr"
+          data-dh9-s="2"
+          src="./images/display-hero/hero-scr-yield.webp"
+          alt=""
+          aria-hidden="true"
+          style="left:43.321%;top:24.619%;width:22.289%;height:25.965%"
+        >
+
+        <!-- 3 위험 — 즉시 정지 -->
+        <img
+          class="dh9__scr"
+          data-dh9-s="3"
+          src="./images/display-hero/hero-scr-stop.webp"
+          alt=""
+          aria-hidden="true"
+          style="left:43.321%;top:24.619%;width:22.289%;height:25.965%"
+        >
+
+        <!-- 위험 단계 색 빛 (평소엔 꺼짐) -->
         <i
-          class="dh8__glow"
-          aria-hidden="true"
-        ></i>
-
-        <!-- 2026.10.10 : 평소 화면도 선명한 이미지로 덮음 (사진 속 화면은 1536px 이라 흐림) -->
-        <img
-          class="dh8__scr dh8__scr--base"
-          src="./images/dh8-scr-base.webp"
-          alt=""
-          aria-hidden="true"
-        >
-
-        <img
-          class="dh8__scr dh8__scr--stop"
-          src="./images/dh8-scr-stop.webp"
-          alt=""
-          aria-hidden="true"
-        >
-
-        <img
-          class="dh8__scr dh8__scr--yield"
-          src="./images/dh8-scr-yield.webp"
-          alt=""
-          aria-hidden="true"
-        >
-
-        <i
-          class="dh8__glare"
+          class="dh9__glow"
           aria-hidden="true"
         ></i>
 
       </figure>
 
 
-      <!-- 위험일 때 화면 가장자리 붉게 -->
+      <!-- 글이 잘 보이게 왼쪽 · 아래 어둡게 -->
 
       <i
-        class="dh8__edge"
+        class="dh9__shade"
         aria-hidden="true"
       ></i>
 
 
       <!-- 글 -->
 
-      <div class="dh8__copy">
+      <div class="dh9__copy">
 
-        <!-- 지금 상태 (평소 / 즉시 정지 / 긴급차) — JS 가 바꿈 -->
-        <p
-          class="dh8__kick"
-          data-dh8-kick
-        >
-          평소
-        </p>
-
-        <div class="dh8__titles">
+        <div class="dh9__titles">
 
           <h1
-            class="dh8__title is-on"
-            data-dh8-title="0"
+            class="dh9__title is-on"
+            data-dh9-s="0"
           >
-            필요한 정보만,
-            <span class="dh8__blue">가장 앞에서.</span>
+            필요한 정보만,<br>
+            <span class="dh9__c">가장 앞에서.</span>
           </h1>
 
           <p
-            class="dh8__title"
-            data-dh8-title="1"
+            class="dh9__title"
+            data-dh9-s="1"
             aria-hidden="true"
           >
-            가장 급한 소리부터,<br>
-            <span class="dh8__red">가장 크게.</span>
+            옆 차로의 차량까지,<br>
+            <span class="dh9__c">먼저 알립니다.</span>
           </p>
 
           <p
-            class="dh8__title"
-            data-dh8-title="2"
+            class="dh9__title"
+            data-dh9-s="2"
             aria-hidden="true"
           >
             사이렌을<br>
-            <span class="dh8__pink">눈으로 봅니다.</span>
+            <span class="dh9__c">눈으로 봅니다.</span>
+          </p>
+
+          <p
+            class="dh9__title"
+            data-dh9-s="3"
+            aria-hidden="true"
+          >
+            가장 급한 소리부터,<br>
+            <span class="dh9__c">가장 크게.</span>
           </p>
 
         </div>
+
+        <!-- 단계 표시 (지금 단계에 색 선) -->
+        <ol
+          class="dh9__steps"
+          aria-label="위험 단계"
+        >
+          <li data-dh9-s="0" class="is-on"><i></i>평소</li>
+          <li data-dh9-s="1"><i></i>주의</li>
+          <li data-dh9-s="2"><i></i>경고</li>
+          <li data-dh9-s="3"><i></i>위험</li>
+        </ol>
 
       </div>
 
@@ -401,44 +431,19 @@
 
         </div>
 
-        <figure class="fan__card">
-          <img
-            src="./images/display-fan/ui-drive.webp"
-            alt="길 안내 화면"
-          >
-          <figcaption><b>01</b>길 안내</figcaption>
-        </figure>
-
-        <figure class="fan__card">
-          <img
-            src="./images/display-fan/ui-lane.webp"
-            alt="차선 변경 주의 화면"
-          >
-          <figcaption><b>02</b>차선 변경 주의</figcaption>
-        </figure>
-
-        <figure class="fan__card">
-          <img
-            src="./images/display-fan/ui-stop.webp"
-            alt="즉시 정지 화면"
-          >
-          <figcaption><b>03</b>즉시 정지</figcaption>
-        </figure>
-
-        <figure class="fan__card">
-          <img
-            src="./images/display-fan/ui-yield.webp"
-            alt="긴급차 양보 화면"
-          >
-          <figcaption><b>04</b>긴급차 양보</figcaption>
-        </figure>
+        <!-- 2026.10.27 : 순서 바꿈 — 처음 펼쳐질 때 가운데에 날씨가 와서 어색했음
+             전) 길 안내 · 위험 알림 · 즉시 정지 · 긴급차 양보 · 날씨(가운데) · 음악 · 대기 · 차량 · 검색
+             후) 왼쪽 : 출발 전 (날씨 · 음악 · 대기 화면 · 목적지 검색)
+                 가운데 : 길 안내 (처음 펼쳐질 때 보이는 카드)
+                 오른쪽 : 주행 중 위험이 커지는 순서 (위험 알림 → 긴급차 양보 → 즉시 정지) · 차량 상태
+                 스크롤하면 부채가 왼쪽으로 돌아 길 안내 다음 위험 알림이 가운데로 -->
 
         <figure class="fan__card">
           <img
             src="./images/display-fan/ui-weather.webp"
             alt="날씨 화면"
           >
-          <figcaption><b>05</b>날씨</figcaption>
+          <figcaption><b>01</b>날씨</figcaption>
         </figure>
 
         <figure class="fan__card">
@@ -446,23 +451,15 @@
             src="./images/display-fan/ui-music.webp"
             alt="음악 화면"
           >
-          <figcaption><b>06</b>음악</figcaption>
+          <figcaption><b>02</b>음악</figcaption>
         </figure>
 
         <figure class="fan__card">
           <img
             src="./images/display-fan/ui-home.webp"
-            alt="대기 화면"
+            alt="대기 화면 화면"
           >
-          <figcaption><b>07</b>대기 화면</figcaption>
-        </figure>
-
-        <figure class="fan__card">
-          <img
-            src="./images/display-fan/ui-car.webp"
-            alt="차량 상태 화면"
-          >
-          <figcaption><b>08</b>차량 상태</figcaption>
+          <figcaption><b>03</b>대기 화면</figcaption>
         </figure>
 
         <figure class="fan__card">
@@ -470,7 +467,47 @@
             src="./images/display-fan/ui-search.webp"
             alt="목적지 검색 화면"
           >
-          <figcaption><b>09</b>목적지 검색</figcaption>
+          <figcaption><b>04</b>목적지 검색</figcaption>
+        </figure>
+
+        <figure class="fan__card">
+          <img
+            src="./images/display-fan/ui-drive.webp"
+            alt="길 안내 화면"
+          >
+          <figcaption><b>05</b>길 안내</figcaption>
+        </figure>
+
+        <figure class="fan__card">
+          <img
+            src="./images/display-fan/ui-lane.webp"
+            alt="위험 알림 화면"
+          >
+          <figcaption><b>06</b>위험 알림</figcaption>
+        </figure>
+
+        <figure class="fan__card">
+          <img
+            src="./images/display-fan/ui-yield.webp"
+            alt="긴급차 양보 화면"
+          >
+          <figcaption><b>07</b>긴급차 양보</figcaption>
+        </figure>
+
+        <figure class="fan__card">
+          <img
+            src="./images/display-fan/ui-stop.webp"
+            alt="즉시 정지 화면"
+          >
+          <figcaption><b>08</b>즉시 정지</figcaption>
+        </figure>
+
+        <figure class="fan__card">
+          <img
+            src="./images/display-fan/ui-car.webp"
+            alt="차량 상태 화면"
+          >
+          <figcaption><b>09</b>차량 상태</figcaption>
         </figure>
 
       </div>
@@ -549,32 +586,46 @@
 
 
     <!-- =====================================================
-         04. OVERVIEW
-
-         모든 정보가, 한눈에.
-
-         처음
-         TITLE LEFT
-         STACK RIGHT
-
-         ↓ SCROLL
-
-         TITLE CENTER
-
-         ↓
-
-         TITLE 아래부터
-         화면 4개 펼쳐짐
+         04. OVERVIEW — 위험 단계 버전 / 2026.10.27
+         디스플레이_위험단계_레이더.zip 바탕
+         전) 모든 정보가, 한눈에. (경로 · 교통 · 안전 · 차량 화면 4장)
+         후) 위험은 단계별로, 한눈에. (LEVEL 1 안전 → 2 주의 → 3 경고 → 4 위험)
+         ---- 펼쳐지는 동작은 기존 그대로 (interface.js — 처음 제목 왼쪽 · 화면 오른쪽 → 제목 가운데 → 화면 4개 펼쳐짐)
+         ---- 추가 : 배경 레이더(.lvbg)  (오른쪽 위 단계 표시 .lvstep 는 2026.10.27 에 없앰)
+                     화면 가운데 카드의 단계에 맞춰 색 · 방향 · 빛이 바뀜
+         ---- 스타일 : interface.css [DISPLAY 위험 단계] / 동작 : interface.js [DISPLAY 위험 단계]
     ====================================================== -->
 
     <section
       class="display-overview"
       id="display-overview"
+      data-lvnow="1"
     >
 
       <!-- STICKY -->
 
       <div class="display-overview__sticky">
+
+
+        <!-- =================================================
+             배경 레이더 — 내 차를 가운데 두고 위험 방향 · 거리 표시
+             (선 · 눈금은 패키지 SVG 그대로 / 2026.10.27 : 위험 방향 부채꼴 빛 진하기 .14 → .24)
+        ================================================== -->
+
+        <div class="lvbg" aria-hidden="true"><svg class="rad" viewBox="-580 -580 1160 1160" preserveAspectRatio="xMidYMid slice">
+  <defs><radialGradient id="wg" cx="0" cy="0" r="540" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="var(--lc)" stop-opacity="0"/><stop offset=".4" stop-color="var(--lc)" stop-opacity=".24"/><stop offset="1" stop-color="var(--lc)" stop-opacity="0"/></radialGradient></defs>
+  <g fill="none" stroke="rgba(255,255,255,.035)" stroke-width=".5" stroke-dasharray="1 5"><circle r="195"/><circle r="325"/><circle r="455"/></g>
+  <g fill="none" stroke-width=".5"><circle r="130" stroke="rgba(255,255,255,0.1)"/><circle r="260" stroke="rgba(255,255,255,0.075)"/><circle r="390" stroke="rgba(255,255,255,0.055)"/><circle r="520" stroke="rgba(255,255,255,0.04)"/></g>
+  <g stroke-width=".6"><line x1="0.0" y1="-532.0" x2="0.0" y2="-544.0" stroke="rgba(255,255,255,.1)"/><line x1="137.7" y1="-513.9" x2="139.2" y2="-519.7" stroke="rgba(255,255,255,.04)"/><line x1="266.0" y1="-460.7" x2="269.0" y2="-465.9" stroke="rgba(255,255,255,.04)"/><line x1="376.2" y1="-376.2" x2="380.4" y2="-380.4" stroke="rgba(255,255,255,.04)"/><line x1="460.7" y1="-266.0" x2="465.9" y2="-269.0" stroke="rgba(255,255,255,.04)"/><line x1="513.9" y1="-137.7" x2="519.7" y2="-139.2" stroke="rgba(255,255,255,.04)"/><line x1="532.0" y1="-0.0" x2="544.0" y2="-0.0" stroke="rgba(255,255,255,.1)"/><line x1="513.9" y1="137.7" x2="519.7" y2="139.2" stroke="rgba(255,255,255,.04)"/><line x1="460.7" y1="266.0" x2="465.9" y2="269.0" stroke="rgba(255,255,255,.04)"/><line x1="376.2" y1="376.2" x2="380.4" y2="380.4" stroke="rgba(255,255,255,.04)"/><line x1="266.0" y1="460.7" x2="269.0" y2="465.9" stroke="rgba(255,255,255,.04)"/><line x1="137.7" y1="513.9" x2="139.2" y2="519.7" stroke="rgba(255,255,255,.04)"/><line x1="0.0" y1="532.0" x2="0.0" y2="544.0" stroke="rgba(255,255,255,.1)"/><line x1="-137.7" y1="513.9" x2="-139.2" y2="519.7" stroke="rgba(255,255,255,.04)"/><line x1="-266.0" y1="460.7" x2="-269.0" y2="465.9" stroke="rgba(255,255,255,.04)"/><line x1="-376.2" y1="376.2" x2="-380.4" y2="380.4" stroke="rgba(255,255,255,.04)"/><line x1="-460.7" y1="266.0" x2="-465.9" y2="269.0" stroke="rgba(255,255,255,.04)"/><line x1="-513.9" y1="137.7" x2="-519.7" y2="139.2" stroke="rgba(255,255,255,.04)"/><line x1="-532.0" y1="0.0" x2="-544.0" y2="0.0" stroke="rgba(255,255,255,.1)"/><line x1="-513.9" y1="-137.7" x2="-519.7" y2="-139.2" stroke="rgba(255,255,255,.04)"/><line x1="-460.7" y1="-266.0" x2="-465.9" y2="-269.0" stroke="rgba(255,255,255,.04)"/><line x1="-376.2" y1="-376.2" x2="-380.4" y2="-380.4" stroke="rgba(255,255,255,.04)"/><line x1="-266.0" y1="-460.7" x2="-269.0" y2="-465.9" stroke="rgba(255,255,255,.04)"/><line x1="-137.7" y1="-513.9" x2="-139.2" y2="-519.7" stroke="rgba(255,255,255,.04)"/></g>
+  <g stroke="rgba(255,255,255,.035)" stroke-width=".5"><line x1="-520" y1="0" x2="520" y2="0"/><line x1="0" y1="-520" x2="0" y2="520"/></g>
+  <g class="pulses" fill="none"><circle class="pu" r="80"/><circle class="pu" r="80"/><circle class="pu" r="80"/><circle class="pu" r="80"/></g>
+  <g class="dir dir-2" transform="rotate(90)"><path class="wedge" d="M 0 0 L -270.0 -467.7 A 540 540 0 0 1 270.0 -467.7 Z" fill="url(#wg)"/><path class="wave" d="M -46.9 -88.3 A 100 100 0 0 1 46.9 -88.3" style="--k:0"/><path class="wave" d="M -46.9 -88.3 A 100 100 0 0 1 46.9 -88.3" style="--k:1"/><path class="wave" d="M -46.9 -88.3 A 100 100 0 0 1 46.9 -88.3" style="--k:2"/></g><g class="dir dir-3" transform="rotate(180)"><path class="wedge" d="M 0 0 L -270.0 -467.7 A 540 540 0 0 1 270.0 -467.7 Z" fill="url(#wg)"/><path class="wave" d="M -46.9 -88.3 A 100 100 0 0 1 46.9 -88.3" style="--k:0"/><path class="wave" d="M -46.9 -88.3 A 100 100 0 0 1 46.9 -88.3" style="--k:1"/><path class="wave" d="M -46.9 -88.3 A 100 100 0 0 1 46.9 -88.3" style="--k:2"/></g><g class="dir dir-4" transform="rotate(0)"><path class="wedge" d="M 0 0 L -270.0 -467.7 A 540 540 0 0 1 270.0 -467.7 Z" fill="url(#wg)"/><path class="wave" d="M -46.9 -88.3 A 100 100 0 0 1 46.9 -88.3" style="--k:0"/><path class="wave" d="M -46.9 -88.3 A 100 100 0 0 1 46.9 -88.3" style="--k:1"/><path class="wave" d="M -46.9 -88.3 A 100 100 0 0 1 46.9 -88.3" style="--k:2"/></g>
+  <rect class="carshape" x="-26" y="-50" width="52" height="100" rx="18" fill="rgba(12,13,15,.85)" stroke="rgba(255,255,255,.28)" stroke-width=".7"/>
+  <rect x="-18" y="-24" width="36" height="26" rx="6" fill="none" stroke="rgba(255,255,255,.18)" stroke-width=".6"/>
+  <g fill="rgba(255,255,255,.2)" font-size="12" text-anchor="middle" font-family="Pretendard Variable, sans-serif" letter-spacing="3"><text y="-556">전방</text><text y="566">후방</text><text x="-560" y="4">좌측</text><text x="560" y="4">우측</text></g>
+  <g fill="rgba(255,255,255,.13)" font-size="10" font-family="Pretendard Variable, sans-serif" letter-spacing="1"><text x="8" y="-136">100m</text><text x="8" y="-266">200m</text><text x="8" y="-396">300m</text></g>
+</svg></div>
+
 
         <div class="display-overview__inner">
 
@@ -601,33 +652,34 @@
               DISPLAY / 01
             </p>
 
+            <!-- 2026.10.27 : 전 모든 정보가, 한눈에. -->
             <h2 class="display-overview__title">
-              모든 정보가,<br>
+              위험은 단계별로,<br>
               한눈에.
             </h2>
 
+            <!-- 2026.10.27 : 문장 다듬기
+                 전) 평소에는 길 안내만, 위험이 커질수록 색과 카드, 진동이 더해집니다.
+                     네 단계로 상황을 먼저 알려 드립니다. -->
+            <!-- 2026.10.27 : 두 줄 양쪽 맞춤 (전 평소에는 길 안내만 보여 줍니다. / 위험이 가까워질수록 색과 알림 카드, / 진동이 단계별로 더해집니다.) -->
             <p class="display-overview__description">
-              운전에 필요한 모든 정보를 시각적으로 전달하여<br>
-              더 안전하고 스마트한 드라이빙을 경험하세요.
+              평소에는 다음 길 안내만 조용히 보여 주다가,<br>
+              위험이 가까워지면 색과 카드, 진동을 더합니다.
             </p>
 
           </div>
 
 
           <!-- =================================================
-               VISUAL STACK
-
-               현재는 아래 네 이미지 사용.
-               나중에 이미지 SRC만 교체하면 됨.
+               VISUAL STACK — 단계별 화면 4장
+               (2 ~ 4 단계 : 평소 화면(-off) 위에 빛 들어온 화면(.lit)을 겹침)
           ================================================== -->
 
           <div class="display-overview__visual">
 
 
             <!-- =================================================
-                 01 ROUTE
-
-                 Reference처럼 제일 앞쪽
+                 LEVEL 1 · 안전
             ================================================== -->
 
             <article
@@ -635,30 +687,31 @@
                 display-info
                 display-info--route
               "
+              data-lv="1"
             >
 
               <div class="display-info__image">
 
                 <img
-                  src="./images/screen-navigation.png"
-                  alt="경로 안내 및 장소 탐색 디스플레이 화면"
+                  src="./images/display-level/lv1.png"
+                  alt="평소 길 안내 화면"
                 >
-
               </div>
 
               <div class="display-info__text">
 
                 <span class="display-info__eyebrow">
-                  01 / ROUTE
+                  LEVEL 1 · 안전
                 </span>
 
                 <h3>
-                  경로 안내 및 변경
+                  길 안내
                 </h3>
 
+                <!-- 2026.10.27 : 양쪽 맞춤 — 두 줄 길이를 비슷하게 (전 다음 회전과 남은 거리를 조용히.) -->
                 <p>
-                  최적의 이동 경로와<br>
-                  변경 정보를 제공합니다.
+                  위험이 없을 때는 길 안내만.<br>
+                  회전과 남은 거리를 조용히.
                 </p>
 
               </div>
@@ -667,7 +720,7 @@
 
 
             <!-- =================================================
-                 02 TRAFFIC
+                 LEVEL 2 · 주의
             ================================================== -->
 
             <article
@@ -675,30 +728,45 @@
                 display-info
                 display-info--traffic
               "
+              data-lv="2"
             >
 
               <div class="display-info__image">
 
                 <img
-                  src="./images/screen-media.png"
-                  alt="미디어와 정보가 표시된 다들림 디스플레이 화면"
+                  src="./images/display-level/lv2-off.png"
+                  alt="차선 변경 주의 알림 화면"
                 >
+
+                <!-- 해당 단계일 때만 켜지는 빛 들어온 화면 -->
+                <img
+                  class="lit"
+                  src="./images/display-level/lv2.png"
+                  alt=""
+                  aria-hidden="true"
+                >
+
+                <i
+                  class="litglow"
+                  aria-hidden="true"
+                ></i>
 
               </div>
 
               <div class="display-info__text">
 
                 <span class="display-info__eyebrow">
-                  02 / TRAFFIC
+                  LEVEL 2 · 주의
                 </span>
 
                 <h3>
-                  실시간 교통 정보
+                  차선 변경 주의
                 </h3>
 
+                <!-- 2026.10.27 : 양쪽 맞춤 -->
                 <p>
-                  교통 흐름과 주변 상황을<br>
-                  실시간으로 확인합니다.
+                  사각지대 차량을 주황 카드로.<br>
+                  거리 2m, 중간 세기 진동 2회.
                 </p>
 
               </div>
@@ -707,7 +775,7 @@
 
 
             <!-- =================================================
-                 03 SAFETY
+                 LEVEL 3 · 경고
             ================================================== -->
 
             <article
@@ -715,30 +783,46 @@
                 display-info
                 display-info--safety
               "
+              data-lv="3"
             >
 
               <div class="display-info__image">
 
                 <img
-                  src="./images/screen-smartcare.png"
-                  alt="스마트 케어 안전 설정 디스플레이 화면"
+                  src="./images/display-level/lv3-off.png"
+                  alt="긴급차 양보 알림 화면"
                 >
+
+                <!-- 해당 단계일 때만 켜지는 빛 들어온 화면 -->
+                <img
+                  class="lit"
+                  src="./images/display-level/lv3.png"
+                  alt=""
+                  aria-hidden="true"
+                >
+
+                <i
+                  class="litglow"
+                  aria-hidden="true"
+                ></i>
 
               </div>
 
               <div class="display-info__text">
 
                 <span class="display-info__eyebrow">
-                  03 / SAFETY
+                  LEVEL 3 · 경고
                 </span>
 
                 <h3>
-                  안전 알림
+                  긴급차 양보
                 </h3>
 
+                <!-- 2026.10.27 : 양쪽 맞춤 — 두 줄 길이를 비슷하게
+                     (전 뒤에서 다가오는 긴급차를 / 알림 카드로 보여 줍니다. / 120m 뒤, 길을 비켜 주세요.) -->
                 <p>
-                  위험 상황과 주요 알림을<br>
-                  빠르게 전달합니다.
+                  긴급차가 뒤에 오면 알림 카드로.<br>
+                  120m 전부터 길을 비켜 주세요.
                 </p>
 
               </div>
@@ -747,7 +831,7 @@
 
 
             <!-- =================================================
-                 04 VEHICLE
+                 LEVEL 4 · 위험
             ================================================== -->
 
             <article
@@ -755,30 +839,46 @@
                 display-info
                 display-info--vehicle
               "
+              data-lv="4"
             >
 
               <div class="display-info__image">
 
                 <img
-                  src="./images/screen-weather.png"
-                  alt="날씨와 일정 정보가 표시된 다들림 디스플레이 화면"
+                  src="./images/display-level/lv4-off.png"
+                  alt="즉시 정지 알림 화면"
                 >
+
+                <!-- 해당 단계일 때만 켜지는 빛 들어온 화면 -->
+                <img
+                  class="lit"
+                  src="./images/display-level/lv4.png"
+                  alt=""
+                  aria-hidden="true"
+                >
+
+                <i
+                  class="litglow"
+                  aria-hidden="true"
+                ></i>
 
               </div>
 
               <div class="display-info__text">
 
                 <span class="display-info__eyebrow">
-                  04 / VEHICLE
+                  LEVEL 4 · 위험
                 </span>
 
                 <h3>
-                  차량 상태 정보
+                  즉시 정지
                 </h3>
 
+                <!-- 2026.10.27 : 양쪽 맞춤 — 두 줄 길이를 비슷하게
+                     (전 앞차 급정거, 45m 앞. / 붉은 카드와 강한 연속 진동이 / 동시에 울립니다.) -->
                 <p>
-                  차량의 현재 상태와<br>
-                  필요한 정보를 한눈에 확인합니다.
+                  앞차가 45m 앞에서 급정거하면,<br>
+                  붉은 카드와 강한 진동이 동시에.
                 </p>
 
               </div>
@@ -788,6 +888,9 @@
           </div>
 
         </div>
+
+
+        <!-- 2026.10.27 : 오른쪽 위 단계 표시(안전 · 주의 · 경고 · 위험) 없앰 -->
 
       </div>
 

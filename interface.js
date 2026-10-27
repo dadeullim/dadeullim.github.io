@@ -1889,8 +1889,9 @@ document.addEventListener("DOMContentLoaded", () => {
       : [];
 
 
+  /* 2026.10.27 : 펼친 화면이 너무 커서 줄임 620 → 500 (맥북 기준, 큰 화면은 아래 sc 로 비율대로) */
   const OVERVIEW_CARD_MAX =
-    620;
+    500;
 
 
   const OVERVIEW_CARD_ZIGZAG =
@@ -1963,8 +1964,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
       style.textContent = `
+        /* 2026.10.27 : 모서리 둥근 정도 줄임 12px → 5px */
         .display-page .display-overview .display-info__image {
-          border-radius: 12px;
+          border-radius: 5px;
           overflow: hidden;
           box-shadow:
             0 30px 70px rgba(0, 0, 0, 0.55),
@@ -1974,7 +1976,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         .display-page .display-overview .display-info__image img {
           display: block;
-          border-radius: 12px;
+          border-radius: 5px;   /* 전 12px */
         }
       `;
 
@@ -2281,11 +2283,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-      const textGap =
-        vw >
-        1100
-          ? 52
-          : 34;
+      /* 2026.10.27 : textGap 은 아래 sc 다음으로 옮김 (큰 화면에서 비율대로) */
 
 
       const textWidth =
@@ -2298,13 +2296,36 @@ document.addEventListener("DOMContentLoaded", () => {
           : 190;
 
 
+      /* 2026.10.27 : 양옆 여백이 좁아 빡빡해 보여서 26px → 화면 폭의 6% (맥북 약 90px)
+         큰 화면(1513 이상)은 맥북 비율 그대로 커지게 sc */
+      const sc =
+        Math.max(
+          1,
+          vw /
+          1512
+        );
+
+
       const sideMargin =
-        26;
+        Math.max(
+          56,
+          vw *
+          0.06
+        );
+
+
+      const textGap =
+        vw >
+        1100
+          ? 52 *
+            sc
+          : 34;
 
 
       const zigzagTarget =
         Math.min(
-          OVERVIEW_CARD_ZIGZAG,
+          OVERVIEW_CARD_ZIGZAG *
+          sc,
           vw *
           0.105
         );
@@ -2324,8 +2345,9 @@ document.addEventListener("DOMContentLoaded", () => {
             ) *
             2,
             vw *
-            0.44,
-            OVERVIEW_CARD_MAX
+            0.34,   /* 2026.10.27 : 전 0.44 */
+            OVERVIEW_CARD_MAX *
+            sc
           )
         );
 
@@ -3551,6 +3573,13 @@ document.addEventListener(
         "handle-page"
       )
     ) {
+      return;
+    }
+
+
+    /* 2026.10.23 : 핸들 4차 시안(.hd4)으로 바뀌어 옛 HAPTIC HANDLE LITE 동작은 쓰지 않음
+       (아래 코드는 그대로 남겨 둠 — 4차 동작은 맨 아래 [HANDLE 4차]) */
+    if (document.querySelector(".hd4")) {
       return;
     }
 
@@ -7297,3 +7326,532 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 });
+
+
+/* =========================================================
+   [HANDLE 4차] 핸들 페이지 4차 시안 조합 / 2026.10.23
+   ---------------------------------------------------------
+   dadeullim-handle-4차.zip 의 assets/seq.js · hero.js · site.js · widgets.js
+   + index.html 맨 아래 스크립트를 순서 그대로 옮겨 옴
+   ---- handle.html 의 .hd4 가 있을 때만 실행
+   ---- 이미지 시퀀스 경로 : assets/seq/ → ./images/handle-seq/
+   ---- 히어로 선 · 라벨 위치(callouts.json) : 파일로 불러오지 않고 아래 값으로
+   ---- Lenis(부드러운 스크롤)는 handle.html 에서 interface.js 보다 먼저 불러옴
+   전) 위쪽 HAPTIC HANDLE (지금은 .hd4 가 있으면 건너뜀)
+========================================================= */
+
+(() => {
+  if (!document.querySelector(".hd4")) return;
+
+  /* 히어로 부품 라벨 A–G · 영상 시간별 위치 (전 assets/callouts.json) */
+  const HANDLE_CALLOUTS = {"parts":[{"k":"A","name":"Outer trim"},{"k":"B","name":"Chrome ring"},{"k":"C","name":"Haptic module"},{"k":"D","name":"Leather rim"},{"k":"E","name":"Spoke frame"},{"k":"F","name":"Hub cushion"},{"k":"G","name":"CC2 emblem"}],"track":[[5.9,[0.2878,0.4094],[0.4122,0.2602],[0.4293,0.4639],[0.5715,0.2617],[0.6061,0.5453],[0.6501,0.6254],[0.7296,0.697]],[5.95,[0.2959,0.412],[0.4158,0.2688],[0.432,0.465],[0.5691,0.2709],[0.6021,0.544],[0.6443,0.6212],[0.7207,0.6904]],[6.0,[0.2988,0.4129],[0.4171,0.2719],[0.433,0.4654],[0.5683,0.2743],[0.6006,0.5436],[0.6422,0.6198],[0.7175,0.6882]],[6.05,[0.2988,0.4127],[0.4172,0.2718],[0.433,0.4653],[0.5684,0.2743],[0.6006,0.5436],[0.6422,0.6199],[0.7175,0.6884]],[6.1,[0.2988,0.4125],[0.4172,0.2717],[0.433,0.4652],[0.5684,0.2743],[0.6006,0.5437],[0.6422,0.6201],[0.7175,0.6886]],[6.15,[0.2987,0.4124],[0.4172,0.2716],[0.4329,0.4652],[0.5685,0.2742],[0.6006,0.5438],[0.6422,0.6202],[0.7175,0.6888]],[6.2,[0.2986,0.4122],[0.4172,0.2714],[0.4329,0.4651],[0.5686,0.2742],[0.6007,0.5439],[0.6423,0.6204],[0.7176,0.6891]],[6.25,[0.2985,0.412],[0.4172,0.2712],[0.4329,0.4651],[0.5687,0.2741],[0.6007,0.544],[0.6424,0.6206],[0.7177,0.6893]],[6.3,[0.2984,0.4118],[0.4172,0.2709],[0.4328,0.465],[0.5688,0.2739],[0.6008,0.5441],[0.6425,0.6207],[0.7178,0.6896]],[6.35,[0.2982,0.4116],[0.4172,0.2706],[0.4328,0.4649],[0.5689,0.2737],[0.6009,0.5442],[0.6426,0.621],[0.718,0.6899]],[6.4,[0.298,0.4114],[0.4171,0.2703],[0.4327,0.4648],[0.569,0.2735],[0.601,0.5443],[0.6427,0.6212],[0.7182,0.6903]],[6.45,[0.2978,0.4111],[0.417,0.27],[0.4326,0.4647],[0.5692,0.2733],[0.6011,0.5444],[0.6429,0.6214],[0.7185,0.6906]],[6.5,[0.2975,0.4109],[0.417,0.2697],[0.4325,0.4647],[0.5693,0.273],[0.6012,0.5446],[0.643,0.6216],[0.7187,0.691]],[6.55,[0.2972,0.4107],[0.4169,0.2693],[0.4324,0.4646],[0.5694,0.2727],[0.6014,0.5447],[0.6432,0.6219],[0.719,0.6914]],[6.6,[0.2969,0.4104],[0.4168,0.2689],[0.4323,0.4645],[0.5696,0.2724],[0.6015,0.5448],[0.6434,0.6222],[0.7193,0.6918]],[6.65,[0.2966,0.4102],[0.4167,0.2684],[0.4322,0.4644],[0.5697,0.2721],[0.6017,0.5449],[0.6436,0.6224],[0.7196,0.6923]],[6.7,[0.2963,0.4099],[0.4166,0.268],[0.4321,0.4643],[0.5699,0.2717],[0.6019,0.5451],[0.6439,0.6227],[0.72,0.6927]],[6.75,[0.2959,0.4096],[0.4165,0.2675],[0.432,0.4642],[0.5701,0.2713],[0.6021,0.5452],[0.6441,0.623],[0.7204,0.6932]],[6.8,[0.2955,0.4094],[0.4163,0.267],[0.4319,0.4641],[0.5702,0.2709],[0.6022,0.5453],[0.6444,0.6233],[0.7208,0.6937]],[6.85,[0.2951,0.4091],[0.4162,0.2665],[0.4317,0.464],[0.5704,0.2705],[0.6025,0.5455],[0.6447,0.6236],[0.7212,0.6941]],[6.9,[0.2947,0.4088],[0.4161,0.266],[0.4316,0.4639],[0.5706,0.27],[0.6027,0.5456],[0.6449,0.624],[0.7216,0.6946]],[6.95,[0.2942,0.4085],[0.4159,0.2655],[0.4315,0.4638],[0.5708,0.2695],[0.6029,0.5457],[0.6452,0.6243],[0.7221,0.6951]],[7.0,[0.2938,0.4083],[0.4157,0.2649],[0.4313,0.4637],[0.5709,0.269],[0.6031,0.5459],[0.6456,0.6246],[0.7226,0.6957]],[7.05,[0.2933,0.408],[0.4156,0.2643],[0.4312,0.4636],[0.5711,0.2685],[0.6033,0.546],[0.6459,0.625],[0.7231,0.6962]],[7.1,[0.2929,0.4077],[0.4154,0.2637],[0.431,0.4635],[0.5713,0.268],[0.6036,0.5462],[0.6462,0.6253],[0.7236,0.6967]],[7.15,[0.2924,0.4074],[0.4152,0.2632],[0.4308,0.4633],[0.5715,0.2675],[0.6038,0.5463],[0.6465,0.6256],[0.7241,0.6973]],[7.2,[0.2919,0.4071],[0.415,0.2625],[0.4307,0.4632],[0.5717,0.2669],[0.6041,0.5464],[0.6469,0.626],[0.7246,0.6978]],[7.25,[0.2914,0.4068],[0.4148,0.2619],[0.4305,0.4631],[0.5719,0.2664],[0.6043,0.5466],[0.6472,0.6264],[0.7252,0.6984]],[7.3,[0.2908,0.4065],[0.4147,0.2613],[0.4303,0.463],[0.5721,0.2658],[0.6046,0.5467],[0.6476,0.6267],[0.7257,0.6989]],[7.35,[0.2903,0.4062],[0.4145,0.2607],[0.4302,0.4629],[0.5723,0.2652],[0.6048,0.5469],[0.648,0.6271],[0.7263,0.6995]],[7.4,[0.2898,0.4059],[0.4143,0.26],[0.43,0.4628],[0.5725,0.2646],[0.6051,0.547],[0.6483,0.6274],[0.7268,0.7001]],[7.45,[0.2892,0.4056],[0.414,0.2594],[0.4298,0.4627],[0.5727,0.264],[0.6054,0.5472],[0.6487,0.6278],[0.7274,0.7007]],[7.5,[0.2887,0.4054],[0.4138,0.2588],[0.4296,0.4626],[0.5729,0.2634],[0.6057,0.5473],[0.6491,0.6282],[0.728,0.7012]],[7.55,[0.2882,0.4051],[0.4136,0.2581],[0.4294,0.4624],[0.5731,0.2628],[0.6059,0.5475],[0.6495,0.6285],[0.7286,0.7018]],[7.6,[0.2876,0.4048],[0.4134,0.2575],[0.4293,0.4623],[0.5733,0.2622],[0.6062,0.5476],[0.6499,0.6289],[0.7292,0.7024]],[7.65,[0.287,0.4045],[0.4132,0.2568],[0.4291,0.4622],[0.5736,0.2616],[0.6065,0.5478],[0.6503,0.6293],[0.7298,0.7029]],[7.7,[0.2865,0.4042],[0.413,0.2561],[0.4289,0.4621],[0.5738,0.261],[0.6068,0.5479],[0.6506,0.6296],[0.7303,0.7035]],[7.75,[0.2859,0.4039],[0.4128,0.2555],[0.4287,0.462],[0.574,0.2604],[0.607,0.548],[0.651,0.63],[0.7309,0.7041]],[7.8,[0.2854,0.4037],[0.4126,0.2549],[0.4285,0.4619],[0.5742,0.2598],[0.6073,0.5482],[0.6514,0.6303],[0.7315,0.7046]],[7.85,[0.2848,0.4034],[0.4123,0.2542],[0.4283,0.4618],[0.5744,0.2592],[0.6076,0.5483],[0.6518,0.6307],[0.7321,0.7052]],[7.9,[0.2843,0.4031],[0.4121,0.2536],[0.4282,0.4617],[0.5746,0.2586],[0.6079,0.5484],[0.6522,0.631],[0.7327,0.7057]],[7.95,[0.2837,0.4028],[0.4119,0.2529],[0.428,0.4616],[0.5748,0.2579],[0.6081,0.5486],[0.6526,0.6314],[0.7333,0.7063]],[8.0,[0.2832,0.4026],[0.4117,0.2523],[0.4278,0.4615],[0.5749,0.2573],[0.6084,0.5487],[0.653,0.6317],[0.7339,0.7068]],[8.05,[0.2827,0.4023],[0.4115,0.2517],[0.4276,0.4614],[0.5751,0.2568],[0.6087,0.5488],[0.6533,0.6321],[0.7344,0.7073]],[8.1,[0.2821,0.4021],[0.4113,0.2511],[0.4274,0.4613],[0.5753,0.2562],[0.6089,0.549],[0.6537,0.6324],[0.735,0.7078]],[8.15,[0.2816,0.4018],[0.4111,0.2505],[0.4273,0.4612],[0.5755,0.2556],[0.6092,0.5491],[0.6541,0.6327],[0.7356,0.7084]],[8.2,[0.2811,0.4016],[0.4109,0.2499],[0.4271,0.4611],[0.5757,0.255],[0.6094,0.5492],[0.6544,0.633],[0.7361,0.7088]],[8.25,[0.2806,0.4014],[0.4107,0.2493],[0.4269,0.461],[0.5759,0.2545],[0.6097,0.5493],[0.6548,0.6333],[0.7367,0.7093]],[8.3,[0.2801,0.4012],[0.4105,0.2488],[0.4268,0.4609],[0.576,0.2539],[0.6099,0.5494],[0.6551,0.6336],[0.7372,0.7098]],[8.35,[0.2796,0.401],[0.4102,0.2482],[0.4266,0.4608],[0.5762,0.2534],[0.6102,0.5495],[0.6555,0.6339],[0.7377,0.7102]],[8.4,[0.2791,0.4008],[0.41,0.2477],[0.4264,0.4608],[0.5763,0.2528],[0.6104,0.5496],[0.6558,0.6342],[0.7383,0.7107]],[8.45,[0.2786,0.4006],[0.4098,0.2471],[0.4263,0.4607],[0.5765,0.2522],[0.6107,0.5497],[0.6562,0.6344],[0.7388,0.7111]],[8.5,[0.2781,0.4005],[0.4095,0.2466],[0.4261,0.4606],[0.5766,0.2516],[0.611,0.5497],[0.6566,0.6347],[0.7394,0.7114]],[8.55,[0.2775,0.4004],[0.4093,0.246],[0.4259,0.4606],[0.5768,0.2509],[0.6112,0.5498],[0.657,0.6349],[0.7401,0.7118]],[8.6,[0.2769,0.4003],[0.409,0.2455],[0.4257,0.4606],[0.5769,0.2502],[0.6115,0.5498],[0.6574,0.6351],[0.7407,0.7121]],[8.65,[0.2764,0.4003],[0.4087,0.2449],[0.4255,0.4605],[0.577,0.2496],[0.6118,0.5499],[0.6578,0.6353],[0.7414,0.7125]],[8.7,[0.2758,0.4002],[0.4084,0.2444],[0.4253,0.4605],[0.5771,0.2489],[0.6121,0.5499],[0.6583,0.6355],[0.742,0.7128]],[8.75,[0.2752,0.4002],[0.4081,0.2438],[0.4251,0.4605],[0.5773,0.2481],[0.6124,0.5499],[0.6587,0.6357],[0.7427,0.7131]],[8.8,[0.2746,0.4002],[0.4077,0.2432],[0.4249,0.4605],[0.5774,0.2474],[0.6127,0.5499],[0.6592,0.6359],[0.7434,0.7133]],[8.85,[0.2739,0.4002],[0.4074,0.2427],[0.4247,0.4604],[0.5775,0.2467],[0.613,0.5499],[0.6596,0.636],[0.7441,0.7136]]]};
+
+
+  /* ---------- 이미지 시퀀스 (seq.js) ---------- */
+/* DADEULLIM — HANDLE SEQUENCE ENGINE (shared by 시안 1–5)
+   331 frames · 1440×810 · assets/seq/0000.webp – 0330.webp
+   Scene map (331 index)
+   0–30 emerge · 30–80 rotate · 80–159 unscrew + explode · 159–171 zoom through rim
+   175–190 housing opens · 190–199 coin out · 197–207 ripple · 204–215 short ×3
+   227–246 close · 252–290 reassemble · 290–330 complete (bg keyed to black)        */
+(function () {
+  const N = 331, W = 1440, H = 810;
+  const src = (i) => `./images/handle-seq/${String(i).padStart(4, "0")}.webp`;
+  const imgs = new Array(N);
+  const loaded = new Uint8Array(N);
+  const listeners = new Set();
+
+  function load(i) {
+    if (imgs[i]) return;
+    const im = new Image();
+    im.decoding = "async";
+    im.onload = () => { loaded[i] = 1; listeners.forEach((f) => f(i)); };
+    im.src = src(i);
+    imgs[i] = im;
+  }
+  // first frames now, the rest in order, a few at a time
+  for (let i = 0; i < 24; i++) load(i);
+  let next = 24;
+  function pump() {
+    let n = 0;
+    while (next < N && n < 6) { load(next++); n++; }
+    if (next < N) setTimeout(pump, 40);
+  }
+  setTimeout(pump, 200);
+
+  function nearest(i) {
+    i = Math.max(0, Math.min(N - 1, Math.round(i)));
+    if (loaded[i]) return imgs[i];
+    for (let d = 1; d < N; d++) {
+      if (i - d >= 0 && loaded[i - d]) return imgs[i - d];
+      if (i + d < N && loaded[i + d]) return imgs[i + d];
+    }
+    return null;
+  }
+
+  // background grey of the render at a frame (black → #d2d2d2 between 266 and 295)
+  const bgStops = [[0, 0], [330, 0]];   // 4차: frames are keyed to black all the way through
+  function rawAt(f) {
+    for (let k = 0; k < bgStops.length - 1; k++) {
+      const [a, va] = bgStops[k], [b, vb] = bgStops[k + 1];
+      if (f >= a && f <= b) return Math.round(va + (vb - va) * ((f - a) / (b - a)));
+    }
+    return f < 0 ? 0 : 210;
+  }
+  // render black is lifted to graphite (screen blend) so the page is never pure black
+  const LIFT = [23, 25, 28];
+  const screen = (v, l) => Math.round(255 - (255 - v) * (255 - l) / 255);
+  const bgAt = (f) => screen(rawAt(f), 25);
+  const bgCss = (f) => { const v = rawAt(f); return `rgb(${LIFT.map((l) => screen(v, l)).join(",")})`; };
+
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  function progressOf(el) {
+    const r = el.getBoundingClientRect();
+    return clamp(-r.top / Math.max(1, el.offsetHeight - innerHeight));
+  }
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Player: draws frames into a canvas with cover/contain fit.
+     opts: canvas, fit ('cover'|'contain'), zoom(f)->scale, focus [nx,ny]   */
+  function Player(opts) {
+    const c = opts.canvas, ctx = c.getContext("2d");
+    const st = { f: 0, target: 0, raf: 0, rect: null, scale: 1, fx: 0.5, fy: 0.5 };
+    function size() {
+      const r = c.getBoundingClientRect();
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      c.width = Math.max(1, Math.round(r.width * dpr));
+      c.height = Math.max(1, Math.round(r.height * dpr));
+      st.cw = r.width; st.ch = r.height; st.dpr = dpr;
+      draw(true);
+    }
+    function geom() {
+      const fit = typeof opts.fit === "function" ? opts.fit() : (opts.fit || "cover");
+      const s0 = fit === "cover" ? Math.max(st.cw / W, st.ch / H) : Math.min(st.cw / W, st.ch / H);
+      const ox = opts.offsetX ? opts.offsetX() : 0;   // shift in css px (e.g. split layouts)
+      const dw0 = W * s0, dh0 = H * s0;
+      const dx0 = (st.cw - dw0) / 2 + ox, dy0 = (st.ch - dh0) / 2;
+      const px = dx0 + st.fx * dw0, py = dy0 + st.fy * dh0;
+      const dw = dw0 * st.scale, dh = dh0 * st.scale;
+      return { s: s0 * st.scale, dw, dh, dx: px - st.fx * dw, dy: py - st.fy * dh };
+    }
+    let lastDrawn = -1;
+    function draw(force) {
+      const fi = Math.round(st.f);
+      if (!force && fi === lastDrawn) return;
+      const im = nearest(fi);
+      if (!im) return;
+      const g = geom();
+      ctx.setTransform(st.dpr, 0, 0, st.dpr, 0, 0);
+      ctx.globalCompositeOperation = "source-over";
+      ctx.fillStyle = `rgb(${LIFT.join(",")})`;
+      ctx.fillRect(0, 0, st.cw, st.ch);
+      // edges outside the image take the render's own background
+      ctx.fillStyle = bgCss(fi);
+      ctx.fillRect(0, 0, st.cw, st.ch);
+      ctx.fillStyle = `rgb(${LIFT.join(",")})`;
+      ctx.fillRect(g.dx, g.dy, g.dw, g.dh);
+      ctx.globalCompositeOperation = "screen";
+      ctx.drawImage(im, g.dx, g.dy, g.dw, g.dh);
+      ctx.globalCompositeOperation = "source-over";
+      lastDrawn = fi;
+      opts.onDraw && opts.onDraw(fi, api);
+    }
+    st.ts = 1; st.tfx = .5; st.tfy = .5;
+    function tick() {
+      const d = st.target - st.f;
+      st.f = Math.abs(d) < 0.3 || reduce ? st.target : st.f + d * 0.22;
+      let moved = false;
+      for (const [a, b] of [["scale", "ts"], ["fx", "tfx"], ["fy", "tfy"]]) {
+        const e = st[b] - st[a];
+        if (e !== 0) { st[a] = Math.abs(e) < 0.0005 || reduce ? st[b] : st[a] + e * 0.08; moved = true; }
+      }
+      draw(moved);
+      st.raf = st.f !== st.target || moved ? requestAnimationFrame(tick) : 0;
+    }
+    const api = {
+      N,
+      set(frame) { st.target = clamp(frame, 0, N - 1); if (!st.raf) st.raf = requestAnimationFrame(tick); },
+      jump(frame) { st.f = st.target = clamp(frame, 0, N - 1); draw(true); },
+      setView(scale, fx, fy, instant) {
+        st.ts = scale; st.tfx = fx; st.tfy = fy;
+        if (instant) { st.scale = scale; st.fx = fx; st.fy = fy; draw(true); }
+        else if (!st.raf) st.raf = requestAnimationFrame(tick);
+      },
+      get frame() { return Math.round(st.f); },
+      // frame-normalised point → canvas-local CSS px
+      toScreen(nx, ny) { const g = geom(); return [g.dx + nx * g.dw, g.dy + ny * g.dh]; },
+      redraw() { draw(true); },
+      ctx, canvas: c,
+    };
+    listeners.add((i) => { if (Math.abs(i - Math.round(st.f)) < 3) draw(true); });
+    addEventListener("resize", size);
+    new ResizeObserver(size).observe(c);
+    size();
+    return api;
+  }
+
+  function onScroll(fn) {
+    let q = 0;
+    const run = () => { q = 0; fn(); };
+    addEventListener("scroll", () => { if (!q) q = requestAnimationFrame(run); }, { passive: true });
+    addEventListener("resize", () => { if (!q) q = requestAnimationFrame(run); });
+    fn();
+  }
+
+  // map progress p (0–1) through keyed segments [[p0,f0],[p1,f1],...]
+  function mapKeys(p, keys) {
+    if (p <= keys[0][0]) return keys[0][1];
+    for (let k = 0; k < keys.length - 1; k++) {
+      const [a, fa] = keys[k], [b, fb] = keys[k + 1];
+      if (p <= b) return fa + (fb - fa) * ((p - a) / (b - a || 1));
+    }
+    return keys[keys.length - 1][1];
+  }
+  const range = (p, a, b) => clamp((p - a) / (b - a));
+
+  window.HSeq = { N, Player, onScroll, progressOf, bgAt, bgCss, LIFT, mapKeys, range, clamp, src, imgs, reduce };
+})();
+
+
+
+  /* ---------- 영상 히어로 글자 · 선 (hero.js) ---------- */
+/* DADEULLIM handle — film hero with coded overlays (labels, HW-01, A–G callouts, motor, ending)
+   Timing follows assets/vid/film(.av1).mp4 — 17.9s, edited 2026-10-23 */
+(() => {
+  const root = document.querySelector("[data-hero]");
+  if (!root) return;
+  const v = root.querySelector("video"), svg = root.querySelector("svg.hero-lines"), NS = "http://www.w3.org/2000/svg";
+  const $ = (s) => root.querySelector(s);
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const rng = (t, a, b) => clamp((t - a) / (b - a));
+  const eo = (x) => 1 - Math.pow(1 - clamp(x), 3);
+  const SEC = [[0, "1.0", "Overview"], [2.6, "2.0", "Form"], [4.4, "3.0", "Layers"], [9.5, "4.0", "Calibre"], [14.35, "5.0", "Return"], [17.2, "6.0", "Complete"]];
+  // callout layout: side (+1 right / −1 left), elbow dy (px)
+  const LAY = { A: [-1, -50], B: [-1, -90], C: [-1, 120], D: [1, -90], E: [1, -60], F: [1, 60], G: [1, 80] };
+  let CO = null;
+  /* 2026.10.23 : assets/callouts.json 을 불러오던 것 → HANDLE_CALLOUTS 값을 바로 씀 (아래 frame 시작 직전에) */
+
+  const lab = $(".h-sec"), big = $(".h-big"), mot = $(".h-motor"), end = $(".h-end"), cnt = $(".h-count"), tm = $(".h-time");
+  const struct = $(".h-struct"), structN = $(".h-struct b"), bars = [...root.querySelectorAll(".h-pulse i")], rip = $(".h-rip");
+  const line = $(".h-rule");
+  const cos = [];
+  function build() {
+    CO.parts.forEach((p) => {
+      const g = document.createElementNS(NS, "g");
+      g.innerHTML = '<polyline fill="none" stroke="rgba(242,242,239,.7)" stroke-width="1"/><circle r="4" fill="#a9dded"/>';
+      svg.appendChild(g);
+      const d = document.createElement("div"); d.className = "h-co"; d.dataset.full = `${p.k}.  ${p.name.toUpperCase()}`; root.querySelector(".hero-ui").appendChild(d);
+      cos.push({ k: p.k, g, d });
+    });
+  }
+  function rect() {
+    const r = root.getBoundingClientRect(), s = Math.max(r.width / 1920, r.height / 1080);
+    return { w: 1920 * s, h: 1080 * s, x: (r.width - 1920 * s) / 2, y: (r.height - 1080 * s) / 2, W: r.width, H: r.height };
+  }
+  function trackAt(t) {
+    const T = CO.track; if (t <= T[0][0]) return T[0]; if (t >= T[T.length - 1][0]) return T[T.length - 1];
+    for (let i = 0; i < T.length - 1; i++) if (t <= T[i + 1][0]) {
+      const u = (t - T[i][0]) / (T[i + 1][0] - T[i][0]);
+      return [t, ...T[i].slice(1).map((p, k) => [p[0] + (T[i + 1][k + 1][0] - p[0]) * u, p[1] + (T[i + 1][k + 1][1] - p[1]) * u])];
+    }
+  }
+  let lastSec = -1;
+  function frame() {
+    const t = v.currentTime || 0;
+    // section label + rule
+    let si = 0; SEC.forEach((s, i) => { if (t >= s[0]) si = i; });
+    if (si !== lastSec) { lastSec = si; lab.innerHTML = `<b>${SEC[si][1]}</b>${SEC[si][2]}`; }
+    line.style.transform = `scaleX(${eo(rng(t, .1, .9)).toFixed(3)})`;
+    cnt.textContent = `DADEULLIM HANDLE — ${String(Math.round(t * 60)).padStart(4, "0")}`;
+    tm.textContent = `${t.toFixed(2).padStart(5, "0")}s`;
+    // HW-01 reveal
+    const bu = eo(rng(t, 1.3, 2.0)) * (1 - rng(t, 2.35, 2.6));
+    big.style.clipPath = `inset(${(1 - eo(rng(t, 1.3, 2.0))) * 100}% 0 0 0)`;
+    big.style.opacity = bu > 0 ? (1 - rng(t, 2.35, 2.6)).toFixed(3) : 0;
+    // structure + callouts
+    const sOn = t >= 6.1 && t < 8.8;
+    struct.style.opacity = sOn ? (rng(t, 6.1, 6.4) * (1 - rng(t, 8.6, 8.8))).toFixed(3) : 0;
+    if (CO && cos.length) {
+      const R = rect(), row = sOn ? trackAt(t) : null; let shown = 0;
+      cos.forEach((c, i) => {
+        const t0 = 6.3 + i * .22, on = sOn && t >= t0, fade = 1 - rng(t, 8.6, 8.8);
+        c.g.style.opacity = on ? fade : 0; c.d.style.opacity = on ? fade : 0;
+        if (!on) { c.d.textContent = ""; return; }
+        shown++;
+        const [u, w] = row[i + 1], x = R.x + u * R.w, y = R.y + w * R.h;
+        const [side, dy] = LAY[c.k], ex = x + side * 70, ey = y + dy, tx = ex + side * 110;
+        const k = eo(rng(t, t0, t0 + .3)), k1 = Math.min(1, k * 2), k2 = Math.max(0, k * 2 - 1);
+        const p1x = x + (ex - x) * k1, p1y = y + (ey - y) * k1;
+        c.g.firstChild.setAttribute("points", k2 > 0 ? `${x},${y} ${ex},${ey} ${ex + (tx - ex) * k2},${ey}` : `${x},${y} ${p1x},${p1y}`);
+        c.g.lastChild.setAttribute("cx", x); c.g.lastChild.setAttribute("cy", y); c.g.lastChild.setAttribute("r", 4 * eo(rng(t, t0, t0 + .15)));
+        const full = c.d.dataset.full, n = Math.round(full.length * rng(t, t0 + .18, t0 + .5));
+        c.d.textContent = full.slice(0, n);
+        const wid = full.length * 8.4;
+        let lx = side > 0 ? tx + 10 : tx - 10 - wid, ly = ey;
+        if (lx + wid > R.W - 24) { lx = R.W - 24 - wid; ly = ey - 16; }
+        if (lx < 24) { lx = 24; ly = ey - 16; }
+        c.d.style.left = lx + "px"; c.d.style.top = ly + "px"; c.d.style.transform = "translateY(-50%)";
+      });
+      structN.textContent = `${shown} / 7`;
+    }
+    // motor
+    const mOn = t >= 9.5 && t < 14.4;
+    mot.style.opacity = mOn ? (rng(t, 9.6, 10.0) * (1 - rng(t, 14.2, 14.4))).toFixed(3) : 0;
+    rip.textContent = t >= 12.95 ? "Ripple 2 / 2" : t >= 11.95 ? "Ripple 1 / 2" : "Housing open";
+    bars.forEach((b, i) => b.style.setProperty("--k", rng(t, 13.5 + i * .28, 13.5 + i * .28 + .22).toFixed(3)));
+    // ending
+    end.style.opacity = (rng(t, 16.4, 17.0) * (1 - rng(t, 17.75, 17.9))).toFixed(3);
+    requestAnimationFrame(frame);
+  }
+  CO = HANDLE_CALLOUTS; build();
+  requestAnimationFrame(frame);
+})();
+
+
+
+  /* ---------- 스크롤 · 나타나기 · 진행도 (site.js) ---------- */
+/* DADEULLIM handle pages — smooth inertial scroll (Lenis) + small scroll helpers */
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (window.Lenis && !reduce) {
+    const lenis = new Lenis({ lerp: 0.085, wheelMultiplier: 0.9, smoothWheel: true, anchors: true });
+    const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
+    requestAnimationFrame(raf);
+    window.__lenis = lenis;
+  }
+  // reveal on enter
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.18, rootMargin: "0px 0px -6% 0px" });
+  document.querySelectorAll("[data-rv]").forEach((el) => io.observe(el));
+  // count-up numbers
+  const fmt = (v, d) => v.toLocaleString("ko-KR", { minimumFractionDigits: d, maximumFractionDigits: d });
+  const co = new IntersectionObserver((es) => es.forEach((e) => {
+    if (!e.isIntersecting) return; co.unobserve(e.target);
+    const el = e.target, to = parseFloat(el.dataset.count), d = +(el.dataset.dec || 0), t0 = performance.now(), dur = 1400;
+    const step = (t) => { const u = Math.min(1, (t - t0) / dur), k = 1 - Math.pow(1 - u, 4); el.textContent = fmt(to * k, d); if (u < 1) requestAnimationFrame(step); };
+    reduce ? (el.textContent = fmt(to, d)) : requestAnimationFrame(step);
+  }), { threshold: 0.4 });
+  document.querySelectorAll("[data-count]").forEach((el) => co.observe(el));
+  // per-section scroll progress → --p on [data-prog] (sticky scenes read it)
+  const progs = [...document.querySelectorAll("[data-prog]")];
+  const upd = () => progs.forEach((el) => {
+    const r = el.getBoundingClientRect(), span = Math.max(1, el.offsetHeight - innerHeight);
+    const p = Math.min(1, Math.max(0, -r.top / span));
+    el.style.setProperty("--p", p.toFixed(4)); el.__p = p; el.dispatchEvent(new CustomEvent("prog", { detail: p }));
+  });
+  addEventListener("scroll", () => requestAnimationFrame(upd), { passive: true }); addEventListener("resize", upd); upd();
+  window.onProg = (el, fn) => { el.addEventListener("prog", (e) => fn(e.detail)); fn(el.__p || 0); };
+  // footnote smooth jumps keep working with Lenis anchors
+})();
+
+
+
+  /* ---------- 시퀀스 장면 · 진동 패턴 (widgets.js) ---------- */
+/* shared widgets: scroll-scrubbed render scenes, wheel pulse player, PWM waveform */
+(() => {
+  // ---------------- render image-sequence scenes (sticky canvas, scrubbed by section progress)
+  document.querySelectorAll(".seqs").forEach((sec) => {
+    const cv = sec.querySelector("canvas"); if (!cv || !window.HSeq) return;
+    const f0 = +sec.dataset.f0, f1 = +sec.dataset.f1, [s, x, y] = sec.dataset.view.split(",").map(Number);
+    const pl = HSeq.Player({ canvas: cv });
+    pl.setView(s, x, y, true);
+    sec.player = pl;
+    onProg(sec, (p) => {
+      const e = p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;   // ease in-out over the section
+      const f = f0 + (f1 - f0) * e;
+      pl.set(f);
+      sec.dispatchEvent(new CustomEvent("frame", { detail: { f, p } }));
+    });
+  });
+
+  // ---------------- patterns (예시 values — replace with the Arduino sketch)
+  window.PATTERNS = {
+    1: { name: "주의", en: "Notice", duty: 45, seq: [[150, 140], [150, 140], [150, 700]], use: "경적 · 먼 사이렌" },
+    2: { name: "접근", en: "Approach", duty: 70, seq: [[150, 120], [150, 120], [150, 380], [150, 120], [150, 120], [150, 700]], use: "다가오는 사이렌" },
+    3: { name: "긴급", en: "Urgent", duty: 100, seq: [[120, 80], [120, 80], [120, 220], [120, 80], [120, 80], [120, 220], [120, 80], [120, 80], [120, 600]], use: "바로 옆 긴급차량" },
+  };
+
+  // ---------------- play a pattern on a wheel svg side ("L" | "R")
+  window.playWheel = (svg, side, pid = 1, loop = false) => {
+    if (!svg) return () => {};
+    const dots = [...svg.querySelectorAll(`.${side} .m, .m.${side}`)], P = PATTERNS[pid];
+    svg.classList.remove("play-L", "play-R");
+    let alive = true, i = 0, timer = 0;
+    const op = .35 + .65 * (P.duty / 100);
+    svg.classList.add(`play-${side}`);
+    const step = () => {
+      if (!alive) return;
+      const [on, off] = P.seq[i % P.seq.length];
+      dots.forEach((d) => { d.classList.add("on"); d.style.opacity = op; });
+      timer = setTimeout(() => {
+        dots.forEach((d) => d.classList.remove("on"));
+        i++;
+        if (!loop && i >= P.seq.length) { svg.classList.remove(`play-${side}`); return; }
+        timer = setTimeout(step, off);
+      }, on);
+    };
+    step();
+    return () => { alive = false; clearTimeout(timer); dots.forEach((d) => d.classList.remove("on")); svg.classList.remove("play-L", "play-R"); };
+  };
+
+  // ---------------- PWM waveform into an <svg data-pwm> (viewBox 0 0 600 120)
+  window.drawPWM = (svg, duty, periods = 8) => {
+    if (!svg) return;
+    const W = 600, top = 18, bot = 102, pw = W / periods, d = Math.max(0, Math.min(100, duty)) / 100;
+    let path = `M0 ${bot}`;
+    for (let k = 0; k < periods; k++) {
+      const x0 = k * pw, x1 = x0 + pw * d;
+      if (d > 0) path += ` L${x0} ${top} L${x1} ${top} L${x1} ${bot}`;
+      path += ` L${x0 + pw} ${bot}`;
+    }
+    const avgY = bot - (bot - top) * d;
+    svg.innerHTML = `<path d="${path}" fill="none" stroke="#f2f2ef" stroke-width="1.5" stroke-opacity=".85"/>` +
+      `<line x1="0" x2="${W}" y1="${avgY}" y2="${avgY}" stroke="#a9dded" stroke-dasharray="4 5"/>` +
+      `<text x="${W - 4}" y="${avgY - 8}" text-anchor="end" fill="#a9dded" style="font:500 11px 'IBM Plex Mono',monospace">avg ${(5 * d).toFixed(2)} V</text>`;
+  };
+  document.querySelectorAll("svg[data-pwm]").forEach((s) => drawPWM(s, +s.dataset.pwm));
+
+  // ---------------- waveform strip for a pattern into <svg data-pat="1"> (viewBox 0 0 600 60)
+  document.querySelectorAll("svg[data-pat]").forEach((s) => {
+    const P = PATTERNS[s.dataset.pat], total = P.seq.reduce((a, [on, off]) => a + on + off, 0);
+    let x = 0, h = 10 + 36 * P.duty / 100, out = "";
+    P.seq.forEach(([on, off]) => { const w = on / total * 600; out += `<rect x="${x.toFixed(1)}" y="${(50 - h).toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" fill="#a9dded"/>`; x += (on + off) / total * 600; });
+    s.innerHTML = `<line x1="0" x2="600" y1="50" y2="50" stroke="rgba(242,242,239,.25)"/>` + out;
+  });
+})();
+
+
+
+  /* ---------- 섹션별 동작 (index.html 맨 아래 스크립트) ---------- */
+(() => {
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  const stops = new Map();
+  const light = (st, side, pid, loop) => { stops.get(st.id) && stops.get(st.id)(); stops.set(st.id, playWheel(st, side, pid, loop)); };
+  const quiet = (st) => { stops.get(st.id) && stops.get(st.id)(); stops.delete(st.id); };
+  // chapter indicator
+  const nav = document.getElementById('chap'), ticks = [...nav.querySelectorAll('.ticks i')], names = ['문제','아이디어','구조','방향','세기 · 리듬','체험','제작','질문'];
+  const chaps = [...document.querySelectorAll('[data-chap]')];
+  const updNav = () => { let k = -1; chaps.forEach((c) => { const r = c.getBoundingClientRect(); if (r.top < innerHeight * .5 && r.bottom > innerHeight * .5) k = +c.dataset.chap; });
+    nav.classList.toggle('on', k >= 0); if (k < 0) return; ticks.forEach((t, i) => t.classList.toggle('on', i <= k));
+    document.getElementById('chap-n').textContent = String(k + 1).padStart(2, '0'); document.getElementById('chap-t').textContent = names[k]; };
+  addEventListener('scroll', () => requestAnimationFrame(updNav), { passive: true }); updNav();
+  // 01 numbers one by one
+  const P = document.getElementById('prob'), ps = [...P.querySelectorAll('.st')], pl = [...P.querySelectorAll('ol.steps li')];
+  onProg(P, (p) => { const k = p < .36 ? 0 : p < .7 ? 1 : 2; ps.forEach((s, i) => s.classList.toggle('on', i === k)); pl.forEach((s, i) => s.classList.toggle('on', i === k)); });
+  // 03 legend
+  const S = document.getElementById('struct'), lis = [...S.querySelectorAll('#legend li')];
+  S.addEventListener('frame', (e) => { const k = Math.max(0, Math.min(7, Math.round(7 * cl((e.detail.f - 92) / 60)))); lis.forEach((l, i) => l.classList.toggle('on', i < k)); document.getElementById('lay-n').textContent = k; });
+  // 04 left then right
+  const D = document.getElementById('dir'), dst = document.getElementById('d-st'), rules = [...D.querySelectorAll('.rule > div')], caps = [...D.querySelectorAll('.side-cap')]; let cur = '';
+  onProg(D, (p) => { const k = p < .1 ? '' : p < .52 ? 'L' : p < .95 ? 'R' : '';
+    if (k === cur) return; cur = k;
+    rules.forEach((r) => r.classList.toggle('on', r.classList.contains(k))); caps.forEach((r) => r.classList.toggle('on', r.classList.contains(k)));
+    if (k) light(dst, k, k === 'L' ? 2 : 1, true); else quiet(dst); });
+  new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) { quiet(dst); cur = ''; } })).observe(D);
+  // 05 pulses + pattern rows
+  const G = document.getElementById('sig'), pcs = [...G.querySelectorAll('#pc i')], pats = [...G.querySelectorAll('.pat')];
+  G.addEventListener('frame', (e) => { const f = e.detail.f, p = e.detail.p, on = [[204.5, 207.5], [208.5, 211.5], [212.5, 216]];
+    pcs.forEach((c, i) => c.classList.toggle('on', f >= on[i][0] && f < on[i][1]));
+    const k = p < .4 ? 0 : p < .7 ? 1 : 2; pats.forEach((r, i) => r.classList.toggle('on', i === k)); });
+  // 06 configurator
+  const T = document.getElementById('t-st'), st = { side: 'L', snd: 'siren', lv: 2 }, nm = { 1: '주의', 2: '접근', 3: '긴급' };
+  const lvl = () => st.snd === 'horn' ? 1 : +st.lv;
+  const render = () => { const P = PATTERNS[lvl()];
+    document.getElementById('o-pin').textContent = st.side === 'L' ? 'D5' : 'D6'; document.getElementById('o-pat').textContent = nm[lvl()]; document.getElementById('o-duty').textContent = P.duty + '%';
+    document.getElementById('hl').classList.toggle('on', st.side === 'L'); document.getElementById('hr').classList.toggle('on', st.side === 'R'); };
+  const fire = () => light(T, st.side, lvl(), false);
+  document.querySelectorAll('#cfg [data-g]').forEach((g) => g.querySelectorAll('button').forEach((b) => b.onclick = () => {
+    g.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', x === b)); st[g.dataset.g] = b.dataset.v; render(); fire(); }));
+  document.getElementById('go').onclick = fire; render();
+})();
+})();
+
+
+/* =========================================================
+   [DISPLAY 위험 단계] 04 OVERVIEW / 2026.10.27
+   ---------------------------------------------------------
+   디스플레이_위험단계_레이더.zip 의 display-level.js 를 옮겨 옴
+   지금 화면 가운데에 가장 가까운 카드의 단계를 섹션(data-lvnow)에 표시
+   → 배경 레이더 · 오른쪽 위 단계 표시 · 카드 빛이 따라 바뀜 (스타일 : interface.css [DISPLAY 위험 단계])
+========================================================= */
+
+(() => {
+  const ov = document.getElementById("display-overview");
+  /* 2026.10.27 : 단계 표시(.lvstep)를 없애서 배경 레이더(.lvbg)로 확인 (전 .lvstep) */
+  if (!ov || !ov.querySelector(".lvbg")) return;
+
+  const cards = [...ov.querySelectorAll(".display-info")];
+  const steps = [...ov.querySelectorAll(".lvstep li")];
+  let cur = 0;
+
+  const tick = () => {
+    const r = ov.getBoundingClientRect();
+    const inView = r.top < innerHeight * 0.5 && r.bottom > innerHeight * 0.5;
+    ov.style.setProperty("--stepo", inView ? 1 : 0);   /* 섹션 안에 있을 때만 단계 표시 보임 */
+
+    let best = 1, bd = 1e9;
+    const cy = innerHeight * 0.5;
+    cards.forEach((c) => {
+      const b = c.getBoundingClientRect();
+      if (b.bottom < 0 || b.top > innerHeight) return;
+      const d = Math.abs((b.top + b.bottom) / 2 - cy) + (b.width < 1 ? 1e6 : 0);
+      if (d < bd) { bd = d; best = +c.dataset.lv; }
+    });
+
+    if (best !== cur) {
+      cur = best;
+      ov.dataset.lvnow = best;
+      steps.forEach((s) => s.classList.toggle("on", +s.dataset.lv === best));
+      ov.dispatchEvent(new CustomEvent("lv", { detail: best }));
+    }
+  };
+
+  addEventListener("scroll", () => requestAnimationFrame(tick), { passive: true });
+  addEventListener("resize", tick);
+  setTimeout(tick, 300);
+})();
+
+
+/* =========================================================
+   [DISPLAY HERO — 위험 단계] 히어로 1안 / 2026.10.27
+   ---------------------------------------------------------
+   디스플레이_히어로1안_위험단계.zip 의 display-hero.js 를 옮겨 옴
+   평소 → 주의 → 경고 → 위험 → 반복 (2.2초씩 — 처음 3.4초)
+   사진 속 화면 · 제목 · 단계 표시 · 강조 색(data-state)이 함께 바뀜
+   히어로가 화면에 보일 때만 돌아가고, 다른 섹션을 볼 땐 멈춤
+   (옛 [DISPLAY HERO — 위험 순간] .dh8 코드는 대상이 없어 동작 안 함)
+========================================================= */
+
+(() => {
+  const hero = document.querySelector("[data-dh9]");
+  if (!hero) return;
+
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const DUR = 2200;   /* 한 단계 머무는 시간 (ms) — 2026.10.27 : 느려서 3400 → 2200 */
+  const N = 4;        /* 평소 · 주의 · 경고 · 위험 */
+  let s = 0;
+  let timer = null;
+
+  const show = () => {
+    hero.dataset.state = s;
+    hero.querySelectorAll("[data-dh9-s]").forEach((el) => {
+      const on = +el.dataset.dh9S === s;
+      el.classList.toggle("is-on", on);
+      if (el.matches("h1, p")) el.setAttribute("aria-hidden", !on);
+    });
+  };
+
+  const start = () => {
+    if (!timer && !reduce) timer = setInterval(() => { s = (s + 1) % N; show(); }, DUR);
+  };
+
+  const stop = () => {
+    clearInterval(timer);
+    timer = null;
+  };
+
+  show();
+  new IntersectionObserver(
+    (es) => es.forEach((e) => (e.isIntersecting ? start() : stop())),
+    { threshold: 0.2 }
+  ).observe(hero);
+})();

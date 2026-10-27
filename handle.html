@@ -32,6 +32,25 @@
   >
 
 
+  <!-- 2026.10.23 : 핸들 4차 — 작은 숫자 · 라벨용 고정폭 서체 (IBM Plex Mono) -->
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap"
+  >
+
+
   <!-- =====================================================
        DISPLAY / HANDLE / HUD 공통 CSS
   ====================================================== -->
@@ -45,6 +64,13 @@
   <!-- =====================================================
        DISPLAY / HANDLE / HUD 공통 JS
   ====================================================== -->
+
+  <!-- 2026.10.23 : 핸들 4차 — 부드러운 관성 스크롤 (Lenis) -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"
+    defer
+  ></script>
 
   <script
     src="./interface.js"
@@ -241,1011 +267,236 @@
 
 
   <!-- =====================================================
-       HANDLE MAIN
-
-       HAPTIC HANDLE LITE 구조 유지
-       PRODUCT NAV 제거
+       HANDLE MAIN — 4차 시안 조합 / 2026.10.23
+       dadeullim-handle-4차.zip (index.html "조합") 바탕
+       전) HAPTIC HANDLE LITE (정면 → 왼쪽 → 오른쪽 시퀀스 · 제품 섹션들)
+       후) 00 영상 히어로 → 01 문제 → 02 아이디어 → 03 구조 → 04 방향
+           → 05 세기 · 리듬 → 06 직접 울려 보기 → 07 제작 → 08 질문
+       스타일 : interface.css 맨 아래 [HANDLE 4차] (전부 .hd4 안에서만)
+       동작   : interface.js 맨 아래 [HANDLE 4차]
+       이미지 : images/handle-film(-av1).mp4 · handle-poster.jpg · handle-seq/0000~0330.webp
   ====================================================== -->
 
-  <main class="handle-main">
+  <main class="handle-main hd4">
 
-
-    <!-- ===================================================
-         01.
-         HANDLE OVERVIEW
-         FRONT → LEFT → RIGHT
+  <!-- ===================================================
+         00. 히어로 — 핸들 영상(분해 → 진동 → 다시 조립) + 영상 시간에 맞춘 글자 · 선
     ==================================================== -->
 
-    <section
-      class="handle-sequence handle-sequence--hero"
-      id="handle-overview"
-      data-handle-hero
-      aria-label="햅틱 핸들 외관 탐색"
+  <section
+      class="hero"
+      data-hero
+      aria-label="다들림 핸들 영상"
     >
-
-      <div class="handle-sequence__stage">
-
-
-        <!-- ===============================================
-             IMAGE SEQUENCE
-
-             01 FRONT
-             02 LEFT
-             03 RIGHT
-        ================================================ -->
-
-        <div
-          class="handle-sequence__frames"
-          aria-hidden="true"
-        >
-
-          <img
-            class="handle-sequence__frame is-active"
-            src="./images/handle-01-front.png"
-            alt=""
-            decoding="async"
-            fetchpriority="high"
-            data-handle-frame
-          >
-
-          <img
-            class="handle-sequence__frame"
-            src="./images/handle-02-left.png"
-            alt=""
-            loading="eager"
-            decoding="async"
-            data-handle-frame
-          >
-
-          <img
-            class="handle-sequence__frame"
-            src="./images/handle-03-right.png"
-            alt=""
-            loading="eager"
-            decoding="async"
-            data-handle-frame
-          >
-
-        </div>
+    <video autoplay muted loop playsinline preload="auto" poster="./images/handle-poster.jpg" aria-label="다들림 핸들이 분해되고 진동한 뒤 다시 조립되는 영상">
+      <source src="./images/handle-film-av1.mp4" type='video/mp4; codecs="av01.0.09M.10"'>
+      <source src="./images/handle-film.mp4" type="video/mp4">
+    </video>
+    <svg class="hero-lines" aria-hidden="true"></svg>
+    <div class="hero-ui">
+      <div class="h-top"><div class="row"><span class="h-sec"><b>1.0</b>Overview</span><span>DADEULLIM · Haptic Handle</span></div><div class="h-rule"></div></div>
+      <div class="h-big" aria-hidden="true"><div><small>DADEULLIM · HAPTIC HANDLE</small><strong>들리지 않는 소리를,<br>손으로.</strong></div><span>위험의 방향을, 손끝으로 먼저.</span></div>
+      <div class="h-struct" aria-hidden="true"><b>0 / 7</b><p>STRUCTURE</p></div>
+      <div class="h-motor" aria-hidden="true"><h2>COIN<br>VIBRATION<br>MOTOR</h2><p class="h-rip">Housing open</p><div class="h-pulse"><i></i><i></i><i></i></div><p>짧게, 세 번.</p></div>
+      <div class="h-end" aria-hidden="true"><p>다시 하나의 핸들로.</p><p>손은 같은 자리에 둔 채.</p></div>
+      <div class="h-bottom"><span class="h-count">DADEULLIM HANDLE — 0000</span><span class="h-time">00.00s</span></div>
+    </div>
+  </section>
 
 
-        <!-- BACKGROUND SHADE -->
+<div class="chap-nav" id="chap" aria-hidden="true"><span class="ticks"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span><b id="chap-n">01</b> &nbsp;<span id="chap-t">문제</span></span></div>
 
-        <div
-          class="handle-sequence__shade"
-          aria-hidden="true"
-        ></div>
-
-
-        <!-- ===============================================
-             HERO COPY
-        ================================================ -->
-
-        <div class="handle-sequence__copy-wrap">
-
-
-          <!-- FRONT -->
-
-          <article
-            class="handle-sequence__copy is-active"
-            data-handle-copy
-          >
-
-            <p class="handle-eyebrow">
-              DADEULLIM HAPTIC / 01
-            </p>
-
-            <h1>
-              위험의 방향을<br>
-
-              <span>
-                손끝으로
-                <strong class="handle-title-emphasis">
-                  먼저.
-                </strong>
-              </span>
-            </h1>
-
-            <p class="handle-sequence__description">
-              소리로 놓칠 수 있는 위험을 좌우 진동으로 전환해,<br>
-              시선을 도로에 둔 채 방향을 인지합니다.
-            </p>
-
-          </article>
-
-
-          <!-- LEFT -->
-
-          <article
-            class="handle-sequence__copy"
-            data-handle-copy
-          >
-
-            <p class="handle-eyebrow">
-              FORM / LEFT VIEW
-            </p>
-
-            <h2>
-              손에 닿는 형태부터<br>
-
-              <span class="handle-title-emphasis">
-                정교하게.
-              </span>
-            </h2>
-
-            <p class="handle-sequence__description">
-              부드러운 곡률과 이중 소재가 손의 위치를 자연스럽게 잡고,<br>
-              필요한 순간 진동을 또렷하게 전달합니다.
-            </p>
-
-          </article>
-
-
-          <!-- RIGHT -->
-
-          <article
-            class="handle-sequence__copy"
-            data-handle-copy
-          >
-
-            <p class="handle-eyebrow">
-              FORM / RIGHT VIEW
-            </p>
-
-            <h2>
-              어느 방향에서도<br>
-
-              <span class="handle-title-emphasis">
-                같은 감각.
-              </span>
-            </h2>
-
-            <p class="handle-sequence__description">
-              좌우 대칭 구조로 그립의 압력과 진동 전달 범위를 맞춰,<br>
-              방향이 달라도 일관된 피드백을 제공합니다.
-            </p>
-
-          </article>
-
-        </div>
-
-
-        <!-- ===============================================
-             HERO BOTTOM PROGRESS
-        ================================================ -->
-
-        <div class="handle-sequence__footer">
-
-          <p>
-            SCROLL TO EXPLORE
-          </p>
-
-          <div
-            class="handle-sequence__progress"
-            aria-hidden="true"
-          >
-            <span data-handle-progress></span>
-          </div>
-
-          <p
-            class="handle-sequence__count"
-            aria-live="polite"
-          >
-            <span data-handle-current>
-              01
-            </span>
-
-            / 03
-          </p>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- ===================================================
-         02.
-         MATERIAL DETAIL
+<!-- ===================================================
+         01. 문제 — 사이렌은 울리는데, 들리지 않는 운전자 (숫자 세 개가 차례로)
     ==================================================== -->
 
-    <section
-      class="handle-material"
-      id="handle-detail"
-      data-handle-section
-      data-handle-material
+<section
+      class="sticky-wrap split"
+      id="prob"
+      data-chap="0"
+      data-prog
+      style="height:320vh"
+      aria-label="문제"
     >
+  <div class="sticky">
+    <div class="copy">
+      <div><div class="chead"><p class="mono"><b style="color:var(--ink)">01</b>&nbsp; The problem</p></div>
+        <h2 class="ttl">사이렌은 울리는데,<br><em>들리지 않는 운전자가 있습니다.</em></h2>
+        <p class="lead" style="margin-top:22px">도로의 위급 신호는 거의 전부 소리로 옵니다. 긴급차량에 길을 비켜 주는 건 모든 운전자의 의무지만, 들리지 않으면 경광등이 미러에 들어올 때까지 알 방법이 없습니다.</p>
+      </div>
+      <ol class="steps hide-m">
+        <li class="on"><b>01</b>얼마나 많은 사람이 듣지 못하나</li>
+        <li><b>02</b>운전자는 실제로 어떻게 느끼나</li>
+        <li><b>03</b>그 몇 초가 만드는 결과</li>
+      </ol>
+    </div>
+    <div class="vis">
+      <div class="hstage" id="p-st"><img src="./images/handle-seq/0315.webp" alt="완성된 다들림 핸들"><b class="ring L" style="left:27.50%;top:47.53%"><u></u><u></u><u></u></b><b class="ring R" style="left:72.50%;top:47.53%"><u></u><u></u><u></u></b><i class="m L" style="left:29.17%;top:36.05%"></i><i class="m L" style="left:27.50%;top:47.53%"></i><i class="m L" style="left:29.17%;top:59.01%"></i><i class="m R" style="left:70.83%;top:36.05%"></i><i class="m R" style="left:72.50%;top:47.53%"></i><i class="m R" style="left:70.83%;top:59.01%"></i></div>
+      <div class="siren" aria-hidden="true"><u></u><u></u><u></u></div>
+      <div class="num">
+        <div class="st on"><span class="v">17.1<small>%</small></span><p>국내 등록장애인 262만 명 중 청각장애<sup class="fn"><a href="#note-8">08</a></sup></p></div>
+        <div class="st"><span class="v">25<small>/ 25</small></span><p>인터뷰한 농·난청 운전자 전원, “긴급차량을 알아채기 어렵다”<sup class="fn"><a href="#note-12">12</a></sup></p></div>
+        <div class="st"><span class="v">42.5<small>%</small></span><p>소방차 교통사고 중 출동 중에 난 사고<sup class="fn"><a href="#note-11">11</a></sup></p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <!-- CSS에서 sticky로 고정할 화면: 이미지 → 파동 → 다음 섹션 -->
-
-      <div
-        class="handle-material__sticky"
-        data-material-sticky
-      >
-
-
-        <!-- IMAGE -->
-
-        <div class="handle-material__media">
-
-          <img
-            data-material-image
-            src="./images/handle-04-rim.webp"
-            alt="블랙 가죽과 아이스 블루 라인이 적용된 핸들 상단 디테일"
-            loading="lazy"
-            decoding="async"
-          >
-
-        </div>
-
-
-        <!--
-          파동 전용 오버레이. 기존 이미지를 중복 삽입하지 않습니다.
-          후속 CSS/JS에서 hidden 해제 및 스크롤 구간 연결.
-
-          JS는 원본 좌표 1676×938과 이미지의 cover / object-position /
-          scale(1.01)을 함께 반영해 SVG 위치·크기를 맞춥니다.
-
-          발생점: CX=833, CY=1271, R=916, ANG=[-40, 0, 40].
-          대기 중에는 오버레이를 숨기고 활성 구간에서만 pulse를 실행합니다.
-        -->
-
-        <div
-          class="handle-material__haptics"
-          data-material-haptics
-          hidden
-          aria-hidden="true"
-        >
-
-          <svg
-            class="handle-material__wave-svg"
-            data-material-wave-svg
-            viewBox="0 0 1676 938"
-            xmlns="http://www.w3.org/2000/svg"
-            focusable="false"
-            aria-hidden="true"
-          >
-
-            <defs>
-
-              <radialGradient id="handle-material-blob">
-
-                <stop
-                  offset="0"
-                  stop-color="#c1e2e7"
-                  stop-opacity=".78"
-                />
-
-                <stop
-                  offset=".34"
-                  stop-color="#c1e2e7"
-                  stop-opacity=".3"
-                />
-
-                <stop
-                  offset=".68"
-                  stop-color="#c1e2e7"
-                  stop-opacity=".08"
-                />
-
-                <stop
-                  offset="1"
-                  stop-color="#c1e2e7"
-                  stop-opacity="0"
-                />
-
-              </radialGradient>
-
-
-              <radialGradient id="handle-material-halo">
-
-                <stop
-                  offset="0"
-                  stop-color="#c1e2e7"
-                  stop-opacity=".72"
-                />
-
-                <stop
-                  offset=".45"
-                  stop-color="#c1e2e7"
-                  stop-opacity=".24"
-                />
-
-                <stop
-                  offset="1"
-                  stop-color="#c1e2e7"
-                  stop-opacity="0"
-                />
-
-              </radialGradient>
-
-
-              <clipPath id="handle-material-frame">
-
-                <rect
-                  x="0"
-                  y="0"
-                  width="1676"
-                  height="938"
-                />
-
-              </clipPath>
-
-            </defs>
-
-
-            <g clip-path="url(#handle-material-frame)">
-
-              <!-- ring() / bloom()이 생성하는 파동 -->
-
-              <g data-material-waves></g>
-
-              <!-- pulse()가 사용하는 세 지점의 halo / dot -->
-
-              <g data-material-dots></g>
-
-            </g>
-
-          </svg>
-
-        </div>
-
-
-        <!-- COPY -->
-
-        <div
-          class="handle-material__copy"
-          data-handle-reveal
-        >
-
-          <p class="handle-eyebrow">
-            MATERIAL / 02
-          </p>
-
-          <h2>
-            감각은 손이 닿는<br>
-
-            <span>
-              바로 그 자리에서.
-            </span>
-          </h2>
-
-          <p>
-            매트한 블랙 가죽,
-            미세 타공 아이보리 그립,
-            그리고 얇은 블루 라인.
-
-            서로 다른 촉감과 명확한 경계가
-            안정적인 그립 위치를 안내합니다.
-          </p>
-
-        </div>
-
-      </div><!-- /.handle-material__sticky -->
-
-    </section>
-
-
-
-    <!-- ===================================================
-         03.
-         LEFT / RIGHT FEEDBACK
+<!-- ===================================================
+         02. 아이디어 — 위험이 오는 쪽 손이 먼저 울림 (이유 세 가지)
     ==================================================== -->
 
-    <section
-      class="handle-grip handle-grip-sequence"
-      id="handle-feedback"
-      data-handle-grip
-      data-handle-section
-      aria-label="좌우 방향성 진동 피드백"
+<section
+      class="idea"
+      data-chap="1"
+      aria-label="아이디어"
     >
+  <div class="txt">
+    <div class="chead"><p class="mono"><b style="color:var(--ink)">02</b>&nbsp; The idea</p><p class="bridge">소리가 닿지 않는다면, 다른 감각으로 전하면 됩니다.</p></div>
+    <h2 class="ttl">위험이 오는 쪽,<br><em>그쪽 손이 먼저 울립니다.</em></h2>
+    <p class="lead" style="margin-top:22px">다들림 핸들은 사이렌과 경적을 진동으로 바꿉니다. 소리가 난 방향의 그립만 울려서, 운전자는 시선을 도로에 둔 채 방향을 압니다.</p>
+    <div class="why">
+      <div data-rv><b>1</b><div><p class="h">두 손이 늘 닿아 있는 곳</p><p class="s">운전 중 가장 오래, 가장 확실하게 몸이 닿아 있는 부품입니다.</p></div></div>
+      <div data-rv="2"><b>2</b><div><p class="h">좌우가 이미 나뉘어 있다</p><p class="s">왼손과 오른손 — 방향을 따로 설명할 필요가 없습니다.</p></div></div>
+      <div data-rv="3"><b>3</b><div><p class="h">시선을 빼앗지 않는다</p><p class="s">진동 경고는 반응을 앞당깁니다. 9개 연구 중 8개에서 반응시간이 줄었습니다<sup class="fn"><a href="#note-5">05</a></sup>.</p></div></div>
+    </div>
+  </div>
+  <div class="img"><img src="./images/handle-seq/0300.webp" alt="완성된 다들림 핸들" loading="lazy"></div>
+</section>
 
-      <div
-        class="handle-grip__stage handle-grip-sequence__stage"
-      >
-
-
-        <!-- ===============================================
-             GRIP IMAGE SEQUENCE
-             LEFT → RIGHT
-        ================================================ -->
-
-        <div
-          class="handle-grip__frames handle-grip-sequence__frames"
-          aria-hidden="true"
-        >
-
-          <img
-            class="handle-grip__frame handle-grip-sequence__frame is-active"
-            src="./images/handle-05-left-grip.webp"
-            alt=""
-            loading="lazy"
-            decoding="async"
-            data-grip-frame
-          >
-
-          <img
-            class="handle-grip__frame handle-grip-sequence__frame"
-            src="./images/handle-06-right-grip.webp"
-            alt=""
-            loading="lazy"
-            decoding="async"
-            data-grip-frame
-          >
-
-        </div>
-
-
-        <!-- ===============================================
-             GRIP COPY
-        ================================================ -->
-
-        <div
-          class="handle-grip__copy-wrap handle-grip-sequence__copy"
-        >
-
-
-          <!-- LEFT -->
-
-          <article
-            class="handle-grip__copy handle-grip-copy is-active"
-            data-grip-copy
-          >
-
-            <p class="handle-eyebrow">
-              LEFT FEEDBACK / 03
-            </p>
-
-            <h2>
-              왼쪽에서 오는 위험은<br>
-
-              <span class="handle-title-emphasis">
-                왼손으로.
-              </span>
-            </h2>
-
-            <p>
-              왼쪽 그립 내부의 세 개 모터가 동시에 반응해
-              운전자가 방향을 생각하기 전에
-              먼저 느끼도록 합니다.
-            </p>
-
-          </article>
-
-
-          <!-- RIGHT -->
-
-          <article
-            class="handle-grip__copy handle-grip-copy"
-            data-grip-copy
-          >
-
-            <p class="handle-eyebrow">
-              RIGHT FEEDBACK / 03
-            </p>
-
-            <h2>
-              오른쪽의 움직임은<br>
-
-              <span class="handle-title-emphasis">
-                오른손으로.
-              </span>
-            </h2>
-
-            <p>
-              위험이 감지된 방향의 그립만 진동해
-              복잡한 시각 정보 없이도
-              즉각적인 판단을 돕습니다.
-            </p>
-
-          </article>
-
-        </div>
-
-
-        <!-- LEFT / RIGHT GUIDE -->
-
-        <div
-          class="handle-grip__side-label handle-grip-sequence__side-label"
-          aria-hidden="true"
-        >
-
-          <span>
-            L
-          </span>
-
-          <i></i>
-
-          <span>
-            R
-          </span>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- ===================================================
-         04.
-         HAPTIC ANATOMY
-         LEFT / RIGHT 3 MOTORS
+<!-- ===================================================
+         03. 구조 — 핸들이 일곱 겹으로 열림 (이미지 시퀀스 84 → 159 프레임)
     ==================================================== -->
 
-    <section
-      class="handle-anatomy"
-      data-handle-section
+<section
+      class="sticky-wrap seqs "
+      id="struct"
+      data-chap="2"
+      data-prog
+      data-f0="84"
+      data-f1="159"
+      data-view="0.78,0.92,0.55"
+      style="height:340vh"
     >
+  <div class="sticky black"><canvas aria-hidden="true"></canvas><div class="ov">
+  <div class="copy2"><div class="chead"><p class="mono"><b style="color:var(--ink)">03</b>&nbsp; Inside the handle</p><p class="bridge">그렇다면 진동은 어디서 나올까요. 핸들을 열어 보면,</p></div>
+    <h2 class="ttl" style="font-size:clamp(34px,3.4vw,62px)">일곱 겹,<br><em>그 가운데 모터 여섯 개.</em></h2>
+    <p class="body" style="margin-top:18px">겉보기엔 평범한 핸들이지만 가죽 림 바로 안쪽에 코인 진동 모터가 좌우 세 개씩 들어 있습니다. 손이 닿는 면과 가장 가까운 자리입니다.</p></div>
+  <aside class="legend"><p class="mono"><span id="lay-n">0</span> / 7 layers</p><ol id="legend"><li><b>A</b><span>외곽 트림<small>그립 뒤쪽을 감싸는 커버</small></span></li><li><b>B</b><span>크롬 링<small>앞뒤 레이어를 잇는 링</small></span></li><li><b>C</b><span>햅틱 모듈<small>코인 모터 6개와 배선</small></span></li><li><b>D</b><span>가죽 림<small>손이 닿는 면 — 진동이 전해지는 자리</small></span></li><li><b>E</b><span>스포크 프레임<small>구조와 버튼을 받치는 프레임</small></span></li><li><b>F</b><span>허브 쿠션<small>센터 커버 안쪽</small></span></li><li><b>G</b><span>엠블럼 커버<small>CC2 엠블럼이 들어간 커버</small></span></li></ol></aside>
+</div></div>
+</section>
 
-
-      <!-- SECTION HEADING -->
-
-      <header
-        class="handle-section-heading handle-anatomy__heading"
-        data-handle-reveal
-      >
-
-        <div class="handle-section-heading__title">
-
-          <p class="handle-eyebrow">
-            HAPTIC STRUCTURE
-          </p>
-
-          <h2>
-            한쪽에 세 번,<br>
-
-            <span>
-              양쪽에 여섯 번.
-            </span>
-          </h2>
-
-        </div>
-
-        <p>
-          그립의 곡선을 따라 배치된 코인 진동 모터가
-          손바닥 전체에 균일한 진동을 전달합니다.
-        </p>
-
-      </header>
-
-
-      <!-- MOTOR CARDS -->
-
-      <div class="handle-anatomy__grid">
-
-
-        <!-- LEFT -->
-
-        <article
-          class="handle-anatomy__card handle-anatomy-card"
-          data-handle-reveal
-        >
-
-          <img
-            src="./images/handle-07-left-cutaway.webp"
-            alt="왼쪽 그립 내부에 배치된 코인 진동 모터 세 개"
-            loading="lazy"
-            decoding="async"
-          >
-
-          <div class="handle-anatomy__label">
-
-            <span class="handle-anatomy__index">
-              L / 03
-            </span>
-
-            <div>
-
-              <h3>
-                왼쪽 위험을 전달하는 세 개의 진동점
-              </h3>
-
-              <p>
-                LEFT GRIP · COIN VIBRATION MOTOR × 3
-              </p>
-
-            </div>
-
-          </div>
-
-        </article>
-
-
-        <!-- RIGHT -->
-
-        <article
-          class="handle-anatomy__card handle-anatomy-card"
-          data-handle-reveal
-        >
-
-          <img
-            src="./images/handle-08-right-cutaway.webp"
-            alt="오른쪽 그립 내부에 배치된 코인 진동 모터 세 개"
-            loading="lazy"
-            decoding="async"
-          >
-
-          <div class="handle-anatomy__label">
-
-            <span class="handle-anatomy__index">
-              R / 03
-            </span>
-
-            <div>
-
-              <h3>
-                오른쪽 위험을 전달하는 세 개의 진동점
-              </h3>
-
-              <p>
-                RIGHT GRIP · COIN VIBRATION MOTOR × 3
-              </p>
-
-            </div>
-
-          </div>
-
-        </article>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- ===================================================
-         ASSEMBLY PROCESS FILMS
-         INSTALL / ROUTE / CONNECT
+<!-- ===================================================
+         04. 방향 — 왼손 D5 / 오른손 D6
     ==================================================== -->
 
-    <section
-      class="handle-process"
-      id="handle-process"
-      data-handle-section
-      data-handle-process
-      aria-label="햅틱 핸들 제작 과정"
+<section
+      class="sticky-wrap split"
+      id="dir"
+      data-chap="3"
+      data-prog
+      style="height:340vh"
+      aria-label="방향"
     >
-
-
-      <!-- PROCESS META -->
-
-      <div
-        class="handle-process__meta"
-        data-handle-reveal
-      >
-
-        <p>
-          ASSEMBLY PROCESS
-        </p>
-
-        <span>
-          INSTALL · ROUTE · CONNECT
-        </span>
-
+  <div class="sticky">
+    <div class="copy">
+      <div><div class="chead"><p class="mono"><b style="color:var(--ink)">04</b>&nbsp; Direction</p><p class="bridge">모터 여섯 개는 두 묶음으로 나뉩니다. 그게 곧 방향입니다.</p></div>
+        <h2 class="ttl" style="font-size:clamp(34px,3.4vw,62px)">울리는 쪽이,<br><em>오고 있는 쪽.</em></h2>
+        <p class="body" style="margin-top:18px">왼쪽 그립의 모터 세 개는 아두이노 D5, 오른쪽 세 개는 D6 한 채널로 묶었습니다. 사이렌이 감지된 방향의 채널만 켜지고 반대쪽은 조용합니다.</p>
       </div>
+      <div class="rule"><div class="L"><p class="ar">←</p><p>왼쪽 뒤 구급차<br>→ 왼손 · L1–L3 · D5</p></div><div class="R"><p class="ar">→</p><p>오른쪽 경적<br>→ 오른손 · R1–R3 · D6</p></div></div>
+    </div>
+    <div class="vis"><div class="hstage" id="d-st"><img src="./images/handle-seq/0315.webp" alt="완성된 다들림 핸들"><b class="ring L" style="left:27.50%;top:47.53%"><u></u><u></u><u></u></b><b class="ring R" style="left:72.50%;top:47.53%"><u></u><u></u><u></u></b><i class="m L" style="left:29.17%;top:36.05%"></i><i class="m L" style="left:27.50%;top:47.53%"></i><i class="m L" style="left:29.17%;top:59.01%"></i><i class="m R" style="left:70.83%;top:36.05%"></i><i class="m R" style="left:72.50%;top:47.53%"></i><i class="m R" style="left:70.83%;top:59.01%"></i></div><p class="side-cap L">왼손</p><p class="side-cap R">오른손</p></div>
+  </div>
+</section>
 
-
-      <!-- PROCESS FILMS
-           01 : LARGE / LEFT
-           02 : SMALL / RIGHT
-           03 : MEDIUM / LEFT
-      -->
-
-      <div
-        class="handle-process__grid handle-process__sequence"
-        aria-label="햅틱 핸들 조립 공정 영상"
-      >
-
-
-        <!-- 01 / INSTALL -->
-
-        <article
-          class="handle-process__item handle-process__item--install handle-process__item--wide-left"
-          data-handle-process-item
-          data-process-delay="0"
-        >
-
-          <div class="handle-process__media">
-
-            <video
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="auto"
-              disablepictureinpicture
-              controlslist="nodownload noplaybackrate"
-              data-handle-process-video
-              aria-label="핸들 내부에 진동 모터를 장착하는 과정"
-            >
-
-              <source
-                src="./images/handle-process-01-install.mp4"
-                type="video/mp4"
-              >
-
-              브라우저에서 영상을 재생할 수 없습니다.
-
-            </video>
-
-          </div>
-
-          <div class="handle-process__caption">
-
-            <span>
-              01 / INSTALL
-            </span>
-
-            <p>
-              VIBRATION MOTOR ASSEMBLY
-            </p>
-
-          </div>
-
-        </article>
-
-
-        <!-- 02 / ROUTE -->
-
-        <article
-          class="handle-process__item handle-process__item--route handle-process__item--narrow-right"
-          data-handle-process-item
-          data-process-delay="450"
-        >
-
-          <div class="handle-process__media">
-
-            <video
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="auto"
-              disablepictureinpicture
-              controlslist="nodownload noplaybackrate"
-              data-handle-process-video
-              aria-label="핸들 내부 배선을 정리하는 과정"
-            >
-
-              <source
-                src="./images/handle-process-02-route.mp4"
-                type="video/mp4"
-              >
-
-              브라우저에서 영상을 재생할 수 없습니다.
-
-            </video>
-
-          </div>
-
-          <div class="handle-process__caption">
-
-            <span>
-              02 / ROUTE
-            </span>
-
-            <p>
-              INTERNAL WIRE ROUTING
-            </p>
-
-          </div>
-
-        </article>
-
-
-        <!-- 03 / CONNECT -->
-
-        <article
-          class="handle-process__item handle-process__item--connect handle-process__item--medium-left"
-          data-handle-process-item
-          data-process-delay="900"
-        >
-
-          <div class="handle-process__media">
-
-            <video
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="auto"
-              disablepictureinpicture
-              controlslist="nodownload noplaybackrate"
-              data-handle-process-video
-              aria-label="아두이노 제어보드에 핸들 배선을 연결하는 과정"
-            >
-
-              <source
-                src="./images/handle-process-03-connect.mp4"
-                type="video/mp4"
-              >
-
-              브라우저에서 영상을 재생할 수 없습니다.
-
-            </video>
-
-          </div>
-
-          <div class="handle-process__caption">
-
-            <span>
-              03 / CONNECT
-            </span>
-
-            <p>
-              ARDUINO CONTROL CONNECTION
-            </p>
-
-          </div>
-
-        </article>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- ===================================================
-         05.
-         CONTROL SYSTEM
+<!-- ===================================================
+         05. 세기 · 리듬 — 짧게 세 번 (이미지 시퀀스 170 → 216 프레임)
     ==================================================== -->
 
-    <section
-      class="handle-system"
-      id="handle-system"
-      data-handle-section
+<section
+      class="sticky-wrap seqs "
+      id="sig"
+      data-chap="4"
+      data-prog
+      data-f0="170"
+      data-f1="216"
+      data-view="1.0,0.62,0.52"
+      style="height:380vh"
     >
+  <div class="sticky black"><canvas aria-hidden="true"></canvas><div class="ov">
+  <div class="copy2"><div class="chead"><p class="mono"><b style="color:var(--ink)">05</b>&nbsp; Intensity · Rhythm</p><p class="bridge">방향은 어느 손인지로, 급한 정도는 세기와 리듬으로.</p></div>
+    <h2 class="ttl" style="font-size:clamp(34px,3.4vw,62px)">짧게, 세 번.<br><em>급할수록 세고 촘촘하게.</em></h2>
+    <p class="body" style="margin-top:18px">길게 울리면 손은 금방 무뎌집니다<sup class="fn"><a href="#note-3">03</a></sup>. 그래서 짧은 펄스를 세 번, 세기는 PWM으로 조절합니다<sup class="fn"><a href="#note-2">02</a></sup>. 패턴은 구분하기 쉽게 세 가지만<sup class="fn"><a href="#note-5">05</a></sup>.</p>
+    <div class="pc" id="pc"><i></i><i></i><i></i></div></div>
+  <div class="pats"><p class="mono" style="margin-bottom:6px">Patterns · duty <span class="ex">예시</span></p><div class="pat" data-k="1"><span><span class="mono">01</span><br>주의</span><svg data-pat="1" viewBox="0 0 600 60" aria-hidden="true"></svg><span class="d">45%</span></div><div class="pat" data-k="2"><span><span class="mono">02</span><br>접근</span><svg data-pat="2" viewBox="0 0 600 60" aria-hidden="true"></svg><span class="d">70%</span></div><div class="pat" data-k="3"><span><span class="mono">03</span><br>긴급</span><svg data-pat="3" viewBox="0 0 600 60" aria-hidden="true"></svg><span class="d">100%</span></div></div>
+</div></div>
+</section>
 
+<!-- ===================================================
+         06. 직접 울려 보기 — 방향 · 소리 · 거리 선택
+    ==================================================== -->
 
-      <!-- SYSTEM HEADING -->
+<section
+      class="full"
+      id="try"
+      data-chap="5"
+      aria-label="직접 울려 보세요"
+    >
+  <div class="hstage" id="t-st"><img src="./images/handle-seq/0315.webp" alt="완성된 다들림 핸들"><b class="ring L" style="left:27.50%;top:47.53%"><u></u><u></u><u></u></b><b class="ring R" style="left:72.50%;top:47.53%"><u></u><u></u><u></u></b><i class="m L" style="left:29.17%;top:36.05%"></i><i class="m L" style="left:27.50%;top:47.53%"></i><i class="m L" style="left:29.17%;top:59.01%"></i><i class="m R" style="left:70.83%;top:36.05%"></i><i class="m R" style="left:72.50%;top:47.53%"></i><i class="m R" style="left:70.83%;top:59.01%"></i></div>
+  <div class="hud" aria-hidden="true"><span id="hl">◀ LEFT</span><span id="hr">RIGHT ▶</span></div>
+  <div class="top"><div class="chead"><p class="mono"><b style="color:var(--ink)">06</b>&nbsp; Try it</p><p class="bridge">이제 직접 울려 보세요. 방향·소리·거리를 고르면 핸들이 반응합니다.</p></div></div>
+  <div class="panel" id="cfg">
+    <div class="row" data-g="side"><span class="mono">Direction</span><button class="tog" data-v="L" aria-pressed="true">왼쪽</button><button class="tog" data-v="R" aria-pressed="false">오른쪽</button></div>
+    <div class="row" data-g="snd"><span class="mono">Sound</span><button class="tog" data-v="siren" aria-pressed="true">사이렌</button><button class="tog" data-v="horn" aria-pressed="false">경적</button></div>
+    <div class="row" data-g="lv"><span class="mono">Distance</span><button class="tog" data-v="1" aria-pressed="false">멀리</button><button class="tog" data-v="2" aria-pressed="true">다가옴</button><button class="tog" data-v="3" aria-pressed="false">바로 옆</button></div>
+    <div class="out"><div><span class="mono">Pin</span><b id="o-pin">D5</b></div><div><span class="mono">Pattern</span><b id="o-pat">접근</b></div><div><span class="mono">Duty</span><b id="o-duty">70%</b></div></div>
+    <button class="go" id="go">진동 재생 ▶</button>
+    <p class="small">경적은 거리와 상관없이 ‘주의’로 울립니다.</p>
+  </div>
+</section>
 
-      <header
-        class="handle-system__heading"
-        data-handle-reveal
-      >
+<!-- ===================================================
+         07. 제작 — 설치 · 배선 · 연결 영상 세 개
+    ==================================================== -->
 
-        <div class="handle-section-heading__title">
+<section
+      class="made"
+      data-chap="6"
+      aria-label="제작"
+    >
+  <div class="head pad"><div class="chead"><p class="mono"><b style="color:var(--ink)">07</b>&nbsp; Made by hand</p><p class="bridge">렌더 속 구조를 실제 핸들 위에 그대로 만들었습니다.</p></div><p class="mono">Install · Route · Connect</p></div>
+  <div class="grid">
+    <figure><video src="./images/handle-process-01-install.mp4" muted loop playsinline autoplay preload="metadata" aria-label="그립에 모터를 장착하는 과정"></video><figcaption><div class="row1"><b>01</b><span class="mono" style="color:var(--ink)">Install</span></div><p>손바닥이 닿는 곡선을 따라 세 지점을 정하고, 그립 안쪽 홈에 코인 모터를 고정합니다.</p></figcaption></figure>
+    <figure><video src="./images/handle-process-02-route.mp4" muted loop playsinline autoplay preload="metadata" aria-label="배선을 정리하는 과정"></video><figcaption><div class="row1"><b>02</b><span class="mono" style="color:var(--ink)">Route</span></div><p>선은 림 안쪽을 따라 허브까지. 손이 닿는 면에는 아무것도 드러나지 않게.</p></figcaption></figure>
+    <figure><video src="./images/handle-process-03-connect.mp4" muted loop playsinline autoplay preload="metadata" aria-label="아두이노에 연결하는 과정"></video><figcaption><div class="row1"><b>03</b><span class="mono" style="color:var(--ink)">Connect</span></div><p>세 개씩 묶은 모터를 아두이노 PWM 핀 D5·D6에 나눠 연결합니다.</p></figcaption></figure>
+  </div>
+</section>
 
-          <p class="handle-eyebrow">
-            CONTROL SYSTEM / 04
-          </p>
+<!-- ===================================================
+         08. 질문 + 출처
+    ==================================================== -->
 
-          <h2>
-            여섯 개의 모터,<br>
+<section
+      class="qa2"
+      data-chap="7"
+      aria-label="질문"
+    >
+  <div class="img"><img src="./images/handle-seq/0196.webp" alt="그립 속 코인 진동 모터" loading="lazy"></div>
+  <div class="txt">
+    <div class="chead"><p class="mono"><b style="color:var(--ink)">08</b>&nbsp; Questions</p><p class="bridge">마지막으로, 가장 많이 받은 질문들.</p></div>
+    <div class="qa" style="margin-top:40px">
+      <details open><summary>진동만으로 방향을 알 수 있나요?</summary><p class="body">미리 의미를 알려 주면 좌우 진동 경고에 약 80%가 맞게 반응했습니다<sup class="fn"><a href="#note-7">07</a></sup>. 다들림은 화면·HUD 표시와 함께 쓰고, 처음 쓰는 사람에게 세 패턴을 먼저 알려 줍니다.</p></details>
+      <details><summary>진동이 실제로 도움이 되나요?</summary><p class="body">전방 충돌 실험에서 진동 경고가 있을 때 브레이크 반응이 1,134 ms에서 886 ms로 빨라졌습니다<sup class="fn"><a href="#note-6">06</a></sup>.</p></details>
+      <details><summary>모터는 얼마나 빨리 떨리나요?</summary><p class="body">10 mm 코인 모터는 3 V에서 약 12,000 rpm, 초당 약 200번 떨립니다<sup class="fn"><a href="#note-1">01</a></sup>. 손이 가장 민감한 250 Hz 부근과 가깝습니다<sup class="fn"><a href="#note-3">03</a></sup>.</p></details>
+      <details><summary>비슷한 기술이 있나요?</summary><p class="body">현대자동차그룹이 2019년 사이렌을 HUD 그림과 핸들 진동으로 알려 주는 기술을 공개했습니다<sup class="fn"><a href="#note-14">14</a></sup>.</p></details>
+      <details><summary>청각장애인은 운전이 더 위험한가요?</summary><p class="body">그런 근거는 없습니다<sup class="fn"><a href="#note-13">13</a></sup>. 다들림은 운전 능력을 보완하는 게 아니라, 소리로만 오던 정보를 손으로 옮기는 장치입니다.</p></details>
+    </div>
+    <ol class="notes"><li id="note-1"><span>Precision Microdrives, 310-103 10 mm vibration motor datasheet (3 V, 12,200 rpm, 1.3 G, lag 40 ms / rise 87 ms) — 다들림 모터의 참고 모델 — <a href="https://precisionmicrodrives.com/cdn/catalog_product/59072e84-3ff3-4155-a98a-733d7a611a29/310-103.pdf">precisionmicrodrives.com</a></span></li><li id="note-2"><span>Precision Microdrives AB-012, Driving vibration motors with PWM (평균 전압 = 공급 전압 × duty) — <a href="https://www.precisionmicrodrives.com/ab-012">www.precisionmicrodrives.com</a></span></li><li id="note-3"><span>Pacinian corpuscle — 약 250 Hz 진동에 가장 민감, 빠르게 적응하는 수용기 — <a href="https://en.wikipedia.org/wiki/Pacinian_corpuscle">en.wikipedia.org</a></span></li><li id="note-5"><span>Petermeijer et al. (2015), The effect of haptic support systems on driver performance: A literature survey, IEEE Trans. Haptics 8(4) — <a href="https://pure.tudelft.nl/ws/portalfiles/portal/94282296/07113879.pdf">pure.tudelft.nl</a></span></li><li id="note-6"><span>Meng et al. (2015), Dynamic vibrotactile signals for forward collision avoidance warning systems, Human Factors 57(2) — <a href="https://research.birmingham.ac.uk/files/20456710/Human_Factors_The_Journal_of_the_Human_Factors_and_Ergonomics_Society_2015_Meng_329_46.pdf">research.birmingham.ac.uk</a></span></li><li id="note-7"><span>Bazilinskyy et al. (2017), 좌우 방향 진동 경고 — 사전 안내 시 약 80% 정반응 — <a href="https://repository.tudelft.nl/file/File_96ecfb3c-9d77-4156-859f-174bfd13a576">repository.tudelft.nl</a></span></li><li id="note-8"><span>경향신문 (2026.4.19), 2025년 말 등록장애인 262만 7,761명 — 청각장애 17.1% — <a href="https://www.khan.co.kr/article/202604191532001/">www.khan.co.kr</a></span></li><li id="note-11"><span>노컷뉴스 — 2020–2024 소방차 교통사고 1,025건 중 42.5%가 출동 중 — <a href="https://www.nocutnews.co.kr/news/6411711">www.nocutnews.co.kr</a></span></li><li id="note-12"><span>Zayen & Groessing, SafeDrive4Deaf: A Mixed-Methods Study — 농·난청 운전자 25명 전원 긴급차량 감지 어려움 — <a href="https://nafath.mada.org.qa/wp-content/uploads/2025/09/294_-SafeDrive4Deaf-A-Mixed-Methods-Study.pdf">nafath.mada.org.qa</a></span></li><li id="note-13"><span>Dow et al. (2022), Does hearing loss affect the risk of involvement in a motor vehicle crash? J. Transport & Health 26 — <a href="https://profiles.wustl.edu/en/publications/does-hearing-loss-affect-the-risk-of-involvement-in-a-motor-vehic/">profiles.wustl.edu</a></span></li><li id="note-14"><span>Hyundai Motor Group (2019), 청각장애 운전자 지원 기술 — 사이렌을 HUD 그림과 핸들 진동으로 — <a href="https://www.automotiveworld.com/news/hyundai-motor-group-reveals-life-changing-technology-to-assist-hearing-impaired-drivers/">www.automotiveworld.com</a></span></li></ol>
+    <p class="small" style="margin-top:20px"><span class="ex">예시</span> 표시 값(duty, 패턴 간격)은 실제 아두이노 값으로 바꿉니다.</p>
+  </div>
+</section>
 
-            <span>
-              하나의 판단.
-            </span>
-          </h2>
-
-        </div>
-
-        <p>
-          중앙 제어부가 위험의 방향을 판단하고
-          좌우 모터를 개별 제어해,
-          시각을 방해하지 않는
-          촉각 정보로 변환합니다.
-        </p>
-
-      </header>
-
-
-      <!-- SYSTEM IMAGE -->
-
-      <figure
-        class="handle-system__figure"
-        data-handle-reveal
-      >
-
-        <img
-          src="./images/handle-09-system.webp"
-          alt="좌우 코인 진동 모터 여섯 개와 중앙 아두이노 제어부가 연결된 햅틱 핸들 시스템"
-          loading="lazy"
-          decoding="async"
-        >
-
-
-        <!-- MARKERS -->
-
-        <figcaption class="handle-system__markers">
-
-          <span
-            class="handle-system__marker handle-system__marker--left"
-          >
-            LEFT / 3 MOTORS
-          </span>
-
-          <span
-            class="handle-system__marker handle-system__marker--control"
-          >
-            CONTROL UNIT
-          </span>
-
-          <span
-            class="handle-system__marker handle-system__marker--right"
-          >
-            RIGHT / 3 MOTORS
-          </span>
-
-        </figcaption>
-
-      </figure>
-
-
-      <!-- SYSTEM PROCESS -->
-
-      <div
-        class="handle-system__summary"
-        data-handle-reveal
-      >
-
-
-        <!-- INPUT -->
-
-        <article class="handle-system__stat">
-
-          <span>
-            01 / INPUT
-          </span>
-
-          <strong>
-            위험 방향 감지
-          </strong>
-
-          <p>
-            차량의 감지 정보가 중앙 제어부로 전달됩니다.
-          </p>
-
-        </article>
-
-
-        <!-- PROCESS -->
-
-        <article class="handle-system__stat">
-
-          <span>
-            02 / PROCESS
-          </span>
-
-          <strong>
-            좌우 신호 분리
-          </strong>
-
-          <p>
-            제어부가 위험 위치에 맞춰
-            작동할 모터를 선택합니다.
-          </p>
-
-        </article>
-
-
-        <!-- OUTPUT -->
-
-        <article class="handle-system__stat">
-
-          <span>
-            03 / OUTPUT
-          </span>
-
-          <strong>
-            촉각 피드백 전달
-          </strong>
-
-          <p>
-            해당 방향의 세 모터가
-            손끝에 즉시 진동을 전달합니다.
-          </p>
-
-        </article>
-
-      </div>
-
-    </section>
 
   </main>
 

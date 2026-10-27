@@ -9688,6 +9688,2702 @@ body.hud-page.is-header-hidden .site-header {
 }
 
 /* =========================================================
+   [HANDLE 4차] 핸들 페이지 4차 시안 조합 / 2026.10.23
+   ---------------------------------------------------------
+   dadeullim-handle-4차.zip (index.html "조합") 의 CSS 를 옮겨 옴
+   ---- 모든 규칙은 .hd4 (핸들 main) 안에서만 — 다른 페이지 · 공통 헤더 · 푸터와 안 겹침
+   ---- 패키지의 헤더 · 시안 이동 바 · 푸터 · 글꼴 파일은 사이트 것을 쓰므로 뺌
+   ---- :root 값(색 · 간격) → .hd4 로, 애니메이션 이름은 hd4- 로 시작
+   ---- 이미지 · 영상 경로 : images/handle-film(-av1).mp4 · handle-poster.jpg · handle-seq/
+   전) HAPTIC HANDLE LITE 스타일 (.handle-sequence 등 — 위쪽에 그대로 남아 있음, 지금은 안 씀)
+========================================================= */
+
+/* 핸들 페이지 바탕 (패키지 그래파이트 #17191c) */
+body.handle-page {
+  background: #17191c;
+}
+
+.hd4 {
+  background: var(--bg);   /* 옛 .handle-main 바탕(#08090a) 대신 패키지 그래파이트 */
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.hd4 img,
+.hd4 video,
+.hd4 canvas {
+  display: block;
+  max-width: 100%;
+}
+
+.hd4 h1,
+.hd4 h2,
+.hd4 h3,
+.hd4 p {
+  margin: 0;
+}
+
+.hd4 a {
+  color: inherit;
+}
+
+/* ---------- 공통 값 · 작은 글자 (common.css) ---------- */
+
+.hd4 {
+  --ink: #f2f2ef;
+  --ink-2: rgba(242, 242, 239, .62);
+  --ink-3: rgba(242, 242, 239, .38);
+  --line: rgba(242, 242, 239, .14);
+  --bg: #17191c;
+  --bg-2: #1d2024;
+  --bg-3: #131518;
+  --panel: #0b0c0d;
+  --ice: #a9dded;
+  --render-grey: #d2d2d2;
+  --dark-ink: #111214;
+  --sans: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --gutter: clamp(20px, 4.2vw, 80px);
+  color-scheme: dark;
+}
+
+.hd4 img,
+.hd4 video,
+.hd4 canvas {
+  display: block;
+  max-width: 100%;
+}
+
+.hd4 h1,
+.hd4 h2,
+.hd4 h3,
+.hd4 p {
+  margin: 0;
+}
+
+.hd4 .mono {
+  font-family: var(--mono);
+  font-feature-settings: "tnum";
+}
+
+.hd4 .sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.hd4 .lift {
+  background: var(--bg);
+  isolation: isolate;
+}
+
+.hd4 .lift video,
+.hd4 .lift img.blend {
+  mix-blend-mode: screen;
+}
+
+/* ---------- 00 영상 히어로 (hero.css) ---------- */
+
+.hd4 .hero {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 620px;
+  overflow: hidden;
+  background: #000;
+  color: #f2f2ef;
+}
+
+.hd4 .hero video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hd4 .hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 18%;
+  background: linear-gradient(180deg, transparent, var(--bg));
+  pointer-events: none;
+}
+
+.hd4 .hero-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hd4 .hero-ui {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  font-family: var(--sans);
+}
+
+.hd4 .h-top {
+  position: absolute;
+  left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  right: max(var(--gutter), env(safe-area-inset-right, 0px));
+  top: calc(clamp(58px, 4.03vw, 70px) + 22px);
+}
+
+.hd4 .h-top .row {
+  display: flex;
+  justify-content: space-between;
+  font: 500 12px/1 var(--mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.hd4 .h-top .row b {
+  font-weight: 500;
+  margin-right: 12px;
+}
+
+.hd4 .h-top .row span:last-child {
+  color: rgba(242,242,239,.5);
+}
+
+.hd4 .h-rule {
+  height: 1px;
+  margin-top: 12px;
+  background: rgba(242,242,239,.25);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+.hd4 .h-bottom {
+  position: absolute;
+  left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  right: max(var(--gutter), env(safe-area-inset-right, 0px));
+  bottom: 34px;
+  display: flex;
+  justify-content: space-between;
+  font: 400 12px var(--mono);
+  letter-spacing: .06em;
+  color: rgba(242,242,239,.55);
+}
+
+.hd4 .h-big {
+  position: absolute;
+  left: calc(max(var(--gutter), env(safe-area-inset-left, 0px)) - .04em);
+  bottom: 70px;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(24px, 4vw, 70px);
+  opacity: 0;
+}
+
+.hd4 .h-big strong {
+  display: block;
+  font-size: clamp(54px, 6.6vw, 128px);
+  font-weight: 200;
+  letter-spacing: -.065em;
+  line-height: .98;
+  word-break: keep-all;
+}
+
+.hd4 .h-big small {
+  display: block;
+  font: 500 12px var(--mono);
+  letter-spacing: .08em;
+  color: rgba(242,242,239,.6);
+  margin-bottom: 18px;
+}
+
+.hd4 .h-big span {
+  font-size: clamp(15px, 1.4vw, 24px);
+  font-weight: 300;
+  padding-bottom: .9vw;
+  color: rgba(242,242,239,.85);
+}
+
+.hd4 .h-co {
+  position: absolute;
+  white-space: nowrap;
+  font: 500 12px/1 var(--mono);
+  letter-spacing: .05em;
+  color: #f2f2ef;
+  opacity: 0;
+}
+
+.hd4 .h-struct {
+  position: absolute;
+  right: max(var(--gutter), env(safe-area-inset-right, 0px));
+  top: calc(clamp(58px, 4.03vw, 70px) + 70px);
+  text-align: right;
+  opacity: 0;
+}
+
+.hd4 .h-struct b {
+  display: block;
+  font: 500 12px var(--mono);
+  letter-spacing: .06em;
+  font-weight: 500;
+}
+
+.hd4 .h-struct p {
+  font-size: clamp(40px, 4.4vw, 80px);
+  font-weight: 220;
+  letter-spacing: -.05em;
+  margin-top: 8px;
+}
+
+.hd4 .h-motor {
+  position: absolute;
+  left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  top: 50%;
+  transform: translateY(-46%);
+  opacity: 0;
+}
+
+.hd4 .h-motor h2 {
+  font-size: clamp(42px, 4.6vw, 86px);
+  font-weight: 220;
+  letter-spacing: -.05em;
+  line-height: .98;
+}
+
+.hd4 .h-motor .h-rip {
+  margin-top: 26px;
+  font: 500 12px var(--mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: rgba(242,242,239,.6);
+}
+
+.hd4 .h-pulse {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.hd4 .h-pulse i {
+  width: 64px;
+  height: 3px;
+  background: rgba(242,242,239,.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.hd4 .h-pulse i::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--ice);
+  transform: scaleX(var(--k, 0));
+  transform-origin: left;
+}
+
+.hd4 .h-pulse + p {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(242,242,239,.8);
+}
+
+.hd4 .h-end {
+  position: absolute;
+  left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  bottom: 90px;
+  opacity: 0;
+}
+
+.hd4 .h-end p {
+  font-size: clamp(30px, 3vw, 56px);
+  font-weight: 260;
+  letter-spacing: -.05em;
+  line-height: 1.15;
+}
+
+.hd4 .h-end p + p {
+  color: rgba(242,242,239,.55);
+}
+
+@media (max-width: 760px) {
+
+  .hd4 .h-co,
+  .hd4 .hero-lines {
+    display: none;
+  }
+
+  .hd4 .h-big strong {
+    font-size: 11vw;
+  }
+
+  .hd4 .h-big span {
+    display: none;
+  }
+
+}
+
+/* ---------- 긴 섹션 공통 (sections.css) ---------- */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.hd4 .lbl {
+  font: 500 11px/1.3 var(--mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.hd4 .lbl b {
+  color: var(--ink);
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.hd4 .pad {
+  padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
+}
+
+.hd4 .sec {
+  padding-block: clamp(110px, 10vw, 190px);
+  position: relative;
+}
+
+.hd4 .sec + .sec {
+  border-top: 1px solid var(--line);
+}
+
+.hd4 .tone2 {
+  background: var(--bg-2);
+}
+
+.hd4 .tone3 {
+  background: var(--bg-3);
+}
+
+.hd4 .black {
+  background: #000;
+}
+
+.hd4 .row-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.hd4 .sec > .row-top:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.hd4 .h2 {
+  font-size: clamp(40px, 5.2vw, 96px);
+  font-weight: 200;
+  letter-spacing: -.062em;
+  line-height: 1.02;
+  margin-top: 30px;
+  word-break: keep-all;
+  text-wrap: balance;
+}
+
+.hd4 .h3 {
+  font-size: clamp(24px, 2.2vw, 38px);
+  font-weight: 260;
+  letter-spacing: -.045em;
+  line-height: 1.2;
+  word-break: keep-all;
+}
+
+.hd4 .lead {
+  font-size: clamp(15px, 1.05vw, 18px);
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--ink-2);
+  word-break: keep-all;
+  max-width: 36em;
+}
+
+.hd4 .body {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--ink-2);
+  word-break: keep-all;
+}
+
+.hd4 .small {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--ink-3);
+  word-break: keep-all;
+}
+
+.hd4 .head2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, .85fr);
+  gap: clamp(30px, 6vw, 110px);
+  align-items: end;
+}
+
+.hd4 .head2 .lead {
+  margin-bottom: 6px;
+}
+
+.hd4 sup.fn {
+  font: 500 9px var(--mono);
+  color: var(--ice);
+  margin-left: 2px;
+}
+
+.hd4 sup.fn a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hd4 .big {
+  font-size: clamp(64px, 8.4vw, 160px);
+  font-weight: 160;
+  letter-spacing: -.075em;
+  line-height: .86;
+}
+
+.hd4 .stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  margin-top: 60px;
+}
+
+.hd4 .stats > div {
+  padding: 22px 22px 0 0;
+}
+
+.hd4 .stats p.big {
+  font-size: clamp(64px, 8.4vw, 160px);
+  line-height: .86;
+  margin-top: 0;
+  max-width: none;
+  color: var(--ink);
+}
+
+.hd4 .stats .big {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.hd4 .stats .big small {
+  font-size: .26em;
+  font-weight: 300;
+  letter-spacing: -.02em;
+  color: var(--ink-2);
+}
+
+.hd4 .stats p {
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--ink-2);
+  line-height: 1.6;
+  word-break: keep-all;
+  max-width: 22em;
+}
+
+.hd4 .media {
+  position: relative;
+  background: #000;
+  overflow: hidden;
+}
+
+.hd4 .media video,
+.hd4 .media img,
+.hd4 .media canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hd4 video.proc {
+  filter: brightness(.86) saturate(.85);
+}
+
+.hd4 .cap {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.hd4 table.ledger {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 640px;
+}
+
+.hd4 .tw {
+  overflow-x: auto;
+  margin-top: 50px;
+}
+
+.hd4 .ledger th {
+  text-align: left;
+  font: 500 11px var(--mono);
+  letter-spacing: .06em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  padding: 0 14px 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.hd4 .ledger td {
+  padding: 16px 14px 16px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  font-weight: 300;
+  vertical-align: top;
+}
+
+.hd4 .ledger td:first-child {
+  color: var(--ink);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.hd4 .ledger td.n,
+.hd4 .ledger th.n {
+  text-align: right;
+  font-family: var(--mono);
+}
+
+.hd4 .ledger td.n {
+  color: var(--ink);
+}
+
+.hd4 .ledger tr.tot td {
+  color: var(--ink);
+  border-bottom: 0;
+  padding-top: 22px;
+}
+
+.hd4 dl.spec {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) 2fr;
+  margin: 50px 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.hd4 dl.spec dt,
+.hd4 dl.spec dd {
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+  margin: 0;
+  font-size: 14px;
+}
+
+.hd4 dl.spec dt {
+  font: 500 11px/1.9 var(--mono);
+  letter-spacing: .06em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+}
+
+.hd4 dl.spec dd {
+  color: var(--ink-2);
+  font-weight: 300;
+}
+
+.hd4 .notes {
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--ink-3);
+  counter-reset: n;
+  list-style: none;
+  padding: 0;
+  margin: 40px 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 40px;
+}
+
+.hd4 .notes li {
+  counter-increment: n;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+}
+
+.hd4 .notes li > span {
+  min-width: 0;
+}
+
+.hd4 .notes li::before {
+  content: counter(n, decimal-leading-zero);
+  font-family: var(--mono);
+  color: var(--ice);
+}
+
+.hd4 .notes a {
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  word-break: break-all;
+}
+
+.hd4 .chip {
+  display: inline-block;
+  font: 500 10px var(--mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  color: var(--ink-2);
+}
+
+.hd4 .ex {
+  font: 500 10px var(--mono);
+  color: var(--ink-3);
+  border: 1px dashed rgba(242,242,239,.25);
+  padding: 2px 6px;
+  margin-left: 8px;
+  letter-spacing: .04em;
+}
+
+.hd4 [data-rv] {
+  opacity: .12;
+  transform: translateY(28px);
+  transition: opacity 1.1s cubic-bezier(.2,.8,.2,1), transform 1.1s cubic-bezier(.2,.8,.2,1);
+}
+
+.hd4 [data-rv].in {
+  opacity: 1;
+  transform: none;
+}
+
+.hd4 [data-rv="2"] {
+  transition-delay: .12s;
+}
+
+.hd4 [data-rv="3"] {
+  transition-delay: .24s;
+}
+
+.hd4 [data-rv="4"] {
+  transition-delay: .36s;
+}
+
+.hd4 .sticky-wrap {
+  position: relative;
+}
+
+.hd4 .sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.hd4 button.tog {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--ink-2);
+  font: 500 11px var(--mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.hd4 button.tog:hover {
+  color: var(--ink);
+  border-color: var(--ink-3);
+}
+
+.hd4 button.tog[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+.hd4 .qa details {
+  border-top: 1px solid var(--line);
+  padding: 22px 0;
+}
+
+.hd4 .qa details:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.hd4 .qa summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: clamp(18px, 1.5vw, 24px);
+  font-weight: 300;
+  letter-spacing: -.03em;
+}
+
+.hd4 .qa summary::after {
+  content: "+";
+  font-weight: 200;
+  font-size: 1.4em;
+  line-height: .8;
+  color: var(--ink-3);
+  transition: transform .4s;
+}
+
+.hd4 .qa details[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.hd4 .qa details p {
+  margin-top: 14px;
+  max-width: 46em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hd4 [data-rv] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+}
+
+@media (max-width: 900px) {
+
+  .hd4 .head2 {
+    grid-template-columns: 1fr;
+  }
+
+  .hd4 .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hd4 .notes {
+    grid-template-columns: 1fr;
+  }
+
+  .hd4 dl.spec {
+    grid-template-columns: 1fr;
+  }
+
+  .hd4 dl.spec dt {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+}
+
+/* ---------- 섹션별 (index.html <style>) ---------- */
+
+.hd4 .wheel {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.hd4 .wheel .rim {
+  fill: none;
+  stroke: rgba(242,242,239,.5);
+  stroke-width: 14;
+  stroke-opacity: .18;
+}
+
+.hd4 .wheel .rim2 {
+  fill: none;
+  stroke: rgba(242,242,239,.14);
+  stroke-width: 1;
+}
+
+.hd4 .wheel .spoke {
+  stroke: rgba(242,242,239,.16);
+  stroke-width: 10;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.hd4 .wheel .hub {
+  fill: rgba(242,242,239,.05);
+  stroke: rgba(242,242,239,.2);
+}
+
+.hd4 .wheel .m {
+  fill: rgba(242,242,239,.2);
+  transition: fill .12s;
+}
+
+.hd4 .wheel .m.on {
+  fill: var(--ice);
+}
+
+.hd4 .wheel .t {
+  font: 500 10px var(--mono);
+  fill: rgba(242,242,239,.45);
+  letter-spacing: .06em;
+}
+
+.hd4 .wheel .ripL circle,
+.hd4 .wheel .ripR circle {
+  fill: none;
+  stroke: var(--ice);
+  stroke-width: 1.2;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.hd4 .wheel.play-L .ripL circle,
+.hd4 .wheel.play-R .ripR circle {
+  animation: hd4-rip 1.2s cubic-bezier(.2,.8,.2,1) infinite;
+}
+
+.hd4 .wheel .ripL circle:nth-child(2),
+.hd4 .wheel .ripR circle:nth-child(2) {
+  animation-delay: .25s !important;
+}
+
+.hd4 .wheel .ripL circle:nth-child(3),
+.hd4 .wheel .ripR circle:nth-child(3) {
+  animation-delay: .5s !important;
+}
+
+@keyframes hd4-rip {
+  0% {
+    opacity: .8;
+    transform: scale(.6);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3.2);
+  }
+}
+
+.hd4 .seqs .sticky canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hd4 .seqs .ov {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hd4 .full {
+  position: relative;
+}
+
+.hd4 .sticky.full {
+  position: sticky;
+  top: 0;
+}
+
+.hd4 .full {
+  height: 100vh;
+  height: 100svh;
+  min-height: 600px;
+  overflow: hidden;
+  background: #000;
+}
+
+.hd4 .cap1 {
+  font-size: clamp(26px, 2.6vw, 46px);
+  font-weight: 220;
+  letter-spacing: -.05em;
+  line-height: 1.2;
+  word-break: keep-all;
+}
+
+.hd4 .mono {
+  font: 500 11px var(--mono);
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.hd4 .hstage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100vw, 177.78vh);
+  aspect-ratio: 16/9;
+  transform: translate(-50%, -50%) scale(var(--z, 1));
+  transition: transform 1.2s cubic-bezier(.2,.8,.2,1);
+}
+
+.hd4 .hstage img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: brightness(var(--b, 1));
+  transition: filter 1s;
+}
+
+.hd4 .hstage .m {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: rgba(242,242,239,.18);
+  box-shadow: 0 0 0 1px rgba(242,242,239,.35);
+  transition: background .08s, box-shadow .08s;
+}
+
+.hd4 .hstage .m.on {
+  background: var(--ice);
+  box-shadow: 0 0 0 1px var(--ice), 0 0 28px 8px rgba(169,221,237,.55);
+}
+
+.hd4 .hstage .ring {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.hd4 .hstage .ring u {
+  position: absolute;
+  left: -60px;
+  top: -60px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 1px solid var(--ice);
+  opacity: 0;
+}
+
+.hd4 .hstage.play-L .ring.L u,
+.hd4 .hstage.play-R .ring.R u {
+  animation: hd4-ring 1.1s cubic-bezier(.2,.8,.2,1) infinite;
+}
+
+.hd4 .hstage .ring u:nth-child(2) {
+  animation-delay: .22s !important;
+}
+
+.hd4 .hstage .ring u:nth-child(3) {
+  animation-delay: .44s !important;
+}
+
+@keyframes hd4-ring {
+  0% {
+    opacity: .9;
+    transform: scale(.3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.6);
+  }
+}
+
+.hd4 #quiet .hstage {
+  --b: .32;
+  --z: 1.25;
+}
+
+.hd4 #quiet .siren {
+  position: absolute;
+  left: -10vw;
+  top: 50%;
+  width: 0;
+  height: 0;
+}
+
+.hd4 #quiet .siren u {
+  position: absolute;
+  left: -40vh;
+  top: -40vh;
+  width: 80vh;
+  height: 80vh;
+  border-radius: 50%;
+  border: 1px solid rgba(169,221,237,.5);
+  animation: hd4-siren 3.2s linear infinite;
+  opacity: 0;
+}
+
+.hd4 #quiet .siren u:nth-child(2) {
+  animation-delay: 1.07s;
+}
+
+.hd4 #quiet .siren u:nth-child(3) {
+  animation-delay: 2.13s;
+}
+
+@keyframes hd4-siren {
+  0% {
+    transform: scale(.2);
+    opacity: .7;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.hd4 #quiet .num {
+  position: absolute;
+  left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  bottom: 9vh;
+  right: var(--gutter);
+}
+
+.hd4 #quiet .st {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .7s, transform .9s cubic-bezier(.2,.8,.2,1);
+}
+
+.hd4 #quiet .st.on {
+  opacity: 1;
+  transform: none;
+}
+
+.hd4 #quiet .st .v {
+  font-size: clamp(120px, 20vw, 380px);
+  font-weight: 120;
+  letter-spacing: -.08em;
+  line-height: .8;
+  display: block;
+}
+
+.hd4 #quiet .st .v small {
+  font-size: .26em;
+  letter-spacing: -.03em;
+  font-weight: 240;
+  color: var(--ink-2);
+  margin-left: 10px;
+}
+
+.hd4 #quiet .st p {
+  margin-top: 22px;
+}
+
+.hd4 #quiet .top {
+  position: absolute;
+  left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  top: calc(clamp(58px, 4.03vw, 70px) + 34px);
+}
+
+.hd4 #quiet .bar {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 9vh;
+  display: flex;
+  gap: 8px;
+}
+
+.hd4 #quiet .bar i {
+  width: 34px;
+  height: 2px;
+  background: rgba(242,242,239,.2);
+}
+
+.hd4 #quiet .bar i.on {
+  background: var(--ink);
+}
+
+.hd4 #decl .say {
+  position: absolute;
+  left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  bottom: 9vh;
+  opacity: calc(1 - var(--p, 0) * 2.2);
+}
+
+.hd4 #decl .say .big {
+  font-size: clamp(54px, 7vw, 136px);
+}
+
+.hd4 #decl .say .big em {
+  font-style: normal;
+  color: var(--ink-3);
+}
+
+.hd4 #decl .cnt {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 9vh;
+  text-align: right;
+  opacity: calc(var(--p, 0) * 2 - .3);
+}
+
+.hd4 #decl .cnt b {
+  display: block;
+  font-size: clamp(80px, 9vw, 170px);
+  font-weight: 140;
+  letter-spacing: -.08em;
+  line-height: .8;
+}
+
+.hd4 #lr .side {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(300px, 26vw);
+  opacity: 0;
+  transition: opacity .6s;
+}
+
+.hd4 #lr .side.on {
+  opacity: 1;
+}
+
+.hd4 #lr .side.L {
+  left: max(var(--gutter), env(safe-area-inset-left, 0px));
+}
+
+.hd4 #lr .side.R {
+  right: var(--gutter);
+  text-align: right;
+}
+
+.hd4 #lr .side .arrow {
+  font-size: clamp(60px, 7vw, 130px);
+  font-weight: 120;
+  line-height: .8;
+  color: var(--ice);
+}
+
+.hd4 #lr .side .cap1 {
+  margin-top: 18px;
+}
+
+.hd4 #lr .top {
+  position: absolute;
+  left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  top: calc(clamp(58px, 4.03vw, 70px) + 34px);
+}
+
+.hd4 #lr .hstage {
+  --z: .92;
+}
+
+.hd4 #inside .say {
+  position: absolute;
+  left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  bottom: 9vh;
+}
+
+.hd4 #inside .pc {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.hd4 #inside .pc i {
+  width: 60px;
+  height: 6px;
+  background: rgba(242,242,239,.15);
+  transition: background .12s;
+}
+
+.hd4 #inside .pc i.on {
+  background: var(--ice);
+  box-shadow: 0 0 18px rgba(169,221,237,.7);
+}
+
+.hd4 #try {
+  background: #000;
+}
+
+.hd4 #try .hstage {
+  --z: .78;
+}
+
+.hd4 #try .top {
+  position: absolute;
+  left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  top: calc(clamp(58px, 4.03vw, 70px) + 34px);
+}
+
+.hd4 #try .panel {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 7vh;
+  width: min(380px, 86vw);
+  display: grid;
+  gap: 16px;
+  background: rgba(10,11,13,.72);
+  backdrop-filter: blur(14px);
+  padding: 22px;
+  border: 1px solid var(--line);
+}
+
+.hd4 #try .row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.hd4 #try .row .mono {
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+.hd4 #try .out {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+
+.hd4 #try .out b {
+  display: block;
+  font-size: 30px;
+  font-weight: 200;
+  letter-spacing: -.05em;
+  margin-top: 4px;
+}
+
+.hd4 #try .go {
+  background: var(--ink);
+  color: var(--bg);
+  border: 0;
+  font: 500 12px var(--mono);
+  letter-spacing: .08em;
+  padding: 15px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.hd4 #try .hud {
+  position: absolute;
+  left: 50%;
+  top: 14vh;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 22vw;
+  font: 500 12px var(--mono);
+  letter-spacing: .1em;
+  color: var(--ink-3);
+}
+
+.hd4 #try .hud span.on {
+  color: var(--ice);
+}
+
+.hd4 .made {
+  background: #000;
+  padding: clamp(90px, 8vw, 150px) 0 0;
+}
+
+.hd4 .made .head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  padding-bottom: 30px;
+}
+
+.hd4 .made .grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 4px;
+}
+
+.hd4 .made figure {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.hd4 .made video {
+  width: 100%;
+  height: 72vh;
+  min-height: 420px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(.82) saturate(.85);
+  transform: scale(1.06);
+  transition: transform 1.6s cubic-bezier(.2,.8,.2,1), filter .6s;
+}
+
+.hd4 .made figure:hover video {
+  transform: scale(1);
+  filter: brightness(1) saturate(1);
+}
+
+.hd4 .made figcaption {
+  position: absolute;
+  left: 22px;
+  bottom: 20px;
+  right: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.hd4 .made figcaption b {
+  font-size: clamp(56px, 5vw, 96px);
+  font-weight: 140;
+  letter-spacing: -.08em;
+  line-height: .8;
+}
+
+.hd4 .qa2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: 100vh;
+  background: var(--bg-2);
+}
+
+.hd4 .qa2 .img {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.hd4 .qa2 .img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 38% 50%;
+}
+
+.hd4 .qa2 .txt {
+  padding: clamp(90px, 8vw, 150px) var(--gutter) 70px clamp(30px, 4vw, 70px);
+}
+
+.hd4 .qa2 .notes {
+  grid-template-columns: 1fr;
+  margin-top: 60px;
+}
+
+@media (max-width: 900px) {
+
+  .hd4 .made .grid,
+  .hd4 .qa2 {
+    grid-template-columns: 1fr;
+  }
+
+  .hd4 .qa2 .img {
+    height: 60vh;
+  }
+
+  .hd4 .made video {
+    height: 56vh;
+  }
+
+  .hd4 #lr .side {
+    width: 40vw;
+  }
+
+  .hd4 #try .hud {
+    gap: 40vw;
+  }
+
+}
+
+.hd4 .chead .bridge {
+  margin-top: 18px;
+  font-size: clamp(15px, 1.05vw, 18px);
+  font-weight: 300;
+  color: var(--ink-3);
+  line-height: 1.7;
+  max-width: 30em;
+  word-break: keep-all;
+}
+
+.hd4 .ttl {
+  font-size: clamp(38px, 4.4vw, 84px);
+  font-weight: 200;
+  letter-spacing: -.06em;
+  line-height: 1.06;
+  margin-top: 26px;
+  word-break: keep-all;
+}
+
+.hd4 .ttl em {
+  font-style: normal;
+  color: var(--ink-3);
+}
+
+.hd4 .copy p + p {
+  margin-top: 14px;
+}
+
+.hd4 .chap-nav {
+  position: fixed;
+  left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  bottom: 22px;
+  z-index: 40;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  font: 500 11px var(--mono);
+  letter-spacing: .07em;
+  color: var(--ink-3);
+  opacity: 0;
+  transition: opacity .5s;
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+
+.hd4 .chap-nav.on {
+  opacity: 1;
+}
+
+.hd4 .chap-nav .ticks {
+  display: flex;
+  gap: 4px;
+}
+
+.hd4 .chap-nav .ticks i {
+  width: 18px;
+  height: 2px;
+  background: rgba(242,242,239,.25);
+}
+
+.hd4 .chap-nav .ticks i.on {
+  background: #f2f2ef;
+}
+
+.hd4 .chap-nav b {
+  color: #f2f2ef;
+  font-weight: 500;
+}
+
+.hd4 .split .sticky {
+  display: grid;
+  grid-template-columns: minmax(380px, 5fr) minmax(0, 7fr);
+}
+
+.hd4 .split .ttl {
+  font-size: clamp(32px, 3vw, 56px);
+}
+
+.hd4 .split .copy {
+  padding: calc(clamp(58px, 4.03vw, 70px) + 40px) clamp(24px, 3vw, 56px) 86px max(var(--gutter), env(safe-area-inset-left, 0px));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--bg);
+  position: relative;
+  z-index: 2;
+}
+
+.hd4 .split .vis {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.hd4 .split .vis .hstage {
+  width: max(100%, 177.78vh);
+}
+
+.hd4 #prob .vis .hstage {
+  --b: .38;
+  --z: 1.18;
+}
+
+.hd4 #prob .siren {
+  position: absolute;
+  left: -12%;
+  top: 50%;
+  width: 0;
+  height: 0;
+}
+
+.hd4 #prob .siren u {
+  position: absolute;
+  left: -40vh;
+  top: -40vh;
+  width: 80vh;
+  height: 80vh;
+  border-radius: 50%;
+  border: 1px solid rgba(169,221,237,.5);
+  animation: hd4-siren 3.2s linear infinite;
+  opacity: 0;
+}
+
+.hd4 #prob .siren u:nth-child(2) {
+  animation-delay: 1.07s;
+}
+
+.hd4 #prob .siren u:nth-child(3) {
+  animation-delay: 2.13s;
+}
+
+.hd4 #prob .num {
+  position: absolute;
+  left: 6%;
+  bottom: 9vh;
+  right: 6%;
+}
+
+.hd4 #prob .st {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .7s, transform .9s cubic-bezier(.2,.8,.2,1);
+}
+
+.hd4 #prob .st.on {
+  opacity: 1;
+  transform: none;
+}
+
+.hd4 #prob .st .v {
+  font-size: clamp(110px, 15vw, 290px);
+  font-weight: 120;
+  letter-spacing: -.08em;
+  line-height: .8;
+  display: block;
+}
+
+.hd4 #prob .st .v small {
+  font-size: .26em;
+  letter-spacing: -.03em;
+  font-weight: 240;
+  color: var(--ink-2);
+  margin-left: 10px;
+}
+
+.hd4 #prob .st p {
+  margin-top: 18px;
+  font-size: clamp(18px, 1.5vw, 26px);
+  font-weight: 260;
+  letter-spacing: -.03em;
+}
+
+.hd4 #prob ol.steps {
+  list-style: none;
+  padding: 0;
+  margin: 30px 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.hd4 #prob ol.steps li {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--ink-3);
+  transition: color .4s;
+}
+
+.hd4 #prob ol.steps li.on {
+  color: var(--ink);
+}
+
+.hd4 #prob ol.steps li b {
+  font: 500 11px/1.9 var(--mono);
+}
+
+.hd4 .idea {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.hd4 .idea .img {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.hd4 .idea .img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  transform: scale(1.15);
+}
+
+.hd4 .idea .txt {
+  padding: clamp(100px, 9vw, 170px) clamp(28px, 4vw, 70px) 70px max(var(--gutter), env(safe-area-inset-left, 0px));
+}
+
+.hd4 .why {
+  margin-top: 50px;
+  border-top: 1px solid var(--line);
+}
+
+.hd4 .why > div {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 10px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.hd4 .why b {
+  font-size: 34px;
+  font-weight: 160;
+  letter-spacing: -.06em;
+  line-height: .9;
+}
+
+.hd4 .why p.h {
+  font-size: 19px;
+  font-weight: 300;
+  letter-spacing: -.03em;
+}
+
+.hd4 .why p.s {
+  font-size: 14px;
+  color: var(--ink-3);
+  font-weight: 300;
+  margin-top: 6px;
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+.hd4 #struct .ov::before,
+.hd4 #sig .ov::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 52%;
+  background: linear-gradient(90deg, rgba(23,25,28,.92) 0%, rgba(23,25,28,.75) 55%, rgba(23,25,28,0) 100%);
+}
+
+.hd4 #struct .ov .copy2 {
+  position: absolute;
+  left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  top: calc(clamp(58px, 4.03vw, 70px) + 34px);
+  width: min(420px, 34vw);
+  pointer-events: auto;
+}
+
+.hd4 #struct .legend {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 8vh;
+  width: min(340px, 30vw);
+}
+
+.hd4 #struct .legend ol {
+  padding: 0;
+  margin: 14px 0 0;
+}
+
+.hd4 #struct .legend li {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  color: rgba(242,242,239,.3);
+  transition: color .35s;
+  font-size: 14px;
+}
+
+.hd4 #struct .legend li small {
+  display: block;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.hd4 #struct .legend li b {
+  font: 500 11px/1.7 var(--mono);
+}
+
+.hd4 #struct .legend li.on {
+  color: var(--ink);
+}
+
+.hd4 #struct .legend li.on b {
+  color: var(--ice);
+}
+
+.hd4 #dir .vis .hstage {
+  --z: .7;
+}
+
+.hd4 #dir .rule {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--line);
+}
+
+.hd4 #dir .rule > div {
+  padding: 18px 16px 0 0;
+  opacity: .3;
+  transition: opacity .5s;
+}
+
+.hd4 #dir .rule > div.on {
+  opacity: 1;
+}
+
+.hd4 #dir .rule .ar {
+  font-size: 54px;
+  font-weight: 120;
+  line-height: .8;
+  color: var(--ice);
+}
+
+.hd4 #dir .rule p {
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--ink-2);
+  line-height: 1.7;
+}
+
+.hd4 #dir .side-cap {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: clamp(26px, 2.4vw, 42px);
+  font-weight: 200;
+  letter-spacing: -.05em;
+  opacity: 0;
+  transition: opacity .5s;
+}
+
+.hd4 #dir .side-cap.on {
+  opacity: 1;
+}
+
+.hd4 #dir .side-cap.L {
+  left: 5%;
+}
+
+.hd4 #dir .side-cap.R {
+  right: 5%;
+}
+
+.hd4 #sig .ov .copy2 {
+  position: absolute;
+  left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  top: calc(clamp(58px, 4.03vw, 70px) + 34px);
+  width: min(440px, 36vw);
+}
+
+.hd4 #sig .pats {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 7vh;
+  width: min(420px, 38vw);
+  background: rgba(10,11,13,.7);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--line);
+  padding: 20px 22px;
+}
+
+.hd4 #sig .pat {
+  display: grid;
+  grid-template-columns: 70px 1fr 54px;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  opacity: .35;
+  transition: opacity .4s;
+}
+
+.hd4 #sig .pat:first-of-type {
+  border-top: 0;
+}
+
+.hd4 #sig .pat.on {
+  opacity: 1;
+}
+
+.hd4 #sig .pat svg {
+  width: 100%;
+  height: 34px;
+}
+
+.hd4 #sig .pat .d {
+  font: 500 11px var(--mono);
+  text-align: right;
+  color: var(--ink-2);
+}
+
+.hd4 #sig .pc {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.hd4 #sig .pc i {
+  width: 54px;
+  height: 5px;
+  background: rgba(242,242,239,.15);
+  transition: background .12s;
+}
+
+.hd4 #sig .pc i.on {
+  background: var(--ice);
+  box-shadow: 0 0 18px rgba(169,221,237,.7);
+}
+
+.hd4 #try .top {
+  width: min(440px, 40vw);
+}
+
+.hd4 .made .grid figure figcaption {
+  position: static;
+  display: block;
+  padding: 18px 22px 30px;
+  background: #000;
+}
+
+.hd4 .made .grid figure figcaption .row1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.hd4 .made .grid figure figcaption p {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--ink-2);
+  font-weight: 300;
+  line-height: 1.7;
+  word-break: keep-all;
+  max-width: 30em;
+}
+
+.hd4 .made video {
+  height: 58vh;
+}
+
+.hd4 .made .head .chead .bridge {
+  max-width: 34em;
+}
+
+@media (max-width: 900px) {
+
+  .hd4 .split .sticky {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .hd4 .split .copy {
+    padding-bottom: 20px;
+  }
+
+  .hd4 .split .copy .hide-m {
+    display: none;
+  }
+
+  .hd4 .idea {
+    grid-template-columns: 1fr;
+  }
+
+  .hd4 .idea .img {
+    height: 50vh;
+  }
+
+  .hd4 #struct .ov .copy2,
+  .hd4 #sig .ov .copy2 {
+    width: auto;
+    right: 16px;
+  }
+
+  .hd4 #struct .legend {
+    display: none;
+  }
+
+  .hd4 #sig .pats {
+    left: 16px;
+    right: 16px;
+    width: auto;
+  }
+
+  .hd4 #try .top {
+    width: auto;
+    right: 16px;
+  }
+
+}
+
+/* =========================================================
+   [DISPLAY 위험 단계] 04 OVERVIEW 위험 단계 + 배경 레이더 / 2026.10.27
+   ---------------------------------------------------------
+   디스플레이_위험단계_레이더.zip 의 display-level.css 를 옮겨 옴 (따로 파일 대신 여기에)
+   ---- 화면 가운데 카드의 단계(data-lvnow 1~4)에 따라
+        배경 레이더 색 · 위험 방향 부채꼴 · 파동 속도 · 카드 빛 · 오른쪽 위 단계 표시가 바뀜
+   ---- 색 : 안전 #667cff / 주의 #ffb547 / 경고 #ff8a3d / 위험 #ff5b55 (아래 --l1 ~ --l4)
+   ---- 모서리 : 카드 모서리는 기존 그대로 5px (interface.js 의 카드 스타일)
+                빛 들어온 화면(.lit) · 테두리 빛(.litglow)도 같은 모서리로 (border-radius: inherit)
+   ---- 애니메이션 이름은 dlv- 로 시작 (다른 페이지와 겹침 방지)
+========================================================= */
+
+.display-page .display-info__image {
+  position:relative;
+}
+
+.display-page .display-info__image .lit {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  opacity:0;
+  transition:opacity .7s ease;
+}
+
+.display-page .display-info__image .litglow {
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .7s ease;
+  box-shadow:inset 0 0 0 1px var(--gc),inset 0 0 40px -14px var(--gc);
+}
+
+.display-page .display-info[data-lv="2"] {
+  --gc:rgba(255,181,71,.42);
+}
+
+.display-page .display-info[data-lv="3"] {
+  --gc:rgba(255,138,61,.42);
+}
+
+.display-page .display-info[data-lv="4"] {
+  --gc:rgba(255,91,85,.45);
+}
+
+.display-page .display-overview[data-lvnow="2"] .display-info[data-lv="2"] :is(.lit,.litglow),
+.display-page .display-overview[data-lvnow="3"] .display-info[data-lv="3"] :is(.lit,.litglow),
+.display-page .display-overview[data-lvnow="4"] .display-info[data-lv="4"] :is(.lit,.litglow) {
+  opacity:1;
+}
+
+.display-page .display-overview {
+  --l1:#667cff;
+  --l2:#ffb547;
+  --l3:#ff8a3d;
+  --l4:#ff5b55;
+  --lc:var(--l1);
+}
+
+.display-page .display-overview[data-lvnow="2"] {
+  --lc:var(--l2);
+}
+
+.display-page .display-overview[data-lvnow="3"] {
+  --lc:var(--l3);
+}
+
+.display-page .display-overview[data-lvnow="4"] {
+  --lc:var(--l4);
+}
+
+.display-page .lvbg {
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.display-page .display-overview__inner {
+  position:relative;
+  z-index:1;
+}
+
+.display-page .display-info__eyebrow {
+  transition:color .5s;
+}
+
+.display-page .display-info[data-lv="2"] .display-info__eyebrow {
+  color:#ffb547;
+}
+
+.display-page .display-info[data-lv="3"] .display-info__eyebrow {
+  color:#ff8a3d;
+}
+
+.display-page .display-info[data-lv="4"] .display-info__eyebrow {
+  color:#ff5b55;
+}
+
+.display-page .lvstep {
+  position:absolute;
+  z-index:3;
+  right:max(28px,env(safe-area-inset-right,0px));
+  top:84px;
+  display:flex;
+  gap:4px;
+  margin:0;
+  padding:6px;
+  list-style:none;
+  background:rgba(12,13,15,.72);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.08);
+  opacity:var(--stepo,0);
+  transition:opacity .5s;
+}
+
+.display-page .lvstep li {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  font-size:13px;
+  color:rgba(244,244,241,.4);
+  transition:color .4s,background .4s;
+  white-space:nowrap;
+}
+
+.display-page .lvstep li i {
+  width:7px;
+  height:7px;
+  background:currentColor;
+  opacity:.6;
+}
+
+.display-page .lvstep li.on {
+  color:#f4f4f1;
+  background:rgba(255,255,255,.06);
+}
+
+.display-page .lvstep li.on i {
+  background:var(--lc);
+  opacity:1;
+}
+
+.display-page .lvbg::before {
+  content:"";
+  position:absolute;
+  left:50%;
+  top:52%;
+  width:80vmin;
+  height:80vmin;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(closest-side,var(--lc),transparent);
+  opacity:.06;
+  transition:background .8s;
+}
+
+.display-page .lvbg .rad {
+  -webkit-mask:radial-gradient(closest-side,#000 55%,transparent 100%);
+  mask:radial-gradient(closest-side,#000 55%,transparent 100%);
+  position:absolute;
+  left:50%;
+  top:52%;
+  width:max(150vmin,1200px);
+  height:max(150vmin,1200px);
+  transform:translate(-50%,-50%);
+}
+
+.display-page .lvbg .pu {
+  stroke:var(--lc);
+  stroke-width:.6;
+  vector-effect:non-scaling-stroke;
+  transform-origin:0 0;
+  opacity:0;
+  animation:dlv-pu var(--pp,7s) cubic-bezier(.33,0,.25,1) infinite;
+}
+
+.display-page .lvbg .pu:nth-child(2) {
+  animation-delay:calc(var(--pp,7s) * -.25);
+}
+
+.display-page .lvbg .pu:nth-child(3) {
+  animation-delay:calc(var(--pp,7s) * -.5);
+}
+
+.display-page .lvbg .pu:nth-child(4) {
+  animation-delay:calc(var(--pp,7s) * -.75);
+}
+
+@keyframes dlv-pu {
+  0% {
+    transform:scale(1);
+    opacity:0;
+  }
+  15% {
+    opacity:var(--po,.3);
+  }
+  70% {
+    opacity:calc(var(--po,.3) * .35);
+  }
+  100% {
+    transform:scale(6.6);
+    opacity:0;
+  }
+}
+
+.display-page .lvbg .dir {
+  opacity:0;
+  transition:opacity .8s;
+}
+
+.display-page .lvbg .wedge {
+  animation:dlv-wg 3.2s ease-in-out infinite;
+  opacity:.7;
+}
+
+@keyframes dlv-wg {
+  50% {
+    opacity:1;
+  }
+}
+
+.display-page .lvbg .wave {
+  fill:none;
+  stroke:var(--lc);
+  stroke-width:.9;
+  vector-effect:non-scaling-stroke;
+  stroke-linecap:round;
+  transform-origin:0 0;
+  opacity:0;
+  filter:drop-shadow(0 0 4px var(--lc));
+  animation:dlv-wave var(--ap,3s) cubic-bezier(.3,0,.3,1) infinite;
+  animation-delay:calc(var(--ap,3s) * var(--k) * -.333);
+}
+
+@keyframes dlv-wave {
+  0% {
+    transform:scale(1);
+    opacity:0;
+  }
+  12% {
+    opacity:.85;
+  }
+  65% {
+    opacity:.25;
+  }
+  100% {
+    transform:scale(5.2);
+    opacity:0;
+  }
+}
+
+.display-page .display-overview[data-lvnow="1"] {
+  --pp:8s;
+  --po:.22;
+}
+
+.display-page .display-overview[data-lvnow="2"] {
+  --pp:6.5s;
+  --po:.32;
+  --ap:3.4s;
+}
+
+.display-page .display-overview[data-lvnow="3"] {
+  --pp:5.5s;
+  --po:.36;
+  --ap:2.8s;
+}
+
+.display-page .display-overview[data-lvnow="4"] {
+  --pp:4.5s;
+  --po:.42;
+  --ap:2.2s;
+}
+
+.display-page .display-overview[data-lvnow="2"] .dir-2,
+.display-page .display-overview[data-lvnow="3"] .dir-3,
+.display-page .display-overview[data-lvnow="4"] .dir-4 {
+  opacity:1;
+}
+
+.display-page .lvbg .carshape {
+  transition:stroke .6s;
+}
+
+.display-page .display-overview:not([data-lvnow="1"]) .lvbg .carshape {
+  stroke:var(--lc);
+  stroke-opacity:.75;
+}
+
+/* 빛 들어온 화면 · 테두리 빛도 카드와 같은 모서리 (기존 5px 그대로) */
+.display-page .display-info__image .lit,
+.display-page .display-info__image .litglow {
+  border-radius: inherit;
+}
+
+/* =========================================================
+   [DISPLAY 위험 단계] 퍼지는 파동 — 물결처럼 연하게 / 2026.10.27
+   ---------------------------------------------------------
+   또렷한 선 → 물결이 번지듯 흐릿하고 연한 띠
+   ---- 차에서 퍼지는 원(.pu) : 굵고 흐린 띠 (선 6 + 흐림 3px), 진하기는 낮게
+        단계별 진하기(--po) : 0.16 · 0.2 · 0.24 · 0.28 (원래 .22 ~ .42 / 바로 전 .45 ~ .78)
+   ---- 위험 방향 호(.wave) : 선 3 + 흐림 2px 로 부드럽게
+   ---- 퍼지는 속도는 그대로
+========================================================= */
+
+.display-page .lvbg .pu {
+  stroke-width: 6;               /* 원래 .6 · 바로 전 1.2 */
+  filter: blur(3px);             /* 바로 전 drop-shadow — 선 대신 번지는 띠 */
+}
+
+.display-page .display-overview[data-lvnow="1"] {
+  --po: 0.16;
+}
+
+.display-page .display-overview[data-lvnow="2"] {
+  --po: 0.2;
+}
+
+.display-page .display-overview[data-lvnow="3"] {
+  --po: 0.24;
+}
+
+.display-page .display-overview[data-lvnow="4"] {
+  --po: 0.28;
+}
+
+.display-page .lvbg .wave {
+  stroke-width: 3;               /* 원래 .9 · 바로 전 1.6 */
+  filter: blur(2px);             /* 원래 drop-shadow 4px */
+}
+
+/* =========================================================
+   [DISPLAY HERO — 위험 단계] 히어로 1안 / 2026.10.27
+   ---------------------------------------------------------
+   디스플레이_히어로1안_위험단계.zip 의 display-hero.css 를 옮겨 옴 (따로 파일 대신 여기에)
+   전) [DISPLAY HERO — 위험 순간] .dh8 (위쪽에 그대로 남아 있음, 지금은 안 씀)
+   후) .dh9 — 햇살 드는 실내 사진 + 사진 속 화면이 평소 → 주의 → 경고 → 위험
+   ---- 색 : 평소 #667cff · 주의 #ffb547 · 경고 #ff8a3d · 위험 #ff5b55 (아래 --c0 ~ --c3)
+   ---- 사진(1672:941 비율)이 화면을 가득 덮고, 18초 동안 화면 쪽으로 천천히 다가갔다 물러남
+========================================================= */
+
+.display-page .dh9 {
+  --c0:#667cff;
+  --c1:#ffb547;
+  --c2:#ff8a3d;
+  --c3:#ff5b55;
+  --lc:var(--c0);
+  position:relative;
+  height:100svh;
+  min-height:580px;
+  overflow:hidden;
+  background:#000;
+  isolation:isolate;
+}
+
+.display-page .dh9[data-state="1"] {
+  --lc:var(--c1);
+}
+
+.display-page .dh9[data-state="2"] {
+  --lc:var(--c2);
+}
+
+.display-page .dh9[data-state="3"] {
+  --lc:var(--c3);
+}
+
+.display-page .dh9__scene {
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:max(100%,calc(100svh * 1.777));
+  aspect-ratio:1672/941;
+  margin:0;
+  transform:translate(-50%,-50%);
+  transform-origin:54.5% 36.9%;
+  animation:dh9Dolly 18s ease-in-out infinite alternate;
+}
+
+@keyframes dh9Dolly {
+  from {
+    transform:translate(-50%,-50%) scale(1);
+  }
+  to {
+    transform:translate(-50%,-50%) scale(1.08);
+  }
+}
+
+.display-page .dh9__photo {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.display-page .dh9__scr {
+  position:absolute;
+  display:block;
+  max-width:none;
+  opacity:0;
+  transition:opacity .9s ease;
+}
+
+.display-page .dh9__scr.is-on {
+  opacity:1;
+}
+
+.display-page .dh9__glow {
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  mix-blend-mode:screen;
+  background:radial-gradient(22% 24% at 55% 37%,var(--lc),transparent 70%);
+  opacity:0;
+  transition:opacity .8s,background .8s;
+}
+
+.display-page .dh9:not([data-state="0"]) .dh9__glow {
+  opacity:.22;
+}
+
+.display-page .dh9__shade {
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(90deg,rgba(8,6,4,.78),rgba(8,6,4,.35) 34%,transparent 52%),linear-gradient(0deg,rgba(8,6,4,.6),transparent 40%);
+}
+
+.display-page .dh9__copy {
+  position:absolute;
+  z-index:3;
+  left:max(28px,calc(50% - 640px));
+  bottom:clamp(56px,11vh,110px);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.display-page .dh9__titles {
+  display:grid;
+}
+
+.display-page .dh9__title {
+  grid-area:1/1;
+  margin:0;
+  font-size:clamp(32px,3.8vw,60px);
+  font-weight:300;
+  line-height:1.12;
+  letter-spacing:-.035em;
+  color:#f4f4f1;
+  word-break:keep-all;
+  opacity:0;
+  transform:translateY(12px);
+  transition:opacity .6s cubic-bezier(.22,.7,.12,1),transform .7s cubic-bezier(.22,.7,.12,1);
+}
+
+.display-page .dh9__title.is-on {
+  opacity:1;
+  transform:none;
+}
+
+.display-page .dh9__c {
+  color:var(--lc);
+  transition:color .5s;
+}
+
+.display-page .dh9__steps {
+  display:flex;
+  gap:4px;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+.display-page .dh9__steps li {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px 8px 0;
+  font-size:13px;
+  color:rgba(244,244,241,.4);
+  transition:color .4s;
+}
+
+.display-page .dh9__steps li i {
+  width:22px;
+  height:2px;
+  background:rgba(255,255,255,.22);
+  transition:background .4s;
+}
+
+.display-page .dh9__steps li.is-on {
+  color:#f4f4f1;
+}
+
+.display-page .dh9__steps li.is-on i {
+  background:var(--lc);
+}
+
+@media (max-width:760px) {
+
+  .display-page .dh9__scene {
+    left:46%;
+  }
+
+}
+
+@media (prefers-reduced-motion:reduce) {
+
+  .display-page .dh9__scene {
+    animation:none;
+  }
+
+  .display-page .dh9 * {
+    transition-duration:.01ms!important;
+  }
+
+}
+
+/* =========================================================
+   [DISPLAY HERO — 위험 단계] 글 여백 / 2026.10.27
+   ---------------------------------------------------------
+   창이 1300px 보다 좁으면 글이 왼쪽 끝 28px 에 붙던 것
+   (전 left : max(28px, calc(50% - 640px)) — 좁은 창에서는 28px)
+   ---- 왼쪽 : 화면 폭의 5.8% (최소 32px · 최대 88px — 아래 OVERVIEW 제목과 같은 선)
+              넓은 화면은 기존처럼 가운데 1280px 칸의 왼쪽 끝
+   ---- 아래 : clamp(56px, 11vh, 110px) → clamp(72px, 14vh, 140px) 위로 조금 띄움
+========================================================= */
+
+.display-page .dh9__copy {
+  left: max(clamp(32px, 5.8vw, 88px), calc(50% - 640px));
+  bottom: clamp(72px, 14vh, 140px);
+}
+
+/* =========================================================
+   [DISPLAY HERO — 위험 단계] 아래 섹션과 이어지게 / 2026.10.27
+   ---------------------------------------------------------
+   히어로 사진이 끝나는 자리에서 다음 섹션(부채 · 배경 #0b0c10)과 딱 끊겨 보이던 것
+   ---- 히어로 맨 아래 26% 를 다음 섹션 색으로 서서히 덮음 (사진 → 배경 색)
+   ---- 글(.dh9__copy)은 이 그라데이션 위에 있어 그대로 보임
+========================================================= */
+
+.display-page .dh9::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 26%;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(11, 12, 16, 0) 0%,
+      rgba(11, 12, 16, 0.55) 45%,
+      rgba(11, 12, 16, 0.9) 78%,
+      #0b0c10 100%
+    );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   [DISPLAY HERO — 위험 단계] 단계 표시 선 / 2026.10.27
+   ---------------------------------------------------------
+   전) 글 왼쪽에 굵은 선(22 × 2px)
+   후) 글 위에 얇은 선(1px), 글 폭만큼 — 지금 단계만 단계 색으로 켜짐
+========================================================= */
+
+.display-page .dh9__steps {
+  gap: 18px;   /* 전 4px (선이 위로 가서 칸 사이를 조금 띄움) */
+}
+
+.display-page .dh9__steps li {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;   /* 2026.10.27 : 선 ↔ 글 살짝 가깝게 (전 10px) */
+
+  padding: 0;   /* 전 8px 12px 8px 0 */
+}
+
+.display-page .dh9__steps li i {
+  width: 100%;   /* 전 22px */
+  height: 1px;   /* 전 2px */
+}
+
+/* =========================================================
+   [DISPLAY HERO — 위험 단계] 왼쪽 시작선 맞춤 / 2026.10.27
+   ---------------------------------------------------------
+   큰 제목 글자는 글자 자체의 왼쪽 여백(약 0.045em) 때문에
+   아래 단계 표시(선 · 평소)보다 2.5 ~ 4px 오른쪽에서 시작해 보였음
+   → 제목만 0.045em 왼쪽으로 당겨 같은 선에서 시작 (시각 보정)
+========================================================= */
+
+.display-page .dh9__title {
+  margin-left: -0.045em;   /* 제목 글자 크기 기준 */
+}
+
+/* =========================================================
+   [DISPLAY 위험 단계] 카드 옆 글 / 2026.10.27
+   ---------------------------------------------------------
+   ---- 제목(길 안내 · 차선 변경 주의 · 긴급차 양보 · 즉시 정지) 살짝 두껍게 : 500 → 600
+   ---- 설명은 단어 중간에서 끊기지 않게 (keep-all), 글 칸 폭 190 → 220px
+========================================================= */
+
+.display-page .display-info__text h3 {
+  font-weight: 600;   /* 전 500 */
+}
+
+.display-page .display-info__text p {
+  word-break: keep-all;
+
+  /* 2026.10.27 : 양쪽 맞춤 — 두 줄(<br>)을 같은 폭으로
+                  글 폭 = 긴 줄 폭(fit-content), 짧은 줄은 글자 사이를 살짝 벌려 같은 끝에서 끝남
+                  (자동 줄바꿈 + justify 는 단어 사이가 크게 벌어지고 마지막 줄이 떨어져서 안 씀) */
+  width: fit-content;
+  max-width: 100%;
+
+  text-align: justify;
+  text-align-last: justify;
+  text-justify: inter-character;
+}
+
+/* 글 칸 폭 190 → 220px — 좁은 창(작은 글씨)에서도 한 줄이 끝에서 떨어지지 않게
+   (화면 폭 계산은 interface.js 가 이 폭을 읽어서 맞춤) */
+.display-page .display-info__text {
+  width: 220px;
+}
+
+/* =========================================================
+   [DISPLAY 위험 단계] 제목 아래 설명 두 줄 양쪽 맞춤 / 2026.10.27
+   ---------------------------------------------------------
+   카드 옆 글과 같은 방식 — 글 폭 = 긴 줄 폭, 짧은 줄은 글자 사이를 살짝 벌려 같은 끝에서 끝남
+   ---- 폭 제한 없애고 줄바꿈 금지(nowrap) — <br> 에서만 나뉘어 어떤 화면에서도 두 줄
+========================================================= */
+
+.display-page .display-overview__description {
+  width: fit-content;
+  max-width: none;       /* 2026.10.27 : 창 크기에 따라 세 줄로 꺾이던 것 → 폭 제한 없이 */
+  white-space: nowrap;   /* 2026.10.27 : <br> 에서만 줄이 나뉨 — 어떤 화면에서도 두 줄 */
+
+  text-align: justify;
+  text-align-last: justify;
+  text-justify: inter-character;
+  word-break: keep-all;
+}
+
+/* 아주 좁은 폰(360px 이하)에서만 화면 밖으로 넘치지 않게 줄바꿈 허용 */
+@media (max-width: 360px) {
+
+  .display-page .display-overview__description {
+    white-space: normal;
+  }
+
+}
+
+/* =========================================================
+   [DISPLAY HERO — 위험 단계] 사진 살짝 아래로 / 2026.10.27
+   ---------------------------------------------------------
+   사진이 위로 올라가 보이던 것 → 사진을 히어로 안에서 살짝 아래로
+   ---- 사진은 원래 히어로 높이에 딱 맞는 크기라, 크기 그대로 내리면 위쪽에 빈 띠가 생김
+        → 내린 만큼만 아주 조금 키움 (바로 전 10% 는 너무 확대돼 보여서 줄임)
+        width : max(100%, 177.7svh) → max(104%, 184.8svh)   (4% 만)
+        top   : 50% → 52%   (4% 커진 높이의 절반만큼 아래로 = 위쪽 빈틈 없음)
+        (바로 전 : width max(110%, 195.5svh) · top 55%)
+   ---- 사진 속 화면 4장은 장면 안에 % 로 붙어 있어 같이 움직임
+========================================================= */
+
+.display-page .dh9__scene {
+  top: 52%;                                    /* 원래 50% · 바로 전 55% */
+  width: max(104%, calc(100svh * 1.848));      /* 원래 max(100%, 177.7svh) · 바로 전 max(110%, 195.5svh) */
+}
+
+/* =========================================================
+   [DISPLAY 위험 단계] 배경 빛 조금 더 강하게 / 2026.10.27
+   ---------------------------------------------------------
+   카드 뒤 단계 색 빛이 너무 안 보이던 것
+   ---- 가운데 둥근 빛(.lvbg::before) : 진하기 0.06 → 0.12
+   ---- 위험 방향 부채꼴(SVG 그라데이션) : 0.14 → 0.24 (display.html)
+========================================================= */
+
+.display-page .lvbg::before {
+  opacity: 0.12;   /* 전 .06 */
+}
+
+/* =========================================================
+   [DISPLAY 위험 단계] 배경 큰 글자 DISPLAY / 2026.10.27
+   ---------------------------------------------------------
+   테두리 선(-webkit-text-stroke) 때문에 글자 안쪽에 도형이 겹친 선이 보이던 것
+   (가변 글꼴은 획끼리 겹쳐 그려져서 테두리를 주면 겹친 자리가 드러남)
+   → 테두리 없이 채운 글자만, 아주 옅게
+      전) color .035 + stroke 1px .07  /  후) color .06, stroke 없음
+========================================================= */
+
+.display-page .display-overview__background-word {
+  color: rgba(244, 244, 241, 0.06);
+  -webkit-text-stroke: 0;
+}
+
+/* =========================================================
+   [DISPLAY 위험 단계] 카드 옆 글 — 왼쪽 맞춤 · 제목 크게 / 2026.10.27
+   ---------------------------------------------------------
+   ---- 설명 : 양쪽 맞춤 → 다시 왼쪽 맞춤 (글자 사이 벌림 없이)
+   ---- 제목(길 안내 · 차선 변경 주의 · 긴급차 양보 · 즉시 정지)
+        clamp(16px, 1.22vw, 21px) → clamp(19px, 1.5vw, 26px)
+========================================================= */
+
+.display-page .display-info__text p {
+  text-align: left;        /* 전 justify */
+  text-align-last: auto;   /* 전 justify */
+}
+
+.display-page .display-info__text h3 {
+  font-size: clamp(19px, 1.5vw, 26px);
+}
+
+/* =========================================================
+   [DISPLAY 위험 단계] 왼쪽 글은 오른쪽 맞춤 / 2026.10.27
+   ---------------------------------------------------------
+   카드 왼쪽에 있는 글(01 길 안내 · 03 긴급차 양보)은 카드 쪽(오른쪽)으로 맞춤
+   카드 오른쪽 글(02 · 04)은 그대로 왼쪽 맞춤
+========================================================= */
+
+/* 위쪽 :nth-child(1) · (3) 규칙(text-align: left)보다 강하게 .display-overview 를 붙임 */
+.display-page .display-overview .display-info--route .display-info__text,
+.display-page .display-overview .display-info--safety .display-info__text {
+  text-align: right;   /* 전 left */
+}
+
+.display-page .display-info--route .display-info__text p,
+.display-page .display-info--safety .display-info__text p {
+  margin-left: auto;   /* 글 폭이 줄 길이(fit-content)라 오른쪽 끝으로 붙임 */
+  text-align: right;
+}
+
+/* =========================================================
    LARGE SCREEN LAYOUT — 맥북 비율 그대로 (자동 생성) / 2026.10.14
    ---------------------------------------------------------
    아이맥(2048px)처럼 넓은 화면에서
@@ -11229,6 +13925,632 @@ body.hud-page.is-header-hidden .site-header {
   .hf-row {
     margin-top: 5svh;
     padding-bottom: 2.6455vw;
+  }
+  .hd4 img, .hd4 video, .hd4 canvas {
+    max-width: 100%;
+  }
+  .hd4 h1, .hd4 h2, .hd4 h3, .hd4 p {
+    margin: 0;
+  }
+  .hd4 {
+    --gutter: 4.2vw;
+  }
+  .hd4 img, .hd4 video, .hd4 canvas {
+    max-width: 100%;
+  }
+  .hd4 h1, .hd4 h2, .hd4 h3, .hd4 p {
+    margin: 0;
+  }
+  .hd4 .sr {
+    width: 1px;
+    height: 1px;
+  }
+  .hd4 .hero {
+    height: 100vh;
+    height: 100svh;
+    min-height: 41.0053vw;
+  }
+  .hd4 .hero video {
+    width: 100%;
+    height: 100%;
+  }
+  .hd4 .hero::after {
+    left: 0;
+    right: 0;
+    height: 18%;
+  }
+  .hd4 .hero-lines {
+    width: 100%;
+    height: 100%;
+  }
+  .hd4 .h-top {
+    left: max(var(--gutter), env(safe-area-inset-left, 0px));
+    right: max(var(--gutter), env(safe-area-inset-right, 0px));
+  }
+  .hd4 .h-top .row b {
+    margin-right: 0.7937vw;
+  }
+  .hd4 .h-rule {
+    height: 1px;
+    margin-top: 0.7937vw;
+  }
+  .hd4 .h-bottom {
+    left: max(var(--gutter), env(safe-area-inset-left, 0px));
+    right: max(var(--gutter), env(safe-area-inset-right, 0px));
+  }
+  .hd4 .h-big {
+    left: calc(max(var(--gutter), env(safe-area-inset-left, 0px)) - .04em);
+    gap: 4vw;
+  }
+  .hd4 .h-big small {
+    margin-bottom: 1.1905vw;
+  }
+  .hd4 .h-big span {
+    padding-bottom: .9vw;
+  }
+  .hd4 .h-struct {
+    right: max(var(--gutter), env(safe-area-inset-right, 0px));
+  }
+  .hd4 .h-struct p {
+    margin-top: 0.5291vw;
+  }
+  .hd4 .h-motor {
+    left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  }
+  .hd4 .h-motor .h-rip {
+    margin-top: 1.7196vw;
+  }
+  .hd4 .h-pulse {
+    gap: 0.5291vw;
+    margin-top: 0.9259vw;
+  }
+  .hd4 .h-pulse i {
+    width: 4.2328vw;
+    height: 0.1984vw;
+  }
+  .hd4 .h-pulse + p {
+    margin-top: 0.6614vw;
+  }
+  .hd4 .h-end {
+    left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  }
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+  .hd4 .lbl b {
+    margin-right: 0.6614vw;
+  }
+  .hd4 .pad {
+    padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+    padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
+  }
+  .hd4 .sec {
+    padding-block: 10vw;
+  }
+  .hd4 .row-top {
+    gap: 1.0582vw;
+    padding-top: 0.9259vw;
+  }
+  .hd4 .sec > .row-top:first-child {
+    padding-top: 0;
+  }
+  .hd4 .h2 {
+    margin-top: 1.9841vw;
+  }
+  .hd4 .lead {
+    max-width: 36em;
+  }
+  .hd4 .head2 {
+    gap: 6vw;
+  }
+  .hd4 .head2 .lead {
+    margin-bottom: 0.3968vw;
+  }
+  .hd4 sup.fn {
+    margin-left: 2px;
+  }
+  .hd4 .stats {
+    margin-top: 3.9683vw;
+  }
+  .hd4 .stats > div {
+    padding: 1.455vw 1.455vw 0 0;
+  }
+  .hd4 .stats p.big {
+    margin-top: 0;
+    max-width: none;
+  }
+  .hd4 .stats .big {
+    gap: 0.3968vw;
+  }
+  .hd4 .stats p {
+    margin-top: 0.9259vw;
+    max-width: 22em;
+  }
+  .hd4 .media video, .hd4 .media img, .hd4 .media canvas {
+    width: 100%;
+    height: 100%;
+  }
+  .hd4 .cap {
+    gap: 1.0582vw;
+    margin-top: 0.7937vw;
+  }
+  .hd4 table.ledger {
+    width: 100%;
+    min-width: 42.328vw;
+  }
+  .hd4 .tw {
+    margin-top: 3.3069vw;
+  }
+  .hd4 .ledger th {
+    padding: 0 0.9259vw 0.9259vw 0;
+  }
+  .hd4 .ledger td {
+    padding: 1.0582vw 0.9259vw 1.0582vw 0;
+  }
+  .hd4 .ledger tr.tot td {
+    padding-top: 1.455vw;
+  }
+  .hd4 dl.spec {
+    margin: 3.3069vw 0 0;
+  }
+  .hd4 dl.spec dt, .hd4 dl.spec dd {
+    padding: 0.9921vw 0;
+    margin: 0;
+  }
+  .hd4 .notes {
+    padding: 0;
+    margin: 2.6455vw 0 0;
+    gap: 0.3968vw 2.6455vw;
+  }
+  .hd4 .notes li > span {
+    min-width: 0;
+  }
+  .hd4 .chip {
+    padding: 0.3307vw 0.5291vw;
+  }
+  .hd4 .ex {
+    padding: 2px 0.3968vw;
+    margin-left: 0.5291vw;
+  }
+  .hd4 .sticky {
+    height: 100vh;
+    height: 100svh;
+    min-height: 39.6825vw;
+  }
+  .hd4 button.tog {
+    padding: 0.6614vw 0.9259vw;
+  }
+  .hd4 .qa details {
+    padding: 1.455vw 0;
+  }
+  .hd4 .qa summary {
+    gap: 1.3228vw;
+  }
+  .hd4 .qa details p {
+    margin-top: 0.9259vw;
+    max-width: 46em;
+  }
+  .hd4 .wheel {
+    width: 100%;
+    height: auto;
+  }
+  .hd4 .seqs .sticky canvas {
+    width: 100%;
+    height: 100%;
+  }
+  .hd4 .full {
+    height: 100vh;
+    height: 100svh;
+    min-height: 39.6825vw;
+  }
+  .hd4 .hstage {
+    left: 50%;
+    width: max(100vw, 177.78vh);
+  }
+  .hd4 .hstage img {
+    width: 100%;
+    height: 100%;
+  }
+  .hd4 .hstage .m {
+    width: 0.9259vw;
+    height: 0.9259vw;
+    margin: -0.463vw 0 0 -0.463vw;
+  }
+  .hd4 .hstage .ring {
+    width: 0;
+    height: 0;
+  }
+  .hd4 .hstage .ring u {
+    left: -3.9683vw;
+    width: 7.9365vw;
+    height: 7.9365vw;
+  }
+  .hd4 #quiet .siren {
+    left: -10vw;
+    width: 0;
+    height: 0;
+  }
+  .hd4 #quiet .siren u {
+    left: -40vh;
+    width: 80vh;
+    height: 80vh;
+  }
+  .hd4 #quiet .num {
+    left: max(var(--gutter), env(safe-area-inset-left, 0px));
+    right: var(--gutter);
+  }
+  .hd4 #quiet .st {
+    left: 0;
+  }
+  .hd4 #quiet .st .v small {
+    margin-left: 0.6614vw;
+  }
+  .hd4 #quiet .st p {
+    margin-top: 1.455vw;
+  }
+  .hd4 #quiet .top {
+    left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  }
+  .hd4 #quiet .bar {
+    right: var(--gutter);
+    gap: 0.5291vw;
+  }
+  .hd4 #quiet .bar i {
+    width: 2.2487vw;
+    height: 2px;
+  }
+  .hd4 #decl .say {
+    left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  }
+  .hd4 #decl .cnt {
+    right: var(--gutter);
+  }
+  .hd4 #lr .side {
+    width: min(19.8413vw, 26vw);
+  }
+  .hd4 #lr .side.L {
+    left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  }
+  .hd4 #lr .side.R {
+    right: var(--gutter);
+  }
+  .hd4 #lr .side .cap1 {
+    margin-top: 1.1905vw;
+  }
+  .hd4 #lr .top {
+    left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  }
+  .hd4 #inside .say {
+    left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  }
+  .hd4 #inside .pc {
+    gap: 0.6614vw;
+    margin-top: 1.455vw;
+  }
+  .hd4 #inside .pc i {
+    width: 3.9683vw;
+    height: 0.3968vw;
+  }
+  .hd4 #try .top {
+    left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  }
+  .hd4 #try .panel {
+    right: var(--gutter);
+    width: min(25.1323vw, 86vw);
+    gap: 1.0582vw;
+    padding: 1.455vw;
+  }
+  .hd4 #try .row {
+    gap: 0.3968vw;
+  }
+  .hd4 #try .row .mono {
+    width: 100%;
+    margin-bottom: 2px;
+  }
+  .hd4 #try .out {
+    padding-top: 0.9259vw;
+  }
+  .hd4 #try .out b {
+    margin-top: 0.2646vw;
+  }
+  .hd4 #try .go {
+    padding: 0.9921vw;
+  }
+  .hd4 #try .hud {
+    left: 50%;
+    gap: 22vw;
+  }
+  .hd4 .made {
+    padding: 8vw 0 0;
+  }
+  .hd4 .made .head {
+    gap: 1.3228vw;
+    padding-bottom: 1.9841vw;
+  }
+  .hd4 .made .grid {
+    gap: 0.2646vw;
+  }
+  .hd4 .made figure {
+    margin: 0;
+  }
+  .hd4 .made video {
+    width: 100%;
+    height: 72vh;
+    min-height: 27.7778vw;
+  }
+  .hd4 .made figcaption {
+    left: 1.455vw;
+    right: 1.455vw;
+  }
+  .hd4 .qa2 {
+    min-height: 100vh;
+  }
+  .hd4 .qa2 .img img {
+    width: 100%;
+    height: 100%;
+  }
+  .hd4 .qa2 .txt {
+    padding: 8vw var(--gutter) 4.6296vw 4vw;
+  }
+  .hd4 .qa2 .notes {
+    margin-top: 3.9683vw;
+  }
+  .hd4 .chead .bridge {
+    margin-top: 1.1905vw;
+    max-width: 30em;
+  }
+  .hd4 .ttl {
+    margin-top: 1.7196vw;
+  }
+  .hd4 .copy p + p {
+    margin-top: 0.9259vw;
+  }
+  .hd4 .chap-nav {
+    left: max(var(--gutter), env(safe-area-inset-left, 0px));
+    gap: 0.9259vw;
+  }
+  .hd4 .chap-nav .ticks {
+    gap: 0.2646vw;
+  }
+  .hd4 .chap-nav .ticks i {
+    width: 1.1905vw;
+    height: 2px;
+  }
+  .hd4 .split .copy {
+    padding: calc(4.03vw + 2.6455vw) 3vw 5.6878vw max(var(--gutter), env(safe-area-inset-left, 0px));
+  }
+  .hd4 .split .vis .hstage {
+    width: max(100%, 177.78vh);
+  }
+  .hd4 #prob .siren {
+    left: -12%;
+    width: 0;
+    height: 0;
+  }
+  .hd4 #prob .siren u {
+    left: -40vh;
+    width: 80vh;
+    height: 80vh;
+  }
+  .hd4 #prob .num {
+    left: 6%;
+    right: 6%;
+  }
+  .hd4 #prob .st {
+    left: 0;
+  }
+  .hd4 #prob .st .v small {
+    margin-left: 0.6614vw;
+  }
+  .hd4 #prob .st p {
+    margin-top: 1.1905vw;
+  }
+  .hd4 #prob ol.steps {
+    padding: 0;
+    margin: 1.9841vw 0 0;
+  }
+  .hd4 #prob ol.steps li {
+    padding: 0.8598vw 0;
+  }
+  .hd4 .idea {
+    min-height: 100vh;
+  }
+  .hd4 .idea .img img {
+    width: 100%;
+    height: 100%;
+  }
+  .hd4 .idea .txt {
+    padding: 9vw 4vw 4.6296vw max(var(--gutter), env(safe-area-inset-left, 0px));
+  }
+  .hd4 .why {
+    margin-top: 3.3069vw;
+  }
+  .hd4 .why > div {
+    gap: 0.6614vw;
+    padding: 1.455vw 0;
+  }
+  .hd4 .why p.s {
+    margin-top: 0.3968vw;
+  }
+  .hd4 #struct .ov::before, .hd4 #sig .ov::before {
+    width: 52%;
+  }
+  .hd4 #struct .ov .copy2 {
+    left: max(var(--gutter), env(safe-area-inset-left, 0px));
+    width: min(27.7778vw, 34vw);
+  }
+  .hd4 #struct .legend {
+    right: var(--gutter);
+    width: min(22.4868vw, 30vw);
+  }
+  .hd4 #struct .legend ol {
+    padding: 0;
+    margin: 0.9259vw 0 0;
+  }
+  .hd4 #struct .legend li {
+    padding: 0.6614vw 0;
+  }
+  .hd4 #struct .legend li small {
+    margin-top: 2px;
+  }
+  .hd4 #dir .rule {
+    margin-top: 1.9841vw;
+  }
+  .hd4 #dir .rule > div {
+    padding: 1.1905vw 1.0582vw 0 0;
+  }
+  .hd4 #dir .rule p {
+    margin-top: 0.7937vw;
+  }
+  .hd4 #dir .side-cap.L {
+    left: 5%;
+  }
+  .hd4 #dir .side-cap.R {
+    right: 5%;
+  }
+  .hd4 #sig .ov .copy2 {
+    left: max(var(--gutter), env(safe-area-inset-left, 0px));
+    width: min(29.1005vw, 36vw);
+  }
+  .hd4 #sig .pats {
+    right: var(--gutter);
+    width: min(27.7778vw, 38vw);
+    padding: 1.3228vw 1.455vw;
+  }
+  .hd4 #sig .pat {
+    gap: 0.7937vw;
+    padding: 0.7937vw 0;
+  }
+  .hd4 #sig .pat svg {
+    width: 100%;
+    height: 2.2487vw;
+  }
+  .hd4 #sig .pc {
+    gap: 0.6614vw;
+    margin-top: 1.455vw;
+  }
+  .hd4 #sig .pc i {
+    width: 3.5714vw;
+    height: 0.3307vw;
+  }
+  .hd4 #try .top {
+    width: min(29.1005vw, 40vw);
+  }
+  .hd4 .made .grid figure figcaption {
+    padding: 1.1905vw 1.455vw 1.9841vw;
+  }
+  .hd4 .made .grid figure figcaption p {
+    margin-top: 0.7937vw;
+    max-width: 30em;
+  }
+  .hd4 .made video {
+    height: 58vh;
+  }
+  .hd4 .made .head .chead .bridge {
+    max-width: 34em;
+  }
+  .display-page .display-info__image .lit {
+    width: 100%;
+    height: 100%;
+  }
+  .display-page .lvstep {
+    right: max(1.8519vw,env(safe-area-inset-right,0px));
+    gap: 0.2646vw;
+    margin: 0;
+    padding: 0.3968vw;
+  }
+  .display-page .lvstep li {
+    gap: 0.5291vw;
+    padding: 0.5291vw 0.7937vw;
+  }
+  .display-page .lvstep li i {
+    width: 0.463vw;
+    height: 0.463vw;
+  }
+  .display-page .lvbg::before {
+    left: 50%;
+    width: 80vmin;
+    height: 80vmin;
+  }
+  .display-page .lvbg .rad {
+    left: 50%;
+    width: max(150vmin,79.3651vw);
+    height: max(150vmin,79.3651vw);
+  }
+  .display-page .dh9 {
+    height: 100svh;
+    min-height: 38.3598vw;
+  }
+  .display-page .dh9__scene {
+    left: 50%;
+    width: max(100%,calc(100svh * 1.777));
+    margin: 0;
+  }
+  .display-page .dh9__photo {
+    width: 100%;
+    height: 100%;
+  }
+  .display-page .dh9__scr {
+    max-width: none;
+  }
+  .display-page .dh9__copy {
+    left: max(1.8519vw,calc(50% - 42.328vw));
+    gap: 1.1905vw;
+  }
+  .display-page .dh9__title {
+    margin: 0;
+  }
+  .display-page .dh9__steps {
+    gap: 0.2646vw;
+    margin: 0;
+    padding: 0;
+  }
+  .display-page .dh9__steps li {
+    gap: 0.5291vw;
+    padding: 0.5291vw 0.7937vw 0.5291vw 0;
+  }
+  .display-page .dh9__steps li i {
+    width: 1.455vw;
+    height: 2px;
+  }
+  .display-page .dh9__copy {
+    left: max(5.8vw, calc(50% - 42.328vw));
+  }
+  .display-page .dh9::after {
+    left: 0;
+    right: 0;
+    height: 26%;
+  }
+  .display-page .dh9__steps {
+    gap: 1.1905vw;
+  }
+  .display-page .dh9__steps li {
+    gap: 0.3968vw;
+    padding: 0;
+  }
+  .display-page .dh9__steps li i {
+    width: 100%;
+    height: 1px;
+  }
+  .display-page .dh9__title {
+    margin-left: -0.045em;
+  }
+  .display-page .display-info__text p {
+    width: fit-content;
+    max-width: 100%;
+  }
+  .display-page .display-info__text {
+    width: 14.5503vw;
+  }
+  .display-page .display-overview__description {
+    width: fit-content;
+    max-width: none;
+  }
+  .display-page .dh9__scene {
+    width: max(104%, calc(100svh * 1.848));
+  }
+  .display-page .display-info--route .display-info__text p, .display-page .display-info--safety .display-info__text p {
+    margin-left: auto;
   }
 
 }
