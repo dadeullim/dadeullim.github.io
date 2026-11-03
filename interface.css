@@ -7520,6 +7520,11 @@ body.handle-page {
 
 /* 2026.11.03 : 제목 앞 번호(01 · 02 · 03)는 handle.html 에서 뺌 → 번호 스타일도 지움 */
 
+/* 2026.11.03 : 영상 모서리 살짝 둥글게 ---- 0 → 6px (사용자 정의 히어로 창과 같은 정도) */
+.hd5 .mk3--zig video {
+  border-radius: 6px;
+}
+
 /* 설명 문장 : 14px → 16px · 줄이 예쁘게 끊기게 (마지막 줄 한 단어만 남지 않게) */
 .hd5 .mk3 figcaption p:not(.lbl) {
   margin-top: 12px;
@@ -7613,6 +7618,11 @@ body.handle-page {
   /* 핸들 05 정면도 : handle.html 인라인 max-width 420px → */
   html body .hd5 div[style*="max-width:420px"] {
     max-width: 27.778vw !important;
+  }
+
+  /* 핸들 07 제작 영상 모서리 : 6px → 화면 비율 (2048 에서 약 8px) */
+  html body .hd5 .mk3--zig video {
+    border-radius: 0.3968vw;
   }
 
   /* 핸들 04 Hz · ms 칸 : 72px 고정 → 화면 비율 */
