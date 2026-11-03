@@ -2037,11 +2037,17 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
 
+      /* 2026.11.03 : 큰 화면(1513 이상)은 980 도 맥북 비율대로 */
       const endWidth =
         Math.min(
           window.innerWidth *
           0.82,
-          980
+          980 *
+          Math.max(
+            1,
+            window.innerWidth /
+            1512
+          )
         );
 
 
@@ -2451,12 +2457,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
       overviewIntro.style
         .width =
+        /* 2026.11.03 : 아이맥에서 글씨는 1.35배인데 제목 칸은 370px 그대로라 줄 · 정렬이 어긋남
+           → 370 · 980 도 sc 배 (맥북은 sc = 1 그대로) */
         `${lerp(
-          370,
+          370 *
+          sc,
           Math.min(
             vw *
             0.82,
-            980
+            980 *
+            sc
           ),
           titleMove
         ).toFixed(1)}px`;

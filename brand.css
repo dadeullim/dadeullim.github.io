@@ -16784,6 +16784,38 @@ html {
 
 }
 
+/* =========================================================
+   [BRAND2 가치 이미지 2 · 3] 바뀔 때 어긋나 보이던 것 / 2026.11.03
+   ---------------------------------------------------------
+   Intuitive(b2-3) · Connected(b2-4) 는 같은 장면에 화면 내용만 다른 사진
+   ---- 자르는 위치가 46% · 50% 로 달라서 바뀔 때 핸들 · 손이 옆으로 밀려 보임 → 둘 다 48%
+   ---- 바뀔 때 커졌다 내려오는 움직임(scale 1.018 · 14px)도 있어 겹치는 동안 두 장이 어긋남
+        → 두 장 사이에서는 움직임 없이 화면 내용만 서서히 바뀌게 (1번 이미지는 그대로)
+========================================================= */
+.brand2-page .philosophy-keyword-media[data-keyword-media="intuitive"] img,
+.brand2-page .philosophy-keyword-media[data-keyword-media="connected"] img {
+  object-position: 48% center;
+}
+
+.brand2-page .philosophy-keyword-media[data-keyword-media="intuitive"],
+.brand2-page .philosophy-keyword-media[data-keyword-media="connected"] {
+  transform: none;
+}
+
+/* =========================================================
+   [아이맥 화면비] 맥북 느낌 그대로 / 2026.11.03
+   ---- html body 를 붙인 건 아래 자동 블록보다 이기게
+========================================================= */
+@media (min-width: 1513px) {
+
+  /* 03 "기술보다 사람을" 제목 살짝 위로 (카드와 간격)
+     ---- 아래쪽 clamp(48px, 4.5vw, 70px) 가 70px 에서 멈춰 아이맥에서 붙어 보였음 → 6vw */
+  html body.brand2-page .philosophy-accordion-heading {
+    margin-bottom: 6vw;
+  }
+
+}
+
 /* ===== [아이맥 글자 크기] 자동 생성 시작 — 손으로 고치지 않기 ===== */
 /* 맥북 1512px 글자 크기를 아이맥에서도 같은 비율로 (px · clamp → vw)
    ---- 위쪽 CSS 를 고치면 python3 ~/.claude/dadeullim-tools/fonts_large.py 파일.css 로 다시 만들기 */

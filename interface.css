@@ -5571,7 +5571,7 @@ html.lenis body {
 }
 
 .hd5 .ann .ld text.sub {
-  font: 400 19px var(--sans)None;   /* 2026.11.02 다른 페이지 두께에 맞춤 ---- 300 → 400 */
+  font: 400 19px var(--sans);   /* 2026.11.02 다른 페이지 두께에 맞춤 ---- 300 → 400 */
   fill: var(--ink-2);
   letter-spacing: -.01em;
 }
@@ -7484,6 +7484,62 @@ body.handle-page {
 }
 
 /* =========================================================
+   [HANDLE 5차 다듬기] 도면 글씨 · 숫자 칸 · 제작 영상 / 2026.11.03
+========================================================= */
+
+/* 04 단면 도면 이름표 (코인 모터 · 가죽 · 폼 층 · 스틸 코어)
+   ---- 한글이 고정폭 서체(--mono)로 떠서 글자 사이가 벌어지고 다른 글씨와 서체가 달라 보임 → 본문 서체로
+        font: 500 22px var(--mono) → 500 22px var(--sans) */
+.hd5 .ann .ld text:not(.sub):not(.num) {
+  font-family: var(--sans);
+  letter-spacing: -.01em;   /* .04em → */
+}
+
+/* 04 Hz · ms 기호와 옆 글 사이 : 칸 50px → 72px */
+.hd5 .facts > div {
+  grid-template-columns: 72px 1fr;
+}
+
+/* 07 제작 영상 3개 : 영상 40% → 52% · 글씨 키움 */
+.hd5 .mk3--zig figure {
+  width: 52%;
+}
+
+.hd5 .mk3--zig figcaption {
+  max-width: 34em;
+  padding-top: 22px;
+}
+
+/* 제목 (01 그립에 모터 장착) : 인라인 14px → 20px */
+.hd5 .mk3 figcaption .lbl[style] {
+  font-size: 20px !important;
+  font-weight: 500;
+}
+
+.hd5 .mk3 figcaption .lbl b {
+  font-family: var(--mono);
+  font-size: .8em;
+  color: var(--ice);
+  margin-right: 14px;
+}
+
+/* 설명 문장 : 14px → 16px · 줄이 예쁘게 끊기게 (마지막 줄 한 단어만 남지 않게) */
+.hd5 .mk3 figcaption p:not(.lbl) {
+  margin-top: 12px;
+  font-size: 16px;
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+
+@media (max-width: 900px) {
+
+  .hd5 .mk3--zig figure {
+    width: 100%;
+  }
+
+}
+
+/* =========================================================
    [아이맥 화면비] 맥북 느낌 그대로 / 2026.11.03
    ---------------------------------------------------------
    아이맥 2048 × 1152 (브라우저 안 약 2048 × 1040) 은 맥북(1512 × 860)보다 세로가 짧아서
@@ -7528,6 +7584,61 @@ body.handle-page {
   /* 핸들 05 정면도 : handle.html 인라인 max-width 420px → */
   html body .hd5 div[style*="max-width:420px"] {
     max-width: 27.778vw !important;
+  }
+
+  /* 핸들 04 Hz · ms 칸 : 72px 고정 → 화면 비율 */
+  html body .hd5 .facts > div {
+    grid-template-columns: 4.7619vw 1fr;
+  }
+
+  /* 핸들 히어로 왼쪽 제목 살짝 위로 / 2026.11.03 : bottom 140px(13.5%) → 20vh */
+  html body .hd5 .h-big {
+    bottom: 20vh;
+  }
+
+  /* 핸들 도면 선 : 선 굵기가 화면 크기와 상관없이 고정(non-scaling)이라
+     아이맥에서는 그림만 1.35배 커지고 선은 그대로 → 가늘어 보임
+     ---- 선 굵기 × 1.6 (1.35배 + 조금 더 또렷하게) */
+  html body .hd5 svg.trace path.o,
+  html body .hd5 svg.hand .o,
+  html body .hd5 svg.hand .o * {
+    stroke-width: 2.4;    /* 1.5 */
+  }
+  html body .hd5 svg.trace path.m,
+  html body .hd5 svg.hand .m,
+  html body .hd5 svg.hand .m * {
+    stroke-width: 1.6;    /* 1 */
+  }
+  html body .hd5 svg.trace path.d,
+  html body .hd5 svg.hand .d,
+  html body .hd5 svg.hand .d * {
+    stroke-width: 1.2;    /* .75 */
+  }
+  html body .hd5 svg .hl,
+  html body .hd5 svg .cl2,
+  html body .hd5 .ann .dimn path,
+  html body .hd5 .ann .cl line,
+  html body .hd5 .ann .cl path,
+  html body .hd5 .ann .bal path {
+    stroke-width: 1.6;    /* 1 */
+  }
+  html body .hd5 .ann .ld polyline,
+  html body .hd5 svg .ripL circle,
+  html body .hd5 svg .ripR circle {
+    stroke-width: 1.9;    /* 1.2 */
+  }
+  html body .hd5 .ann .ld .pt {
+    stroke-width: 2.4;    /* 1.5 */
+  }
+  html body .hd5 .ann .dimn .tk,
+  html body .hd5 svg .m[data-m] {
+    stroke-width: 2.2;    /* 1.4 */
+  }
+  html body .hd5 .ann .bal circle {
+    stroke-width: 2.1;    /* 1.3 */
+  }
+  html body .hd5 .ann .zone {
+    stroke-width: 4;      /* 2.5 */
   }
 
 }
@@ -7930,11 +8041,17 @@ body.handle-page {
   .display-page .display-info__text h3 {
     font-size: 1.5vw;
   }
+  .hd5 .mk3 figcaption .lbl[style] {
+    font-size: 1.3228vw !important;
+  }
+  .hd5 .mk3 figcaption .lbl b {
+    font-size: .8em;
+  }
+  .hd5 .mk3 figcaption p:not(.lbl) {
+    font-size: 1.0582vw;
+  }
   .hd5 .cfg .lbl[style], .hd5 .out .lbl[style] {
     font-size: 0.7937vw !important;
-  }
-  .hd5 .mk3 figcaption .lbl[style] {
-    font-size: 0.9259vw !important;
   }
   .hd5 .timing .tr > span:first-child {
     font-size: 1.0582vw;
@@ -9233,6 +9350,19 @@ body.handle-page {
   }
   .display-page .display-info--route .display-info__text p, .display-page .display-info--safety .display-info__text p {
     margin-left: auto;
+  }
+  .hd5 .mk3--zig figure {
+    width: 52%;
+  }
+  .hd5 .mk3--zig figcaption {
+    max-width: 34em;
+    padding-top: 1.455vw;
+  }
+  .hd5 .mk3 figcaption .lbl b {
+    margin-right: 0.9259vw;
+  }
+  .hd5 .mk3 figcaption p:not(.lbl) {
+    margin-top: 0.7937vw;
   }
 
 }
