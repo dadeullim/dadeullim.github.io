@@ -8050,6 +8050,348 @@ html {
 
 }
 
+/* ===== [아이맥 글자 크기] 자동 생성 시작 — 손으로 고치지 않기 ===== */
+/* 맥북 1512px 글자 크기를 아이맥에서도 같은 비율로 (px · clamp → vw)
+   ---- 위쪽 CSS 를 고치면 python3 ~/.claude/dadeullim-tools/fonts_large.py 파일.css 로 다시 만들기 */
+@media (min-width: 1513px) {
+
+  .site-header__logo {
+    font-size: 0.7937vw;
+  }
+  .site-header__nav-link {
+    font-size: 0.6614vw;
+  }
+  .site-header__mega-links a {
+    font-size: 0.7275vw;
+  }
+  .copy-slide__eyebrow {
+    font-size: 0.6614vw;
+  }
+  .copy-slide__title {
+    font-size: 10vw;
+  }
+  .copy-slide__description {
+    font-size: 0.8598vw;
+  }
+  .copy-slide[data-copy="0"]::before, .copy-slide[data-copy="0"]::after {
+    font-size: 1.05vw;
+  }
+  .copy-slide[data-copy="0"] .copy-slide__title--hero {
+    font-size: 3.7vw;
+  }
+  .copy-slide[data-copy="1"] .copy-slide__title--hero02 {
+    font-size: 3.7vw;
+  }
+  .copy-slide[data-copy="1"] .hero02-emphasis {
+    font-size: 1em;
+  }
+  .copy-slide[data-copy="1"] .hero02-emphasis--final {
+    font-size: 1em;
+  }
+  .copy-slide[data-copy="2"] .copy-slide__title--hero03 {
+    font-size: 4.2vw;
+  }
+  .copy-slide__eyebrow {
+    font-size: 0.6614vw;
+  }
+  .scene-status {
+    font-size: 0.6614vw;
+  }
+  .case-micro-label {
+    font-size: 0.5291vw;
+  }
+  .case-product__brand {
+    font-size: 2.7778vw;
+  }
+  .case-product__type {
+    font-size: 1.0582vw;
+  }
+  .case-product__label {
+    font-size: 0.9921vw;
+  }
+  .case-product__description p {
+    font-size: 0.8598vw;
+  }
+  .case-section-number {
+    font-size: 0.5291vw;
+  }
+  .case-showcase__title {
+    font-size: 0.6614vw;
+  }
+  .case-showcase__caption {
+    font-size: 0.463vw;
+  }
+  .case-main-mockup__logo {
+    font-size: 0.5291vw;
+  }
+  .case-main-mockup__nav {
+    font-size: 0.3968vw;
+  }
+  .case-floating-card__number {
+    font-size: 0.5291vw;
+  }
+  .case-floating-card__eyebrow {
+    font-size: 0.3968vw;
+  }
+  .case-floating-card__copy h3 {
+    font-size: 1.9841vw;
+  }
+  .case-floating-card__copy p {
+    font-size: 0.3968vw;
+  }
+  .case-type-scale {
+    font-size: 0.5291vw;
+  }
+  .case-type-category, .case-type-weight, .case-type-side__roman {
+    font-size: 0.5291vw;
+  }
+  .case-type-main h2 {
+    font-size: 7.9365vw;
+  }
+  .case-type-statement {
+    font-size: 1.1905vw;
+  }
+  .case-type-description {
+    font-size: 0.7937vw;
+  }
+  .case-type-side__vertical {
+    font-size: 0.9259vw;
+  }
+  .case-summary__heading h2 {
+    font-size: 7.1429vw;
+  }
+  .case-summary-card__number {
+    font-size: 3.6376vw;
+  }
+  .case-summary-card__keyword {
+    font-size: 2.5132vw;
+  }
+  .case-summary-card__info h3, .case-summary-card__info p {
+    font-size: 0.3968vw;
+  }
+  .case-footer__label {
+    font-size: 0.3968vw;
+  }
+  .case-footer__column a {
+    font-size: 0.5291vw;
+  }
+  .case-footer__button {
+    font-size: 0.3968vw !important;
+  }
+  .case-footer__brand {
+    font-size: 10.582vw;
+  }
+  .case-footer__meta p {
+    font-size: 0.3307vw;
+  }
+  .bridge-transition__category {
+    font-size: 0.7937vw;
+  }
+  .bridge-transition__title {
+    font-size: 3.45vw;
+  }
+  .bridge-transition__number {
+    font-size: 7vw;
+  }
+  .bridge-transition__description {
+    font-size: 0.5952vw;
+  }
+  .bridge-transition__counter {
+    font-size: 0.5291vw;
+  }
+  .site-header__logo {
+    font-size: 0.8333vw;
+  }
+  .site-header__nav-link {
+    font-size: 0.6944vw;
+  }
+  .site-header__mega-links a {
+    font-size: 0.7639vw;
+  }
+  .copy-slide__eyebrow {
+    font-size: 0.6944vw;
+  }
+  .copy-slide__title {
+    font-size: 10vw;
+  }
+  .copy-slide__description {
+    font-size: 0.9028vw;
+  }
+  .copy-slide[data-copy="0"]::before, .copy-slide[data-copy="0"]::after {
+    font-size: 1.05vw;
+  }
+  .copy-slide[data-copy="0"] .copy-slide__title--hero, .copy-slide[data-copy="1"] .copy-slide__title--hero02 {
+    font-size: 3.7vw;
+  }
+  .copy-slide[data-copy="2"] .copy-slide__title--hero03 {
+    font-size: 4.2vw;
+  }
+  .scene-status {
+    font-size: 0.6944vw;
+  }
+  .case-micro-label {
+    font-size: 0.5556vw;
+  }
+  .case-product__brand {
+    font-size: 2.9167vw;
+  }
+  .case-product__type {
+    font-size: 1.1111vw;
+  }
+  .case-product__label {
+    font-size: 1.0417vw;
+  }
+  .case-product__description p {
+    font-size: 0.9028vw;
+  }
+  .case-section-number {
+    font-size: 0.5556vw;
+  }
+  .case-showcase__title {
+    font-size: 0.6944vw;
+  }
+  .case-showcase__caption {
+    font-size: 0.4861vw;
+  }
+  .case-floating-card__number {
+    font-size: 0.5556vw;
+  }
+  .case-floating-card__eyebrow {
+    font-size: 0.4167vw;
+  }
+  .case-floating-card__copy h3 {
+    font-size: 2vw;
+  }
+  .case-floating-card__copy p {
+    font-size: 0.4167vw;
+  }
+  .case-type-scale {
+    font-size: 0.5556vw;
+  }
+  .case-type-category, .case-type-weight, .case-type-side__roman {
+    font-size: 0.5556vw;
+  }
+  .case-type-main h2 {
+    font-size: 8vw;
+  }
+  .case-type-statement {
+    font-size: 1.2vw;
+  }
+  .case-type-description {
+    font-size: 0.8333vw;
+  }
+  .case-type-side__vertical {
+    font-size: 0.9722vw;
+  }
+  .case-summary__heading h2 {
+    font-size: 6.5vw;
+  }
+  .case-summary-card__number {
+    font-size: 4vw;
+  }
+  .case-summary-card__keyword {
+    font-size: 2.6389vw;
+  }
+  .case-summary-card__info h3, .case-summary-card__info p {
+    font-size: 0.4167vw;
+  }
+  .bridge-transition__category {
+    font-size: 0.82vw;
+  }
+  .bridge-transition__title {
+    font-size: 3.45vw;
+  }
+  .bridge-transition__number {
+    font-size: 7vw;
+  }
+  .bridge-transition__description {
+    font-size: 0.62vw;
+  }
+  .bridge-transition__counter {
+    font-size: 0.5556vw;
+  }
+  .case-footer__label {
+    font-size: 0.4167vw;
+  }
+  .case-footer__column a {
+    font-size: 0.5556vw;
+  }
+  .case-footer__button {
+    font-size: 0.4167vw !important;
+  }
+  .case-footer__brand {
+    font-size: 11vw;
+  }
+  .case-footer__meta p {
+    font-size: 0.3472vw;
+  }
+  .case-footer__label {
+    font-size: 0.52vw;
+  }
+  .case-footer__project-name, .case-footer__text, .case-footer__column a {
+    font-size: 0.72vw;
+  }
+  .case-footer__back-to-top {
+    font-size: 0.58vw;
+  }
+  .case-footer__brand {
+    font-size: 16.4vw;
+  }
+  .case-footer__bottom-meta p {
+    font-size: 0.42vw;
+  }
+  .case-footer__label {
+    font-size: 0.48vw;
+  }
+  .case-footer__project-name, .case-footer__text, .case-footer__column a {
+    font-size: 0.72vw;
+  }
+  .case-footer__back-to-top {
+    font-size: 0.58vw;
+  }
+  .case-footer__brand {
+    font-size: 16.4vw;
+  }
+  .case-footer__bottom-meta p {
+    font-size: 0.42vw;
+  }
+  .case-footer__brand {
+    font-size: 16.4vw;
+  }
+  .site-intro__skip {
+    font-size: 0.7639vw;
+  }
+  html body.display-page .display-hero__title, html body.handle-page .handle-sequence__copy h1, html body.hud-page .hud-hero__title, html body.driving-page .driving-hero__title, html body.safety-page .safety-hero__title, html body.problem-page .problem-opening__title, html body.user-page .user-opening__title {
+    font-size: var(--type-hero-size) !important;
+  }
+  html body .bridge-transition__title, html body.display-page .display-manifesto__title, html body.display-page .display-scene__title, html body.display-page .display-overview__title, html body.display-page .display-gallery__title, html body.handle-page .handle-sequence__copy h2, html body.handle-page .handle-material__copy h2, html body.handle-page .handle-grip__copy h2, html body.handle-page .handle-section-heading__title h2, html body.hud-page .hud-benefit__title, html body.hud-page .hud-information__title, html body.hud-page .hud-focus__copy h2, html body.driving-page .driving-solution__title, html body.driving-page .dp-title, html body.safety-page .safety-response__title, html body.safety-page .safety-final__title, html body.problem-page .dz-title, html body.user-page .user-character__heading h2, html body.user-page .user-gaze__title, html body.user-page .user-emotion__heading-title {
+    font-size: var(--type-title-size) !important;
+  }
+  html body .bridge-transition__description, html body.display-page .display-manifesto__description, html body.display-page .display-scene__description, html body.display-page .display-overview__description, html body.display-page .display-gallery__description, html body.handle-page .handle-sequence__description, html body.handle-page .handle-material__copy p, html body.handle-page .handle-grip__copy p, html body.hud-page .hud-hero__description, html body.driving-page .driving-solution__description, html body.driving-page .dp-desc, html body.safety-page .safety-response__description, html body.safety-page .safety-final__description, html body.problem-page .dz-desc, html body.user-page .user-character__description-text, html body.user-page .user-gaze__lead {
+    font-size: var(--type-sub-size) !important;
+  }
+  html body.display-page .display-info__text p, html body.display-page .display-gallery-card__copy p, html body.handle-page .handle-system__stat p, html body.problem-page .problem-item__copy p, html body.problem-page .dz-tab__copy {
+    font-size: var(--type-body-size) !important;
+  }
+  html body .bridge-transition__title {
+    font-size: 3.1944vw !important;
+  }
+  html body .bridge-transition__title {
+    font-size: 3.1944vw !important;
+  }
+  html body .bridge-transition__description {
+    font-size: 1.1243vw !important;
+  }
+  .case-floating-card__copy p:not(.case-floating-card__eyebrow) {
+    font-size: 0.463vw;
+  }
+  .case-floating-card__copy p:not(.case-floating-card__eyebrow) {
+    font-size: 0.5vw;
+  }
+
+}
+/* ===== [아이맥 글자 크기] 자동 생성 끝 ===== */
+
 /* =========================================================
    LARGE SCREEN LAYOUT — 맥북 비율 그대로 (자동 생성) / 2026.10.14
    ---------------------------------------------------------

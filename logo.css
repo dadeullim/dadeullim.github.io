@@ -3451,6 +3451,144 @@ html {
 
 }
 
+/* ===== [아이맥 글자 크기] 자동 생성 시작 — 손으로 고치지 않기 ===== */
+/* 맥북 1512px 글자 크기를 아이맥에서도 같은 비율로 (px · clamp → vw)
+   ---- 위쪽 CSS 를 고치면 python3 ~/.claude/dadeullim-tools/fonts_large.py 파일.css 로 다시 만들기 */
+@media (min-width: 1513px) {
+
+  button {
+    font: inherit;
+  }
+  .site-header__logo {
+    font-size: 0.7937vw;
+  }
+  .site-header__nav-link {
+    font-size: 0.6614vw;
+  }
+  .site-header__mega-links a {
+    font-size: 0.7275vw;
+  }
+  .hero__tagline {
+    font-size: 1.15vw;
+  }
+  .hero__replay {
+    font-size: 0.7275vw;
+  }
+  .scroll {
+    font-size: 0.6614vw;
+  }
+  .eyebrow {
+    font-size: 0.7937vw;
+  }
+  h2 {
+    font-size: 3.1746vw;
+  }
+  .lead {
+    font-size: 1.1243vw;
+  }
+  .num {
+    font-size: 0.7937vw;
+  }
+  .intro .big {
+    font-size: 4.2328vw;
+  }
+  .concept-row::after {
+    font-size: 5.8201vw;
+  }
+  .concept-row__body h3 {
+    font-size: 1.3889vw;
+  }
+  .concept-row__body p {
+    font-size: 0.9921vw;
+  }
+  .glyph {
+    font-size: 2.1164vw;
+  }
+  .specs b {
+    font-size: 1.8519vw;
+  }
+  .specs span {
+    font-size: 0.8598vw;
+  }
+  .detail h4 {
+    font-size: 1.1243vw;
+  }
+  .detail em {
+    font-size: 1.1243vw;
+  }
+  .step__ghost {
+    font-size: 13vw;
+  }
+  .step h4 {
+    font-size: 1.7196vw;
+  }
+  .step p {
+    font-size: 0.9921vw;
+  }
+  .color-block::after {
+    font-size: 4.8942vw;
+  }
+  .color-block__name {
+    font-size: 1.1905vw;
+  }
+  .color-block__hex {
+    font-size: 0.8598vw;
+  }
+  .app-item .label {
+    font-size: 0.7937vw;
+  }
+  .toast {
+    font-size: 0.9259vw;
+  }
+  .case-footer__label {
+    font-size: 0.52vw;
+  }
+  .case-footer__project-name, .case-footer__text, .case-footer__column a {
+    font-size: 0.72vw;
+  }
+  .case-footer__back-to-top {
+    font-size: 0.58vw;
+  }
+  .case-footer__brand {
+    font-size: 16.4vw;
+  }
+  .site-header__logo {
+    font-size: .8333vw;
+  }
+  .site-header__nav-link {
+    font-size: .6944vw;
+  }
+  .site-header__mega-links a {
+    font-size: .7639vw;
+  }
+  .case-footer__label {
+    font-size: .48vw;
+  }
+  .case-footer__project-name, .case-footer__text, .case-footer__column a {
+    font-size: .72vw;
+  }
+  .case-footer__back-to-top {
+    font-size: .58vw;
+  }
+  .case-footer__brand {
+    font-size: 16.4vw;
+  }
+  html body.logo-page section .wrap > h2 {
+    font-size: var(--type-title-size) !important;
+  }
+  html body.logo-page .lead {
+    font-size: var(--type-sub-size) !important;
+  }
+  html body.logo-page .concept-row__body p, html body.logo-page .t p {
+    font-size: var(--type-body-size) !important;
+  }
+  .intro .big {
+    font-size: 3.7037vw;
+  }
+
+}
+/* ===== [아이맥 글자 크기] 자동 생성 끝 ===== */
+
 /* =========================================================
    LARGE SCREEN LAYOUT — 맥북 비율 그대로 (자동 생성) / 2026.10.14
    ---------------------------------------------------------

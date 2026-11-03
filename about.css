@@ -4811,6 +4811,219 @@ body.about-page.user-page{overflow-x:clip;}
   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+/* ===== [아이맥 글자 크기] 자동 생성 시작 — 손으로 고치지 않기 ===== */
+/* 맥북 1512px 글자 크기를 아이맥에서도 같은 비율로 (px · clamp → vw)
+   ---- 위쪽 CSS 를 고치면 python3 ~/.claude/dadeullim-tools/fonts_large.py 파일.css 로 다시 만들기 */
+@media (min-width: 1513px) {
+
+  .problem-opening__eyebrow {
+    font-size: 0.6614vw;
+  }
+  .problem-page .problem-opening__title {
+    font-size: 3vw;
+  }
+  .problem-intro__text {
+    font-size: 2.3vw;
+  }
+  .problem-item__copy h2 {
+    font-size: 1.1905vw;
+  }
+  .problem-item__copy p {
+    font-size: 0.85vw;
+  }
+  .problem-item__arrow {
+    font-size: 1.5873vw;
+  }
+  .problem-conclusion__korean {
+    font-size: 4.25vw;
+  }
+  .problem-marquee__track span {
+    font-size: 3.8vw;
+  }
+  .user-opening__title {
+    font-size: 4.8vw;
+  }
+  .user-character__heading h2 {
+    font-size: 2.6vw;
+  }
+  .user-character__button span {
+    font-size: 2.0503vw;
+  }
+  .user-character__description-text {
+    font-size: 1.35vw;
+  }
+  .user-character__keyword {
+    font-size: 1.25vw;
+  }
+  .user-emotion__heading h2 {
+    font-size: 3.45vw;
+  }
+  .user-emotion__label-en {
+    font-size: 3.4vw;
+  }
+  .user-emotion__label-ko {
+    font-size: 1.9vw;
+  }
+  .user-emotion__control span {
+    font-size: 2.0503vw;
+  }
+  .problem-page .dz-title {
+    font-size: 2.2vw;
+  }
+  .problem-page .dz-desc {
+    font-size: 1vw;
+  }
+  .problem-page .dz-label {
+    font-size: 0.7275vw;
+  }
+  .problem-page .dz-tag {
+    font-size: 0.7937vw;
+  }
+  .problem-page .dz-tab__title {
+    font-size: 1.3vw;
+  }
+  .problem-page .dz-tab__copy {
+    font-size: 0.9259vw;
+  }
+  .user-gaze__spot::after {
+    font-size: 0.7937vw;
+  }
+  .user-gaze__title {
+    font-size: 3vw;
+  }
+  .user-gaze__lead {
+    font-size: 1.05vw;
+  }
+  .user-gaze__from {
+    font-size: 1.15vw;
+  }
+  .user-gaze__seen {
+    font-size: 2.1vw;
+  }
+  .user-gaze__closing {
+    font-size: 1.85vw;
+  }
+  .user-gaze[data-cap="left"] .user-gaze__seen {
+    font-size: 1.9vw;
+  }
+  .user-gaze[data-cap="left"] .user-gaze__closing {
+    font-size: 1.5vw;
+  }
+  .user-gaze[data-cap="bottom"] .user-gaze__seen {
+    font-size: 2.1vw;
+  }
+  .user-gaze[data-cap="bottom"] .user-gaze__closing {
+    font-size: 1.9vw;
+  }
+  .user-gaze[data-cap="corner"] .user-gaze__seen {
+    font-size: 1.9vw;
+  }
+  .user-gaze[data-cap="corner"] .user-gaze__closing {
+    font-size: 1.55vw;
+  }
+  .user-gaze__callout .user-gaze__from {
+    font-size: 1.05vw;
+  }
+  .user-gaze__callout .user-gaze__seen {
+    font-size: 1.9vw;
+  }
+  .user-gaze[data-cap="anchor"] .user-gaze__closing {
+    font-size: 1.9vw;
+  }
+  .user-gaze__title {
+    font-size: 2.7vw;
+  }
+  .user-gaze__lead {
+    font-size: 0.96vw;
+  }
+  .user-emotion__heading h2 {
+    font-size: 3.15vw;
+  }
+  html body.problem-page .problem-opening__title, html body.user-page .user-opening__title {
+    font-size: 3.1944vw !important;
+  }
+  .problem-page .ft-figure__value {
+    font-size: 9.5vw;
+  }
+  .problem-page .ft-figure__unit {
+    font-size: 0.3em;
+  }
+  .problem-page .ft-figure__name {
+    font-size: 1.8vw;
+  }
+  .problem-page .ft-figure__text {
+    font-size: 1.0251vw;
+  }
+  .problem-page .ft-figures__step {
+    font-size: 0.7937vw;
+  }
+  .ud-eyebrow {
+    font-size: 0.8598vw;
+  }
+  .ud-h1 {
+    font-size: 5.6vw;
+  }
+  .ud-h2 {
+    font-size: 3.7vw;
+  }
+  .ud-h3 {
+    font-size: 1.7vw;
+  }
+  .ud-lead {
+    font-size: 1.2vw;
+  }
+  .ud-body {
+    font-size: 1.05vw;
+  }
+  .ud-num {
+    font-size: 0.8598vw;
+  }
+  .ud-chip {
+    font-size: 0.8598vw;
+  }
+  .ud-next {
+    font-size: 0.9921vw;
+  }
+  .v2-hero__line {
+    font-size: 5vw;
+  }
+  .wd__text {
+    font-size: var(--type-title-size, 2.6455vw);
+  }
+  .wd__tags li {
+    font-size: var(--type-sub-size, 1.1243vw);
+  }
+  .v4-ctx__title {
+    font-size: 2.6vw;
+  }
+  .v4-tag {
+    font-size: 0.7937vw;
+  }
+  .v5-emo__w {
+    font-size: 12vw;
+  }
+  .mx-needs__points b {
+    font-size: 3.2vw;
+  }
+  .mx-needs__points p {
+    font-size: 1.15vw;
+  }
+  .ud-main .v2-hero__line {
+    font-size: 3.1944vw;
+  }
+  .ud-main .ud-h2 {
+    font-size: var(--type-title-size);
+  }
+  .ud-main .ud-lead {
+    font-size: var(--type-sub-size);
+  }
+  .ud-main .ud-body {
+    font-size: var(--type-body-size);
+  }
+
+}
+/* ===== [아이맥 글자 크기] 자동 생성 끝 ===== */
+
 /* =========================================================
    LARGE SCREEN LAYOUT — 맥북 비율 그대로 (자동 생성) / 2026.10.14
    ---------------------------------------------------------
