@@ -7521,6 +7521,12 @@ body.handle-page {
 
 /* 2026.11.03 : 제목 앞 번호(01 · 02 · 03)는 handle.html 에서 뺌 → 번호 스타일도 지움 */
 
+/* 2026.11.03 : 07 제작 제목 "도면 그대로, 손으로 만들었습니다." 살짝 작게
+   ---- clamp(34px, 3.8vw, 72px) → clamp(32px, 3.3vw, 62px) (맥북 57px → 50px) */
+.hd5 > section[aria-label="PROCESS"] .ttl {
+  font-size: clamp(32px, 3.3vw, 62px);
+}
+
 /* 2026.11.03 : 영상 모서리 살짝 둥글게 ---- 0 → 6px (사용자 정의 히어로 창과 같은 정도) */
 .hd5 .mk3--zig video {
   border-radius: 6px;
@@ -8083,6 +8089,9 @@ body.handle-page {
   }
   .hd5 .mk3 figcaption .lbl[style] {
     font-size: 1.3228vw !important;
+  }
+  .hd5 > section[aria-label="PROCESS"] .ttl {
+    font-size: 3.3vw;
   }
   .hd5 .mk3 figcaption p:not(.lbl) {
     font-size: 1.0582vw;
