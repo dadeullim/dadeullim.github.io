@@ -7608,7 +7608,7 @@ body.handle-page {
 
   /* 핸들 히어로 왼쪽 제목 살짝 위로 / 2026.11.03 : bottom 140px(13.5%) → 20vh */
   html body .hd5 .h-big {
-    bottom: 20vh;
+    bottom: 16.5vh;   /* 2026.11.03 너무 올라가서 살짝 내림 ---- 20vh → 16.5vh */
   }
 
   /* 핸들 도면 선 : 선 굵기가 화면 크기와 상관없이 고정(non-scaling)이라
