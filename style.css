@@ -7883,7 +7883,7 @@ html {
 
   transform: translateY(-29%);
 
-  opacity: 0.6;     /* 2026.10.28 연하게 ---- 1 → 0.82 → 0.68 → 0.6 */
+  opacity: 0.45;    /* 2026.10.28 연하게 ---- 1 → 0.82 → 0.68 → 0.6 / 2026.11.03 더 연하게 → 0.45 */
   mix-blend-mode: screen; /* 2026.10.28 유리에 비친 느낌 (빛만 더해짐) ---- 없음 → screen */
 
   pointer-events: none;
