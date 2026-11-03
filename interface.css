@@ -7516,6 +7516,7 @@ body.handle-page {
 .hd5 .mk3 figcaption .lbl[style] {
   font-size: 20px !important;
   font-weight: 500;
+  line-height: 1.3;   /* 2026.11.03 제목 · 설명 사이가 넓어 보여서 ---- 1.7 → 1.3 */
 }
 
 /* 2026.11.03 : 제목 앞 번호(01 · 02 · 03)는 handle.html 에서 뺌 → 번호 스타일도 지움 */
@@ -7527,7 +7528,7 @@ body.handle-page {
 
 /* 설명 문장 : 14px → 16px · 줄이 예쁘게 끊기게 (마지막 줄 한 단어만 남지 않게) */
 .hd5 .mk3 figcaption p:not(.lbl) {
-  margin-top: 12px;
+  margin-top: 6px;    /* 2026.11.03 간격 좁게 ---- 12px → 6px */
   font-size: 16px;
   line-height: 1.75;
   text-wrap: pretty;
@@ -9398,7 +9399,7 @@ body.handle-page {
     padding-top: 1.455vw;
   }
   .hd5 .mk3 figcaption p:not(.lbl) {
-    margin-top: 0.7937vw;
+    margin-top: 0.3968vw;
   }
   .hd5 .mk3--zig figure:nth-child(2) {
     margin-top: -12%;
