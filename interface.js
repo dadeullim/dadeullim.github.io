@@ -2587,10 +2587,12 @@ document.addEventListener("DOMContentLoaded", () => {
       overviewVisual.style
         .width =
         `${lerp(
+          /* 2026.11.03 : 760 도 sc 배 (아이맥) */
           Math.min(
             vw *
             0.54,
-            760
+            760 *
+            sc
           ),
           vw,
           visualMove
@@ -2612,11 +2614,13 @@ document.addEventListener("DOMContentLoaded", () => {
         "translate(-50%, -50%)";
 
 
+      /* 2026.11.03 : 아이맥에서 펼치기 전 화면 4장이 620px 에서 멈춰 작게 모여 보임 → 620 도 sc 배 */
       const stackWidth =
         Math.min(
           vw *
           OVERVIEW_STACK_WIDTH,
-          620,
+          620 *
+          sc,
           (
             vw *
             0.29 -
@@ -2641,9 +2645,15 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
+      /* 2026.11.03 : 아이맥은 세로가 짧아 카드 사이가 좁게 모여 보임 → 맥북 간격(860 × 0.032)의 sc 배보다 작지 않게 */
       const stackDrop =
-        vh *
-        OVERVIEW_STACK_DROP;
+        Math.max(
+          vh *
+          OVERVIEW_STACK_DROP,
+          860 *
+          OVERVIEW_STACK_DROP *
+          sc
+        );
 
 
       const stackHeight =

@@ -7506,7 +7506,7 @@ body.handle-page {
 }
 
 .hd5 .mk3--zig figcaption {
-  max-width: 34em;
+  max-width: none;     /* 2026.11.03 설명 한 줄로 ---- 34em → */
   padding-top: 22px;
 }
 
@@ -7516,12 +7516,7 @@ body.handle-page {
   font-weight: 500;
 }
 
-.hd5 .mk3 figcaption .lbl b {
-  font-family: var(--mono);
-  font-size: .8em;
-  color: var(--ice);
-  margin-right: 14px;
-}
+/* 2026.11.03 : 제목 앞 번호(01 · 02 · 03)는 handle.html 에서 뺌 → 번호 스타일도 지움 */
 
 /* 설명 문장 : 14px → 16px · 줄이 예쁘게 끊기게 (마지막 줄 한 단어만 남지 않게) */
 .hd5 .mk3 figcaption p:not(.lbl) {
@@ -7529,6 +7524,26 @@ body.handle-page {
   font-size: 16px;
   line-height: 1.75;
   text-wrap: pretty;
+}
+
+/* 2026.11.03 : 설명이 여러 줄로 끊겨서 → 다른 섹션처럼 한 줄로 (폰 · 태블릿은 그대로 줄바꿈) */
+@media (min-width: 901px) {
+
+  /* 2026.11.03 : 2번 영상 살짝 위로 ---- margin-top -4% → -12%
+     (1번 설명은 왼쪽 · 2번 영상은 오른쪽이라 가로로 안 겹침) */
+  .hd5 .mk3--zig figure:nth-child(2) {
+    margin-top: -12%;
+  }
+
+  /* 3번 영상은 2번 설명과 가로로 겹치는 자리라 설명 아래로 띄움 ---- -4% → 2.6vw */
+  .hd5 .mk3--zig figure:nth-child(3) {
+    margin-top: 2.6vw;
+  }
+
+  .hd5 .mk3--zig figcaption p:not(.lbl) {
+    white-space: nowrap;
+  }
+
 }
 
 @media (max-width: 900px) {
@@ -8043,9 +8058,6 @@ body.handle-page {
   }
   .hd5 .mk3 figcaption .lbl[style] {
     font-size: 1.3228vw !important;
-  }
-  .hd5 .mk3 figcaption .lbl b {
-    font-size: .8em;
   }
   .hd5 .mk3 figcaption p:not(.lbl) {
     font-size: 1.0582vw;
@@ -9355,14 +9367,17 @@ body.handle-page {
     width: 52%;
   }
   .hd5 .mk3--zig figcaption {
-    max-width: 34em;
+    max-width: none;
     padding-top: 1.455vw;
-  }
-  .hd5 .mk3 figcaption .lbl b {
-    margin-right: 0.9259vw;
   }
   .hd5 .mk3 figcaption p:not(.lbl) {
     margin-top: 0.7937vw;
+  }
+  .hd5 .mk3--zig figure:nth-child(2) {
+    margin-top: -12%;
+  }
+  .hd5 .mk3--zig figure:nth-child(3) {
+    margin-top: 2.6vw;
   }
 
 }

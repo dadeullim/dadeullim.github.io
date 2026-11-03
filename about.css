@@ -4823,6 +4823,12 @@ body.about-page.user-page{overflow-x:clip;}
     top: 17vh;
   }
 
+  /* 사용자 정의 히어로 왼쪽 아래 문구 "들리지 않는 도로 위에서도," 위로
+     ---- bottom clamp(84px, 15vh, 160px) → 아이맥 156px 라 아래로 처져 보였음 → 21vh (약 218px) */
+  html body.user-page .v2-hero__after {
+    bottom: 21vh;
+  }
+
 }
 
 /* ===== [아이맥 글자 크기] 자동 생성 시작 — 손으로 고치지 않기 ===== */

@@ -16811,7 +16811,7 @@ html {
   /* 03 "기술보다 사람을" 제목 살짝 위로 (카드와 간격)
      ---- 아래쪽 clamp(48px, 4.5vw, 70px) 가 70px 에서 멈춰 아이맥에서 붙어 보였음 → 6vw */
   html body.brand2-page .philosophy-accordion-heading {
-    margin-bottom: 6vw;
+    margin-bottom: 5.2vw;   /* 2026.11.03 살짝만 아래로 ---- 6vw → 5.2vw (맥북 4.5vw) */
   }
 
 }
