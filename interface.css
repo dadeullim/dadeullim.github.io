@@ -7483,6 +7483,205 @@ body.handle-page {
   text-align: right;
 }
 
+/* ===== [HANDLE 5차 아이맥 글자] 자동 생성 시작 — 손으로 고치지 않기 ===== */
+/* 맥북 1512px 에서 보이는 글자 크기를 아이맥에서도 같은 비율로 (px · clamp → vw)
+   ---- 다른 페이지는 --type-* 값 · 따로 만든 블록으로 맞춰져 있었고 핸들 5차만 빠져 있었음 (2026.11.03)
+   ---- [HANDLE 5차] 구간을 고치면 python3 ~/.claude/dadeullim-tools/hd5_fonts.py interface.css 로 다시 만들기 */
+@media (min-width: 1513px) {
+
+  .hd5 .h-top .row {
+    font: 500 0.7937vw/1 var(--mono);
+  }
+  .hd5 .h-bottom {
+    font: 400 0.7937vw var(--mono);
+  }
+  .hd5 .h-big strong {
+    font-size: 6.6vw;
+  }
+  .hd5 .h-big small {
+    font: 500 0.7937vw var(--mono);
+  }
+  .hd5 .h-big span {
+    font-size: 1.4vw;
+  }
+  .hd5 .h-co {
+    font: 500 0.7937vw/1 var(--mono);
+  }
+  .hd5 .h-struct b {
+    font: 500 0.7937vw var(--mono);
+  }
+  .hd5 .h-struct p {
+    font-size: 4.4vw;
+  }
+  .hd5 .h-motor h2 {
+    font-size: 4.6vw;
+  }
+  .hd5 .h-motor .h-rip {
+    font: 500 0.7937vw var(--mono);
+  }
+  .hd5 .h-pulse + p {
+    font-size: 0.9921vw;
+  }
+  .hd5 .h-end p {
+    font-size: 3vw;
+  }
+  .hd5 .lbl {
+    font: 500 0.7275vw/1.3 var(--mono);
+  }
+  .hd5 .h2 {
+    font-size: 5.2vw;
+  }
+  .hd5 .h3 {
+    font-size: 2.2vw;
+  }
+  .hd5 .lead {
+    font-size: 1.05vw;
+  }
+  .hd5 .body {
+    font-size: 0.9921vw;
+  }
+  .hd5 .small {
+    font-size: 0.8598vw;
+  }
+  .hd5 sup.fn {
+    font: 500 0.5952vw var(--mono);
+  }
+  .hd5 .big {
+    font-size: 8.4vw;
+  }
+  .hd5 .stats p.big {
+    font-size: 8.4vw;
+  }
+  .hd5 .stats p {
+    font-size: 0.9259vw;
+  }
+  .hd5 table.ledger {
+    font-size: 0.9259vw;
+  }
+  .hd5 .ledger th {
+    font: 500 0.7275vw var(--mono);
+  }
+  .hd5 dl.spec dt, .hd5 dl.spec dd {
+    font-size: 0.9259vw;
+  }
+  .hd5 dl.spec dt {
+    font: 500 0.7275vw/1.9 var(--mono);
+  }
+  .hd5 .notes {
+    font-size: 0.7937vw;
+  }
+  .hd5 .chip {
+    font: 500 0.6614vw var(--mono);
+  }
+  .hd5 .ex {
+    font: 500 0.6614vw var(--mono);
+  }
+  .hd5 button.tog {
+    font: 500 0.7275vw var(--mono);
+  }
+  .hd5 .qa summary {
+    font-size: 1.5vw;
+  }
+  .hd5 .ann .ld text {
+    font: 500 1.455vw var(--mono);
+  }
+  .hd5 .ann .ld text.sub {
+    font: 400 1.2566vw var(--sans)None;
+  }
+  .hd5 .ann .ld text.num {
+    font: 500 1.1905vw var(--mono);
+  }
+  .hd5 .ann .dimn text {
+    font: 500 1.3228vw var(--mono);
+  }
+  .hd5 .tblock {
+    font: 500 0.6614vw var(--mono);
+  }
+  .hd5 .tblock i {
+    font-size: 0.5622vw;
+  }
+  .hd5 .ttl {
+    font-size: 3.8vw;
+  }
+  .hd5 .bridge {
+    font-size: 1.05vw;
+  }
+  .hd5 .facts b {
+    font: 500 0.7275vw/1.9 var(--mono);
+  }
+  .hd5 .facts p {
+    font-size: 0.9921vw;
+  }
+  .hd5 .facts p strong {
+    font-size: 1.1243vw;
+  }
+  .hd5 .cfg .out b {
+    font-size: 2.1164vw;
+  }
+  .hd5 .cfg .go {
+    font: 500 0.7937vw var(--mono);
+  }
+  .hd5 .mk3 figcaption p {
+    font-size: 0.9259vw;
+  }
+  .hd5 .ann text.dtx {
+    font: 500 1.3228vw var(--mono);
+  }
+  .hd5 .sh-head {
+    font: 500 0.6614vw var(--mono);
+  }
+  .hd5 .bp .ttl {
+    font-size: 3.2vw;
+  }
+  .hd5 table.req {
+    font-size: 0.9259vw;
+  }
+  .hd5 table.req th {
+    font: 500 0.6614vw var(--mono);
+  }
+  .hd5 table.req td.big {
+    font-size: 3.6vw;
+  }
+  .hd5 .ga figure figcaption {
+    font: 500 0.6614vw var(--mono);
+  }
+  .hd5 .ann .zt {
+    font: 500 1.1905vw var(--mono);
+  }
+  .hd5 .ann .bal text {
+    font: 500 1.3228vw var(--mono);
+  }
+  .hd5 .timing .axis {
+    font: 500 0.6614vw var(--mono);
+  }
+  .hd5 .foot-note {
+    font: 500 0.6614vw var(--mono);
+  }
+  .hd5 .foot-note {
+    font: 400 0.7937vw var(--sans) !important;
+  }
+  .hd5 .kv .v {
+    font-size: 5.4vw;
+  }
+  .hd5 .kv p:not(.v) {
+    font-size: 0.9259vw;
+  }
+  .hd5 .h-big strong {
+    font-size: 3.8vw;
+  }
+  .hd5 .cfg .lbl[style], .hd5 .out .lbl[style] {
+    font-size: 0.7937vw !important;
+  }
+  .hd5 .mk3 figcaption .lbl[style] {
+    font-size: 0.9259vw !important;
+  }
+  .hd5 .timing .tr > span {
+    font-size: 1.0582vw;
+  }
+
+}
+/* ===== [HANDLE 5차 아이맥 글자] 자동 생성 끝 ===== */
+
 /* =========================================================
    LARGE SCREEN LAYOUT — 맥북 비율 그대로 (자동 생성) / 2026.10.14
    ---------------------------------------------------------
