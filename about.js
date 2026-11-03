@@ -1041,7 +1041,12 @@ document.addEventListener("DOMContentLoaded", () => {
     win.style.width = `${lerp(slotBox.w, vw, t)}px`;
     win.style.height = `${lerp(slotBox.h, vh, t)}px`;
     /* 2026.10.07 : 시작 라운드 14px → 6px (덜 둥글게, about.css 맨 끝 블록과 맞춤) */
-    win.style.borderRadius = `${lerp(6, 0, t)}px`;
+    /* 2026.11.03 : 아이맥에서 모서리가 각져 보임
+       ---- 6px 고정 → 큰 화면(1513 이상)은 맥북 비율대로 (2048 에서 약 8px)
+       ---- 영상(video)이 모서리 밖으로 삐져나와 라운드가 안 보이는 브라우저가 있어 clip-path 로도 한 번 더 자름 */
+    const radius = lerp(6 * Math.max(1, vw / 1512), 0, t);
+    win.style.borderRadius = `${radius}px`;
+    win.style.clipPath = `inset(0 round ${radius}px)`;
 
     /* 양옆 단어는 밀려나며 사라짐 (모바일은 제자리) */
     const spread = isMobile() ? 0 : t * vw * 0.32;
