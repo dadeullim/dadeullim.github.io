@@ -7852,18 +7852,6 @@ body.handle-page {
   .hd5 .qa summary::after {
     font-size: 1.4em;
   }
-  .hd5 .ann .ld text {
-    font: 500 1.455vw var(--mono);
-  }
-  .hd5 .ann .ld text.sub {
-    font: 400 1.2566vw var(--sans)None;
-  }
-  .hd5 .ann .ld text.num {
-    font: 500 1.1905vw var(--mono);
-  }
-  .hd5 .ann .dimn text {
-    font: 500 1.3228vw var(--mono);
-  }
   .hd5 .tblock {
     font: 500 0.6614vw var(--mono);
   }
@@ -7894,9 +7882,6 @@ body.handle-page {
   .hd5 .mk3 figcaption p {
     font-size: 0.9259vw;
   }
-  .hd5 .ann text.dtx {
-    font: 500 1.3228vw var(--mono);
-  }
   .hd5 .sh-head {
     font: 500 0.6614vw var(--mono);
   }
@@ -7914,12 +7899,6 @@ body.handle-page {
   }
   .hd5 .ga figure figcaption {
     font: 500 0.6614vw var(--mono);
-  }
-  .hd5 .ann .zt {
-    font: 500 1.1905vw var(--mono);
-  }
-  .hd5 .ann .bal text {
-    font: 500 1.3228vw var(--mono);
   }
   .hd5 .timing .axis {
     font: 500 0.6614vw var(--mono);
