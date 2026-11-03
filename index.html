@@ -325,8 +325,42 @@
             REPUBLIC OF KOREA
           </p>
 </div>
-<div class="case-product__visual">
-<img alt="DADEULLIM headset" class="case-product__image" src="./images/04.jpg"/>
+<!-- 2026.10.28 : 핸들 사진 → 옛 핸들 페이지의 반원 핸들 + 파동 3개 (왼쪽 · 가운데 · 오른쪽)
+     ---- ./images/04.jpg → ./images/handle-04-rim.webp
+     파동은 script.js [INDEX 핸들 파동] 이 화면에 보일 때만 만듭니다 -->
+<div
+  class="case-product__visual case-product__visual--rim"
+  data-rim-haptics
+>
+<img
+  alt="블랙 가죽과 아이스 블루 라인이 적용된 다들림 핸들 상단"
+  class="case-product__image"
+  src="./images/handle-04-rim.webp"
+/>
+<svg
+  aria-hidden="true"
+  class="case-rim__waves"
+  focusable="false"
+  preserveAspectRatio="none"
+  viewBox="0 0 1676 938"
+  xmlns="http://www.w3.org/2000/svg"
+>
+<defs>
+<radialGradient id="case-rim-blob">
+<stop offset="0" stop-color="#c1e2e7" stop-opacity=".78"/>
+<stop offset=".34" stop-color="#c1e2e7" stop-opacity=".3"/>
+<stop offset=".68" stop-color="#c1e2e7" stop-opacity=".08"/>
+<stop offset="1" stop-color="#c1e2e7" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="case-rim-halo">
+<stop offset="0" stop-color="#c1e2e7" stop-opacity=".72"/>
+<stop offset=".45" stop-color="#c1e2e7" stop-opacity=".24"/>
+<stop offset="1" stop-color="#c1e2e7" stop-opacity="0"/>
+</radialGradient>
+</defs>
+<g data-rim-waves=""></g>
+<g data-rim-dots=""></g>
+</svg>
 </div>
 <div class="case-container case-product__content">
 <div class="case-product__identity">
@@ -488,6 +522,14 @@
               </p>
 </div>
 </div>
+<!-- 2026.10.28 : HEAD-UP 오른쪽 빈 영역에 다들림 HUD (위험 없는 평상시 화면) 추가
+     (HUD 수정 인덱스.zip / 스타일 : style.css 맨 아래 [INDEX HEAD-UP HUD]) -->
+<figure class="case-type-hud">
+<img
+  alt="DADEULLIM HUD — 평상시 주행 화면"
+  src="./images/hud-safe.png"
+/>
+</figure>
 <div class="case-type-side">
 <p class="case-type-side__vertical">
               03 Head-Up Display

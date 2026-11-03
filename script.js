@@ -5993,3 +5993,368 @@ updateHeaderState();
   );
 
 })();
+
+
+/* =========================================================
+   [INDEX 핸들 파동] 반원 핸들 위 세 지점에서 파동 / 2026.10.28
+   옛 핸들 페이지 MATERIAL / 02 의 ring · bloom · halo 를 그대로 옮김
+   발생점 : CX=833, CY=1271, R=916, 각도 [-40, 0, 40]
+   화면에 보일 때만 반복하고, 벗어나면 멈춥니다
+========================================================= */
+(() => {
+
+  "use strict";
+
+  const box =
+    document.querySelector(
+      "[data-rim-haptics]"
+    );
+
+  if (!box) {
+    return;
+  }
+
+  const waves =
+    box.querySelector(
+      "[data-rim-waves]"
+    );
+
+  const dots =
+    box.querySelector(
+      "[data-rim-dots]"
+    );
+
+  if (
+    !waves ||
+    !dots ||
+    typeof Element.prototype.animate !== "function" ||
+    !("IntersectionObserver" in window)
+  ) {
+    return;
+  }
+
+  const NS =
+    "http://www.w3.org/2000/svg";
+
+  const cfg = {
+    duration: 2800,
+    layers: 2,
+    radius: 200,
+    interval: 3900
+  };
+
+  const points =
+    [-40, 0, 40].map(
+      (angle) => {
+        const a =
+          angle * Math.PI / 180;
+
+        return [
+          833 + 916 * Math.sin(a),
+          1271 - 916 * Math.cos(a)
+        ];
+      }
+    );
+
+  const motion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
+
+  const animations =
+    new Set();
+
+  let active = false;
+  let timer = 0;
+
+
+  /* ---------------------------------------------------------
+     [핸들 파동] SVG 요소 · 애니메이션 도우미
+  --------------------------------------------------------- */
+  const node =
+    (tag, attrs = {}) => {
+      const n =
+        document.createElementNS(
+          NS,
+          tag
+        );
+
+      Object.entries(attrs).forEach(
+        ([key, value]) => {
+          n.setAttribute(
+            key,
+            String(value)
+          );
+        }
+      );
+
+      return n;
+    };
+
+  const animate =
+    (target, keys, options, cleanup) => {
+      const animation =
+        target.animate(
+          keys,
+          options
+        );
+
+      animations.add(animation);
+
+      animation.onfinish =
+        () => {
+          animations.delete(animation);
+
+          if (cleanup) {
+            cleanup();
+          }
+
+          animation.cancel();
+        };
+    };
+
+  const atPoint =
+    (i, parent) => {
+      const g =
+        node("g", {
+          transform:
+            `translate(${points[i][0]} ${points[i][1]})`
+        });
+
+      parent.appendChild(g);
+
+      return g;
+    };
+
+
+  /* ---------------------------------------------------------
+     [핸들 파동] 퍼지는 링
+  --------------------------------------------------------- */
+  function ring(i, delay, strength) {
+    const group =
+      atPoint(i, waves);
+
+    const shape =
+      node("g", {
+        fill: "none",
+        stroke: "#c1e2e7",
+        opacity: 0
+      });
+
+    [
+      [24, 0.045],
+      [10, 0.11],
+      [3.4, 0.42]
+    ].forEach(
+      ([width, opacity]) => {
+        shape.appendChild(
+          node("circle", {
+            r: 100,
+            "stroke-width": width * strength,
+            opacity,
+            "vector-effect": "non-scaling-stroke"
+          })
+        );
+      }
+    );
+
+    group.appendChild(shape);
+
+    const radius =
+      cfg.radius * (0.7 + 0.3 * strength);
+
+    const peak =
+      0.34 + 0.52 * strength;
+
+    const scale =
+      (fraction) =>
+        `scale(${radius * fraction / 100})`;
+
+    animate(
+      shape,
+      [
+        { offset: 0,    transform: "scale(.02)",  opacity: 0 },
+        { offset: 0.07, transform: scale(0.13),   opacity: peak },
+        { offset: 0.22, transform: scale(0.27),   opacity: peak * 0.6 },
+        { offset: 0.42, transform: scale(0.47),   opacity: peak * 0.33 },
+        { offset: 0.62, transform: scale(0.66),   opacity: peak * 0.17 },
+        { offset: 0.82, transform: scale(0.85),   opacity: peak * 0.06 },
+        { offset: 1,    transform: scale(1),      opacity: 0 }
+      ],
+      {
+        duration: cfg.duration,
+        delay,
+        easing: "linear",
+        fill: "both"
+      },
+      () => group.remove()
+    );
+  }
+
+
+  /* ---------------------------------------------------------
+     [핸들 파동] 바닥에 번지는 빛
+  --------------------------------------------------------- */
+  function bloom(i) {
+    const group =
+      atPoint(i, waves);
+
+    waves.prepend(group);
+
+    const shape =
+      node("circle", {
+        r: 100,
+        fill: "url(#case-rim-blob)",
+        opacity: 0
+      });
+
+    group.appendChild(shape);
+
+    const scale =
+      (fraction) =>
+        `scale(${cfg.radius * fraction / 100})`;
+
+    animate(
+      shape,
+      [
+        { offset: 0,    transform: "scale(.03)", opacity: 0 },
+        { offset: 0.09, transform: scale(0.14),  opacity: 0.46 },
+        { offset: 0.26, transform: scale(0.28),  opacity: 0.27 },
+        { offset: 0.48, transform: scale(0.47),  opacity: 0.13 },
+        { offset: 0.72, transform: scale(0.67),  opacity: 0.05 },
+        { offset: 1,    transform: scale(0.88),  opacity: 0 }
+      ],
+      {
+        duration: cfg.duration * 1.2,
+        easing: "linear",
+        fill: "both"
+      },
+      () => group.remove()
+    );
+  }
+
+
+  /* ---------------------------------------------------------
+     [핸들 파동] 한 지점 = 빛 + 링 두 겹 + halo
+  --------------------------------------------------------- */
+  function pulse(i) {
+    bloom(i);
+
+    for (let k = 0; k < cfg.layers; k++) {
+      ring(
+        i,
+        cfg.duration * 0.16 * k,
+        1 - k * 0.18
+      );
+    }
+
+    const group =
+      atPoint(i, dots);
+
+    const halo =
+      node("circle", {
+        r: 100,
+        fill: "url(#case-rim-halo)",
+        opacity: 0
+      });
+
+    group.appendChild(halo);
+
+    animate(
+      halo,
+      [
+        { offset: 0,   opacity: 0,    transform: "scale(.03)" },
+        { offset: 0.09, opacity: 0.48, transform: "scale(.16)" },
+        { offset: 0.3, opacity: 0.24, transform: "scale(.31)" },
+        { offset: 0.6, opacity: 0.08, transform: "scale(.5)" },
+        { offset: 1,   opacity: 0,    transform: "scale(.68)" }
+      ],
+      {
+        duration: cfg.duration,
+        easing: "linear",
+        fill: "both"
+      },
+      () => group.remove()
+    );
+  }
+
+
+  /* ---------------------------------------------------------
+     [핸들 파동] 반복 · 멈춤
+  --------------------------------------------------------- */
+  function cycle() {
+    if (
+      !active ||
+      motion.matches ||
+      document.hidden
+    ) {
+      timer = 0;
+      return;
+    }
+
+    points.forEach(
+      (_, i) => pulse(i)
+    );
+
+    timer =
+      window.setTimeout(
+        cycle,
+        cfg.interval
+      );
+  }
+
+  function start() {
+    if (active) {
+      return;
+    }
+
+    active = true;
+    cycle();
+  }
+
+  function stop() {
+    active = false;
+
+    clearTimeout(timer);
+    timer = 0;
+
+    animations.forEach(
+      (animation) => animation.cancel()
+    );
+
+    animations.clear();
+    waves.replaceChildren();
+    dots.replaceChildren();
+  }
+
+  new IntersectionObserver(
+    (entries) => {
+      entries.forEach(
+        (entry) => {
+          if (entry.isIntersecting) {
+            start();
+          } else {
+            stop();
+          }
+        }
+      );
+    },
+    {
+      threshold: 0.35
+    }
+  ).observe(box);
+
+  document.addEventListener(
+    "visibilitychange",
+    () => {
+      if (
+        !document.hidden &&
+        active &&
+        !timer
+      ) {
+        cycle();
+      }
+    }
+  );
+
+})();
