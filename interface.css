@@ -7500,9 +7500,11 @@ body.handle-page {
   grid-template-columns: 72px 1fr;
 }
 
-/* 07 제작 영상 3개 : 영상 40% → 52% · 글씨 키움 */
+/* 07 제작 영상 3개 : 영상 40% → 52% → 47% · 글씨 키움
+   ---- 2026.11.03 : 52% 는 왼쪽 영상(0~52%)과 오른쪽 영상(42~100%)이 가로로 겹쳐서
+        2번 영상을 올리면 1번 영상 · 설명 위를 덮음 → 47% + 2번은 오른쪽 끝에 붙여 가로로 안 겹치게 */
 .hd5 .mk3--zig figure {
-  width: 52%;
+  width: 47%;
 }
 
 .hd5 .mk3--zig figcaption {
@@ -7526,13 +7528,13 @@ body.handle-page {
   text-wrap: pretty;
 }
 
-/* 2026.11.03 : 설명이 여러 줄로 끊겨서 → 다른 섹션처럼 한 줄로 (폰 · 태블릿은 그대로 줄바꿈) */
 @media (min-width: 901px) {
 
   /* 2026.11.03 : 2번 영상 살짝 위로 ---- margin-top -4% → -12%
-     (1번 설명은 왼쪽 · 2번 영상은 오른쪽이라 가로로 안 겹침) */
+     영상 폭 47% · 2번은 오른쪽 끝(margin-right 6% → 0) → 1번(0~47%) · 2번(53~100%) 사이 6% 띄워 안 겹침 */
   .hd5 .mk3--zig figure:nth-child(2) {
     margin-top: -12%;
+    margin-right: 0;
   }
 
   /* 3번 영상은 2번 설명과 가로로 겹치는 자리라 설명 아래로 띄움 ---- -4% → 2.6vw */
@@ -7540,7 +7542,19 @@ body.handle-page {
     margin-top: 2.6vw;
   }
 
+  /* 설명 : 영상 폭 안에서 줄이 고르게 (옆 영상으로 넘어가지 않게) */
   .hd5 .mk3--zig figcaption p:not(.lbl) {
+    text-wrap: balance;
+  }
+
+}
+
+/* 2026.11.03 : 설명 한 줄 — 영상 폭이 문장보다 넓은 큰 화면(1400 이상)에서만 · 16px → 15px
+   (작은 창에서 한 줄로 두면 옆 영상 밑으로 글이 들어가서) */
+@media (min-width: 1400px) {
+
+  .hd5 .mk3--zig figcaption p:not(.lbl) {
+    font-size: 15px;
     white-space: nowrap;
   }
 
@@ -8061,6 +8075,9 @@ body.handle-page {
   }
   .hd5 .mk3 figcaption p:not(.lbl) {
     font-size: 1.0582vw;
+  }
+  .hd5 .mk3--zig figcaption p:not(.lbl) {
+    font-size: 0.9921vw;
   }
   .hd5 .cfg .lbl[style], .hd5 .out .lbl[style] {
     font-size: 0.7937vw !important;
@@ -9364,7 +9381,7 @@ body.handle-page {
     margin-left: auto;
   }
   .hd5 .mk3--zig figure {
-    width: 52%;
+    width: 47%;
   }
   .hd5 .mk3--zig figcaption {
     max-width: none;
@@ -9375,6 +9392,7 @@ body.handle-page {
   }
   .hd5 .mk3--zig figure:nth-child(2) {
     margin-top: -12%;
+    margin-right: 0;
   }
   .hd5 .mk3--zig figure:nth-child(3) {
     margin-top: 2.6vw;
