@@ -30,7 +30,7 @@
 
   <link
     rel="stylesheet"
-    href="./style.css?v=20261108b"
+    href="./style.css?v=20261108d"
   >
 
 
@@ -40,7 +40,7 @@
 
   <link
     rel="stylesheet"
-    href="./interface.css?v=20261108b"
+    href="./interface.css?v=20261108d"
   >
 
 
@@ -49,7 +49,7 @@
   ====================================================== -->
 
   <script
-    src="./interface.js?v=20261108b"
+    src="./interface.js?v=20261108d"
     defer
   ></script>
 
@@ -265,137 +265,96 @@
 
 
     <!-- =================================================
-         [HUD 최종] 2026.10.18
-         00. HERO — 시안 E (빛나는 표본)
-         가운데 영상만 빛나고 가장자리는 배경으로 녹음, 아래로 하프미러 반사
-         전) .hv (액자 영상 + 선 사이 큰 문장 + 오른쪽 HUD 글자)
-         스타일 : interface.css 맨 아래 [HUD 최종] / 동작 : interface.js [HUD 최종]
+         [HUD 11-08] 2026.11.08
+         00. HERO — 앞유리 사진 (시안 목록 2)
+         비 오는 밤, 운전자 어깨 너머 앞유리에 뜬 HUD 를 화면 가득
+         움직이는 건 경고 아이콘에서 번지는 파동 하나뿐 (위치는 interface.js 가 사진 크롭에 맞춰 계산)
+         전) .hf-hero (가운데 빛나는 영상 + 하프미러 반사)
+         ---- 사진은 목업 : 바꿀 때 images/b-8.jpg 교체 (파동 위치는 interface.js [HUD 11-08] 의 PX · PY)
     ================================================== -->
 
     <section
-      class="hf-hero"
-      id="hfHero"
-      aria-label="HUD 투사 영상"
+      class="hs-hero"
+      id="hsHero"
+      aria-label="HUD"
     >
 
-      <!-- 2026.10.18 : 작은 영어 소제목(Interface — Head-Up Display) 없앰 -->
+      <img
+        class="hs-hero__img"
+        src="./images/b-8.jpg"
+        alt="비 오는 밤 도심, 운전자 어깨 너머 앞유리에 긴급차량 접근 경고가 떠 있는 모습"
+      >
 
-      <h1 class="hf-hero__title">운전자의 시선 위에 소리를 띄웁니다.</h1>
+      <span
+        class="hs-hero__ring"
+        id="hsRing"
+        aria-hidden="true"
+      ><i></i><i></i><i></i></span>
 
-      <div class="hf-spec">
+      <div class="hs-hero__copy">
 
-        <!-- 영상 -->
-        <div class="hf-spec__v">
-          <video
-            src="./images/hud-hero.mp4"
-            poster="./images/hud-hero-poster.jpg"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="auto"
-            aria-hidden="true"
-          ></video>
+        <h1 class="hs-hero__title">운전자의 시선 위에<br>소리를 띄웁니다.</h1>
+
+        <div class="hs-row">
+          <div>
+            <span>01</span>
+            <b>전방 유리, 시선 높이</b>
+            <p>고개를 돌리지 않아도 읽히는 자리.</p>
+          </div>
+          <div>
+            <span>02</span>
+            <b>위험한 소리를 한 단어로</b>
+            <p>사이렌 · 경적 · 급정거 · 차간거리 · 끼어들기.</p>
+          </div>
+          <div>
+            <span>03</span>
+            <b>다섯 겹의 정보</b>
+            <p>차로 · 속도 · 경로 · 소리 · 경고.</p>
+          </div>
         </div>
 
-        <!-- 반사 (같은 영상을 뒤집어 엷게) -->
-        <div
-          class="hf-spec__r"
-          aria-hidden="true"
-        >
-          <video
-            src="./images/hud-hero.mp4"
-            poster="./images/hud-hero-poster.jpg"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="auto"
-          ></video>
-        </div>
-
-        <span class="hf-spec__hz" aria-hidden="true"></span>
-
-      </div>
-
-      <!-- 아래 세 칸 -->
-      <div class="hf-row">
-        <div>
-          <span class="hf-meta">01 Where</span>
-          <b>전방 유리, 시선 높이</b>
-          <p>고개를 돌리지 않아도 읽히는 자리.</p>
-        </div>
-        <div>
-          <span class="hf-meta">02 What</span>
-          <b>위험한 소리를 한 단어로</b>
-          <p>사이렌 · 경적 · 급정거 · 차간거리 · 끼어들기.</p>
-        </div>
-        <div>
-          <span class="hf-meta">03 How</span>
-          <b>다섯 겹의 정보</b>
-          <p>차로 · 속도 · 경로 · 소리 · 경고.</p>
-        </div>
       </div>
 
     </section>
 
 
     <!-- =================================================
-         [HUD 최종] 2026.10.18
-         01. 다섯 겹 — 시안 A
-         왼쪽 : 고정 무대(누운 HUD) + 세로 목록(05~01) + 지금 번호
-         오른쪽 : 설명 블록이 한 장씩 지나감 — 화면 가운데 블록의 겹만 밝아짐
-         전) #hx3 (떠다니는 라벨 · 오른쪽 위 큰 번호 · 가운데 가로줄)
-         HUD 다섯 장 · 목록 · 01~05 설명은 interface.js 가 채움
+         [HUD 11-08] 2026.11.08
+         01. 다섯 겹 — 제자리 교체 (시안 B 방식)
+         왼쪽 : 목차 01–05 · 가운데 : 겹친 HUD + 아래 하프미러 반사 · 오른쪽 : 번호와 설명
+         스크롤하면 화면이 세로로 펼쳐지지 않고, 그 자리에서 지금 겹만 밝아지고 나머지는 흐려짐
+         전) #haLy 시안 A (누운 HUD 가 세로로 펼쳐짐 + 오른쪽 설명 블록이 지나감)
+         목차 · HUD · 설명은 interface.js [HUD 11-08] 이 채움
     ================================================== -->
 
     <section
-      class="ha-ly"
-      id="haLy"
+      class="hb-ly"
+      id="hbLy"
       aria-label="HUD 레이어 구조"
     >
-
-      <!-- 왼쪽 고정 무대 -->
-      <div class="ha-stage">
-        <div
-          class="hf-stack"
-          id="haStack"
-          aria-hidden="true"
-        ></div>
+      <div class="hb-stage">
         <ol
-          class="ha-rail hf-meta"
-          id="haRail"
-          aria-hidden="true"
+          class="hb-idx"
+          id="hbIdx"
         ></ol>
-        <p class="ha-count hf-meta"><b id="haCount">00</b> / 05 Layers</p>
+        <div class="hb-c">
+          <div
+            class="hb-hud"
+            id="hbHud"
+            aria-hidden="true"
+          ></div>
+          <div
+            class="hb-ref"
+            id="hbRef"
+            aria-hidden="true"
+          ></div>
+        </div>
+        <div
+          class="hb-txt"
+          id="hbTxt"
+          aria-live="polite"
+        ></div>
       </div>
-
-      <!-- 오른쪽 설명 블록 (01~05 는 JS 가 사이에 넣음) -->
-      <div
-        class="ha-steps"
-        id="haSteps"
-      >
-
-        <article
-          class="ha-st"
-          data-k="-1"
-        >
-          <p class="hf-meta">Layer Structure</p>
-          <h2>한 장처럼 보이는<br>다섯 겹의 정보.</h2>
-          <p class="ha-d">차로 · 속도 · 경로 · 소리 · 경고. 서로 다른 거리에 놓인 다섯 장이 겹쳐 하나의 HUD가 됩니다.</p>
-        </article>
-
-        <article
-          class="ha-st"
-          data-k="9"
-        >
-          <p class="hf-meta">Composite</p>
-          <h2>다시 한 장으로.</h2>
-          <p class="ha-d">운전자는 다섯 겹을 따로 읽지 않습니다. 필요한 겹만 밝아지고, 나머지는 물러납니다.</p>
-        </article>
-
-      </div>
-
     </section>
 
 
@@ -445,12 +404,13 @@
             aria-hidden="true"
           ></span>
 
+          <!-- 2026.11.08 : 점 이름 영어(01 Siren …) → 한글 -->
           <div class="br__ticks">
-            <a href="#w1"><span>01 Siren</span></a>
-            <a href="#w2"><span>02 Horn</span></a>
-            <a href="#w3"><span>03 Stop</span></a>
-            <a href="#w4"><span>04 Gap</span></a>
-            <a href="#w5"><span>05 Merge</span></a>
+            <a href="#w1"><span>01 사이렌</span></a>
+            <a href="#w2"><span>02 경적</span></a>
+            <a href="#w3"><span>03 정지</span></a>
+            <a href="#w4"><span>04 차간거리</span></a>
+            <a href="#w5"><span>05 끼어들기</span></a>
           </div>
 
         </nav>
@@ -639,7 +599,7 @@
 
       <a
         class="case-footer__back-to-top"
-        href="#hfHero"
+        href="#hsHero"
       >
 
         BACK TO TOP

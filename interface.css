@@ -7597,6 +7597,452 @@ body.handle-page {
 }
 
 /* =========================================================
+   [HUD 11-08] HUD 페이지 / 2026.11.08
+   ---------------------------------------------------------
+   1. 히어로(.hs-hero) : 앞유리 사진 화면 가득 (시안 목록 2) — 움직이는 건 경고 아이콘의 파동 하나
+      ---- 전) .hf-hero 가운데 빛나는 영상 + 하프미러 반사 (위 [HUD 최종] 규칙은 남아 있지만 hud.html 에서 안 씀)
+   2. 다섯 겹(.hb-ly) : 왼쪽 목차 · 가운데 HUD + 반사 · 오른쪽 번호와 설명 — 제자리에서 바뀜
+      ---- 전) .ha-ly 시안 A (세로로 펼쳐지는 무대)
+   3. 작은 영어 소제목 없앰 (hud.html · interface.js 에서 글자 자체를 뺌)
+   동작 : interface.js [HUD 11-08]
+========================================================= */
+
+/* ---------- 1. 히어로 ---------- */
+
+.hs-hero {
+  position: relative;
+
+  height: 92svh;              /* 아래 섹션이 살짝 보이게 */
+  min-height: 560px;
+
+  overflow: hidden;
+
+  color: var(--hf-ink);
+  background: var(--hf-bg);
+}
+
+.hs-hero__img {
+  --ox: 0.5;
+  --oy: 0;                    /* 위를 맞춰 아래(센터 화면)를 더 자름 — JS 파동 위치도 이 값을 읽음 */
+
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: 50% 0%;
+}
+
+/* 경고 아이콘에서 번지는 파동 — 위치는 JS */
+.hs-hero__ring {
+  position: absolute;
+  left: 45.6%;
+  top: 29.2%;
+
+  width: 0;
+  height: 0;
+}
+
+.hs-hero__ring i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  width: 9vmin;
+  height: 9vmin;
+
+  border: 1px solid rgba(255, 110, 118, 0.75);
+  border-radius: 50%;
+  opacity: 0;
+
+  translate: -50% -50%;
+  animation: hs-wave 2.6s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
+
+.hs-hero__ring i:nth-child(2) { animation-delay: 0.87s; }
+.hs-hero__ring i:nth-child(3) { animation-delay: 1.74s; }
+
+@keyframes hs-wave {
+  0%   { transform: scale(0.6); opacity: 0; }
+  15%  { opacity: 0.8; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* 위 · 아래만 어둡게 — 헤더와 글자가 읽히게 */
+.hs-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(180deg, rgba(10, 11, 13, 0.5), transparent 16%, transparent 44%, rgba(10, 11, 13, 0.78) 68%, rgba(10, 11, 13, 0.96));
+  pointer-events: none;
+}
+
+.hs-hero__copy {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  column-gap: clamp(16px, 1.6vw, 26px);
+  align-items: end;
+
+  padding: 0 var(--hf-pad) 6svh;
+}
+
+.hs-hero__title {
+  margin: 0;
+
+  font-size: clamp(30px, 2.9vw, 50px);
+  font-weight: 300;
+  line-height: 1.26;
+  letter-spacing: -0.036em;
+  text-wrap: balance;
+}
+
+.hs-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(16px, 1.6vw, 26px);
+}
+
+.hs-row > div {
+  display: grid;
+  align-content: start;
+  gap: 5px;
+
+  padding-top: 11px;
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.hs-row span {
+  color: var(--hf-faint);
+
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+
+.hs-row b {
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.hs-row p {
+  margin: 0;
+
+  color: var(--hf-mute);
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+/* ---------- 2. 다섯 겹 — 제자리 교체 ---------- */
+
+.hb-ly {
+  position: relative;
+
+  height: 520vh;              /* 여섯 칸 (소개 + 다섯 겹) */
+
+  color: var(--hf-ink);
+  background: #0f1113;        /* 섹션 번갈아 — 페이지 다크 그레이 */
+}
+
+.hb-stage {
+  position: sticky;
+  top: 0;
+
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 5fr) minmax(0, 4fr);
+  column-gap: clamp(16px, 1.6vw, 26px);
+  align-items: center;
+
+  height: 100vh;
+  height: 100svh;
+
+  padding: var(--hf-hd) var(--hf-pad) 0;
+}
+
+/* 왼쪽 목차 */
+.hb-idx {
+  margin: 0;
+  padding: 0;
+
+  border-top: 1px solid var(--hf-line);
+
+  list-style: none;
+}
+
+.hb-idx li {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 34px 1fr;
+
+  padding: 12px 0;
+  border-bottom: 1px solid var(--hf-line);
+
+  color: var(--hf-faint);
+
+  font-size: 14px;
+
+  transition: color 0.3s;
+}
+
+.hb-idx li span {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 지금 겹 — 아래 선이 왼쪽부터 차오름 */
+.hb-idx li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+
+  width: 100%;
+  height: 1px;
+
+  background: var(--hf-ink);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+
+  transition: transform 0.6s var(--hf-ease);
+}
+
+.hb-idx li.is-on { color: var(--hf-ink); }
+.hb-idx li.is-on::after { transform: scaleX(1); }
+
+/* 가운데 HUD + 하프미러 반사 */
+.hb-c {
+  position: relative;
+}
+
+.hb-hud,
+.hb-ref {
+  position: relative;
+
+  max-height: 56svh;
+  aspect-ratio: 1687 / 1672;
+
+  margin: 0 auto;
+}
+
+.hb-hud img,
+.hb-ref img {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  transition: opacity 0.5s var(--hf-ease), filter 0.5s var(--hf-ease);
+}
+
+.hb-hud img.is-dim,
+.hb-ref img.is-dim {
+  opacity: 0.1;
+  filter: saturate(0.2);
+}
+
+.hb-ref {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+
+  opacity: 0.12;
+  filter: blur(1.5px);
+  transform: scaleY(-1);
+  pointer-events: none;
+
+  -webkit-mask-image: linear-gradient(0deg, #000, transparent 40%);
+          mask-image: linear-gradient(0deg, #000, transparent 40%);
+}
+
+/* 오른쪽 번호와 설명 — 제자리에서 바뀜 */
+.hb-txt {
+  position: relative;
+
+  min-height: 320px;
+}
+
+.hb-t {
+  position: absolute;
+  inset: 0;
+
+  display: grid;
+  align-content: center;
+  gap: 12px;
+
+  opacity: 0;
+  transform: translateY(10px);
+
+  transition: opacity 0.5s var(--hf-ease), transform 0.5s var(--hf-ease);
+}
+
+.hb-t.is-on {
+  opacity: 1;
+  transform: none;
+}
+
+.hb-t h2,
+.hb-t h3 {
+  margin: 0;
+
+  font-weight: 300;
+  letter-spacing: -0.032em;
+  text-wrap: balance;
+}
+
+.hb-t h2 { font-size: clamp(25px, 2.3vw, 38px); line-height: 1.3; }
+.hb-t h3 { font-size: clamp(20px, 1.6vw, 26px); line-height: 1.4; font-weight: 400; letter-spacing: -0.02em; }
+
+.hb-t p { margin: 0; }
+
+.hb-t__no,
+.hb-t__z {
+  color: var(--hf-faint);
+
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+
+.hb-t__big {
+  font-size: clamp(56px, 5.6vw, 96px);
+  font-weight: 100;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+}
+
+.hb-t__big small {
+  margin-left: 0.3em;
+
+  color: var(--hf-faint);
+
+  font-size: 0.25em;
+  font-weight: 300;
+  letter-spacing: 0;
+}
+
+.hb-t__d {
+  max-width: 30em;
+
+  color: var(--hf-mute);
+
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+
+/* ---------- 태블릿 · 폰 ---------- */
+
+@media (max-width: 900px) {
+
+  .hs-hero__copy {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+  }
+
+  .hs-hero__img {
+    --ox: 0.32;
+    object-position: 32% 0%;
+  }
+
+  .hb-stage {
+    grid-template-columns: 1fr;
+    align-content: center;
+    row-gap: 12px;
+  }
+
+  .hb-idx,
+  .hb-ref {
+    display: none;
+  }
+
+  .hb-hud {
+    max-height: 40svh;
+  }
+
+  .hb-txt {
+    min-height: 230px;
+  }
+
+}
+
+@media (max-width: 640px) {
+
+  .hs-row {
+    grid-template-columns: 1fr;
+    row-gap: 14px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hs-hero__ring i { animation: none; opacity: 0.6; transform: scale(1.4); }
+  .hb-hud img, .hb-ref img, .hb-t, .hb-idx li::after { transition: none; }
+
+}
+
+/* =========================================================
+   [HUD 11-08 다듬기] 히어로 글씨 / 2026.11.08
+   ---------------------------------------------------------
+   1. 왼쪽 제목 "운전자의 시선 위에 소리를 띄웁니다." — 다른 인터페이스 히어로(핸들 · 디스플레이)와 같게
+      ---- font-size clamp(30px, 2.9vw, 50px) → clamp(32px, 3.8vw, 60px) (맥북 44px → 57px)
+      ---- line-height 1.26 → 1.22 · letter-spacing -0.036em → -0.02em (핸들 제목과 같음) · 두께 300 그대로
+      ---- 아래에서 떨어진 거리 : 맥북 123px (핸들과 같음) 그대로 · 아이맥은 아래 [아이맥 화면비] 에서 핸들처럼 16.5vh
+      ---- 왼쪽 위치는 HUD 페이지 여백(--hf-pad)에 맞춘 그대로 (아래 섹션들과 줄이 맞게)
+   2. 오른쪽 세 칸 — 너무 크고 투박해서 작고 가볍게
+      ---- 제목 15px → 13px · 설명 13px → 12px · 번호 11px → 10px
+      ---- 윗선 진하기 .28 → .16 · 간격 줄임
+========================================================= */
+.hs-hero__title {
+  font-size: clamp(32px, 3.8vw, 60px);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+}
+
+.hs-row > div {
+  gap: 3px;                                   /* 5px → */
+  padding-top: 9px;                           /* 11px → */
+  border-top-color: rgba(255, 255, 255, 0.16);
+}
+
+.hs-row span {
+  font-size: 10px;
+}
+
+.hs-row b {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+
+.hs-row p {
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+@media (max-width: 900px) {
+
+  .hs-hero__title {
+    font-size: clamp(30px, 7.4vw, 44px);
+  }
+
+}
+
+/* =========================================================
    [아이맥 화면비] 맥북 느낌 그대로 / 2026.11.03
    ---------------------------------------------------------
    아이맥 2048 × 1152 (브라우저 안 약 2048 × 1040) 은 맥북(1512 × 860)보다 세로가 짧아서
@@ -7625,6 +8071,17 @@ body.handle-page {
   html body .ha-stage .hf-stack {
     --w: min(28.44vw, 56svh);
     margin-top: 4.55vw;     /* 8svh */
+  }
+
+  /* HUD 히어로 글 : 아래에서 거리 핸들 제목과 같게 (히어로 92svh 라 8% + 아래 여백) 6svh → 8.5svh = 16.5vh / 2026.11.08 */
+  html body .hs-hero__copy {
+    padding-bottom: 8.5svh;
+  }
+
+  /* HUD 다섯 겹 가운데 HUD 그림 : max-height 56svh → / 2026.11.08 */
+  html body .hb-hud,
+  html body .hb-ref {
+    max-height: min(31.85vw, 62.7svh);
   }
 
   /* 핸들 06 울려 보기 핸들 그림 : height min(78vh, 760px) → */
@@ -8118,6 +8575,51 @@ body.handle-page {
   }
   .hd5 .mk3--zig figcaption p:not(.lbl) {
     font-size: 0.9921vw;
+  }
+  .hs-hero__title {
+    font-size: 2.9vw;
+  }
+  .hs-row span {
+    font-size: 0.7275vw;
+  }
+  .hs-row b {
+    font-size: 0.9921vw;
+  }
+  .hs-row p {
+    font-size: 0.8598vw;
+  }
+  .hb-idx li {
+    font-size: 0.9259vw;
+  }
+  .hb-t h2 {
+    font-size: 2.3vw;
+  }
+  .hb-t h3 {
+    font-size: 1.6vw;
+  }
+  .hb-t__no, .hb-t__z {
+    font-size: 0.7937vw;
+  }
+  .hb-t__big {
+    font-size: 5.6vw;
+  }
+  .hb-t__big small {
+    font-size: 0.25em;
+  }
+  .hb-t__d {
+    font-size: 0.9921vw;
+  }
+  .hs-hero__title {
+    font-size: 3.8vw;
+  }
+  .hs-row span {
+    font-size: 0.6614vw;
+  }
+  .hs-row b {
+    font-size: 0.8598vw;
+  }
+  .hs-row p {
+    font-size: 0.7937vw;
   }
   .hd5 .cfg .lbl[style], .hd5 .out .lbl[style] {
     font-size: 0.7937vw !important;
@@ -9439,6 +9941,98 @@ body.handle-page {
   }
   .hd5 .mk3--zig figure:nth-child(3) {
     margin-top: 2.6vw;
+  }
+  .hs-hero {
+    height: 92svh;
+    min-height: 37.037vw;
+  }
+  .hs-hero__img {
+    width: 100%;
+    height: 100%;
+  }
+  .hs-hero__ring {
+    left: 45.6%;
+    width: 0;
+    height: 0;
+  }
+  .hs-hero__ring i {
+    left: 50%;
+    width: 9vmin;
+    height: 9vmin;
+  }
+  .hs-hero__copy {
+    left: 0;
+    right: 0;
+    column-gap: 1.6vw;
+    padding: 0 var(--hf-pad) 6svh;
+  }
+  .hs-hero__title {
+    margin: 0;
+  }
+  .hs-row {
+    column-gap: 1.6vw;
+  }
+  .hs-row > div {
+    gap: 0.3307vw;
+    padding-top: 0.7275vw;
+  }
+  .hs-row p {
+    margin: 0;
+  }
+  .hb-ly {
+    height: 520vh;
+  }
+  .hb-stage {
+    column-gap: 1.6vw;
+    height: 100vh;
+    height: 100svh;
+    padding: var(--hf-hd) var(--hf-pad) 0;
+  }
+  .hb-idx {
+    margin: 0;
+    padding: 0;
+  }
+  .hb-idx li {
+    padding: 0.7937vw 0;
+  }
+  .hb-idx li::after {
+    left: 0;
+    width: 100%;
+    height: 1px;
+  }
+  .hb-hud, .hb-ref {
+    max-height: 56svh;
+    margin: 0 auto;
+  }
+  .hb-hud img, .hb-ref img {
+    width: 100%;
+    height: 100%;
+  }
+  .hb-ref {
+    left: 0;
+    right: 0;
+  }
+  .hb-txt {
+    min-height: 21.164vw;
+  }
+  .hb-t {
+    gap: 0.7937vw;
+  }
+  .hb-t h2, .hb-t h3 {
+    margin: 0;
+  }
+  .hb-t p {
+    margin: 0;
+  }
+  .hb-t__big small {
+    margin-left: 0.3em;
+  }
+  .hb-t__d {
+    max-width: 30em;
+  }
+  .hs-row > div {
+    gap: 0.1984vw;
+    padding-top: 0.5952vw;
   }
 
 }

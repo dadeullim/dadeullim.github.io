@@ -4039,6 +4039,8 @@ document.addEventListener("DOMContentLoaded", () => {
       distance: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18"/><path d="m7 8-4 4 4 4"/><path d="m17 8 4 4-4 4"/><path d="M12 5v3M12 16v3"/></svg>',
       time: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>'
     };
+    /* 2026.11.08 : 작은 영어 글자 빼기 — 영어 제목(.wx__en) 없앰, 단계 DANGER · CAUTION → 위험 · 주의 */
+    const LV = { DANGER: "위험", CAUTION: "주의" };
     const wrap = document.getElementById("words");
     wrap.innerHTML = W.map((x, i) => {
       const no = String(i + 1).padStart(2, "0");
@@ -4047,14 +4049,13 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="wx__left">
           <p class="wx__num tnum" aria-hidden="true"><span>${no}</span></p>
           <div class="wx__body rv">
-            <p class="wx__en">${x.w}</p>
             <h2 class="wx__ko">${x.h.replace("<br>", " ")}</h2>
             <p class="wx__desc">${x.p}</p>
-            <p class="wx__meta">${x.src} <i style="background:${x.lc}"></i> ${x.lv}</p>
+            <p class="wx__meta">${x.src} <i style="background:${x.lc}"></i> ${LV[x.lv]}</p>
           </div>
           <ul class="wx__icons rv" data-d="1">
             <li>${ICON.sound}<span>소리</span><b>${x.src}</b></li>
-            <li>${ICON.level}<span>단계</span><b>${x.lv}</b></li>
+            <li>${ICON.level}<span>단계</span><b>${LV[x.lv]}</b></li>
             <li>${ICON.distance}<span>거리</span><b>${x.dir}</b></li>
             <li>${ICON.time}<span>시간</span><b class="tnum">${x.t}</b></li>
           </ul>
@@ -4185,6 +4186,71 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   })();
 
+
+});
+
+
+
+/* =========================================================
+   [HUD 11-08] HUD 페이지 — 히어로 앞유리 사진 · 다섯 겹 제자리 교체 / 2026.11.08
+   ---------------------------------------------------------
+   hud.html 의 #hsHero · #hbLy 가 있을 때만 실행
+   스타일 : interface.css 맨 아래 [HUD 11-08]
+   1. 히어로 : 경고 아이콘 위치(원본 1536 × 1024 에서 700, 299)를 사진 크롭에 맞춰 파동을 놓음
+   2. 다섯 겹 : 섹션 진행도를 여섯 칸으로 나눠
+               0 = 소개(다섯 장 모두 밝게) · 1–5 = 그 겹만 밝게, 목차 선 · 오른쪽 번호와 설명이 함께 바뀜
+========================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* 1. 히어로 파동 위치 */
+  (() => {
+    const hero = document.getElementById("hsHero"), ring = document.getElementById("hsRing");
+    if (!hero || !ring) return;
+    const img = hero.querySelector(".hs-hero__img");
+    const IW = 1536, IH = 1024, PX = 700, PY = 299;
+    const place = () => {
+      const W = hero.clientWidth, H = hero.clientHeight, s = Math.max(W / IW, H / IH);
+      /* object-position 과 같은 값 (CSS 의 --ox · --oy) */
+      const cs = getComputedStyle(img), num = (v, d) => (isNaN(parseFloat(v)) ? d : parseFloat(v));
+      const ox = num(cs.getPropertyValue("--ox"), 0.5), oy = num(cs.getPropertyValue("--oy"), 0.3);
+      ring.style.left = ((W - IW * s) * ox + PX * s).toFixed(1) + "px";
+      ring.style.top = ((H - IH * s) * oy + PY * s).toFixed(1) + "px";
+    };
+    place();
+    addEventListener("resize", place);
+    if (!img.complete) img.addEventListener("load", place);
+  })();
+
+  /* 2. 다섯 겹 — 제자리 교체 */
+  (() => {
+    const sec = document.getElementById("hbLy");
+    if (!sec || !window.DD) return;
+    const L = [
+      { n: "01", ko: "차로 · 노면 위", d: "위험이 있는 차로를 색으로 칠합니다.",       img: "hero-L-lane-red",    z: "노면 위" },
+      { n: "02", ko: "속도 · 고정",   d: "속도와 제한 속도는 늘 같은 자리에 둡니다.", img: "hero-L-speed",       z: "하단 고정" },
+      { n: "03", ko: "경로 안내",     d: "다음 회전과 남은 거리를 보여 줍니다.",       img: "hero-L-nav",         z: "좌측 상단" },
+      { n: "04", ko: "소리 상태",     d: "소리를 감지했는지 귀 아이콘으로 알립니다.", img: "hero-L-ear-siren",   z: "좌측" },
+      { n: "05", ko: "상황 경고",     d: "무엇이, 어느 방향에서 오는지 한 단어로.",   img: "hero-L-alert-siren", z: "우측 상단" }
+    ];
+    const idx = document.getElementById("hbIdx"), hud = document.getElementById("hbHud"), ref = document.getElementById("hbRef"), txt = document.getElementById("hbTxt");
+    idx.innerHTML = L.map((l) => `<li><span>${l.n}</span>${l.ko}</li>`).join("");
+    const imgs = L.map((l) => `<img src="${DD.asset}${l.img}.webp" alt="" draggable="false">`).join("");
+    hud.innerHTML = imgs;
+    ref.innerHTML = imgs;
+    txt.innerHTML =
+      `<article class="hb-t"><p class="hb-t__no">00 / 05</p><h2>한 장처럼 보이는<br>다섯 겹의 정보.</h2><p class="hb-t__d">차로 · 속도 · 경로 · 소리 · 경고. 서로 다른 거리에 놓인 다섯 장이 겹쳐 하나의 HUD가 됩니다.</p></article>` +
+      L.map((l) => `<article class="hb-t"><p class="hb-t__big">${l.n}<small>/ 05</small></p><p class="hb-t__z">${l.z}</p><h3>${l.ko}</h3><p class="hb-t__d">${l.d}</p></article>`).join("");
+    const li = [...idx.children], hi = [...hud.children], ri = [...ref.children], ts = [...txt.children];
+    let last = -2;
+    DD.onFrame(() => {
+      const k = Math.min(5, Math.floor(DD.progress(sec) * 6)) - 1;
+      if (k === last) return;
+      last = k;
+      li.forEach((e, i) => e.classList.toggle("is-on", i === k));
+      [hi, ri].forEach((a) => a.forEach((e, i) => e.classList.toggle("is-dim", k >= 0 && i !== k)));
+      ts.forEach((e, i) => e.classList.toggle("is-on", i === k + 1));
+    });
+  })();
 
 });
 
