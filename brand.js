@@ -2976,12 +2976,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const rippleMap =
     document.querySelector("#pa-ripple feDisplacementMap");
 
-  const rippleNoise =
-    document.querySelector("#pa-ripple feTurbulence");
 
-  /* 맥북 기준 최대 일렁임(px) — 큰 화면은 비율대로
-     작은 창이 맥북에서 약 130 × 50px 라 살짝만 (영상이 1.3배 키워져 있어 실제로는 약 ±7px) */
-  const RIPPLE_MAX = 10;
+  /* 2026.11.08 : 인덱스 02 섹션처럼 — 넓은 물결이 천천히 흐르고(flow) 빨강 · 파랑이 살짝 어긋남(rShift · bShift)
+     전) 잔물결 노이즈 모양(baseFrequency)을 계속 바꿔 울렁울렁 떨림 · 최대 10px */
+  const rippleFlow =
+    document.querySelector('#pa-ripple feOffset[result="flow"]');
+
+  const rippleR =
+    document.querySelector('#pa-ripple feOffset[result="rShift"]');
+
+  const rippleB =
+    document.querySelector('#pa-ripple feOffset[result="bShift"]');
+
+  /* 2026.11.08 : 일렁임이 잘 안 느껴져서 더 세게 · 더 빨리 흐르게
+     전) 휘는 정도 30 · 색 번짐 3.2 · 흐름 속도 0.42 / 0.31 · 흐르는 폭 70 / 50 */
+  const RIPPLE_MAX = 64;   /* 맥북 기준 물결 휘는 정도(px) — 큰 화면은 비율대로 */
+  const CHROMA_MAX = 6;    /* 맥북 기준 색 번짐(px) */
 
   let rippleK = 0, rippleRaf = 0;
 
@@ -2992,18 +3002,20 @@ document.addEventListener("DOMContentLoaded", () => {
       rippleMap.setAttribute("scale", "0");
       return;
     }
-    const t = now / 1000;
-    rippleNoise.setAttribute(
-      "baseFrequency",
-      `${(0.012 + Math.sin(t * 0.9) * 0.002).toFixed(5)} ${(0.03 + Math.cos(t * 1.3) * 0.006).toFixed(5)}`   /* 작은 창 안에 물결이 두세 줄 보이게 */
-    );
-    rippleMap.setAttribute("scale", (RIPPLE_MAX * Math.max(1, W() / 1512) * rippleK).toFixed(2));
+    const t = now / 1000, sc = Math.max(1, W() / 1512);
+    /* 물결 무늬를 천천히 밀어 흐르게 (모양은 그대로라 떨리지 않음) */
+    rippleFlow.setAttribute("dx", (Math.sin(t * 0.9) * 140).toFixed(1));
+    rippleFlow.setAttribute("dy", (Math.cos(t * 0.7) * 100).toFixed(1));
+    rippleMap.setAttribute("scale", (RIPPLE_MAX * sc * rippleK).toFixed(2));
+    const c = CHROMA_MAX * sc * rippleK;
+    rippleR.setAttribute("dx", c.toFixed(2));
+    rippleB.setAttribute("dx", (-c).toFixed(2));
     img.style.filter = "url(#pa-ripple)";
     rippleRaf = requestAnimationFrame(rippleStep);
   };
 
   function rippleUpdate(time) {
-    if (!rippleMap || !rippleNoise || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!rippleMap || !rippleFlow || !rippleR || !rippleB || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const sm = (v) => { v = Math.min(1, Math.max(0, v)); return v * v * (3 - 2 * v); };
     rippleK = sm((time - 7.95) / 0.5) * (1 - sm((time - 9.2) / 1.2));
     if (rippleK > 0.001 && !rippleRaf) rippleRaf = requestAnimationFrame(rippleStep);

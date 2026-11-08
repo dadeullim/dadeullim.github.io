@@ -23,7 +23,7 @@
   <!-- BRAND 공통 CSS -->
   <link
     rel="stylesheet"
-    href="./brand.css?v=20261108u"
+    href="./brand.css?v=20261108w"
   >
 
   <!-- =====================================================
@@ -45,7 +45,7 @@
   ====================================================== -->
 
   <script
-    src="./brand.js?v=20261108u"
+    src="./brand.js?v=20261108w"
     defer
   ></script>
 
@@ -266,12 +266,22 @@
 
             <div class="brand-hero-final__media">
 
-              <!-- 2026.11.08 : 프롤로그 "모든 소리가 [창] 닿을 수 있도록." 작은 창일 때 영상이 물결처럼 일렁이는 필터
-                   (인덱스 이미지 일렁임처럼) — 창이 커지면서 서서히 사라짐 · 세기는 brand.js [창 일렁임] 이 조절 -->
+              <!-- 2026.11.08 : 프롤로그 "모든 소리가 [창] 닿을 수 있도록." 작은 창일 때 영상이 인덱스 02 섹션처럼 일렁이는 필터
+                   ---- 넓고 부드러운 물결이 천천히 흐름(낮은 주파수 노이즈를 조금씩 밀어 줌) + 빨강 · 파랑이 살짝 어긋나는 색 번짐
+                   ---- 전) 잔물결 노이즈 모양을 계속 바꿔 울렁울렁 떨림
+                   세기 · 흐름은 brand.js [창 일렁임] 이 조절 -->
               <svg class="pa-ripple-defs" width="0" height="0" aria-hidden="true" focusable="false">
-                <filter id="pa-ripple" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
-                  <feTurbulence type="fractalNoise" baseFrequency="0.012 0.03" numOctaves="2" seed="7" result="noise"/>
-                  <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+                <filter id="pa-ripple" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.0035 0.0065" numOctaves="2" seed="11" result="noise"/>
+                  <feOffset in="noise" dx="0" dy="0" result="flow"/>
+                  <feDisplacementMap in="SourceGraphic" in2="flow" scale="0" xChannelSelector="R" yChannelSelector="G" result="wave"/>
+                  <feColorMatrix in="wave" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="rOnly"/>
+                  <feOffset in="rOnly" dx="0" dy="0" result="rShift"/>
+                  <feColorMatrix in="wave" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="gOnly"/>
+                  <feColorMatrix in="wave" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="bOnly"/>
+                  <feOffset in="bOnly" dx="0" dy="0" result="bShift"/>
+                  <feBlend in="rShift" in2="gOnly" mode="screen" result="rg"/>
+                  <feBlend in="rg" in2="bShift" mode="screen"/>
                 </filter>
               </svg>
 
