@@ -2965,6 +2965,51 @@ document.addEventListener("DOMContentLoaded", () => {
      (숫자 = 타임라인 위치, 전체 길이는 CSS --pl-len)
   --------------------------------------------------------- */
 
+  /* ---------------------------------------------------------
+     [창 일렁임] 2026.11.08
+     ---- "모든 소리가 [창] 닿을 수 있도록." 작은 창일 때 안의 영상이 물결처럼 일렁임 (인덱스 이미지처럼)
+     ---- 창이 열리는 7.95 부터 서서히 생기고 → 작은 창 동안 일렁 → 창이 커지는 9.2 ~ 10.4 동안 서서히 사라짐
+     ---- 방법 : brand1.html 의 SVG 필터(#pa-ripple)를 영상에 걸고, 물결 무늬를 조금씩 흘림
+                세기가 0 이면 필터를 빼서 가볍게
+     ---- 움직임 줄이기 설정이면 안 함
+  --------------------------------------------------------- */
+  const rippleMap =
+    document.querySelector("#pa-ripple feDisplacementMap");
+
+  const rippleNoise =
+    document.querySelector("#pa-ripple feTurbulence");
+
+  /* 맥북 기준 최대 일렁임(px) — 큰 화면은 비율대로
+     작은 창이 맥북에서 약 130 × 50px 라 살짝만 (영상이 1.3배 키워져 있어 실제로는 약 ±7px) */
+  const RIPPLE_MAX = 10;
+
+  let rippleK = 0, rippleRaf = 0;
+
+  const rippleStep = (now) => {
+    rippleRaf = 0;
+    if (rippleK <= 0.001) {
+      img.style.filter = "";
+      rippleMap.setAttribute("scale", "0");
+      return;
+    }
+    const t = now / 1000;
+    rippleNoise.setAttribute(
+      "baseFrequency",
+      `${(0.012 + Math.sin(t * 0.9) * 0.002).toFixed(5)} ${(0.03 + Math.cos(t * 1.3) * 0.006).toFixed(5)}`   /* 작은 창 안에 물결이 두세 줄 보이게 */
+    );
+    rippleMap.setAttribute("scale", (RIPPLE_MAX * Math.max(1, W() / 1512) * rippleK).toFixed(2));
+    img.style.filter = "url(#pa-ripple)";
+    rippleRaf = requestAnimationFrame(rippleStep);
+  };
+
+  function rippleUpdate(time) {
+    if (!rippleMap || !rippleNoise || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const sm = (v) => { v = Math.min(1, Math.max(0, v)); return v * v * (3 - 2 * v); };
+    rippleK = sm((time - 7.95) / 0.5) * (1 - sm((time - 9.2) / 1.2));
+    if (rippleK > 0.001 && !rippleRaf) rippleRaf = requestAnimationFrame(rippleStep);
+    if (rippleK <= 0.001 && !rippleRaf) { img.style.filter = ""; rippleMap.setAttribute("scale", "0"); }
+  }
+
   const tl = gsap.timeline({
     defaults: {
       ease: "none",
@@ -2972,6 +3017,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     onUpdate() {
       clearHero(this);
+
+      rippleUpdate(this.time());   /* 2026.11.08 [창 일렁임] */
 
       /* 2026.10.14 : HERO 영상 재생 시점
          전) 타임라인 맨 끝(progress 0.999, 문구가 다 나오고 한참 뒤)

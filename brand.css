@@ -16816,6 +16816,21 @@ html {
 
 }
 
+/* =========================================================
+   [창 일렁임] 프롤로그 작은 창 물결 필터 / 2026.11.08
+   ---- brand1.html 의 SVG 필터 정의(#pa-ripple)는 자리를 차지하지 않게 숨김
+   ---- 세기 · 움직임은 brand.js [창 일렁임]
+========================================================= */
+.pa-ripple-defs {
+  position: absolute;
+
+  width: 0;
+  height: 0;
+
+  overflow: hidden;
+  pointer-events: none;
+}
+
 /* ===== [아이맥 글자 크기] 자동 생성 시작 — 손으로 고치지 않기 ===== */
 /* 맥북 1512px 글자 크기를 아이맥에서도 같은 비율로 (px · clamp → vw)
    ---- 위쪽 CSS 를 고치면 python3 ~/.claude/dadeullim-tools/fonts_large.py 파일.css 로 다시 만들기 */
@@ -18270,6 +18285,10 @@ html {
   }
   .brand2-page .philosophy-keywords__item {
     left: 2.9101vw;
+  }
+  .pa-ripple-defs {
+    width: 0;
+    height: 0;
   }
 
 }

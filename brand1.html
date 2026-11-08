@@ -23,7 +23,7 @@
   <!-- BRAND 공통 CSS -->
   <link
     rel="stylesheet"
-    href="./brand.css?v=20261108s"
+    href="./brand.css?v=20261108u"
   >
 
   <!-- =====================================================
@@ -45,7 +45,7 @@
   ====================================================== -->
 
   <script
-    src="./brand.js?v=20261108s"
+    src="./brand.js?v=20261108u"
     defer
   ></script>
 
@@ -265,6 +265,15 @@
           <div class="brand-hero-final">
 
             <div class="brand-hero-final__media">
+
+              <!-- 2026.11.08 : 프롤로그 "모든 소리가 [창] 닿을 수 있도록." 작은 창일 때 영상이 물결처럼 일렁이는 필터
+                   (인덱스 이미지 일렁임처럼) — 창이 커지면서 서서히 사라짐 · 세기는 brand.js [창 일렁임] 이 조절 -->
+              <svg class="pa-ripple-defs" width="0" height="0" aria-hidden="true" focusable="false">
+                <filter id="pa-ripple" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.012 0.03" numOctaves="2" seed="7" result="noise"/>
+                  <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+              </svg>
 
               <!-- 2026.10.14 : HERO 이미지(b-1.jpg) → 영상(brand1-hero.mp4)
                    첫 장면 = 기존 이미지와 같은 구도 (차가 서 있는 장면)
