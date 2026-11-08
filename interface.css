@@ -8016,9 +8016,20 @@ body.handle-page {
       ---- 윗선 진하기 .28 → .16 · 간격 줄임
 ========================================================= */
 .hs-hero__title {
-  font-size: clamp(32px, 3.8vw, 60px);
+  font-size: clamp(30px, 3.2vw, 52px);   /* 2026.11.08 너무 커서 ---- 3.8vw(맥북 57px) → 3.2vw(맥북 48px) */
   line-height: 1.22;
   letter-spacing: -0.02em;
+}
+
+/* 2026.11.08 : 히어로가 화면을 꽉 채우게 (다음 섹션이 살짝 보이던 것)
+   ---- height 92svh → 100svh
+   ---- 글 위치는 그대로 : 아래 여백 6svh → 14svh (전에는 히어로 아래 8% + 6svh) */
+.hs-hero {
+  height: 100svh;
+}
+
+.hs-hero__copy {
+  padding-bottom: 14svh;
 }
 
 .hs-row > div {
@@ -8088,7 +8099,7 @@ body.handle-page {
 
   /* HUD 히어로 글 : 아래에서 거리 핸들 제목과 같게 (히어로 92svh 라 8% + 아래 여백) 6svh → 8.5svh = 16.5vh / 2026.11.08 */
   html body .hs-hero__copy {
-    padding-bottom: 8.5svh;
+    padding-bottom: 16.5svh;   /* 2026.11.08 히어로 100svh 로 바꾸며 ---- 8.5svh(+ 히어로 아래 8%) → 16.5svh */
   }
 
   /* HUD 다섯 겹 가운데 HUD 그림 : max-height 56svh → / 2026.11.08 */
@@ -8623,7 +8634,7 @@ body.handle-page {
     font-size: 0.9921vw;
   }
   .hs-hero__title {
-    font-size: 3.8vw;
+    font-size: 3.2vw;
   }
   .hs-row span {
     font-size: 0.6614vw;
@@ -10042,6 +10053,12 @@ body.handle-page {
   }
   .hb-t__d {
     max-width: 30em;
+  }
+  .hs-hero {
+    height: 100svh;
+  }
+  .hs-hero__copy {
+    padding-bottom: 14svh;
   }
   .hs-row > div {
     gap: 0.1984vw;
