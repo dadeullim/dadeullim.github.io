@@ -4070,11 +4070,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const secs = [...wrap.querySelectorAll(".w")];
     const br = document.getElementById("br");
-    DD.onFrame(() => {
-      const r = br.getBoundingClientRect();
-      const b = DD.smooth(DD.clamp((innerHeight * 0.85 - r.top) / (innerHeight * 0.6)));
+    /* 2026.11.08 : 선이 화면에 들어오면 영상처럼 한 번 쭉 재생
+       ---- 선이 왼쪽부터 차오름(--b) → 선이 닿은 점 글자가 올라오며 진해짐(--p) → 끝에 Sight 가 왼쪽부터 민트로 차오름(--s)
+       ---- 전) 스크롤 위치에 따라 차오름 (const b = DD.smooth(DD.clamp((innerHeight * 0.85 - r.top) / (innerHeight * 0.6))))
+       스타일 : interface.css [HUD Sound → Sight] */
+    const brRule = br.querySelector(".br__rule"), brTicks = [...br.querySelectorAll(".br__ticks a")];
+    const BR_LINE = 2200, BR_SIGHT = 900;   /* 선 차오르는 시간 · Sight 차오르는 시간 (ms) */
+    const brSet = (b, sv) => {
       br.style.setProperty("--b", b.toFixed(3));
-    });
+      const rr = brRule.getBoundingClientRect();
+      brTicks.forEach((a) => {
+        const ar = a.getBoundingClientRect(), at = (ar.left + ar.width / 2 - rr.left) / (rr.width || 1);   /* 선 위 점 위치 0 ~ 1 */
+        a.style.setProperty("--p", DD.smooth(DD.clamp((b - at + 0.04) / 0.1)).toFixed(3));
+      });
+      br.style.setProperty("--s", sv.toFixed(3));
+    };
+    brSet(0, 0);
+    const brPlay = () => {
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) { brSet(1, 1); return; }
+      const t0 = performance.now();
+      const step = (now) => {
+        const t = now - t0;
+        const b = DD.smooth(DD.clamp(t / BR_LINE));
+        const sv = DD.smooth(DD.clamp((t - BR_LINE * 0.85) / BR_SIGHT));
+        brSet(b, sv);
+        if (t < BR_LINE * 0.85 + BR_SIGHT) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    const brIo = new IntersectionObserver(([e]) => { if (e.isIntersecting) { brIo.disconnect(); brPlay(); } }, { threshold: 0, rootMargin: "0px 0px -30% 0px" });
+    brIo.observe(brRule.parentElement);
     /* 섹션이 화면 가운데로 올수록 HUD 이미지가 또렷하게 (--f 0 → 1) */
     DD.onFrame(() => {
       secs.forEach((s) => {

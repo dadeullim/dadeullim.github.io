@@ -8067,6 +8067,66 @@ body.handle-page {
 }
 
 /* =========================================================
+   [HUD Sound → Sight] 선이 차오를 때 점 · Sight 움직임 / 2026.11.08
+   ---------------------------------------------------------
+   1. 선 위 다섯 점(01 사이렌 ~ 05 끼어들기)
+      ---- 선이 그 점까지 차오르면 그 점 글자가 아래에서 올라오며 진해짐
+           (--p 0 → 1 : interface.js 가 점마다 넣음)
+      ---- 전) 늘 연한 회색 그대로
+   2. 오른쪽 Sight
+      ---- 선이 끝에 가까워질수록 글자 안이 왼쪽부터 민트로 차오름 (--s 0 → 1)
+      ---- 전) 글자 전체 색이 한꺼번에 조금씩 진해짐 (color-mix)
+      ---- 아래 반사 글자는 전처럼 글자 색 (차오르는 효과는 위 글자에만)
+========================================================= */
+.hud16 .br__ticks a {
+  color: color-mix(in srgb, var(--ink) calc(var(--p, 0) * 100%), var(--ink-4));
+}
+
+.hud16 .br__ticks a span {
+  opacity: calc(0.35 + var(--p, 0) * 0.65);
+  transform: translateY(calc((1 - var(--p, 0)) * 14px));
+}
+
+.hud16 .br__ticks a::before {
+  opacity: calc(0.4 + var(--p, 0) * 0.6);
+}
+
+.hud16 .br__w--sight {
+  color: transparent;
+  background: linear-gradient(90deg,
+    var(--mint) calc(var(--s, 0) * 116% - 8%),
+    var(--ink-4) calc(var(--s, 0) * 116% + 8%));
+  -webkit-background-clip: text;
+          background-clip: text;
+}
+
+.hud16 .br__w--sight.refl::after {
+  color: color-mix(in srgb, var(--mint) calc(25% + var(--s, 0) * 75%), var(--ink-4));
+}
+
+/* 2026.11.08 : Sight 의 g 아랫부분이 잘려 보임
+   ---- 색을 채우는 배경(background-clip: text)은 글자 상자 안에만 칠해지는데 줄 간격(.9)이 좁아 g 꼬리가 상자 밖
+   ---- 상자를 아래로 0.22em 늘리고(padding) 같은 만큼 margin 으로 되돌려 자리는 그대로
+   ---- 반사 글자도 늘어난 만큼 위치 · 높이 보정 (전과 같은 자리) */
+.hud16 .br__w--sight {
+  padding-bottom: 0.22em;
+  margin-bottom: -0.22em;
+}
+
+.hud16 .br__w--sight.refl::after {
+  top: calc(96% - 0.2112em);      /* 96% × (높이 - 0.22em) */
+  height: calc(100% - 0.22em);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hud16 .br__ticks a span {
+    transform: none;
+  }
+
+}
+
+/* =========================================================
    [아이맥 화면비] 맥북 느낌 그대로 / 2026.11.03
    ---------------------------------------------------------
    아이맥 2048 × 1152 (브라우저 안 약 2048 × 1040) 은 맥북(1512 × 860)보다 세로가 짧아서
@@ -10063,6 +10123,13 @@ body.handle-page {
   .hs-row > div {
     gap: 0.1984vw;
     padding-top: 0.5952vw;
+  }
+  .hud16 .br__w--sight {
+    padding-bottom: 0.22em;
+    margin-bottom: -0.22em;
+  }
+  .hud16 .br__w--sight.refl::after {
+    height: calc(100% - 0.22em);
   }
 
 }
