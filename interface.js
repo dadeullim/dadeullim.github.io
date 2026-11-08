@@ -4383,18 +4383,22 @@ document.addEventListener("DOMContentLoaded", () => {
      ---- 기본 속도 0.35 → 0.6px / 프레임
      ---- 화면에 들어오는 순간 살짝 밀어 줘서(v 3) 바로 흐르는 게 보이고, 곧 기본 속도로 가라앉음
      ---- 화면에 들어오기 300px 전부터 미리 돌기 시작 */
-  const BASE = 0.6;
-  let x = 0, v = 0, last = scrollY, hover = false, on = false, raf = 0;
+  /* 2026.11.08 (2) : 그래도 가만히 두면 다음 화면이 들어오기까지 한참 (36px/초 → 카드 한 장에 약 10초)
+     ---- 프레임마다 0.6px → 1초에 110px (카드 한 장 약 3.5초) · 모니터 주사율(60 · 120Hz)과 상관없이 같은 속도 */
+  const SPEED = 110;   /* px / 초 (맥북 기준) */
+  let x = 0, v = 0, last = scrollY, hover = false, on = false, raf = 0, prev = 0;
   wrap.addEventListener("mouseenter", () => { hover = true; });
   wrap.addEventListener("mouseleave", () => { hover = false; });
 
-  const loop = () => {
+  const loop = (now) => {
     raf = 0;
+    const dt = prev ? Math.min(0.05, (now - prev) / 1000) : 0;   /* 지난 프레임부터 걸린 시간(초) */
+    prev = now;
     const sc = Math.max(1, innerWidth / 1512);   /* 큰 화면은 비율대로 */
     const dy = scrollY - last;
     last = scrollY;
     v += (Math.abs(dy) * 0.15 - v) * 0.1;
-    x += hover ? 0 : (BASE + v) * sc;
+    x += hover ? 0 : (SPEED * dt + v) * sc;
     rows.forEach((r) => {
       const W = r.scrollWidth / 2;
       const off = ((x % W) + W) % W;
@@ -4407,7 +4411,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const was = on;
     on = e.isIntersecting;
     last = scrollY;
-    if (on && !was) v = Math.max(v, 3);   /* 들어오는 순간 살짝 밀어 줌 */
+    if (on && !was) { v = Math.max(v, 3); prev = 0; }   /* 들어오는 순간 살짝 밀어 줌 · 시간 다시 재기 */
     if (on && !raf) raf = requestAnimationFrame(loop);
   }, { rootMargin: "300px 0px" }).observe(sec);
 })();
