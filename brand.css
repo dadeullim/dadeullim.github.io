@@ -16817,6 +16817,20 @@ html {
 }
 
 /* =========================================================
+   [BRAND1 히어로 글 위치] 아주 살짝 왼쪽으로 / 2026.11.09
+   ---- "소리를 넘어 감각으로, / 모두의 이동을 연결하다." 가 너무 오른쪽에 치우쳐 보여서
+   ---- 오른쪽 여백 4.2vw(맥북 63px) → 6.3vw(맥북 95px) · 아이맥도 같은 비율
+   ---- 위쪽 여러 곳(BRAND1 HERO · LARGE SCREEN)에서 4.2vw 로 다시 정해서 html body 로 이기게 · 태블릿 · 폰은 그대로
+========================================================= */
+@media (min-width: 1001px) {
+
+  html body.brand1-page .brand-hero-final__copy {
+    right: 6.3vw;
+  }
+
+}
+
+/* =========================================================
    [창 일렁임] 프롤로그 작은 창 물결 필터 / 2026.11.08
    ---- brand1.html 의 SVG 필터 정의(#pa-ripple)는 자리를 차지하지 않게 숨김
    ---- 세기 · 움직임은 brand.js [창 일렁임]
@@ -18285,6 +18299,9 @@ html {
   }
   .brand2-page .philosophy-keywords__item {
     left: 2.9101vw;
+  }
+  html body.brand1-page .brand-hero-final__copy {
+    right: 6.3vw;
   }
   .pa-ripple-defs {
     width: 0;
