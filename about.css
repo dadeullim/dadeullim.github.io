@@ -4829,6 +4829,13 @@ body.about-page.user-page{overflow-x:clip;}
   .problem-page .problem-opening__image {
     transform: scale(1.1);
     transform-origin: 50% 0;
+
+    /* 아래로 흐려지는 그라데이션 다시 맞춤 (2026.11.08)
+       ---- 1.1배 키우면서 사진 아래 10% 가 화면 밖으로 나가 흐려지는 곳이 잘림 → 다음 섹션과 딱 끊겨 보였음
+       ---- 같은 그라데이션을 화면에 보이는 부분(위에서 90.9%)에 맞춰 당김
+            전) 70% · 82% · 92% · 100% → 63.6% · 74.5% · 83.6% · 90.9% */
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 63.6%, rgba(0,0,0,0.75) 74.5%, rgba(0,0,0,0.35) 83.6%, transparent 90.9%);
+            mask-image: linear-gradient(to bottom, #000 0%, #000 63.6%, rgba(0,0,0,0.75) 74.5%, rgba(0,0,0,0.35) 83.6%, transparent 90.9%);
   }
 
 }
