@@ -4075,13 +4075,16 @@ document.addEventListener("DOMContentLoaded", () => {
        ---- 전) 스크롤 위치에 따라 차오름 (const b = DD.smooth(DD.clamp((innerHeight * 0.85 - r.top) / (innerHeight * 0.6))))
        스타일 : interface.css [HUD Sound → Sight] */
     const brRule = br.querySelector(".br__rule"), brTicks = [...br.querySelectorAll(".br__ticks a")];
-    const BR_LINE = 2200, BR_SIGHT = 900;   /* 선 차오르는 시간 · Sight 차오르는 시간 (ms) */
+    /* 2026.11.08 : 더 빠르게 + 텐션 — 처음엔 살짝 머뭇거리다 확 차오름 (easeInOutQuart)
+       전) 선 2200ms · Sight 900ms · smooth(부드러운 S자) */
+    const BR_LINE = 1300, BR_SIGHT = 550;   /* 선 차오르는 시간 · Sight 차오르는 시간 (ms) */
+    const brEase = (k) => (k < 0.5 ? 8 * k * k * k * k : 1 - Math.pow(-2 * k + 2, 4) / 2);
     const brSet = (b, sv) => {
       br.style.setProperty("--b", b.toFixed(3));
       const rr = brRule.getBoundingClientRect();
       brTicks.forEach((a) => {
         const ar = a.getBoundingClientRect(), at = (ar.left + ar.width / 2 - rr.left) / (rr.width || 1);   /* 선 위 점 위치 0 ~ 1 */
-        a.style.setProperty("--p", DD.smooth(DD.clamp((b - at + 0.04) / 0.1)).toFixed(3));
+        a.style.setProperty("--p", DD.smooth(DD.clamp((b - at + 0.03) / 0.07)).toFixed(3));   /* 2026.11.08 점이 더 또렷하게 톡 (전 + 0.04 / 0.1) */
       });
       br.style.setProperty("--s", sv.toFixed(3));
     };
@@ -4091,10 +4094,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const t0 = performance.now();
       const step = (now) => {
         const t = now - t0;
-        const b = DD.smooth(DD.clamp(t / BR_LINE));
-        const sv = DD.smooth(DD.clamp((t - BR_LINE * 0.85) / BR_SIGHT));
+        const b = brEase(DD.clamp(t / BR_LINE));
+        const sv = brEase(DD.clamp((t - BR_LINE * 0.8) / BR_SIGHT));
         brSet(b, sv);
-        if (t < BR_LINE * 0.85 + BR_SIGHT) requestAnimationFrame(step);
+        if (t < BR_LINE * 0.8 + BR_SIGHT) requestAnimationFrame(step);
       };
       requestAnimationFrame(step);
     };
