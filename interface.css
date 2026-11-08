@@ -7537,6 +7537,14 @@ body.handle-page {
   letter-spacing: -.02em;
 }
 
+/* 2026.11.08 : 02 세 방향 도면 — 정면도(왼쪽)와 오른쪽 아래 도면 사이가 너무 멀어서
+   ---- 정면도 viewBox 를 그림 있는 곳만 잘라(handle.html) 칸 오른쪽 끝에 붙임 · 칸 크기는 전과 같은 1440 : 810
+   ---- 오른쪽 두 도면(측면 · 평면)은 칸 왼쪽 끝에 붙임 (handle.html preserveAspectRatio xMin)
+   ---- 그림 크기는 그대로, 사이 빈 곳만 줄어듦 */
+.hd5 #ga-front {
+  aspect-ratio: 1440 / 810;
+}
+
 /* 2026.11.03 : 07 제작 제목 "도면 그대로, 손으로 만들었습니다." 살짝 작게
    ---- clamp(34px, 3.8vw, 72px) → clamp(32px, 3.3vw, 62px) (맥북 57px → 50px) */
 .hd5 > section[aria-label="PROCESS"] .ttl {

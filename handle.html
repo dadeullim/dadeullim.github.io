@@ -30,7 +30,7 @@
 
   <link
     rel="stylesheet"
-    href="./style.css?v=20261108e"
+    href="./style.css?v=20261108g"
   >
 
 
@@ -59,7 +59,7 @@
 
   <link
     rel="stylesheet"
-    href="./interface.css?v=20261108e"
+    href="./interface.css?v=20261108g"
   >
 
 
@@ -75,7 +75,7 @@
   ></script>
 
   <script
-    src="./interface.js?v=20261108e"
+    src="./interface.js?v=20261108g"
     defer
   ></script>
 
@@ -331,7 +331,9 @@
   <div class="cols" style="margin-bottom:40px"><div><h2 class="ttl">세 방향에서 본<br><em>다들림 핸들.</em></h2></div>
     <p class="lead">정면도에 그립 구간(9시·3시)과 모터 6개의 위치를 표시했습니다. 측면·평면도는 렌더에 없는 각도라 비례만 맞춰 직접 그렸습니다. 치수에 * 표시가 있는 값은 일반 승용차 핸들 기준의 참고 치수입니다.</p></div>
   <div class="ga">
-    <figure class="front"><svg viewBox="0 0 1440 810" class="trace draw" aria-hidden="true" id="ga-front" data-src="640">
+    <!-- 2026.11.08 : 정면도와 오른쪽 도면 사이가 멀어서 — 정면도를 오른쪽으로 155 만큼 옮김 (viewBox 0 0 1440 810 → -155 0 1440 810)
+         바로 전) 300 0 840 810 + 오른쪽 끝에 붙임 → 너무 가까워서 중간으로 (사이 맥북 약 320px → 80px → 150px) -->
+    <figure class="front"><svg viewBox="-155 0 1440 810" class="trace draw" aria-hidden="true" id="ga-front" data-src="640">
 <path class="o" d="M366 388 A354 354 0 1 0 1074 388 A354 354 0 1 0 366 388" pathLength="1" style="--i:0"/>
 <path class="o" d="M428 388 A292 292 0 1 0 1012 388 A292 292 0 1 0 428 388" pathLength="1" style="--i:1"/>
 <path class="m" d="M481 221 L430 185" pathLength="1" style="--i:2"/>
@@ -364,7 +366,7 @@
 <path class="d" d="M656 643 C653 636 643 608 640 600 C637 592 638 597 637 595 C637 594 637 594 638 593" pathLength="1" style="--i:29"/>
 <path class="d" d="M784 643C787 636 797 608 800 600C803 592 802 597 803 595C803 594 803 594 802 593" pathLength="1" style="--i:30"/>
 <g class="ann"><g class="cl"><line x1="720" y1="4" x2="720" y2="772"/><line x1="336" y1="388" x2="1104" y2="388"/></g><path class="zone" d="M413 211 A354 354 0 0 0 413 565"/><path class="zone" d="M1027 211 A354 354 0 0 1 1027 565"/><g class="L"><circle class="m" data-m="L1" cx="409" cy="299" r="8"/><circle class="m" data-m="L2" cx="397" cy="388" r="8"/><circle class="m" data-m="L3" cx="409" cy="477" r="8"/></g><g class="R"><circle class="m" data-m="R1" cx="1031" cy="299" r="8"/><circle class="m" data-m="R2" cx="1043" cy="388" r="8"/><circle class="m" data-m="R3" cx="1031" cy="477" r="8"/></g><g class="dimn "><path d="M366 388 V806 M1074 388 V806" class="ext"/><path d="M366 800 H1074" class="dl"/><path d="M360 806 l12 -12 M1068 806 l12 -12" class="tk"/><text x="720.0" y="790" text-anchor="middle">Ø 370*</text></g><g class="dimn "><path d="M720 34 H714 M720 388 H714" class="ext"/><path d="M720 34 V388" class="dl"/><path d="M714 40 l12 -12 M714 394 l12 -12" class="tk"/><text x="708" y="211.0" text-anchor="end" dominant-baseline="middle"></text></g><text class="dtx" x="732" y="218">R 185*</text></g></svg></figure>
-    <figure><div class="draw-wrap"><svg class="hand side draw" viewBox="400 20 820 790" aria-hidden="true">
+    <figure><div class="draw-wrap"><svg class="hand side draw" viewBox="400 20 820 790" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
   <g class="o">
     <path d="M520 46 C548 46 566 62 566 90 L566 720 C566 748 548 764 520 764 C492 764 474 748 474 720 L474 90 C474 62 492 46 520 46 Z"/>
     <path d="M566 300 C600 298 640 300 664 314 C690 330 700 360 700 405 C700 450 690 480 664 496 C640 510 600 512 566 510"/>
@@ -373,7 +375,7 @@
   <g class="m"><path d="M566 352 L520 140 M566 458 L520 670 M566 405 H520"/><path d="M640 312 C660 340 664 370 664 405 C664 440 660 470 640 498"/></g>
   <g class="d"><path d="M478 230 H562 M478 580 H562"/><circle cx="520" cy="300" r="6"/><circle cx="520" cy="395" r="6"/><circle cx="520" cy="490" r="6"/></g>
 <g class="ann"><g class="dimn "><path d="M474 764 V796 M566 764 V796" class="ext"/><path d="M474 790 H566" class="dl"/><path d="M468 796 l12 -12 M560 796 l12 -12" class="tk"/><text x="520.0" y="780" text-anchor="middle">28*</text></g><g class="dimn "><path d="M566 405 V399 M1120 405 V399" class="ext"/><path d="M566 405 H1120" class="dl"/><path d="M560 411 l12 -12 M1114 411 l12 -12" class="tk"/><text x="843.0" y="395" text-anchor="middle"></text></g><g class="dimn "><path d="M474 46 H428 M474 764 H428" class="ext"/><path d="M434 46 V764" class="dl"/><path d="M428 52 l12 -12 M428 770 l12 -12" class="tk"/><text x="422" y="405.0" text-anchor="end" dominant-baseline="middle">370*</text></g></g></svg></div></figure>
-    <figure><svg class="hand top draw" viewBox="330 150 780 650" aria-hidden="true">
+    <figure><svg class="hand top draw" viewBox="330 150 780 650" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
   <g class="o">
     <path d="M366 236 C366 210 382 194 408 194 L1028 194 C1054 194 1070 210 1070 236 C1070 262 1054 278 1028 278 L408 278 C382 278 366 262 366 236 Z"/>
     <path d="M612 278 C612 312 624 350 650 370 C676 388 700 392 718 392 C736 392 760 388 786 370 C812 350 824 312 824 278"/>
