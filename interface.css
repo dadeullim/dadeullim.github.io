@@ -7521,6 +7521,22 @@ body.handle-page {
 
 /* 2026.11.03 : 제목 앞 번호(01 · 02 · 03)는 handle.html 에서 뺌 → 번호 스타일도 지움 */
 
+/* 2026.11.08 : 히어로 마지막 글 "다시 하나의 핸들로. / 손은 같은 자리에 둔 채." 를 시작 제목과 똑같이
+   ---- 위치 : left max(gutter) · bottom 90px → 시작 제목(.h-big)과 같은 left · bottom
+   ---- 크기 : clamp(30px, 3vw, 56px) → clamp(32px, 3.8vw, 60px) (.h-big strong 과 같음)
+   ---- 두께 · 줄 간격 · 글자 간격도 시작 제목 값으로 */
+.hd5 .h-end {
+  left: calc(max(var(--gutter), env(safe-area-inset-left, 0px)) - .04em);
+  bottom: clamp(72px, 14vh, 140px);
+}
+
+.hd5 .h-end p {
+  font-size: clamp(32px, 3.8vw, 60px);
+  font-weight: 300;
+  line-height: 1.22;
+  letter-spacing: -.02em;
+}
+
 /* 2026.11.03 : 07 제작 제목 "도면 그대로, 손으로 만들었습니다." 살짝 작게
    ---- clamp(34px, 3.8vw, 72px) → clamp(32px, 3.3vw, 62px) (맥북 57px → 50px) */
 .hd5 > section[aria-label="PROCESS"] .ttl {
@@ -7638,7 +7654,8 @@ body.handle-page {
   }
 
   /* 핸들 히어로 왼쪽 제목 살짝 위로 / 2026.11.03 : bottom 140px(13.5%) → 20vh */
-  html body .hd5 .h-big {
+  html body .hd5 .h-big,
+  html body .hd5 .h-end {   /* 2026.11.08 마지막 글도 같은 높이 */
     bottom: 16.5vh;   /* 2026.11.03 너무 올라가서 살짝 내림 ---- 20vh → 16.5vh */
   }
 
@@ -8089,6 +8106,9 @@ body.handle-page {
   }
   .hd5 .mk3 figcaption .lbl[style] {
     font-size: 1.3228vw !important;
+  }
+  .hd5 .h-end p {
+    font-size: 3.8vw;
   }
   .hd5 > section[aria-label="PROCESS"] .ttl {
     font-size: 3.3vw;
@@ -9406,6 +9426,9 @@ body.handle-page {
   .hd5 .mk3--zig figcaption {
     max-width: none;
     padding-top: 1.455vw;
+  }
+  .hd5 .h-end {
+    left: calc(max(var(--gutter), env(safe-area-inset-left, 0px)) - .04em);
   }
   .hd5 .mk3 figcaption p:not(.lbl) {
     margin-top: 0.3968vw;

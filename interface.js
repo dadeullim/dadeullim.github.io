@@ -4217,7 +4217,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const eo = (x) => 1 - Math.pow(1 - clamp(x), 3);
   const SEC = [[0, "1.0", "Overview"], [2.6, "2.0", "Form"], [4.4, "3.0", "Layers"], [9.5, "4.0", "Calibre"], [14.35, "5.0", "Return"], [17.2, "6.0", "Complete"]];
   // callout layout: side (+1 right / −1 left), elbow dy (px)
-  const LAY = { A: [-1, -50], B: [-1, -90], C: [-1, 120], D: [-1, -95], E: [1, -60], F: [-1, 130], G: [1, 80] };
+  const LAY = { A: [-1, -50], B: [-1, -90], C: [-1, 120], D: [-1, -95], E: [1, -60], F: [-1, 130], G: [1, 80] };   /* 2026.11.08 부터 안 씀 (아래 LBL) */
+  /* 2026.11.08 : 라벨 글씨가 핸들 부품 위에 겹쳐 잘 안 보여서 (B 링 · C 스포크 · D 림 · F 스포크 프레임 위)
+     ---- 전) 부품 점에서 정해진 px(70 · 110)만큼 떨어진 곳 → 아이맥에서는 핸들만 커지고 거리는 그대로라 더 겹침
+     ---- 후) 글자 자리를 영상 안 빈 곳 좌표(0~1)로 정함 → 영상 크기 따라 같이 움직여 어느 화면에서도 안 겹침
+          [쪽(-1 글 왼쪽 · 1 글 오른쪽), 선 끝 x, 선 끝 y] */
+  const LBL = { A: [-1, .146, .355], B: [-1, .315, .1075], C: [-1, .386, .829], D: [1, .648, .115], E: [1, .759, .36], F: [-1, .666, .829], G: [1, .841, .679] };
   let CO = null;
   /* 2026.11.02 : 핸들이 펼쳐질 때 부품 라벨 A–G (설명.zip 의 callouts.json) — 파일로 불러오지 않고 아래 값으로
      전) 5차 : 부품 라벨 없음 (패키지 callouts.json 이 비어 있음) */
@@ -4280,8 +4285,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const [u, w] = row[i + 1], x = R.x + u * R.w, y = R.y + w * R.h;
         /* 2026.11.02 설명.zip : 화면이 좁으면 지시선 길이도 줄임
            전) const [side, dy] = LAY[c.k], ex = x + side * 70, ey = y + dy, tx = ex + side * 110; */
-        const [side, dy0] = LAY[c.k], ks = Math.min(1, R.W / 1440), dy = dy0 * ks, ey = y + dy;
-        let ex = x + side * 70 * ks, tx = ex + side * 110 * ks;
+        /* 2026.11.08 전) const [side, dy0] = LAY[c.k], ks = Math.min(1, R.W / 1440), dy = dy0 * ks, ey = y + dy;
+                         let ex = x + side * 70 * ks, tx = ex + side * 110 * ks; */
+        const [side, eu, ev] = LBL[c.k], ks = R.w / 1712, ey = R.y + ev * R.h;   /* 1712 = 맥북에서 영상 너비 */
+        let tx = R.x + eu * R.w, ex = tx - side * 50 * ks;
         /* 2026.11.02 : 선이 글자를 지나가거나 글자 밖으로 삐져나가지 않게
            ---- 글자 실제 너비를 재고, 글자가 화면 끝에서 밀리면 선 끝도 글자 바로 앞까지로 맞춤
            전) 너비 = 글자 수 × 8.4 어림값, 밀리면 글자만 16px 위로 올리고 선은 그대로 */
