@@ -4379,6 +4379,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const rows = [...sec.querySelectorAll(".dmq__row")];
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+  /* 2026.11.08 : 처음 돌기 시작하는 게 한참 걸려 보임 (기본 0.35px 라 거의 멈춘 듯)
+     ---- 기본 속도 0.35 → 0.6px / 프레임
+     ---- 화면에 들어오는 순간 살짝 밀어 줘서(v 3) 바로 흐르는 게 보이고, 곧 기본 속도로 가라앉음
+     ---- 화면에 들어오기 300px 전부터 미리 돌기 시작 */
+  const BASE = 0.6;
   let x = 0, v = 0, last = scrollY, hover = false, on = false, raf = 0;
   wrap.addEventListener("mouseenter", () => { hover = true; });
   wrap.addEventListener("mouseleave", () => { hover = false; });
@@ -4389,7 +4394,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const dy = scrollY - last;
     last = scrollY;
     v += (Math.abs(dy) * 0.15 - v) * 0.1;
-    x += hover ? 0 : (0.35 + v) * sc;
+    x += hover ? 0 : (BASE + v) * sc;
     rows.forEach((r) => {
       const W = r.scrollWidth / 2;
       const off = ((x % W) + W) % W;
@@ -4399,10 +4404,12 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   new IntersectionObserver(([e]) => {
+    const was = on;
     on = e.isIntersecting;
     last = scrollY;
+    if (on && !was) v = Math.max(v, 3);   /* 들어오는 순간 살짝 밀어 줌 */
     if (on && !raf) raf = requestAnimationFrame(loop);
-  }).observe(sec);
+  }, { rootMargin: "300px 0px" }).observe(sec);
 })();
 
 
