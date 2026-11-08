@@ -9,7 +9,7 @@
 <title>
     DADEULLIM — Sound Experience
   </title>
-<link href="./style.css?v=20261108q" rel="stylesheet"/>
+<link href="./style.css?v=20261108r" rel="stylesheet"/>
 <!-- =====================================================
        INTRO 준비 — 2026.10.06
        화면이 그려지기 전에 인트로 재생 여부를 먼저 결정
@@ -52,6 +52,12 @@
 <!-- 2026.10.14 : 인트로 영상 intro.mp4 → intro-v12.mp4 (기존 파일은 images/intro.mp4 로 남겨 둠)
      새 영상은 마지막 장면이 HERO 01 화면과 같음 → 패널이 걷히지 않고 그대로 겹쳐 사라짐 -->
 <video class="site-intro__video" id="site-intro-video" muted="" playsinline="" preload="auto" src="./images/intro-v12.mp4"></video>
+<!-- 2026.11.08 : 인트로 음향 (images/intro-sound.mp3 · 17.4초) — 영상과 같이 재생 (script.js [인트로 음향])
+     브라우저가 소리 자동 재생을 막으면 화면을 한 번 누르거나 SOUND 버튼을 누를 때 영상 위치에 맞춰 시작 -->
+<audio id="site-intro-sound" preload="auto" src="./images/intro-sound.mp3"></audio>
+<button aria-pressed="false" class="site-intro__sound" id="site-intro-sound-toggle" type="button">
+        SOUND ON
+      </button>
 <!-- SKIP 버튼 -->
 <button class="site-intro__skip" id="site-intro-skip" type="button">
         SKIP
@@ -760,6 +766,6 @@
 </div>
 </main>
 <!-- JAVASCRIPT -->
-<script src="./script.js?v=20261108q"></script>
+<script src="./script.js?v=20261108r"></script>
 </body>
 </html>

@@ -8076,6 +8076,63 @@ html {
 
 }
 
+/* =========================================================
+   [인트로 음향] SOUND 버튼 / 2026.11.08
+   ---------------------------------------------------------
+   인트로 SKIP 왼쪽에 SOUND ON / OFF (SKIP 과 같은 글씨 · 색)
+   ---- 소리가 이미 나오고 있으면 SOUND OFF, 브라우저가 막았으면 SOUND ON
+   ---- 동작 : script.js [인트로 음향]
+========================================================= */
+.site-intro__sound {
+  position: absolute;
+  right: calc(var(--header-side-padding, 3vw) + 4.4vw);   /* SKIP 왼쪽 */
+  bottom: 2.2222vw;
+  z-index: 2;
+
+  padding: 0.5556vw 0;
+
+  color: rgba(255, 255, 255, 0.56);
+  background: none;
+  border: 0;
+
+  font-family: inherit;
+  font-size: 0.7639vw;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+
+  cursor: pointer;
+
+  transition: color 0.24s ease, opacity 0.3s ease;
+}
+
+.site-intro__sound:hover,
+.site-intro__sound:focus-visible {
+  color: #ffffff;
+}
+
+/* 소리 파일이 없거나 못 불러오면 숨김 */
+.site-intro__sound[hidden] {
+  display: none;
+}
+
+html.is-intro-leaving .site-intro__sound {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 1000px) {
+
+  .site-intro__sound {
+    right: calc(var(--header-side-padding, 3vw) + 52px);
+    bottom: 28px;
+
+    padding: 8px 0;
+
+    font-size: 11px;
+  }
+
+}
+
 /* ===== [아이맥 글자 크기] 자동 생성 시작 — 손으로 고치지 않기 ===== */
 /* 맥북 1512px 글자 크기를 아이맥에서도 같은 비율로 (px · clamp → vw)
    ---- 위쪽 CSS 를 고치면 python3 ~/.claude/dadeullim-tools/fonts_large.py 파일.css 로 다시 만들기 */
@@ -8413,6 +8470,9 @@ html {
   }
   .case-floating-card__copy p:not(.case-floating-card__eyebrow) {
     font-size: 0.5vw;
+  }
+  .site-intro__sound {
+    font-size: 0.7639vw;
   }
 
 }
@@ -9494,6 +9554,10 @@ html {
   }
   .case-floating-card__copy p:not(.case-floating-card__eyebrow) {
     max-width: 15.8vw;
+  }
+  .site-intro__sound {
+    right: calc(var(--header-side-padding, 3vw) + 4.4vw);
+    padding: 0.5556vw 0;
   }
 
 }

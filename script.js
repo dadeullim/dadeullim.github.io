@@ -5869,6 +5869,11 @@ updateHeaderState();
 
     root.classList.add("is-intro-leaving");
 
+    /* [인트로 음향] 걷히는 동안 소리도 줄어듦 (2026.11.08) */
+    if (typeof fadeSound === "function") {
+      fadeSound(INTRO.leaveDuration || 300);
+    }
+
     window.setTimeout(
       finishIntro,
       INTRO.leaveDuration
@@ -5888,6 +5893,10 @@ updateHeaderState();
     } catch (error) {}
 
     video.pause();
+
+    /* [인트로 음향] 끝나면 소리도 멈춤 (2026.11.08) */
+    const introSound = document.querySelector("#site-intro-sound");
+    if (introSound) introSound.pause();
 
     intro.remove();
 
@@ -5921,6 +5930,93 @@ updateHeaderState();
   --------------------------------------------------------- */
   video.muted =
     true;
+
+
+  /* ---------------------------------------------------------
+     [인트로 음향] 2026.11.08
+     ---- images/intro-sound.mp3 를 영상과 같이 재생 (영상은 그대로 소리 없음)
+     ---- 브라우저가 소리 자동 재생을 막으면 → SOUND ON 버튼이 보이고,
+          화면을 한 번 누르거나(아무 키 · 클릭) 버튼을 누르면 영상 위치에 맞춰 시작
+     ---- 인트로가 걷힐 때 소리도 서서히 줄어듦
+     ---- 스타일 : style.css [인트로 음향]
+  --------------------------------------------------------- */
+  const sound =
+    document.querySelector("#site-intro-sound");
+
+  const soundButton =
+    document.querySelector("#site-intro-sound-toggle");
+
+  let soundOn =
+    false;
+
+  const setSoundButton =
+    () => {
+      if (!soundButton) return;
+      soundButton.textContent = soundOn ? "SOUND OFF" : "SOUND ON";
+      soundButton.setAttribute("aria-pressed", soundOn ? "true" : "false");
+    };
+
+  const startSound =
+    () => {
+      if (!sound || isLeaving) return;
+      sound.volume = 1;
+      if (Number.isFinite(video.currentTime)) {
+        sound.currentTime = video.currentTime;   /* 영상과 맞춤 */
+      }
+      const p = sound.play();
+      if (p && typeof p.then === "function") {
+        p.then(() => { soundOn = true; setSoundButton(); })
+         .catch(() => { soundOn = false; setSoundButton(); });
+      } else {
+        soundOn = true;
+        setSoundButton();
+      }
+    };
+
+  const stopSound =
+    () => {
+      if (!sound) return;
+      sound.pause();
+      soundOn = false;
+      setSoundButton();
+    };
+
+  /* 걷힐 때 서서히 줄이기 */
+  const fadeSound =
+    (ms) => {
+      if (!sound || sound.paused) return;
+      const v0 = sound.volume, t0 = performance.now();
+      const step = (now) => {
+        const k = Math.min(1, (now - t0) / Math.max(1, ms));
+        sound.volume = v0 * (1 - k);
+        if (k < 1) window.requestAnimationFrame(step);
+        else sound.pause();
+      };
+      window.requestAnimationFrame(step);
+    };
+
+  if (sound) {
+    /* 파일이 없거나 못 읽으면 버튼 숨김 */
+    sound.addEventListener("error", () => { if (soundButton) soundButton.hidden = true; });
+
+    /* 영상이 시작되면 같이 시도 → 막히면 첫 클릭 · 키 입력 때 시작 */
+    video.addEventListener("playing", startSound, { once: true });
+
+    const unlock = (event) => {
+      if (soundOn || isLeaving) return;
+      if (event && soundButton && soundButton.contains(event.target)) return;   /* 버튼은 따로 처리 */
+      if (event && skipButton && skipButton.contains(event.target)) return;     /* SKIP 은 소리 없이 넘김 */
+      startSound();
+    };
+    window.addEventListener("pointerdown", unlock);
+    window.addEventListener("keydown", (e) => { if (e.key !== "Escape") unlock(e); });
+
+    if (soundButton) {
+      soundButton.addEventListener("click", () => (soundOn ? stopSound() : startSound()));
+    }
+  } else if (soundButton) {
+    soundButton.hidden = true;
+  }
 
   video.addEventListener(
     "timeupdate",
