@@ -8034,6 +8034,11 @@ body.handle-page {
   line-height: 1.55;
 }
 
+/* 3. 다섯 겹 오른쪽 큰 번호(01 ~ 05) 너무 얇아서 살짝 두껍게 ---- font-weight 100 → 200 */
+.hb-t__big {
+  font-weight: 200;
+}
+
 @media (max-width: 900px) {
 
   .hs-hero__title {
