@@ -4284,6 +4284,81 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* =========================================================
+   [HUD 11-08 영상] 단어 섹션 — 주행 체험 장면 위의 HUD (시안 1) / 2026.11.08
+   ---------------------------------------------------------
+   #w1–#w5 (interface.js [HUD 16] 이 만든 단어 섹션) 의 오른쪽 그림을 바꿈
+   at = 원본 주행 체험 영상(2:51)에서의 위치 · on = 클립 안에서 HUD 가 켜지는 시각(초)
+   스타일 : interface.css 맨 아래 [HUD 11-08 영상]
+========================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+  if (!document.getElementById("words")) return;
+  const DIR = "./images/hud-drive/";
+  const SC = [
+    { k: "siren", at: "2:34", on: 1.5, dur: 4.79, what: "앞 교차로를 가로지르는 구급차" },
+    { k: "horn",  at: "0:40", on: 1.0, dur: 4.42, what: "보이지 않는 뒤차의 경적" },
+    { k: "stop",  at: "0:52", on: 0.8, dur: 4.42, what: "오른쪽에서 앞을 가로지르는 이륜차" },
+    { k: "gap",   at: "2:10", on: 0.9, dur: 4.79, what: "바로 앞에서 느려지는 흰 차" },
+    { k: "merge", at: "2:41", on: 0.8, dur: 4.0,  what: "왼쪽에서 들어오는 차" }
+  ];
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const vids = [];
+  let paused = false;
+
+  SC.forEach((s, i) => {
+    const sec = document.getElementById("w" + (i + 1));
+    const fig = sec && sec.querySelector(".wx__fig");
+    if (!fig) return;
+    const img = fig.querySelector("img");
+    fig.classList.add("hd-fig");
+
+    const box = document.createElement("div");
+    box.className = "hd-box";
+    const v = document.createElement("video");
+    v.muted = true; v.loop = true; v.playsInline = true; v.preload = "none";
+    v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("aria-hidden", "true");
+    v.poster = `${DIR}${s.k}.jpg`;
+    v.src = `${DIR}${s.k}.mp4`;
+    img.src = `${DIR}${s.k}-ar.webp`;
+    img.removeAttribute("loading");
+    box.append(v, img);
+    fig.append(box);
+
+    const cap = document.createElement("p");
+    cap.className = "hd-cap";
+    cap.innerHTML = `<span>주행 체험 ${s.at} — ${s.what}</span>`;
+    fig.append(cap);
+
+    if (reduced) { box.classList.add("is-on"); return; }
+
+    /* 위험이 보이는 순간 HUD 켜짐, 반복 직전에 꺼짐 */
+    v.addEventListener("timeupdate", () => box.classList.toggle("is-on", v.currentTime >= s.on && v.currentTime < s.dur - 0.35));
+
+    /* 화면에 40% 이상 보일 때만 재생 */
+    const io = new IntersectionObserver(([e]) => {
+      v._vis = e.isIntersecting;
+      if (e.isIntersecting && !paused) v.play().catch(() => {});
+      else v.pause();
+      btn.classList.toggle("is-show", vids.some((x) => x._vis));
+    }, { threshold: 0.4 });
+    io.observe(box);
+    vids.push(v);
+  });
+
+  /* 영상 멈춤 버튼 — 단어 섹션이 보일 때만 나타남 */
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "hd-pause";
+  btn.textContent = "영상 멈춤";
+  btn.addEventListener("click", () => {
+    paused = !paused;
+    btn.textContent = paused ? "영상 재생" : "영상 멈춤";
+    vids.forEach((v) => (paused ? v.pause() : v._vis && v.play().catch(() => {})));
+  });
+  if (!reduced) document.body.appendChild(btn);
+});
+
+
+/* =========================================================
    [DISPLAY 화면들 마키] 02 화면들 — 양방향 마키 / 2026.11.08
    ---------------------------------------------------------
    디스플레이_6안_양방향마키_시안.zip 의 index.html 스크립트를 옮겨 옴

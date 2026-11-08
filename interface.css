@@ -8260,6 +8260,115 @@ body.handle-page {
 }
 
 /* =========================================================
+   [HUD 11-08 영상] 단어 섹션 — 주행 체험 장면 위의 HUD (시안 1) / 2026.11.08
+   ---------------------------------------------------------
+   오른쪽 HUD 그림 자리에 그 상황의 주행 체험 장면(HUD 없는 원본, 4–5초 반복)을 어둡게 깔고,
+   장면 속 위험이 나타나는 순간 HUD 가 켜짐
+   HUD 그림 : images/hud-drive/<상황>-ar.webp — 차로 선을 영상 속 내 차로(왼쪽 노란 중앙선 · 오른쪽 가장자리선)에
+              맞춰 원근 변환, 경고 아이콘 · 글자는 변환 없이 차로 위 허공에 (영상과 같은 16:9)
+   영상 : images/hud-drive/<상황>.mp4 (960×540 · 소리 없음 · 0.4–0.8MB) / 첫 장 <상황>.jpg
+   동작 : interface.js [HUD 11-08 영상]
+========================================================= */
+
+.hud16 .wx__fig.hd-fig {
+  display: block;
+}
+
+.hud16 .hd-box {
+  position: relative;
+
+  aspect-ratio: 16 / 9;
+
+  overflow: hidden;
+  border-radius: 6px;   /* 2026.11.08 : 영상 외곽만 살짝 둥글게 */
+
+  background: #000;
+}
+
+.hud16 .hd-box video {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  filter: saturate(0.9);   /* 2026.11.08 : 어둡게 깔던 것(brightness 0.62) 없앰 — 원본 밝기 그대로 */
+}
+
+/* 차로에 맞춘 HUD — 영상과 같은 크기로 겹침, 위험이 보이는 순간에만 켜짐 */
+.hud16 .wx__fig.hd-fig .hd-box img {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+  max-width: none;
+
+  opacity: 0;
+  transform: none;
+  filter: none;   /* 2026.11.08 : 글자 그림자 · 번짐 없앰 */
+
+  transition: opacity 0.35s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.hud16 .wx__fig.hd-fig .hd-box.is-on img {
+  opacity: 1;
+}
+
+.hud16 .hd-cap {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin: 10px 0 0;
+
+  color: var(--ink-3);
+
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 영상 멈춤 — 5초 넘게 자동으로 움직이는 내용은 멈출 수 있어야 함 (WCAG 2.2.2) */
+.hud16-page .hd-pause {
+  position: fixed;
+  z-index: 90;
+  right: max(16px, env(safe-area-inset-right, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+
+  color: rgba(242, 242, 239, 0.8);
+  background: rgba(10, 11, 13, 0.72);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+
+  font: 400 12px/1.4 var(--f-sans, sans-serif);
+  letter-spacing: 0.04em;
+
+  cursor: pointer;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 0.3s;
+}
+
+.hud16-page .hd-pause.is-show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hud16-page .hd-pause:hover { color: #f2f2ef; border-color: rgba(255, 255, 255, 0.5); }
+.hud16-page .hd-pause:focus-visible { outline: 1px solid #a9dcff; outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hud16 .wx__fig.hd-fig .hd-box img { opacity: 1; transition: none; }
+}
+
+/* =========================================================
    [아이맥 화면비] 맥북 느낌 그대로 / 2026.11.03
    ---------------------------------------------------------
    아이맥 2048 × 1152 (브라우저 안 약 2048 × 1040) 은 맥북(1512 × 860)보다 세로가 짧아서
@@ -8317,7 +8426,8 @@ body.handle-page {
     max-width: 27.778vw !important;
   }
 
-  /* 핸들 07 제작 영상 모서리 : 6px → 화면 비율 (2048 에서 약 8px) */
+  /* 핸들 07 제작 영상 · HUD 단어 섹션 주행 영상 모서리 : 6px → 화면 비율 (2048 에서 약 8px) / 2026.11.08 HUD 추가 */
+  html body .hud16 .hd-box,
   html body .hd5 .mk3--zig video {
     border-radius: 0.3968vw;
   }
@@ -8849,6 +8959,12 @@ body.handle-page {
   }
   .display-page .dmq__card figcaption b {
     font-size: 0.7937vw;
+  }
+  .hud16 .hd-cap {
+    font-size: 0.7937vw;
+  }
+  .hud16-page .hd-pause {
+    font: 400 0.7937vw/1.4 var(--f-sans, sans-serif);
   }
   .hd5 .cfg .lbl[style], .hd5 .out .lbl[style] {
     font-size: 0.7937vw !important;
@@ -10307,6 +10423,23 @@ body.handle-page {
   .display-page .dmq__card figcaption {
     gap: 0.6614vw;
     margin-top: 0.6614vw;
+  }
+  .hud16 .hd-box video {
+    width: 100%;
+    height: 100%;
+  }
+  .hud16 .wx__fig.hd-fig .hd-box img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+  }
+  .hud16 .hd-cap {
+    gap: 0.7937vw;
+    margin: 0.6614vw 0 0;
+  }
+  .hud16-page .hd-pause {
+    right: max(1.0582vw, env(safe-area-inset-right, 0px));
+    padding: 0.5291vw 0.9259vw;
   }
 
 }
