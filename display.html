@@ -28,7 +28,7 @@
 
   <link
     rel="stylesheet"
-    href="./style.css?v=20261108m"
+    href="./style.css?v=20261108n"
   >
 
 
@@ -39,7 +39,7 @@
 
   <link
     rel="stylesheet"
-    href="./interface.css?v=20261108m"
+    href="./interface.css?v=20261108n"
   >
 
 
@@ -49,7 +49,7 @@
   ====================================================== -->
 
   <script
-    src="./interface.js?v=20261108m"
+    src="./interface.js?v=20261108n"
     defer
   ></script>
 </head>
@@ -413,104 +413,194 @@
          스크롤하면 접힌 화면 9장이 부채처럼 펼쳐지며 한 장씩 강조
          스타일 : interface.css 맨 아래 [DISPLAY FAN]
          동작   : interface.js  맨 아래 [DISPLAY FAN]
+         2026.11.08 : 아래 양방향 마키(.dmq)로 바꿈 — 부채 섹션 HTML 은 지움 (CSS · JS 는 .fan 이 없으면 안 돎)
     ====================================================== -->
 
+    <!-- =====================================================
+         01-1. 화면들 — 양방향 마키 / 2026.11.08
+         디스플레이_6안_양방향마키_시안.zip 바탕
+         ---- 화면 아홉 장이 두 줄로 살짝 기울어져 흐름 (윗줄 ← · 아랫줄 →)
+              스크롤하면 잠깐 빨라지고, 마우스를 올리면 멈춤
+         ---- 전) .fan (부채꼴로 펼쳐지는 카드 · 380vh 고정 구간)
+         ---- 이미지는 기존 images/display-fan 그대로 (시안 zip 보다 고화질)
+         ---- loading="lazy" 뺌 : 흐르면서 들어오는 카드가 늦게 떠 까맣게 보이지 않게 (같은 9장이라 한 번만 받음)
+         스타일 : interface.css [DISPLAY 화면들 마키] / 동작 : interface.js [DISPLAY 화면들 마키]
+    ====================================================== -->
     <section
-      class="fan"
-      data-fan
+      class="dmq"
+      id="dmq"
+      aria-label="디스플레이 화면들"
     >
 
-      <div class="fan__sticky">
+      <div class="dmq__copy">
 
-        <div class="fan__copy">
+        <!-- 2026.11.08 : 작은 소제목(02 — 화면들)은 사이트 다른 섹션처럼 숨김 (CSS) -->
+        <p class="dmq__eyebrow">02 — 화면들</p>
 
-          <p>02 — 화면들</p>
+        <h2>
+          펼쳐 보면,<br>
+          모두 같은 언어.
+        </h2>
 
-          <h2>
-            펼쳐 보면,<br>
-            모두 같은 언어.
-          </h2>
+        <p class="dmq__desc">
+          길 안내부터 즉시 정지까지, 아홉 개의 화면이 같은 자리 · 같은 색 · 같은 글자 규칙으로 정보를 보여 줍니다.
+        </p>
 
+      </div>
+
+      <div class="dmq__rows">
+
+        <!-- 윗줄 — 왼쪽으로 (같은 9장을 두 번 이어 붙여 끊김 없이 돎) -->
+        <div class="dmq__row" data-d="-1">
+          <figure class="dmq__card">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-drive.webp" alt="길 안내 화면" decoding="async"></div>
+            <figcaption><b>01</b>길 안내</figcaption>
+          </figure>
+          <figure class="dmq__card">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-lane.webp" alt="차선 변경 주의 화면" decoding="async"></div>
+            <figcaption><b>02</b>차선 변경 주의</figcaption>
+          </figure>
+          <figure class="dmq__card">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-stop.webp" alt="즉시 정지 화면" decoding="async"></div>
+            <figcaption><b>03</b>즉시 정지</figcaption>
+          </figure>
+          <figure class="dmq__card">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-yield.webp" alt="긴급차 양보 화면" decoding="async"></div>
+            <figcaption><b>04</b>긴급차 양보</figcaption>
+          </figure>
+          <figure class="dmq__card">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-weather.webp" alt="날씨 화면" decoding="async"></div>
+            <figcaption><b>05</b>날씨</figcaption>
+          </figure>
+          <figure class="dmq__card">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-music.webp" alt="음악 화면" decoding="async"></div>
+            <figcaption><b>06</b>음악</figcaption>
+          </figure>
+          <figure class="dmq__card">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-home.webp" alt="대기 화면 화면" decoding="async"></div>
+            <figcaption><b>07</b>대기 화면</figcaption>
+          </figure>
+          <figure class="dmq__card">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-car.webp" alt="차량 상태 화면" decoding="async"></div>
+            <figcaption><b>08</b>차량 상태</figcaption>
+          </figure>
+          <figure class="dmq__card">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-search.webp" alt="목적지 검색 화면" decoding="async"></div>
+            <figcaption><b>09</b>목적지 검색</figcaption>
+          </figure>
+          <figure class="dmq__card" aria-hidden="true">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-drive.webp" alt="" decoding="async"></div>
+            <figcaption><b>01</b>길 안내</figcaption>
+          </figure>
+          <figure class="dmq__card" aria-hidden="true">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-lane.webp" alt="" decoding="async"></div>
+            <figcaption><b>02</b>차선 변경 주의</figcaption>
+          </figure>
+          <figure class="dmq__card" aria-hidden="true">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-stop.webp" alt="" decoding="async"></div>
+            <figcaption><b>03</b>즉시 정지</figcaption>
+          </figure>
+          <figure class="dmq__card" aria-hidden="true">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-yield.webp" alt="" decoding="async"></div>
+            <figcaption><b>04</b>긴급차 양보</figcaption>
+          </figure>
+          <figure class="dmq__card" aria-hidden="true">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-weather.webp" alt="" decoding="async"></div>
+            <figcaption><b>05</b>날씨</figcaption>
+          </figure>
+          <figure class="dmq__card" aria-hidden="true">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-music.webp" alt="" decoding="async"></div>
+            <figcaption><b>06</b>음악</figcaption>
+          </figure>
+          <figure class="dmq__card" aria-hidden="true">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-home.webp" alt="" decoding="async"></div>
+            <figcaption><b>07</b>대기 화면</figcaption>
+          </figure>
+          <figure class="dmq__card" aria-hidden="true">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-car.webp" alt="" decoding="async"></div>
+            <figcaption><b>08</b>차량 상태</figcaption>
+          </figure>
+          <figure class="dmq__card" aria-hidden="true">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-search.webp" alt="" decoding="async"></div>
+            <figcaption><b>09</b>목적지 검색</figcaption>
+          </figure>
         </div>
 
-        <!-- 2026.10.27 : 순서 바꿈 — 처음 펼쳐질 때 가운데에 날씨가 와서 어색했음
-             전) 길 안내 · 위험 알림 · 즉시 정지 · 긴급차 양보 · 날씨(가운데) · 음악 · 대기 · 차량 · 검색
-             후) 왼쪽 : 출발 전 (날씨 · 음악 · 대기 화면 · 목적지 검색)
-                 가운데 : 길 안내 (처음 펼쳐질 때 보이는 카드)
-                 오른쪽 : 주행 중 위험이 커지는 순서 (위험 알림 → 긴급차 양보 → 즉시 정지) · 차량 상태
-                 스크롤하면 부채가 왼쪽으로 돌아 길 안내 다음 위험 알림이 가운데로 -->
-
-        <figure class="fan__card">
-          <img
-            src="./images/display-fan/ui-weather.webp"
-            alt="날씨 화면"
-          >
-          <figcaption><b>01</b>날씨</figcaption>
-        </figure>
-
-        <figure class="fan__card">
-          <img
-            src="./images/display-fan/ui-music.webp"
-            alt="음악 화면"
-          >
-          <figcaption><b>02</b>음악</figcaption>
-        </figure>
-
-        <figure class="fan__card">
-          <img
-            src="./images/display-fan/ui-home.webp"
-            alt="대기 화면 화면"
-          >
-          <figcaption><b>03</b>대기 화면</figcaption>
-        </figure>
-
-        <figure class="fan__card">
-          <img
-            src="./images/display-fan/ui-search.webp"
-            alt="목적지 검색 화면"
-          >
-          <figcaption><b>04</b>목적지 검색</figcaption>
-        </figure>
-
-        <figure class="fan__card">
-          <img
-            src="./images/display-fan/ui-drive.webp"
-            alt="길 안내 화면"
-          >
-          <figcaption><b>05</b>길 안내</figcaption>
-        </figure>
-
-        <figure class="fan__card">
-          <img
-            src="./images/display-fan/ui-lane.webp"
-            alt="위험 알림 화면"
-          >
-          <figcaption><b>06</b>위험 알림</figcaption>
-        </figure>
-
-        <figure class="fan__card">
-          <img
-            src="./images/display-fan/ui-yield.webp"
-            alt="긴급차 양보 화면"
-          >
-          <figcaption><b>07</b>긴급차 양보</figcaption>
-        </figure>
-
-        <figure class="fan__card">
-          <img
-            src="./images/display-fan/ui-stop.webp"
-            alt="즉시 정지 화면"
-          >
-          <figcaption><b>08</b>즉시 정지</figcaption>
-        </figure>
-
-        <figure class="fan__card">
-          <img
-            src="./images/display-fan/ui-car.webp"
-            alt="차량 상태 화면"
-          >
-          <figcaption><b>09</b>차량 상태</figcaption>
-        </figure>
+        <!-- 아랫줄 — 오른쪽으로 (같은 9장을 두 번 이어 붙여 끊김 없이 돎) -->
+        <div class="dmq__row" data-d="1">
+          <figure class="dmq__card">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-search.webp" alt="목적지 검색 화면" decoding="async"></div>
+            <figcaption><b>09</b>목적지 검색</figcaption>
+          </figure>
+          <figure class="dmq__card">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-car.webp" alt="차량 상태 화면" decoding="async"></div>
+            <figcaption><b>08</b>차량 상태</figcaption>
+          </figure>
+          <figure class="dmq__card">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-home.webp" alt="대기 화면 화면" decoding="async"></div>
+            <figcaption><b>07</b>대기 화면</figcaption>
+          </figure>
+          <figure class="dmq__card">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-music.webp" alt="음악 화면" decoding="async"></div>
+            <figcaption><b>06</b>음악</figcaption>
+          </figure>
+          <figure class="dmq__card">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-weather.webp" alt="날씨 화면" decoding="async"></div>
+            <figcaption><b>05</b>날씨</figcaption>
+          </figure>
+          <figure class="dmq__card">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-yield.webp" alt="긴급차 양보 화면" decoding="async"></div>
+            <figcaption><b>04</b>긴급차 양보</figcaption>
+          </figure>
+          <figure class="dmq__card">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-stop.webp" alt="즉시 정지 화면" decoding="async"></div>
+            <figcaption><b>03</b>즉시 정지</figcaption>
+          </figure>
+          <figure class="dmq__card">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-lane.webp" alt="차선 변경 주의 화면" decoding="async"></div>
+            <figcaption><b>02</b>차선 변경 주의</figcaption>
+          </figure>
+          <figure class="dmq__card">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-drive.webp" alt="길 안내 화면" decoding="async"></div>
+            <figcaption><b>01</b>길 안내</figcaption>
+          </figure>
+          <figure class="dmq__card" aria-hidden="true">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-search.webp" alt="" decoding="async"></div>
+            <figcaption><b>09</b>목적지 검색</figcaption>
+          </figure>
+          <figure class="dmq__card" aria-hidden="true">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-car.webp" alt="" decoding="async"></div>
+            <figcaption><b>08</b>차량 상태</figcaption>
+          </figure>
+          <figure class="dmq__card" aria-hidden="true">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-home.webp" alt="" decoding="async"></div>
+            <figcaption><b>07</b>대기 화면</figcaption>
+          </figure>
+          <figure class="dmq__card" aria-hidden="true">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-music.webp" alt="" decoding="async"></div>
+            <figcaption><b>06</b>음악</figcaption>
+          </figure>
+          <figure class="dmq__card" aria-hidden="true">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-weather.webp" alt="" decoding="async"></div>
+            <figcaption><b>05</b>날씨</figcaption>
+          </figure>
+          <figure class="dmq__card" aria-hidden="true">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-yield.webp" alt="" decoding="async"></div>
+            <figcaption><b>04</b>긴급차 양보</figcaption>
+          </figure>
+          <figure class="dmq__card" aria-hidden="true">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-stop.webp" alt="" decoding="async"></div>
+            <figcaption><b>03</b>즉시 정지</figcaption>
+          </figure>
+          <figure class="dmq__card" aria-hidden="true">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-lane.webp" alt="" decoding="async"></div>
+            <figcaption><b>02</b>차선 변경 주의</figcaption>
+          </figure>
+          <figure class="dmq__card" aria-hidden="true">
+            <div class="dmq__sc"><img src="./images/display-fan/ui-drive.webp" alt="" decoding="async"></div>
+            <figcaption><b>01</b>길 안내</figcaption>
+          </figure>
+        </div>
 
       </div>
 

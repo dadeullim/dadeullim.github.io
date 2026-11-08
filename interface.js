@@ -4281,6 +4281,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* =========================================================
+   [DISPLAY 화면들 마키] 02 화면들 — 양방향 마키 / 2026.11.08
+   ---------------------------------------------------------
+   디스플레이_6안_양방향마키_시안.zip 의 index.html 스크립트를 옮겨 옴
+   ---- 윗줄(data-d -1)은 왼쪽으로, 아랫줄(data-d 1)은 오른쪽으로 계속 흐름
+        같은 9장을 두 번 이어 붙였으니 절반 너비만큼 가면 처음 자리로 (끊김 없음)
+   ---- 기본 속도 0.35px / 프레임 + 스크롤한 만큼 잠깐 빨라짐 · 마우스를 올리면 멈춤
+   ---- 바꾼 곳
+        화면에 보일 때만 돌림 (IntersectionObserver)
+        큰 화면(1513 이상)은 카드가 커진 만큼 속도도 비율대로 (맥북 1512 기준)
+        움직임 줄이기 설정이면 멈춘 채로
+   스타일 : interface.css [DISPLAY 화면들 마키]
+========================================================= */
+(() => {
+  const sec = document.getElementById("dmq");
+  if (!sec) return;
+
+  const wrap = sec.querySelector(".dmq__rows");
+  const rows = [...sec.querySelectorAll(".dmq__row")];
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  let x = 0, v = 0, last = scrollY, hover = false, on = false, raf = 0;
+  wrap.addEventListener("mouseenter", () => { hover = true; });
+  wrap.addEventListener("mouseleave", () => { hover = false; });
+
+  const loop = () => {
+    raf = 0;
+    const sc = Math.max(1, innerWidth / 1512);   /* 큰 화면은 비율대로 */
+    const dy = scrollY - last;
+    last = scrollY;
+    v += (Math.abs(dy) * 0.15 - v) * 0.1;
+    x += hover ? 0 : (0.35 + v) * sc;
+    rows.forEach((r) => {
+      const W = r.scrollWidth / 2;
+      const off = ((x % W) + W) % W;
+      r.style.transform = `translateX(${+r.dataset.d < 0 ? -off : off - W}px)`;
+    });
+    if (on) raf = requestAnimationFrame(loop);
+  };
+
+  new IntersectionObserver(([e]) => {
+    on = e.isIntersecting;
+    last = scrollY;
+    if (on && !raf) raf = requestAnimationFrame(loop);
+  }).observe(sec);
+})();
+
+
+/* =========================================================
    [HANDLE 5차] 핸들 페이지 5차 시안 — Blueprint (3면 도면) / 2026.11.02
    ---------------------------------------------------------
    dadeullim-handle-5차-v8.zip 의 assets/hero.js · site.js · widgets.js · draw.js
