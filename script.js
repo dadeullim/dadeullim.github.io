@@ -6454,3 +6454,80 @@ updateHeaderState();
   );
 
 })();
+
+
+/* =========================================================
+   [맨 아래 → 히어로로] 푸터까지 다 보고 2.5초 가만히 있으면 맨 위(히어로)로 / 2026.11.09
+   ---------------------------------------------------------
+   모든 페이지 같은 코드 (script.js · brand.js · interface.js · experience.js · logo.js 에 똑같이 넣음
+   — 한 페이지에 두 파일이 있어도 한 번만 돌게 window.__ddBackTop 로 막음)
+   ---- 페이지 맨 아래(푸터 끝)에 닿고 2.5초 동안 스크롤 · 클릭 · 키 입력이 없으면 → 부드럽게 맨 위로
+   ---- 올라가는 중에 휠 · 터치 · 키를 쓰면 바로 멈춤 (사용자가 우선)
+   ---- 핸들 페이지(Lenis 관성 스크롤)는 Lenis 로 올림 · 움직임 줄이기 설정이면 바로 이동
+========================================================= */
+(() => {
+  if (window.__ddBackTop) return;
+  window.__ddBackTop = true;
+
+  const WAIT = 2500;   /* 맨 아래에서 기다리는 시간 (ms) */
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let timer = 0, raf = 0, auto = false;
+
+  const atBottom = () => {
+    const doc = document.documentElement;
+    return doc.scrollHeight > innerHeight + 200 && innerHeight + scrollY >= doc.scrollHeight - 4;
+  };
+
+  const stopAuto = () => {
+    if (raf) { cancelAnimationFrame(raf); raf = 0; }
+    if (auto && window.__lenis && window.__lenis.stop) { window.__lenis.stop(); window.__lenis.start(); }
+    auto = false;
+  };
+
+  const goTop = () => {
+    timer = 0;
+    if (!atBottom()) return;
+    auto = true;
+
+    /* 핸들 페이지 : Lenis 로 */
+    if (window.__lenis && typeof window.__lenis.scrollTo === "function") {
+      window.__lenis.scrollTo(0, { duration: reduce ? 0 : 2, onComplete: () => { auto = false; } });
+      return;
+    }
+
+    if (reduce) { window.scrollTo(0, 0); auto = false; return; }
+
+    /* 거리에 따라 1.4 ~ 2.6초 · 처음 · 끝 천천히 */
+    const from = scrollY;
+    const dur = Math.min(2600, Math.max(1400, from * 0.12));
+    const t0 = performance.now();
+    const ease = (k) => (k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
+    const step = (now) => {
+      const k = Math.min(1, (now - t0) / dur);
+      window.scrollTo(0, Math.round(from * (1 - ease(k))));
+      if (k < 1 && auto) raf = requestAnimationFrame(step);
+      else { raf = 0; auto = false; }
+    };
+    raf = requestAnimationFrame(step);
+  };
+
+  const check = () => {
+    if (auto) return;
+    clearTimeout(timer);
+    timer = atBottom() ? setTimeout(goTop, WAIT) : 0;
+  };
+
+  /* 사용자가 직접 움직이면 : 올라가던 중이면 멈추고, 기다리던 시간은 처음부터 */
+  const userMove = () => {
+    if (auto) stopAuto();
+    clearTimeout(timer);
+    timer = 0;
+    requestAnimationFrame(check);
+  };
+
+  addEventListener("scroll", check, { passive: true });
+  addEventListener("wheel", userMove, { passive: true });
+  addEventListener("touchstart", userMove, { passive: true });
+  addEventListener("keydown", userMove);
+  addEventListener("pointerdown", userMove);
+})();
