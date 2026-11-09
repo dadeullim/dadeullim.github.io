@@ -1491,20 +1491,23 @@ document
 
     /* 핸들 페이지 : Lenis 로 */
     if (window.__lenis && typeof window.__lenis.scrollTo === "function") {
-      window.__lenis.scrollTo(0, { duration: reduce ? 0 : 2, onComplete: () => { auto = false; } });
+      window.__lenis.scrollTo(0, { duration: reduce ? 0 : 3.2, easing: (k) => -(Math.cos(Math.PI * k) - 1) / 2, onComplete: () => { auto = false; } });   /* 2026.11.09 (2) 2초 → 3.2초 · sine */
       return;
     }
 
-    if (reduce) { window.scrollTo(0, 0); auto = false; return; }
+    if (reduce) { window.scrollTo({ top: 0, behavior: "instant" }); auto = false; return; }
 
-    /* 거리에 따라 1.4 ~ 2.6초 · 처음 · 끝 천천히 */
+    /* 2026.11.09 (2) : 더 부드럽게
+       ---- 브랜드 · 어바웃 · 경험 페이지는 CSS 에 scroll-behavior: smooth 가 있어서
+            매 프레임 옮길 때마다 브라우저가 한 번 더 부드럽게 따라가려다 서로 엉켜 덜컥거렸음 → behavior "instant"
+       ---- 시간 1.4 ~ 2.6초 → 2.4 ~ 4초 · 곡선 cubic(처음 · 끝이 급함) → sine(물 흐르듯 완만) */
     const from = scrollY;
-    const dur = Math.min(2600, Math.max(1400, from * 0.12));
+    const dur = Math.min(4000, Math.max(2400, from * 0.3));
     const t0 = performance.now();
-    const ease = (k) => (k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
+    const ease = (k) => -(Math.cos(Math.PI * k) - 1) / 2;
     const step = (now) => {
       const k = Math.min(1, (now - t0) / dur);
-      window.scrollTo(0, Math.round(from * (1 - ease(k))));
+      window.scrollTo({ top: from * (1 - ease(k)), behavior: "instant" });
       if (k < 1 && auto) raf = requestAnimationFrame(step);
       else { raf = 0; auto = false; }
     };
