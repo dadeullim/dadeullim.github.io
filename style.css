@@ -4156,7 +4156,7 @@ canvas {
   display: grid;
 
   grid-template-columns:
-    calc(var(--header-column-about) * 1.08) /* 2026.11.10 : WE ARE 맨 앞 (전 brand interface experience about 순, about 1배) */
+    calc(var(--header-column-about) * 1.03) /* 2026.11.10 : WE ARE 맨 앞 (전 brand interface experience about 순, about 1배 → 1.08 → 시각보정 1.03) */
     var(--header-column-brand)
     var(--header-column-interface)
     var(--header-column-experience);
@@ -4336,7 +4336,7 @@ canvas {
   display: grid;
 
   grid-template-columns:
-    calc(var(--header-column-about) * 1.08) /* 2026.11.10 : WE ARE 맨 앞 (전 brand interface experience about 순, about 1배) */
+    calc(var(--header-column-about) * 1.03) /* 2026.11.10 : WE ARE 맨 앞 (전 brand interface experience about 순, about 1배 → 1.08 → 시각보정 1.03) */
     var(--header-column-brand)
     var(--header-column-interface)
     var(--header-column-experience);
@@ -4700,7 +4700,7 @@ canvas {
 
 .site-header__nav {
   grid-template-columns:
-    calc(var(--header-column-about) * 1.08) /* 2026.11.10 : WE ARE 맨 앞 (전 brand interface experience about 순, about 1배) */
+    calc(var(--header-column-about) * 1.03) /* 2026.11.10 : WE ARE 맨 앞 (전 brand interface experience about 순, about 1배 → 1.08 → 시각보정 1.03) */
     var(--header-column-brand)
     var(--header-column-interface)
     var(--header-column-experience);
@@ -4761,7 +4761,7 @@ canvas {
 
 .site-header__mega-grid {
   grid-template-columns:
-    calc(var(--header-column-about) * 1.08) /* 2026.11.10 : WE ARE 맨 앞 (전 brand interface experience about 순, about 1배) */
+    calc(var(--header-column-about) * 1.03) /* 2026.11.10 : WE ARE 맨 앞 (전 brand interface experience about 순, about 1배 → 1.08 → 시각보정 1.03) */
     var(--header-column-brand)
     var(--header-column-interface)
     var(--header-column-experience);
@@ -8062,6 +8062,18 @@ html body .site-header .site-header__nav-link.site-header__nav-link--brand:focus
 html body .site-header .site-header__nav-link.site-header__nav-link--brand.is-active {
   color: #1670ff !important;
   -webkit-text-fill-color: #1670ff !important;
+}
+/* 2026.11.10 : BRAND 오버 밑줄도 블루 (전 : 흰색 / 글자색) */
+html body .site-header .site-header__nav-link.site-header__nav-link--brand::after {
+  background: #1670ff !important;
+  background-color: #1670ff !important;
+  border-color: #1670ff !important;
+}
+/* 2026.11.10 : WE ARE 시각보정 — W 두 개라 넓고 커 보여서 95% 로 (전 : 100%)
+   왼쪽 기준 축소라 아래 상세 메뉴 줄은 그대로, 칸 너비 ×1.03 (전 ×1.08) 로 간격 동일 */
+html body .site-header .site-header__nav-link[href="./problem.html"] {
+  transform: scale(.95) !important;
+  transform-origin: left center !important;
 }
 
 
