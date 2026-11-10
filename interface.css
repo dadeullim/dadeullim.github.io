@@ -8368,6 +8368,21 @@ body.handle-page {
   .hud16 .wx__fig.hd-fig .hd-box img { opacity: 1; transition: none; }
 }
 
+/* =====================================================
+   [헤더 BRAND 블루] 2026.11.10
+   - 메뉴 순서 WE ARE(전 ABOUT) · BRAND · INTERFACE · EXPERIENCE
+   - BRAND 글자만 블루 (#1670FF) / 전 : rgba(244,244,241,.66)
+   - 위 .interface-page ... :not(:hover):not(:focus-within) 규칙보다 세게
+===================================================== */
+html body.interface-page .site-header .site-header__nav-link.site-header__nav-link--brand,
+html body.interface-page .site-header:not(:hover):not(:focus-within) .site-header__nav-link.site-header__nav-link--brand,
+html body.interface-page .site-header .site-header__nav-link.site-header__nav-link--brand:hover,
+html body.interface-page .site-header .site-header__nav-link.site-header__nav-link--brand:focus-visible {
+  color: #1670ff !important;
+  -webkit-text-fill-color: #1670ff !important;
+}
+
+
 /* =========================================================
    [아이맥 화면비] 맥북 느낌 그대로 / 2026.11.03
    ---------------------------------------------------------

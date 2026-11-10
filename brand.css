@@ -5737,10 +5737,10 @@ html:has(.brand2-page) {
   display: grid;
 
   grid-template-columns:
+    calc(var(--header-column-about) * 1.08) /* 2026.11.10 : WE ARE 맨 앞 (전 brand interface experience about 순, about 1배) */
     var(--header-column-brand)
     var(--header-column-interface)
-    var(--header-column-experience)
-    var(--header-column-about);
+    var(--header-column-experience);
 
   column-gap:
     var(--header-center-gap);
@@ -5910,10 +5910,10 @@ html:has(.brand2-page) {
   display: grid;
 
   grid-template-columns:
+    calc(var(--header-column-about) * 1.08) /* 2026.11.10 : WE ARE 맨 앞 (전 brand interface experience about 순, about 1배) */
     var(--header-column-brand)
     var(--header-column-interface)
-    var(--header-column-experience)
-    var(--header-column-about);
+    var(--header-column-experience);
 
   column-gap:
     var(--header-center-gap);
@@ -16801,6 +16801,21 @@ html {
 .brand2-page .philosophy-keyword-media[data-keyword-media="connected"] {
   transform: none;
 }
+
+/* =====================================================
+   [헤더 BRAND 블루] 2026.11.10
+   - 메뉴 순서 WE ARE(전 ABOUT) · BRAND · INTERFACE · EXPERIENCE
+   - BRAND 글자만 블루 (#1670FF, 로고 시스템 블루) / 전 : 다른 메뉴와 같은 색
+   - 페이지마다 헤더 색 규칙이 달라서 !important
+===================================================== */
+html body .site-header .site-header__nav-link.site-header__nav-link--brand,
+html body .site-header .site-header__nav-link.site-header__nav-link--brand:hover,
+html body .site-header .site-header__nav-link.site-header__nav-link--brand:focus-visible,
+html body .site-header .site-header__nav-link.site-header__nav-link--brand.is-active {
+  color: #1670ff !important;
+  -webkit-text-fill-color: #1670ff !important;
+}
+
 
 /* =========================================================
    [아이맥 화면비] 맥북 느낌 그대로 / 2026.11.03
