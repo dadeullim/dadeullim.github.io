@@ -4318,7 +4318,10 @@ document.addEventListener("DOMContentLoaded", () => {
     v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("aria-hidden", "true");
     v.poster = `${DIR}${s.k}.jpg`;
     v.src = `${DIR}${s.k}.mp4`;
-    img.src = `${DIR}${s.k}-ar.webp`;
+    /* 2026.11.10 : HUD 글 카드(아이콘 · 경고 문장)를 왼쪽 아래 → 영상 가운데로 옮긴 그림으로 교체
+       (그림 자체를 다시 만듦 — 카드 밑에 가려졌던 차선은 반대쪽 차선을 뒤집어 복원 / 전 : 카드 왼쪽 아래)
+       ?v= 는 예전 그림이 캐시에 남아 있지 않게 */
+    img.src = `${DIR}${s.k}-ar.webp?v=20261110`;
     img.removeAttribute("loading");
     box.append(v, img);
     fig.append(box);

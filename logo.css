@@ -3490,6 +3490,16 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
     max-width: 100%;
   }
 
+  /* 2026.11.10 : CONCEPT(세 가지 의미가 하나의 형태로) 칸 너비도 맥북 비율로
+     번호 칸 44px · 제목 칸 220px 이 px 고정이라 아이맥에서 설명 글이 왼쪽으로 붙었음 (전 : 44px / 220px) */
+  html body .concept-row .num {
+    flex: 0 0 2.9101vw;
+  }
+  html body .concept-row__body h3,
+  html body .concept-row__body .glyph {
+    flex: 0 0 14.5503vw;
+  }
+
 }
 
 /* ===== [아이맥 글자 크기] 자동 생성 시작 — 손으로 고치지 않기 ===== */

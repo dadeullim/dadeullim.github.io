@@ -16828,6 +16828,23 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
   transform-origin: left center !important;
 }
 
+/* =====================================================
+   [BRAND1 문제 카드 얼굴 안 보이게] 2026.11.10
+   - 카드 4장 사진(세로로 긴 사진) 왼쪽에 운전자 얼굴이 반쯤 보였음
+   - 사진을 124% 로 넓게 깔고 왼쪽 24% 를 카드 밖으로 → 얼굴 쪽이 잘림
+     (전 : left 0 · width 100% · 모서리 둥글게는 border-radius)
+   - 카드 밖으로 나간 부분은 clip-path 로 잘라 모서리 둥글게 그대로 (24 / 124 = 19.355%)
+===================================================== */
+html body.brand1-page .problem-card .problem-image {
+  /* 위쪽 .brand1-page .problem-image 의 inset 0 !important 를 이기려고 !important */
+  left: -24% !important;
+  right: auto !important;
+  width: 124% !important;
+  max-width: none;
+  border-radius: 0;
+  clip-path: inset(0 0 0 19.355% round var(--box-radius, 6px));
+}
+
 
 /* =========================================================
    [아이맥 화면비] 맥북 느낌 그대로 / 2026.11.03
@@ -18326,6 +18343,12 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
   }
   .brand2-page .philosophy-keywords__item {
     left: 2.9101vw;
+  }
+  html body.brand1-page .problem-card .problem-image {
+    left: -24% !important;
+    right: auto !important;
+    width: 124% !important;
+    max-width: none;
   }
   html body.brand1-page .brand-hero-final__copy {
     right: 6.3vw;
