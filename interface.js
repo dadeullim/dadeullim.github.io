@@ -4321,7 +4321,9 @@ document.addEventListener("DOMContentLoaded", () => {
     /* 2026.11.10 : HUD 글 카드(아이콘 · 경고 문장)를 왼쪽 아래 → 영상 가운데로 옮긴 그림으로 교체
        (그림 자체를 다시 만듦 — 카드 밑에 가려졌던 차선은 반대쪽 차선을 뒤집어 복원 / 전 : 카드 왼쪽 아래)
        ?v= 는 예전 그림이 캐시에 남아 있지 않게 */
-    img.src = `${DIR}${s.k}-ar.webp?v=20261110`;
+    /* 2026.11.10 (2) : 가운데 글 카드가 너무 아래라서 120px(1080 기준) 위로 — 그림 다시 만듦 (전 ?v=20261110)
+       2026.11.10 (3) : 더 올려서 200px 위로 (전 120px · ?v=20261110b) */
+    img.src = `${DIR}${s.k}-ar.webp?v=20261110c`;
     img.removeAttribute("loading");
     box.append(v, img);
     fig.append(box);
