@@ -46,12 +46,14 @@
        - 처음 접속했을 때만 인트로 영상 재생 (같은 탭에서는 1회)
        - 상단 로고 클릭 시에는 다시 재생 (2026.10.06 추가)
        - 영상이 끝나기 직전 패널이 위로 걷히면서 HERO 시작
-       - 영상 파일 : ./images/intro-v12.mp4 (2026.10.14 변경, 전 ./images/intro.mp4)
+       - 영상 파일 : ./images/intro-v13.mp4 (2026.11.10 변경, 전 ./images/intro-v12.mp4 · 그 전 ./images/intro.mp4)
   ====================================================== -->
 <div aria-label="DADEULLIM 인트로" class="site-intro" id="site-intro" role="dialog">
 <!-- 2026.10.14 : 인트로 영상 intro.mp4 → intro-v12.mp4 (기존 파일은 images/intro.mp4 로 남겨 둠)
      새 영상은 마지막 장면이 HERO 01 화면과 같음 → 패널이 걷히지 않고 그대로 겹쳐 사라짐 -->
-<video class="site-intro__video" id="site-intro-video" muted="" playsinline="" preload="auto" src="./images/intro-v12.mp4"></video>
+<!-- 2026.11.10 : 인트로 영상 intro-v12.mp4 → intro-v13.mp4 (UNHEARD 장면에 흰 음파 선 추가 · 길이 17.4초 · 마지막 장면 같음)
+     (전 : src="./images/intro-v12.mp4" — 기존 파일은 images/intro-v12.mp4 로 남겨 둠) -->
+<video class="site-intro__video" id="site-intro-video" muted="" playsinline="" preload="auto" src="./images/intro-v13.mp4"></video>
 <!-- 2026.11.08 : 인트로 음향 (images/intro-sound.mp3 · 17.4초) — 영상과 같이 재생 (script.js [인트로 음향])
      브라우저가 소리 자동 재생을 막으면 화면을 한 번 누르거나 SOUND 버튼을 누를 때 영상 위치에 맞춰 시작 -->
 <audio id="site-intro-sound" preload="auto" src="./images/intro-sound.mp3"></audio>
