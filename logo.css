@@ -3455,6 +3455,7 @@ html {
    [헤더 BRAND 블루] 2026.11.10
    - 메뉴 순서 WE ARE(전 ABOUT) · BRAND · INTERFACE · EXPERIENCE
    - BRAND 글자만 블루 (#1670FF, 로고 시스템 블루) / 전 : 다른 메뉴와 같은 색
+   - 2026.11.10 (2) : 다른 페이지는 밝은 블루 #8DB8FF 로 바꿨지만 로고 페이지는 헤더 바탕이 밝아서 #1670FF 그대로
    - 페이지마다 헤더 색 규칙이 달라서 !important
 ===================================================== */
 html body .site-header .site-header__nav-link.site-header__nav-link--brand,

@@ -8438,20 +8438,22 @@ body.handle-page {
    [헤더 BRAND 블루] 2026.11.10
    - 메뉴 순서 WE ARE(전 ABOUT) · BRAND · INTERFACE · EXPERIENCE
    - BRAND 글자만 블루 (#1670FF) / 전 : rgba(244,244,241,.66)
+   - 2026.11.10 (2) : 사진 · 어두운 헤더 위에서는 #1670FF 가 너무 진하게 튀어서
+     같은 시그널 블루 계열의 밝은 블루 #8DB8FF 로 (전 : #1670FF)
    - 위 .interface-page ... :not(:hover):not(:focus-within) 규칙보다 세게
 ===================================================== */
 html body.interface-page .site-header .site-header__nav-link.site-header__nav-link--brand,
 html body.interface-page .site-header:not(:hover):not(:focus-within) .site-header__nav-link.site-header__nav-link--brand,
 html body.interface-page .site-header .site-header__nav-link.site-header__nav-link--brand:hover,
 html body.interface-page .site-header .site-header__nav-link.site-header__nav-link--brand:focus-visible {
-  color: #1670ff !important;
-  -webkit-text-fill-color: #1670ff !important;
+  color: #8db8ff !important; /* 전 : #1670ff */
+  -webkit-text-fill-color: #8db8ff !important;
 }
 /* 2026.11.10 : BRAND 오버 밑줄도 블루 (전 : 흰색 / 글자색) */
 html body .site-header .site-header__nav-link.site-header__nav-link--brand::after {
-  background: #1670ff !important;
-  background-color: #1670ff !important;
-  border-color: #1670ff !important;
+  background: #8db8ff !important; /* 전 : #1670ff */
+  background-color: #8db8ff !important;
+  border-color: #8db8ff !important;
 }
 /* 2026.11.10 : WE ARE 시각보정 — W 두 개라 넓고 커 보여서 95% 로 (전 : 100%)
    왼쪽 기준 축소라 아래 상세 메뉴 줄은 그대로, 칸 너비 ×1.03 (전 ×1.08) 로 간격 동일 */

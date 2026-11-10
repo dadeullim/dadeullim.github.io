@@ -8054,17 +8054,50 @@ html {
    [헤더 BRAND 블루] 2026.11.10
    - 메뉴 순서 WE ARE(전 ABOUT) · BRAND · INTERFACE · EXPERIENCE
    - BRAND 글자만 블루 (#1670FF, 로고 시스템 블루) / 전 : 다른 메뉴와 같은 색
+   - 2026.11.10 (2) : 사진 · 어두운 헤더 위에서는 #1670FF 가 너무 진하게 튀어서
+     같은 시그널 블루 계열의 밝은 블루 #8DB8FF 로 (전 : #1670FF)
    - 페이지마다 헤더 색 규칙이 달라서 !important
 ===================================================== */
 html body .site-header .site-header__nav-link.site-header__nav-link--brand,
 html body .site-header .site-header__nav-link.site-header__nav-link--brand:hover,
 html body .site-header .site-header__nav-link.site-header__nav-link--brand:focus-visible,
 html body .site-header .site-header__nav-link.site-header__nav-link--brand.is-active {
-  color: #1670ff !important;
-  -webkit-text-fill-color: #1670ff !important;
+  color: #8db8ff !important; /* 전 : #1670ff */
+  -webkit-text-fill-color: #8db8ff !important;
 }
 /* 2026.11.10 : BRAND 오버 밑줄도 블루 (전 : 흰색 / 글자색) */
 html body .site-header .site-header__nav-link.site-header__nav-link--brand::after {
+  background: #8db8ff !important; /* 전 : #1670ff */
+  background-color: #8db8ff !important;
+  border-color: #8db8ff !important;
+}
+/* 2026.11.10 (2) : 인덱스는 헤더 뒤 배경이 01 밝은 회청색 사진 · 02 검정 · 03 진한 파랑으로 바뀜
+   #8DB8FF 는 01 위에서 거의 안 보이고, #1670FF 는 03 파랑 위에서 안 보여서
+   세 장 모두 읽히는 더 밝은 시그널 블루 #B4D0FF (같은 색상각 217°) */
+html body.index-page .site-header .site-header__nav-link.site-header__nav-link--brand,
+html body.index-page .site-header .site-header__nav-link.site-header__nav-link--brand:hover,
+html body.index-page .site-header .site-header__nav-link.site-header__nav-link--brand:focus-visible {
+  color: #b4d0ff !important;
+  -webkit-text-fill-color: #b4d0ff !important;
+}
+html body.index-page .site-header .site-header__nav-link.site-header__nav-link--brand::after {
+  background: #b4d0ff !important;
+  background-color: #b4d0ff !important;
+  border-color: #b4d0ff !important;
+}
+/* 2026.11.10 (2) : 헤더 글자가 어두운 페이지(주행 · 안전, 밝은 바탕)는 시그널 블루 그대로 #1670FF
+   밝은 블루는 밝은 바탕에서 흐려 보여서 */
+html body.driving-page .site-header .site-header__nav-link.site-header__nav-link--brand,
+html body.driving-page .site-header .site-header__nav-link.site-header__nav-link--brand:hover,
+html body.driving-page .site-header .site-header__nav-link.site-header__nav-link--brand:focus-visible,
+html body.safety-page .site-header .site-header__nav-link.site-header__nav-link--brand,
+html body.safety-page .site-header .site-header__nav-link.site-header__nav-link--brand:hover,
+html body.safety-page .site-header .site-header__nav-link.site-header__nav-link--brand:focus-visible {
+  color: #1670ff !important;
+  -webkit-text-fill-color: #1670ff !important;
+}
+html body.driving-page .site-header .site-header__nav-link.site-header__nav-link--brand::after,
+html body.safety-page .site-header .site-header__nav-link.site-header__nav-link--brand::after {
   background: #1670ff !important;
   background-color: #1670ff !important;
   border-color: #1670ff !important;
