@@ -4874,6 +4874,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   let timer = 0, raf = 0, auto = false;
 
+  /* 천천히 출발 → 빨라짐 → 끝 5% 에서 짧게 감속하며 닿음 ("촥") */
+  const DD_SNAP_EASE = (k) => {
+    const c = 0.95;                               /* 여기까지는 가속 (k^3) */
+    if (k < c) return 0.9 * Math.pow(k / c, 3);   /* 0 → 0.9 */
+    const u = (k - c) / (1 - c);                  /* 마지막 짧은 구간 : 남은 0.1 을 빠르게 감속 */
+    return 0.9 + 0.1 * (1 - Math.pow(1 - u, 3));
+  };
+
   const atBottom = () => {
     const doc = document.documentElement;
     return doc.scrollHeight > innerHeight + 200 && innerHeight + scrollY >= doc.scrollHeight - 4;
@@ -4892,7 +4900,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* 핸들 페이지 : Lenis 로 */
     if (window.__lenis && typeof window.__lenis.scrollTo === "function") {
-      window.__lenis.scrollTo(0, { duration: reduce ? 0 : 3.2, easing: (k) => -(Math.cos(Math.PI * k) - 1) / 2, onComplete: () => { auto = false; } });   /* 2026.11.09 (2) 2초 → 3.2초 · sine */
+      window.__lenis.scrollTo(0, { duration: reduce ? 0 : 2.6, easing: DD_SNAP_EASE, onComplete: () => { auto = false; } });   /* 2026.11.09 (3) 막판 빠르게 · 2.6초 (전 3.2초 sine) */
       return;
     }
 
@@ -4902,10 +4910,13 @@ document.addEventListener("DOMContentLoaded", () => {
        ---- 브랜드 · 어바웃 · 경험 페이지는 CSS 에 scroll-behavior: smooth 가 있어서
             매 프레임 옮길 때마다 브라우저가 한 번 더 부드럽게 따라가려다 서로 엉켜 덜컥거렸음 → behavior "instant"
        ---- 시간 1.4 ~ 2.6초 → 2.4 ~ 4초 · 곡선 cubic(처음 · 끝이 급함) → sine(물 흐르듯 완만) */
+    /* 2026.11.09 (3) : 막판에 빠르게 올라가 "촥" 닿게
+       ---- 처음엔 천천히 출발 → 점점 빨라져 → 맨 위에 빠르게 닿고 마지막 아주 짧게(약 0.1초) 멈춰 섬
+            전) sine (처음 · 끝 모두 천천히) · 2.4 ~ 4초 → 2 ~ 3.2초 */
     const from = scrollY;
-    const dur = Math.min(4000, Math.max(2400, from * 0.3));
+    const dur = Math.min(3200, Math.max(2000, from * 0.25));
     const t0 = performance.now();
-    const ease = (k) => -(Math.cos(Math.PI * k) - 1) / 2;
+    const ease = DD_SNAP_EASE;
     const step = (now) => {
       const k = Math.min(1, (now - t0) / dur);
       window.scrollTo({ top: from * (1 - ease(k)), behavior: "instant" });
