@@ -5939,6 +5939,11 @@ updateHeaderState();
           화면을 한 번 누르거나(아무 키 · 클릭) 버튼을 누르면 영상 위치에 맞춰 시작
      ---- 인트로가 걷힐 때 소리도 서서히 줄어듦
      ---- 스타일 : style.css [인트로 음향]
+     2026.11.14 : 처음부터 소리 켜짐이 기본 → SOUND OFF 를 누르면 꺼짐
+     ---- 전) 기본은 꺼짐 · 버튼 "SOUND ON" → 누르면 켜짐
+     ---- 브라우저가 처음 온 사이트의 소리 자동 재생을 막으면(크롬 · 사파리 등)
+          버튼은 그대로 "SOUND OFF"(켜진 상태)로 두고, 화면을 처음 누르거나 키를 누르는 순간 영상 위치에 맞춰 시작
+     ---- 휴대폰 터치도 잡도록 pointerup · touchend · click 추가 (전 : pointerdown · keydown 만 — 터치는 브라우저가 소리 허락으로 안 쳐줌)
   --------------------------------------------------------- */
   const sound =
     document.querySelector("#site-intro-sound");
@@ -5947,26 +5952,33 @@ updateHeaderState();
     document.querySelector("#site-intro-sound-toggle");
 
   let soundOn =
-    false;
+    false;   /* 지금 실제로 소리가 나는지 */
+
+  /* 2026.11.14 : 소리를 원하는지 (기본 켜짐 · SOUND OFF 누르면 false) */
+  let soundWanted =
+    true;
 
   const setSoundButton =
     () => {
       if (!soundButton) return;
-      soundButton.textContent = soundOn ? "SOUND OFF" : "SOUND ON";
-      soundButton.setAttribute("aria-pressed", soundOn ? "true" : "false");
+      /* 2026.11.14 : 버튼 글자는 "원하는 상태" 기준 (전 : 실제로 소리가 나는지 soundOn 기준) */
+      soundButton.textContent = soundWanted ? "SOUND OFF" : "SOUND ON";
+      soundButton.setAttribute("aria-pressed", soundWanted ? "true" : "false");
     };
 
   const startSound =
     () => {
-      if (!sound || isLeaving) return;
+      if (!sound || isLeaving || !soundWanted) return;   /* 2026.11.14 : 끈 상태면 안 켬 */
       sound.volume = 1;
-      if (Number.isFinite(video.currentTime)) {
+      /* 2026.11.14 : 0.25초 넘게 어긋날 때만 맞춤 — 터치 한 번에 여러 번 불려도 소리가 튀지 않게
+         (전 : 부를 때마다 sound.currentTime = video.currentTime) */
+      if (Number.isFinite(video.currentTime) && Math.abs(sound.currentTime - video.currentTime) > 0.25) {
         sound.currentTime = video.currentTime;   /* 영상과 맞춤 */
       }
       const p = sound.play();
       if (p && typeof p.then === "function") {
         p.then(() => { soundOn = true; setSoundButton(); })
-         .catch(() => { soundOn = false; setSoundButton(); });
+         .catch(() => { soundOn = false; setSoundButton(); });   /* 막혀도 soundWanted 는 그대로 → 첫 클릭 · 터치 · 키에 시작 */
       } else {
         soundOn = true;
         setSoundButton();
@@ -5976,6 +5988,7 @@ updateHeaderState();
   const stopSound =
     () => {
       if (!sound) return;
+      soundWanted = false;   /* 2026.11.14 : 사용자가 끔 → 화면을 눌러도 다시 안 켬 */
       sound.pause();
       soundOn = false;
       setSoundButton();
@@ -6003,16 +6016,30 @@ updateHeaderState();
     video.addEventListener("playing", startSound, { once: true });
 
     const unlock = (event) => {
-      if (soundOn || isLeaving) return;
+      if (!soundWanted || soundOn || isLeaving) return;   /* 2026.11.14 : 끈 상태면 그대로 (전 : soundOn || isLeaving) */
       if (event && soundButton && soundButton.contains(event.target)) return;   /* 버튼은 따로 처리 */
       if (event && skipButton && skipButton.contains(event.target)) return;     /* SKIP 은 소리 없이 넘김 */
       startSound();
     };
     window.addEventListener("pointerdown", unlock);
+    window.addEventListener("pointerup", unlock);    /* 2026.11.14 : 휴대폰 터치 */
+    window.addEventListener("touchend", unlock);     /* 2026.11.14 : 휴대폰 터치 (iOS) */
+    window.addEventListener("click", unlock);        /* 2026.11.14 */
     window.addEventListener("keydown", (e) => { if (e.key !== "Escape") unlock(e); });
 
     if (soundButton) {
-      soundButton.addEventListener("click", () => (soundOn ? stopSound() : startSound()));
+      /* 2026.11.14 : 켜고 끄는 기준을 soundWanted 로 (전 : soundOn ? stopSound() : startSound())
+         ---- 자동 재생이 막혀 아직 소리가 안 나도 버튼은 "SOUND OFF" → 누르면 꺼짐 */
+      soundButton.addEventListener("click", () => {
+        if (soundWanted) {
+          stopSound();
+        } else {
+          soundWanted = true;
+          startSound();
+          setSoundButton();
+        }
+      });
+      setSoundButton();
     }
   } else if (soundButton) {
     soundButton.hidden = true;

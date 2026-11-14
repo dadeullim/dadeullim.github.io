@@ -9,7 +9,7 @@
 <title>
     DADEULLIM — Sound Experience
   </title>
-<link href="./style.css?v=20261114" rel="stylesheet"/>
+<link href="./style.css?v=20261114b" rel="stylesheet"/>
 <!-- =====================================================
        INTRO 준비 — 2026.10.06
        화면이 그려지기 전에 인트로 재생 여부를 먼저 결정
@@ -62,8 +62,9 @@
      ---- 영상에서 소리만 그대로 꺼냄 (다시 압축 안 함 · AAC 17.4초) → images/intro-sound-v13.m4a
      (전 : src="./images/intro-sound.mp3") -->
 <audio id="site-intro-sound" preload="auto" src="./images/intro-sound-v13.m4a"></audio>
-<button aria-pressed="false" class="site-intro__sound" id="site-intro-sound-toggle" type="button">
-        SOUND ON
+<!-- 2026.11.14 : 소리 기본 켜짐 → 버튼 처음 글자 SOUND OFF (누르면 꺼짐) / 전 : aria-pressed="false" · SOUND ON -->
+<button aria-pressed="true" class="site-intro__sound" id="site-intro-sound-toggle" type="button">
+        SOUND OFF
       </button>
 <!-- SKIP 버튼 -->
 <button class="site-intro__skip" id="site-intro-skip" type="button">
@@ -768,6 +769,6 @@
 </div>
 </main>
 <!-- JAVASCRIPT -->
-<script src="./script.js?v=20261114"></script>
+<script src="./script.js?v=20261114b"></script>
 </body>
 </html>
