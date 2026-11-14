@@ -4864,6 +4864,99 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* =========================================================
+   [HANDLE 07 제작 — 가운데 선 방식] 2026.11.14
+   ---------------------------------------------------------
+   핸들 영상.zip (handle-process/process-section.js) 를 옮겨 옴
+   ---- 화면 가운데 선에 걸친 영상을 찾아 단계 이름 · STEP · N / 3 · 캡션을 굴려서 바꿈
+   ---- 칸 안 영상은 스크롤에 따라 살짝 위아래로 움직임 (scale 1.06)
+   ---- 영상은 화면에 보일 때만 재생
+   ---- 우리 방식으로 바꾼 것 : 섹션이 화면 근처에 있을 때만 매 프레임 계산 (zip 은 항상 계산)
+   스타일 : interface.css [HANDLE 07 제작 — 가운데 선 방식]
+   전) .mk3--zig 영상 3개 autoplay (따로 JS 없음)
+========================================================= */
+
+(() => {
+  const sec = document.querySelector(".hd5 .pcs");
+  if (!sec) return;
+
+  const items = [...sec.querySelectorAll(".pcs-item")];
+  const ind = sec.querySelector(".pcs-ind");
+  if (!items.length || !ind) return;
+
+  const slots = {
+    ttl: ind.querySelector(".pcs-ttl"),
+    num: ind.querySelector(".pcs-num"),
+    cur: ind.querySelector(".pcs-cur"),
+    cap: ind.querySelector(".pcs-cap")
+  };
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let current = -1;
+  let near = false;
+  let raf = 0;
+
+  const play = (v) => {
+    if (reduce) return;
+    const p = v.play();
+    if (p && p.catch) p.catch(() => {});
+  };
+
+  /* 화면에 보일 때만 재생 */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => (e.isIntersecting ? play(e.target) : e.target.pause()));
+  }, { rootMargin: "10% 0px" });
+  sec.querySelectorAll(".pcs-item video").forEach((v) => io.observe(v));
+
+  /* 숫자 · 글자 굴리기 */
+  const roll = (slot, text) => {
+    if (!slot) return;
+    const old = slot.firstElementChild;
+    if (old && old.textContent === String(text)) return;
+    const s = document.createElement("span");
+    s.textContent = text;
+    s.className = "pcs-roll";
+    slot.innerHTML = "";
+    slot.appendChild(s);
+  };
+
+  const frame = () => {
+    raf = 0;
+    const cy = innerHeight / 2;
+    let best = 0, bd = 1e9;
+
+    items.forEach((it, k) => {
+      const b = it.getBoundingClientRect();
+      const c = b.top + b.height / 2;
+      const d = (cy >= b.top - 5 && cy <= b.bottom + 5) ? 0 : Math.abs(c - cy);
+      if (d < bd) { bd = d; best = k; }
+      if (!reduce) {
+        const off = (c - cy) / innerHeight;
+        it.firstElementChild.style.transform = `translateY(${(-off * 7).toFixed(2)}%) scale(1.06)`;
+      }
+    });
+
+    if (best !== current) {
+      current = best;
+      const d = items[best].dataset;
+      roll(slots.ttl, d.title);
+      roll(slots.num, d.num);
+      roll(slots.cur, d.n);
+      roll(slots.cap, d.cap);
+    }
+
+    if (near) raf = requestAnimationFrame(frame);
+  };
+
+  /* 섹션이 화면 위아래 200px 안에 들어오면 계산 시작, 벗어나면 멈춤 */
+  new IntersectionObserver((entries) => {
+    near = entries[0].isIntersecting;
+    if (near && !raf) raf = requestAnimationFrame(frame);
+  }, { rootMargin: "200px 0px" }).observe(sec);
+
+  frame();   /* 처음 한 번 — 라벨 · 영상 위치 맞춰 둠 */
+})();
+
+
+/* =========================================================
    [맨 아래 → 히어로로] 푸터까지 다 보고 2.5초 가만히 있으면 맨 위(히어로)로 / 2026.11.09
    ---------------------------------------------------------
    모든 페이지 같은 코드 (script.js · brand.js · interface.js · experience.js · logo.js 에 똑같이 넣음

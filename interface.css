@@ -8464,6 +8464,251 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
 
 
 /* =========================================================
+   [HANDLE 07 제작 — 가운데 선 방식] 2026.11.14
+   ---------------------------------------------------------
+   핸들 영상.zip (handle-process/process-section.css) 를 옮겨 옴 — WRK ‘Case Development’ 방식
+   ---- 영상 3칸이 세로로 이어지고, 화면 가운데(50vh)에 고정된 1px 선을 지날 때마다
+        단계 이름 · STEP · N / 3 · 캡션이 굴러가며 바뀜 (동작 : interface.js [HANDLE 07 제작 — 가운데 선 방식])
+   ---- 전 : .mk3--zig 지그재그 영상 3개 (왼쪽 · 오른쪽 · 왼쪽 + 설명 문장) — 위 .mk3--zig 규칙은 이제 안 쓰임
+   ---- 우리 페이지에 맞춘 것
+        · 색 · 글꼴은 핸들 페이지 값(--ink · --sans · --mono · --gutter) 그대로 (zip 은 따로 --pcs-* 값)
+        · 바탕 #000 → 핸들 페이지 검정 var(--hd5-black) #0e0f12
+        · 핸들 섹션 공통 모눈 배경(.hd5 > section !important)은 끄고, 제목 칸에만 모눈 → 아래로 사라짐
+        · 위 섹션과 사이 1px 선은 다른 섹션(.sec + .sec)과 같게
+        · 제목 크기는 전과 같은 .hd5 > section[aria-label="PROCESS"] .ttl 규칙 그대로
+        · 영상 모서리 6px (2026.11.03 제작 영상 모서리와 같게 / zip 은 0)
+========================================================= */
+.hd5 > section.pcs:not(.hero) {
+  --pcs-gutter: clamp(20px, 2.1vw, 30px);
+  position: relative;
+  background-image: none !important;   /* 전 : 핸들 공통 모눈 */
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  font-family: var(--sans);
+}
+
+/* 제목 칸 — 모눈이 아래로 갈수록 사라짐 */
+.hd5 .pcs-head {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 24px;
+  align-items: end;
+  padding: clamp(110px, 10vw, 180px) var(--gutter) clamp(90px, 8vw, 140px);
+  background-color: var(--hd5-black);
+  background-image:
+    linear-gradient(rgba(255,255,255,.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.075) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-position: -1px -1px;
+}
+
+.hd5 .pcs-head::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(90px, 8vw, 140px);
+  background: linear-gradient(rgba(14,15,18,0), var(--hd5-black));   /* zip : #000 */
+  pointer-events: none;
+}
+
+.hd5 .pcs-head > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hd5 .pcs-head .ttl {
+  grid-column: 1 / 7;
+  margin: 0;
+}
+
+.hd5 .pcs-lead {
+  grid-column: 8 / 13;
+  margin: 0;
+  font-size: clamp(15px, 1.05vw, 18px);
+  line-height: 1.85;
+  color: var(--ink-2);
+  word-break: keep-all;
+}
+
+/* 영상 줄 */
+.hd5 .pcs-stream {
+  position: relative;
+  padding: 22vh 0 40vh;
+  background: var(--hd5-black);
+}
+
+.hd5 .pcs-col {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(80px, 13vh, 150px);
+}
+
+.hd5 .pcs-item {
+  position: relative;
+  overflow: hidden;
+  width: var(--w, 50%);
+  aspect-ratio: var(--ar, 16 / 9);
+  background: #070707;
+  border-radius: 6px;
+}
+
+.hd5 .pcs-in {
+  position: absolute;
+  inset: -9% 0;
+  will-change: transform;
+}
+
+.hd5 .pcs-in video {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--pos, 50%) 50%;
+  filter: brightness(.82) saturate(.8);
+}
+
+/* 화면 가운데 고정 선 + 라벨 */
+.hd5 .pcs-indw {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.hd5 .pcs-ind {
+  position: sticky;
+  top: 50vh;
+  height: 0;
+}
+
+.hd5 .pcs-line {
+  position: absolute;
+  left: var(--pcs-gutter);
+  right: var(--pcs-gutter);
+  top: 0;
+  height: 1px;
+  background: rgba(255,255,255,.3);
+}
+
+.hd5 .pcs-slot {
+  position: absolute;
+  overflow: hidden;
+  height: 1.5em;
+}
+
+.hd5 .pcs-slot > span {
+  display: block;
+  white-space: nowrap;
+}
+
+.hd5 .pcs-ttl {
+  left: var(--pcs-gutter);
+  bottom: 10px;
+  height: 1.4em;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+}
+
+.hd5 .pcs-num,
+.hd5 .pcs-cnt,
+.hd5 .pcs-cap {
+  top: 9px;
+  font: 400 12px/1.4 var(--mono);
+  letter-spacing: .05em;
+}
+
+.hd5 .pcs-num {
+  left: 25%;
+}
+
+.hd5 .pcs-cnt {
+  left: calc(75% - 3.4em);
+  display: flex;
+  gap: .45em;
+  overflow: visible;
+  color: var(--ink-3);
+}
+
+.hd5 .pcs-cur {
+  display: inline-block;
+  overflow: hidden;
+  height: 1.4em;
+  color: #fff;
+}
+
+.hd5 .pcs-cur > span {
+  display: block;
+}
+
+.hd5 .pcs-cap {
+  right: var(--pcs-gutter);
+  text-align: right;
+}
+
+.hd5 .pcs-roll {
+  animation: hdPcsRoll .55s cubic-bezier(.2, .7, .1, 1) both;
+}
+
+@keyframes hdPcsRoll {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+/* 끝 줄 */
+.hd5 .pcs-end {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px var(--gutter) 110px;
+  border-top: 1px solid var(--line);
+  font: 500 11px/1.4 var(--mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* 모바일 */
+@media (max-width: 900px) {
+
+  .hd5 .pcs-head .ttl,
+  .hd5 .pcs-lead {
+    grid-column: 1 / -1;
+  }
+
+  .hd5 .pcs-item {
+    width: 86% !important;
+  }
+
+  .hd5 .pcs-num {
+    display: none;
+  }
+
+}
+
+/* 움직임 줄이기 설정 */
+@media (prefers-reduced-motion: reduce) {
+
+  .hd5 .pcs-roll {
+    animation: none;
+  }
+
+  .hd5 .pcs-in {
+    transform: none !important;
+  }
+
+}
+
+
+/* =========================================================
    [아이맥 화면비] 맥북 느낌 그대로 / 2026.11.03
    ---------------------------------------------------------
    아이맥 2048 × 1152 (브라우저 안 약 2048 × 1040) 은 맥북(1512 × 860)보다 세로가 짧아서
@@ -8525,6 +8770,31 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
   html body .hud16 .hd-box,
   html body .hd5 .mk3--zig video {
     border-radius: 0.3968vw;
+  }
+
+  /* 핸들 07 제작 (가운데 선 방식) / 2026.11.14
+     ---- 영상 사이 · 위아래 여백이 vh 라 아이맥에서 덜 커져서 → 맥북 비율 그대로 */
+  html body .hd5 .pcs-col {
+    gap: min(7.3944vw, 14.56svh);   /* clamp(80px, 13vh, 150px) */
+  }
+
+  html body .hd5 .pcs-stream {
+    padding: min(12.5136vw, 24.64svh) 0 min(22.752vw, 44.8svh);   /* 22vh 0 40vh */
+  }
+
+  /* 영상 모서리 6px · 선 위아래 라벨 거리 9 · 10px → 화면 비율 */
+  html body .hd5 .pcs-item {
+    border-radius: 0.3968vw;
+  }
+
+  html body .hd5 .pcs-num,
+  html body .hd5 .pcs-cnt,
+  html body .hd5 .pcs-cap {
+    top: 0.5952vw;
+  }
+
+  html body .hd5 .pcs-ttl {
+    bottom: 0.6614vw;
   }
 
   /* 핸들 04 Hz · ms 칸 : 72px 고정 → 화면 비율 */
@@ -9066,6 +9336,18 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
   }
   .display-page .display-manifesto__size span b {
     font-size: 0.6614vw;
+  }
+  .hd5 .pcs-lead {
+    font-size: 1.05vw;
+  }
+  .hd5 .pcs-ttl {
+    font-size: 1.1905vw;
+  }
+  .hd5 .pcs-num, .hd5 .pcs-cnt, .hd5 .pcs-cap {
+    font: 400 0.7937vw/1.4 var(--mono);
+  }
+  .hd5 .pcs-end {
+    font: 500 0.7275vw/1.4 var(--mono);
   }
   .hd5 .cfg .lbl[style], .hd5 .out .lbl[style] {
     font-size: 0.7937vw !important;
@@ -10557,6 +10839,69 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
   }
   .display-page .dh9__steps {
     padding-bottom: 0.4em;
+  }
+  .hd5 > section.pcs:not(.hero) {
+    --pcs-gutter: 1.9841vw;
+  }
+  .hd5 .pcs-head {
+    gap: 1.5873vw;
+    padding: 10vw var(--gutter) 8vw;
+  }
+  .hd5 .pcs-head::after {
+    left: 0;
+    right: 0;
+    height: 8vw;
+  }
+  .hd5 .pcs-head .ttl {
+    margin: 0;
+  }
+  .hd5 .pcs-lead {
+    margin: 0;
+  }
+  .hd5 .pcs-stream {
+    padding: 22vh 0 40vh;
+  }
+  .hd5 .pcs-col {
+    gap: clamp(5.291vw, 13vh, 9.9206vw);
+  }
+  .hd5 .pcs-item {
+    width: var(--w, 50%);
+  }
+  .hd5 .pcs-in video {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+  }
+  .hd5 .pcs-ind {
+    height: 0;
+  }
+  .hd5 .pcs-line {
+    left: var(--pcs-gutter);
+    right: var(--pcs-gutter);
+    height: 1px;
+  }
+  .hd5 .pcs-slot {
+    height: 1.5em;
+  }
+  .hd5 .pcs-ttl {
+    left: var(--pcs-gutter);
+    height: 1.4em;
+  }
+  .hd5 .pcs-num {
+    left: 25%;
+  }
+  .hd5 .pcs-cnt {
+    left: calc(75% - 3.4em);
+    gap: .45em;
+  }
+  .hd5 .pcs-cur {
+    height: 1.4em;
+  }
+  .hd5 .pcs-cap {
+    right: var(--pcs-gutter);
+  }
+  .hd5 .pcs-end {
+    padding: 0.9259vw var(--gutter) 7.2751vw;
   }
 
 }

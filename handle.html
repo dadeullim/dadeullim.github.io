@@ -30,7 +30,7 @@
 
   <link
     rel="stylesheet"
-    href="./style.css?v=20261110l"
+    href="./style.css?v=20261114"
   >
 
 
@@ -59,7 +59,7 @@
 
   <link
     rel="stylesheet"
-    href="./interface.css?v=20261110l"
+    href="./interface.css?v=20261114"
   >
 
 
@@ -75,7 +75,7 @@
   ></script>
 
   <script
-    src="./interface.js?v=20261110l"
+    src="./interface.js?v=20261114"
     defer
   ></script>
 
@@ -588,17 +588,53 @@
   
 </section><!-- ===================================================
          07. 제작 — 도면 그대로 만든 과정 영상
+         2026.11.14 : 지그재그(mk3--zig) → 가운데 고정 선 + 세로로 이어지는 영상 3칸 (핸들 영상.zip · WRK ‘Case Development’ 방식)
+         ---- 스타일 : interface.css [HANDLE 07 제작 — 가운데 선 방식]
+         ---- 동작   : interface.js  [HANDLE 07 제작 — 가운데 선 방식]
+         ---- 영상 3개는 같은 해상도(1264×704)로 다시 압축한 파일로 바꿈 (16.6MB → 3.5MB) + 포스터 jpg 3장 추가
+         (전 : <section class="sec pad bp "> 안 .sheet + .mk3--zig 영상 3개 · 영상마다 설명 문장
+               "손바닥이 닿는 곡선을 따라 세 지점을 정하고, 그립 안쪽 홈에 코인 모터를 고정합니다." /
+               "선은 림 안쪽을 따라 허브까지. 손이 닿는 면에는 아무것도 드러나지 않게." /
+               "세 개씩 묶은 모터를 아두이노 PWM 핀 D5·D6에 나눠 연결합니다.")
     ==================================================== -->
-<section class="sec pad bp " aria-label="PROCESS">
-  <div class="sheet"><i class="crop tl"></i><i class="crop tr"></i><i class="crop bl"></i><i class="crop br"></i>
-    
-    
-  <h2 class="ttl">도면 그대로,<br><em>손으로 만들었습니다.</em></h2>
-  <!-- 2026.11.02 : 영상 3개 한 줄 → 지그재그 (왼쪽 · 오른쪽 · 왼쪽) — mk3--zig -->
-  <!-- 2026.11.03 : 영상 제목 앞 번호(01 · 02 · 03) 뺌 -->
-  <div class="mk3 mk3--zig" style="margin-top:40px"><figure><video class="proc" src="./images/handle-process-01-install.mp4" muted loop playsinline autoplay preload="metadata" aria-label="그립에 모터 장착"></video><figcaption><p class="lbl" style="font-family:var(--sans);text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink)">그립에 모터 장착</p><p>손바닥이 닿는 곡선을 따라 세 지점을 정하고, 그립 안쪽 홈에 코인 모터를 고정합니다.</p></figcaption></figure><figure><video class="proc" src="./images/handle-process-02-route.mp4" muted loop playsinline autoplay preload="metadata" aria-label="배선 정리"></video><figcaption><p class="lbl" style="font-family:var(--sans);text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink)">배선 정리</p><p>선은 림 안쪽을 따라 허브까지. 손이 닿는 면에는 아무것도 드러나지 않게.</p></figcaption></figure><figure><video class="proc" src="./images/handle-process-03-connect.mp4" muted loop playsinline autoplay preload="metadata" aria-label="보드 연결"></video><figcaption><p class="lbl" style="font-family:var(--sans);text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink)">보드 연결</p><p>세 개씩 묶은 모터를 아두이노 PWM 핀 D5·D6에 나눠 연결합니다.</p></figcaption></figure></div>
+<section class="pcs" aria-label="PROCESS">
+
+  <!-- 제목 (모눈 → 아래로 사라짐) -->
+  <div class="pcs-head">
+    <h2 class="ttl">도면 그대로,<br><em>손으로 만들었습니다.</em></h2>
+    <p class="pcs-lead">설계한 자리에 모터를 넣고, 선을 숨기고, 보드에 잇기까지.</p>
   </div>
-  
+
+  <!-- 영상 줄 -->
+  <div class="pcs-stream">
+
+    <div class="pcs-col">
+      <div class="pcs-item" style="--w:50%;--ar:1264/704" data-title="그립에 모터 장착" data-num="STEP 01" data-n="1" data-cap="HW-01 - 01">
+        <div class="pcs-in"><video src="./images/handle-process-01-install.mp4" poster="./images/handle-process-01-install.jpg" muted loop playsinline preload="metadata" aria-label="그립에 모터 장착"></video></div>
+      </div>
+      <div class="pcs-item" style="--w:28%;--ar:3/4;--pos:58%" data-title="배선 정리" data-num="STEP 02" data-n="2" data-cap="HW-01 - 02">
+        <div class="pcs-in"><video src="./images/handle-process-02-route.mp4" poster="./images/handle-process-02-route.jpg" muted loop playsinline preload="metadata" aria-label="배선 정리"></video></div>
+      </div>
+      <div class="pcs-item" style="--w:50%;--ar:2/1" data-title="보드 연결" data-num="STEP 03" data-n="3" data-cap="HW-01 - 03">
+        <div class="pcs-in"><video src="./images/handle-process-03-connect.mp4" poster="./images/handle-process-03-connect.jpg" muted loop playsinline preload="metadata" aria-label="보드 연결"></video></div>
+      </div>
+    </div>
+
+    <!-- 화면 가운데 고정 선 + 라벨 -->
+    <div class="pcs-indw" aria-hidden="true">
+      <div class="pcs-ind">
+        <div class="pcs-line"></div>
+        <div class="pcs-slot pcs-ttl"><span>그립에 모터 장착</span></div>
+        <div class="pcs-slot pcs-num"><span>STEP 01</span></div>
+        <div class="pcs-slot pcs-cnt"><span class="pcs-cur"><span>1</span></span><span>/ 3</span></div>
+        <div class="pcs-slot pcs-cap"><span>HW-01 - 01</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pcs-end"><span>Process · 3 steps · 15.6s</span><span>HW-01</span></div>
+
 </section><!-- 2026.11.02 : 08. 질문 · 출처 섹션(자주 받는 질문 + 출처 목록) 삭제 -->
 
   </main>
