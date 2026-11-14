@@ -8709,6 +8709,598 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
 
 
 /* =========================================================
+   [HANDLE 3D 한 장면] 01 ~ 06 — 3D 핸들 하나가 고정되고 카메라만 돎 / 2026.11.14
+   ---------------------------------------------------------
+   핸들.zip (dadeullim-handle-sian · src/style.css 의 공통 · 고정 무대 · #C 규칙) 을 옮겨 옴 — 시안 04 설계 톤
+   ---- 화면 높이 1050vh 동안 .hx-pin 이 화면에 붙어 있고, 그 안에서 3D 핸들 · 글 칸 · 장 번호 줄이 바뀜
+        (동작 : interface.js [HANDLE 3D 한 장면])
+   ---- 이름은 hx- 로 시작 — 핸들 페이지의 다른 .ttl · .lead · .cfg · .bom 규칙과 안 겹치게 (zip 은 .ttl · .cue · .tag …)
+   ---- 우리 페이지에 맞춘 것
+        · 색 · 글꼴은 핸들 페이지 값(--ink · --sans · --mono · --gutter · --hd5-black) 그대로
+        · 핸들 섹션 공통 모눈 배경(.hd5 > section !important)은 끔
+        · 제목 둘째 줄(em) : zip 은 회색(--ink-3) → 핸들 페이지 다른 제목처럼 흰색 (2026.11.02 결정)
+        · 진동 재생 버튼 누를 때 : zip 은 흰 바탕 · 검정 글자 → 반투명 연한 회색 (2026.11.02 울려 보기 버튼과 같게)
+        · zip 에서 숨겨 둔 것(시점 이름 · 일련번호 · 끌기 안내 · 모터 글자 · 각주 두 개)은 HTML 에서 아예 뺌
+   전) 01 요구 사항 · 02 3면도 · 03 분해 조립도 · 05 신호 타이밍 · 06 직접 울려 보기 섹션
+       — 위 [HANDLE 5차] · [HANDLE 5차 다듬기] 의 .sheet · .ga · .timing · .cfg 규칙은 이제 안 쓰임
+========================================================= */
+.hd5 > section.hx:not(.hero) {
+  position: relative;
+  height: 1050vh;   /* zip --len:1050 — 스크롤 길이 (길수록 천천히 돎) */
+  background-image: none !important;   /* 전 : 핸들 공통 모눈 */
+  color: var(--ink);
+  font-family: var(--sans);
+}
+
+/* 화면에 붙어 있는 무대 — 가로로 끌면 핸들이 살짝 돌아감 (세로 스크롤은 그대로) */
+.hd5 .hx-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--hd5-black);
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.hd5 .hx-pin.drag {
+  cursor: grabbing;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ---------- 바탕 · 3D 핸들 · 빛 번짐 · 가장자리 어둡게 · 글 뒤 어둡게 · 종이 결 ---------- */
+.hd5 .hx-haze {
+  position: absolute;
+  inset: -12%;
+  background:
+    radial-gradient(ellipse 46% 52% at 30% 58%, rgba(196,202,208,.055), transparent 70%),
+    radial-gradient(ellipse 40% 44% at 72% 36%, rgba(196,202,208,.028), transparent 72%),
+    radial-gradient(ellipse 70% 70% at 50% 50%, rgba(120,126,134,.032), transparent 80%);
+  will-change: transform;
+}
+
+.hd5 .hx-gl,
+.hd5 .hx-bloom {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: screen;
+}
+
+.hd5 .hx-bloom {
+  filter: blur(9px);   /* 1/3 크기로 그린 핸들을 흐리게 겹쳐 빛 번짐 */
+  pointer-events: none;
+}
+
+/* 3D 를 못 그리는 브라우저 : 정면 그림 (images/handle-ghost.webp) */
+.hd5 .hx-nogl {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(76vh, 48vw);
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+  opacity: .8;
+}
+
+.hd5 .hx-vg {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(ellipse 78% 82% at 50% 48%, transparent 52%, rgba(6,7,9,.42) 100%);
+}
+
+.hd5 .hx-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(ellipse 46% 52% at 12% 84%, rgba(14,15,18,.86), rgba(14,15,18,.5) 55%, transparent 100%);
+}
+
+.hd5 .hx-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  opacity: .12;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1.1 -.1'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- 일곱 겹 번호 — 3D 부품 위치를 따라다님 ---------- */
+.hd5 .hx-tag {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 6;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  border: 1px solid var(--ink-3);
+  border-radius: 50%;
+  background: rgba(14,15,18,.7);
+  font: 500 10px/1 var(--mono);
+  color: var(--ink-2);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform;
+  transition: background .3s, color .3s, border-color .3s;
+}
+
+.hd5 .hx-tag.on {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--hd5-black);
+}
+
+/* ---------- 네 모서리 꺾쇠 ---------- */
+.hd5 .hx-cm {
+  position: absolute;
+  z-index: 4;
+  width: 22px;
+  height: 22px;
+  border: 0 solid rgba(242,242,239,.4);
+  pointer-events: none;
+}
+
+.hd5 .hx-cm-tl {
+  left: calc(var(--gutter) - 2px);
+  top: 132px;
+  border-width: 1px 0 0 1px;
+}
+
+.hd5 .hx-cm-tr {
+  right: calc(var(--gutter) - 2px);
+  top: 132px;
+  border-width: 1px 1px 0 0;
+}
+
+.hd5 .hx-cm-bl {
+  left: calc(var(--gutter) - 2px);
+  bottom: 7vh;
+  border-width: 0 0 1px 1px;
+}
+
+.hd5 .hx-cm-br {
+  right: calc(var(--gutter) - 2px);
+  bottom: 7vh;
+  border-width: 0 1px 1px 0;
+}
+
+/* ---------- 장 번호 줄 (2.0 ~ 2.5) — 아래 선이 스크롤만큼 차오르고, 장마다 눈금 ---------- */
+.hd5 .hx-chap {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  top: 86px;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.hd5 .hx-chap-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font: 500 11px/1.4 var(--mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.hd5 .hx-chap-sec b {
+  display: inline-block;
+  min-width: 3.2em;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.hd5 .hx-chap-nm {
+  display: inline-block;
+}
+
+.hd5 .hx-chap-nm.roll {
+  animation: hxRoll .5s cubic-bezier(.2,.7,.1,1) both;
+}
+
+.hd5 .hx-chap-rule {
+  position: relative;
+  height: 1px;
+  margin-top: 10px;
+  background: var(--line);
+}
+
+.hd5 .hx-chap-rule i {
+  position: absolute;
+  inset: 0;
+  background: rgba(242,242,239,.7);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
+
+.hd5 .hx-chap-rule u {
+  position: absolute;
+  top: -3px;
+  width: 1px;
+  height: 7px;
+  background: rgba(242,242,239,.38);
+}
+
+@keyframes hxRoll {
+  from { transform: translateY(90%); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+/* ---------- 글 칸 — 자리 : 왼쪽 아래(bl) · 오른쪽 가운데(mr) · 오른쪽 위(tr) ---------- */
+.hd5 .hx-cue {
+  position: absolute;
+  z-index: 5;
+  opacity: 0;
+  pointer-events: none;
+  cursor: auto;
+  will-change: opacity, transform;
+}
+
+.hd5 .hx-cue.live {
+  pointer-events: auto;
+}
+
+.hd5 .hx-bl {
+  left: var(--gutter);
+  bottom: 12vh;
+  width: min(25vw, 460px);
+}
+
+.hd5 .hx-mr {
+  right: var(--gutter);
+  top: 50%;
+  width: min(21vw, 330px);
+}
+
+.hd5 .hx-tr {
+  right: var(--gutter);
+  top: 150px;
+  width: min(21vw, 330px);
+}
+
+.hd5 .hx-ttl {
+  margin: 0;
+  font-size: clamp(24px, 2.25vw, 38px);
+  font-weight: 300;
+  line-height: 1.14;
+  letter-spacing: -.035em;
+  word-break: keep-all;
+  text-wrap: balance;
+}
+
+.hd5 .hx-ttl em {
+  font-style: normal;
+  color: var(--ink);   /* zip : var(--ink-3) 회색 */
+}
+
+.hd5 .hx-lead {
+  max-width: 30em;
+  margin-top: 18px;
+  font-size: clamp(13.5px, .98vw, 16px);
+  line-height: 1.75;
+  color: var(--ink-2);
+  word-break: keep-all;
+}
+
+.hd5 .hx-lbl {
+  font: 500 11px/1.4 var(--mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.hd5 .hx-small {
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-3);
+}
+
+/* 2.0 숫자 네 줄 */
+.hd5 .hx-kvl {
+  border-top: 1px solid var(--line);
+}
+
+.hd5 .hx-kvl > div {
+  display: grid;
+  grid-template-columns: clamp(92px, 8.4vw, 150px) 1fr;
+  column-gap: 14px;
+  align-items: baseline;
+  padding: 15px 0 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.hd5 .hx-v {
+  font-size: clamp(30px, 2.75vw, 48px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+.hd5 .hx-kvl p {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  word-break: keep-all;
+}
+
+/* 2.1 핀 · 치수 표 */
+.hd5 .hx-spec {
+  border-top: 1px solid var(--line);
+}
+
+.hd5 .hx-spec > div {
+  display: grid;
+  grid-template-columns: 5.2em 1fr auto;
+  gap: 10px;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+
+.hd5 .hx-spec b {
+  font: 500 12px/1.4 var(--mono);
+  letter-spacing: .04em;
+  color: var(--ink);
+}
+
+.hd5 .hx-spec i {
+  font: 400 12px/1.4 var(--mono);
+  color: var(--ice);
+}
+
+/* 2.2 세기 읽기 — 큰 숫자 · 주의 / 접근 / 긴급 · 울림 파형 줄 */
+.hd5 .hx-n {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  height: 1em;
+  overflow: hidden;
+  font-size: clamp(64px, 6.6vw, 120px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -.055em;
+  font-variant-numeric: tabular-nums;
+}
+
+.hd5 .hx-n span {
+  display: block;
+}
+
+.hd5 .hx-n i {
+  font-size: .34em;
+  font-style: normal;
+  letter-spacing: 0;
+  color: var(--ink-3);
+}
+
+.hd5 .hx-lv ol {
+  display: flex;
+  gap: 22px;
+  margin: 20px 0 0;
+  padding: 14px 0 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+  color: var(--ink-3);
+}
+
+.hd5 .hx-lv li {
+  position: relative;
+  transition: color .3s;
+}
+
+.hd5 .hx-lv li.on {
+  color: var(--ink);
+}
+
+.hd5 .hx-lv li.on::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -15px;
+  height: 1px;
+  background: var(--ink);
+}
+
+.hd5 .hx-strip {
+  display: block;
+  width: 100%;
+  height: 46px;
+  margin-top: 22px;
+  overflow: visible;
+}
+
+.hd5 .hx-strip path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.hd5 .hx-strip line {
+  stroke: var(--ice);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.hd5 .hx-strip .hx-base {
+  stroke: var(--line);
+}
+
+/* 2.3 직접 울려 보기 — 방향 · 소리 · 거리 고르기 */
+.hd5 .hx-rw {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.hd5 .hx-rw > span {
+  width: 3.4em;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.hd5 .hx-tog {
+  padding: 8px 13px 7px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: color .2s, border-color .2s, background .2s;
+}
+
+.hd5 .hx-tog:hover {
+  border-color: var(--ink-3);
+  color: var(--ink);
+}
+
+.hd5 .hx-tog[aria-pressed="true"] {
+  border-color: rgba(242,242,239,.7);
+  color: var(--ink);
+}
+
+.hd5 .hx-out {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 22px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.hd5 .hx-out > div {
+  padding: 12px 0;
+}
+
+.hd5 .hx-out span {
+  display: block;
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+
+.hd5 .hx-out b {
+  display: block;
+  margin-top: 4px;
+  font-size: 22px;
+  font-weight: 300;
+  letter-spacing: -.03em;
+}
+
+.hd5 .hx-go {
+  width: 100%;
+  margin-top: 18px;
+  padding: 13px 0 12px;
+  border: 1px solid rgba(242,242,239,.7);
+  border-radius: 0;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background .25s, color .25s;
+}
+
+/* zip : background var(--ink) · color #0e0f12 (흰 바탕) */
+.hd5 .hx-go:hover,
+.hd5 .hx-go.playing {
+  background: rgba(244,244,241,.18);
+  color: var(--ink);
+}
+
+/* 2.4 부품표 — 지금 켜진 겹만 흰색 + 설명 한 줄 */
+.hd5 .hx-bom {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.hd5 .hx-bom li {
+  display: grid;
+  grid-template-columns: 2.2em 1fr;
+  column-gap: 6px;
+  padding: 10px 0 9px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-3);
+  transition: color .35s;
+}
+
+.hd5 .hx-bom b {
+  font: 500 11px/1.9 var(--mono);
+  color: inherit;
+}
+
+.hd5 .hx-bom span {
+  font-size: 15px;
+  letter-spacing: -.01em;
+}
+
+.hd5 .hx-bom em {
+  grid-column: 2;
+  max-height: 0;
+  overflow: hidden;
+  font-size: 12.5px;
+  font-style: normal;
+  line-height: 1.6;
+  color: var(--ink-2);
+  opacity: 0;
+  transition: max-height .45s, opacity .35s;
+}
+
+.hd5 .hx-bom li.on {
+  color: var(--ink);
+}
+
+.hd5 .hx-bom li.on em {
+  max-height: 3.4em;
+  opacity: 1;
+}
+
+/* 휴대폰 · 좁은 화면 : 왼쪽 글만 아래쪽에 — 오른쪽 표는 숨김 (zip 그대로) */
+@media (max-width: 900px) {
+
+  .hd5 .hx-bl {
+    width: calc(100vw - 2 * var(--gutter));
+    bottom: 15vh;
+  }
+
+  .hd5 .hx-mr,
+  .hd5 .hx-tr {
+    display: none;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .hd5 .hx-chap-nm.roll {
+    animation: none;
+  }
+
+}
+
+/* =========================================================
    [아이맥 화면비] 맥북 느낌 그대로 / 2026.11.03
    ---------------------------------------------------------
    아이맥 2048 × 1152 (브라우저 안 약 2048 × 1040) 은 맥북(1512 × 860)보다 세로가 짧아서
@@ -8851,6 +9443,35 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
   }
   html body .hd5 .ann .zone {
     stroke-width: 4;      /* 2.5 */
+  }
+
+  /* 핸들 3D 한 장면 / 2026.11.14
+     ---- 위에서 떨어진 거리(top px)는 자동 블록이 안 바꿔서 → 맥북 비율 그대로
+     ---- 숫자 칸 폭 clamp(92px, 8.4vw, 150px) 은 아이맥에서 150px 에 걸려 덜 커져서 → 8.4vw
+     ---- 3D 핸들 크기는 interface.js 에서 같은 계산 (최대 1.12배) */
+  html body .hd5 .hx-chap {
+    top: 5.6878vw;    /* 86px */
+  }
+
+  html body .hd5 .hx-tr {
+    top: 9.9206vw;    /* 150px */
+  }
+
+  html body .hd5 .hx-cm-tl,
+  html body .hd5 .hx-cm-tr {
+    top: 8.7302vw;    /* 132px */
+  }
+
+  html body .hd5 .hx-lv li.on::before {
+    top: -0.9921vw;   /* -15px */
+  }
+
+  html body .hd5 .hx-kvl > div {
+    grid-template-columns: 8.4vw 1fr;
+  }
+
+  html body .hd5 .hx-bloom {
+    filter: blur(0.5952vw);   /* 9px */
   }
 
 }
@@ -9348,6 +9969,74 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
   }
   .hd5 .pcs-end {
     font: 500 0.7275vw/1.4 var(--mono);
+  }
+  .hd5 .hx-tag {
+    font: 500 0.6614vw/1 var(--mono);
+  }
+  .hd5 .hx-chap-row {
+    font: 500 0.7275vw/1.4 var(--mono);
+  }
+  .hd5 .hx-ttl {
+    font-size: 2.25vw;
+  }
+  .hd5 .hx-lead {
+    font-size: 0.98vw;
+  }
+  .hd5 .hx-lbl {
+    font: 500 0.7275vw/1.4 var(--mono);
+  }
+  .hd5 .hx-small {
+    font-size: 0.7937vw;
+  }
+  .hd5 .hx-v {
+    font-size: 2.75vw;
+  }
+  .hd5 .hx-kvl p {
+    font-size: 0.8267vw;
+  }
+  .hd5 .hx-spec > div {
+    font-size: 0.8929vw;
+  }
+  .hd5 .hx-spec b {
+    font: 500 0.7937vw/1.4 var(--mono);
+  }
+  .hd5 .hx-spec i {
+    font: 400 0.7937vw/1.4 var(--mono);
+  }
+  .hd5 .hx-n {
+    font-size: 6.6vw;
+  }
+  .hd5 .hx-n i {
+    font-size: .34em;
+  }
+  .hd5 .hx-lv ol {
+    font-size: 0.9259vw;
+  }
+  .hd5 .hx-rw > span {
+    font-size: 0.7937vw;
+  }
+  .hd5 .hx-tog {
+    font: inherit;
+    font-size: 0.8598vw;
+  }
+  .hd5 .hx-out span {
+    font-size: 0.7606vw;
+  }
+  .hd5 .hx-out b {
+    font-size: 1.455vw;
+  }
+  .hd5 .hx-go {
+    font: inherit;
+    font-size: 0.9259vw;
+  }
+  .hd5 .hx-bom b {
+    font: 500 0.7275vw/1.9 var(--mono);
+  }
+  .hd5 .hx-bom span {
+    font-size: 0.9921vw;
+  }
+  .hd5 .hx-bom em {
+    font-size: 0.8267vw;
   }
   .hd5 .cfg .lbl[style], .hd5 .out .lbl[style] {
     font-size: 0.7937vw !important;
@@ -10902,6 +11591,145 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
   }
   .hd5 .pcs-end {
     padding: 0.9259vw var(--gutter) 7.2751vw;
+  }
+  .hd5 > section.hx:not(.hero) {
+    height: 1050vh;
+  }
+  .hd5 .hx-pin {
+    height: 100vh;
+    height: 100svh;
+  }
+  .hd5 .hx-gl, .hd5 .hx-bloom {
+    width: 100%;
+    height: 100%;
+  }
+  .hd5 .hx-nogl {
+    left: 50%;
+    width: min(76vh, 48vw);
+  }
+  .hd5 .hx-tag {
+    left: 0;
+    width: 1.455vw;
+    height: 1.455vw;
+    margin: -0.7275vw 0 0 -0.7275vw;
+  }
+  .hd5 .hx-cm {
+    width: 1.455vw;
+    height: 1.455vw;
+  }
+  .hd5 .hx-cm-tl {
+    left: calc(var(--gutter) - 2px);
+  }
+  .hd5 .hx-cm-tr {
+    right: calc(var(--gutter) - 2px);
+  }
+  .hd5 .hx-cm-bl {
+    left: calc(var(--gutter) - 2px);
+  }
+  .hd5 .hx-cm-br {
+    right: calc(var(--gutter) - 2px);
+  }
+  .hd5 .hx-chap {
+    left: var(--gutter);
+    right: var(--gutter);
+  }
+  .hd5 .hx-chap-sec b {
+    min-width: 3.2em;
+  }
+  .hd5 .hx-chap-rule {
+    height: 1px;
+    margin-top: 0.6614vw;
+  }
+  .hd5 .hx-chap-rule u {
+    width: 1px;
+    height: 0.463vw;
+  }
+  .hd5 .hx-bl {
+    left: var(--gutter);
+    width: min(25vw, 30.4233vw);
+  }
+  .hd5 .hx-mr {
+    right: var(--gutter);
+    width: min(21vw, 21.8254vw);
+  }
+  .hd5 .hx-tr {
+    right: var(--gutter);
+    width: min(21vw, 21.8254vw);
+  }
+  .hd5 .hx-ttl {
+    margin: 0;
+  }
+  .hd5 .hx-lead {
+    max-width: 30em;
+    margin-top: 1.1905vw;
+  }
+  .hd5 .hx-small {
+    margin-top: 0.9259vw;
+  }
+  .hd5 .hx-kvl > div {
+    column-gap: 0.9259vw;
+    padding: 0.9921vw 0 0.9259vw;
+  }
+  .hd5 .hx-spec > div {
+    gap: 0.6614vw;
+    padding: 0.7937vw 0;
+  }
+  .hd5 .hx-n {
+    gap: 0.3968vw;
+    height: 1em;
+  }
+  .hd5 .hx-lv ol {
+    gap: 1.455vw;
+    margin: 1.3228vw 0 0;
+    padding: 0.9259vw 0 0;
+  }
+  .hd5 .hx-lv li.on::before {
+    left: 0;
+    right: 0;
+    height: 1px;
+  }
+  .hd5 .hx-strip {
+    width: 100%;
+    height: 3.0423vw;
+    margin-top: 1.455vw;
+  }
+  .hd5 .hx-rw {
+    gap: 0.3968vw;
+    margin-top: 0.6614vw;
+  }
+  .hd5 .hx-rw > span {
+    width: 3.4em;
+  }
+  .hd5 .hx-tog {
+    padding: 0.5291vw 0.8598vw 0.463vw;
+  }
+  .hd5 .hx-out {
+    margin-top: 1.455vw;
+  }
+  .hd5 .hx-out > div {
+    padding: 0.7937vw 0;
+  }
+  .hd5 .hx-out b {
+    margin-top: 0.2646vw;
+  }
+  .hd5 .hx-go {
+    width: 100%;
+    margin-top: 1.1905vw;
+    padding: 0.8598vw 0 0.7937vw;
+  }
+  .hd5 .hx-bom {
+    margin: 0;
+    padding: 0;
+  }
+  .hd5 .hx-bom li {
+    column-gap: 0.3968vw;
+    padding: 0.6614vw 0 0.5952vw;
+  }
+  .hd5 .hx-bom em {
+    max-height: 0;
+  }
+  .hd5 .hx-bom li.on em {
+    max-height: 3.4em;
   }
 
 }

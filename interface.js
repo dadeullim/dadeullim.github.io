@@ -4735,7 +4735,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- 섹션별 동작 (index.html 맨 아래 스크립트) ---------- */
 (() => {
-  const ex = document.getElementById('ex'), bals = [...ex.querySelectorAll('.bal')];
+  /* 2026.11.14 : 01 ~ 06 이 3D 한 장면([HANDLE 3D 한 장면])으로 바뀌어 #ex 가 없음
+     ---- 그냥 두면 여기서 오류가 나서 아래 히어로 영상 끝 흐리기까지 멈춤 → 없으면 건너뜀 */
+  const ex = document.getElementById('ex');
+  if (!ex) return;
+  const bals = [...ex.querySelectorAll('.bal')];
   document.querySelectorAll('#bom tr[data-ref]').forEach((tr) => {
     tr.onmouseenter = () => bals.forEach((b) => { const on = b.classList.contains('p' + tr.dataset.ref); b.classList.toggle('on', on); b.classList.toggle('off', !on); });
     tr.onmouseleave = () => bals.forEach((b) => b.classList.remove('on', 'off'));
@@ -4860,6 +4864,822 @@ document.addEventListener("DOMContentLoaded", () => {
     (es) => es.forEach((e) => (e.isIntersecting ? start() : stop())),
     { threshold: 0.2 }
   ).observe(hero);
+})();
+
+
+/* =========================================================
+   [HANDLE 3D 한 장면] 01 ~ 06 — 3D 핸들 하나가 고정되고 카메라만 돎 / 2026.11.14
+   ---------------------------------------------------------
+   핸들.zip (dadeullim-handle-sian) 의 src/_head.js (공통 · 글 칸 · 진동) + src/initC.js (3D 핸들)
+   + src/_tail.js (스크롤 루프) 를 옮겨 옴 — 시안 04 설계 톤
+   ---- 핸들은 C4D 정면 렌더를 보고 코드로 다시 만든 단순화 모델 (three.js r149 · handle.html 에서 먼저 불러옴)
+        좌표 : 핸들 중심이 원점 · 림 바깥 반지름 354 · y 는 위 · z 는 운전자 쪽 · 모터 6개는 반지름 323 위
+   ---- 카메라 : 정면 → 위에서 → 왼쪽 그립 가까이 → 아래에서 → 옆에서(일곱 겹) → 뒤에서
+   ---- 우리 방식으로 바꾼 것
+        · 글 · 숫자 · 버튼은 handle.html 에 미리 적어 둠 (zip 은 JS 가 글을 만들어 넣음)
+        · 이름은 hx- 로 시작 (핸들 페이지의 다른 .ttl · .cfg · .bom 등과 안 겹치게)
+        · 섹션이 화면 근처에 있을 때만 매 프레임 계산 (zip 은 항상 계산)
+        · 탭 전환(시안 00 ~ 04)은 빼고 04 설계 톤만 — 03 입체 엑스레이 톤은 아래 TONE 을 0 으로
+        · zip 에서 숨겨 둔 것(시점 이름 · 일련번호 · 끌기 안내 · 모터 글자)은 만들지 않음
+        · 아이맥(1513px 이상)에서는 핸들도 맥북 비율 그대로 크게 — 최대 1.12배 (CSS [아이맥 화면비] 와 같은 계산)
+        · 3D 를 못 그리는 브라우저는 정면 그림 images/handle-ghost.webp 를 대신 보여 줌
+        · zip README 대로 유지 : 화면 크기가 0 이면 그리지 않고 다시 잼 · 한 프레임에 오류가 나도 멈추지 않음
+   ---- 고치는 곳 (zip README)
+        · 카메라 길 : AZ(좌우 각도) · EL(위아래 각도) · DS(거리, 작을수록 크게) · TX TY(바라보는 점)
+                      · SP(겹 사이 간격) · SX(화면 좌우 밀기) — 줄마다 [스크롤 위치 0 ~ 1, 값]
+        · 장 나누기 : 아래 CHAPTERS + handle.html 글 칸의 data-cue
+        · 재질 : mesh(겹 번호, 형태, { fill 면의 빛, edge 가장자리 빛, pow, grid, lit … })
+        · 진동 : 위쪽 Vib3 (고리 크기 · 밝기 · 지속 시간)
+   스타일 : interface.css [HANDLE 3D 한 장면]
+   전) 01 ~ 06 섹션 동작은 [HANDLE 5차] 의 도면 그리기 · initConfig · playWheel (섹션이 없어져서 이제 안 쓰임)
+========================================================= */
+
+(() => {
+  const sec = document.querySelector(".hd5 .hx");
+  if (!sec) return;
+
+  const pin = sec.querySelector(".hx-pin");
+  const $ = (s, r = pin) => r.querySelector(s);
+  const $$ = (s, r = pin) => [...r.querySelectorAll(s)];
+  const clamp = (v, a = 0, b = 1) => (v < a ? a : v > b ? b : v);
+  const seg = (p, a, b) => clamp((p - a) / (b - a));   /* p 가 a → b 사이 어디쯤인지 0 ~ 1 */
+  const mix = (a, b, t) => a + (b - a) * t;
+  const sm = (t) => t * t * (3 - 2 * t);                 /* 처음 · 끝은 천천히 */
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const RAD = Math.PI / 180;
+
+  /* 1 = 시안 04 설계 톤 (윤곽 · 단면 고리 · 층층이 자른 선) / 0 = 시안 03 입체 엑스레이 (면이 은은하게 빛남) */
+  const TONE = 1;
+
+
+  /* ---------- 내용 값 (지금 페이지 숫자 그대로) ---------- */
+
+  /* 모터 여섯 개 — 정면도 좌표 (viewBox 0 0 1440 810 · 핸들 중심 720, 388) */
+  const MOT = [
+    { id: "L1", x: 409, y: 299, s: "L" }, { id: "L2", x: 397, y: 388, s: "L" }, { id: "L3", x: 409, y: 477, s: "L" },
+    { id: "R1", x: 1031, y: 299, s: "R" }, { id: "R2", x: 1043, y: 388, s: "R" }, { id: "R3", x: 1031, y: 477, s: "R" }
+  ];
+
+  /* 진동 단계 — duty 세기 · on 울림 · gap 사이 · rest 쉼 (ms, 예시 값) */
+  const LV = [
+    null,
+    { name: "주의", duty: .45, on: 90, gap: 250, rest: 900 },
+    { name: "접근", duty: .7, on: 110, gap: 150, rest: 700 },
+    { name: "긴급", duty: 1, on: 130, gap: 80, rest: 450 }
+  ];
+
+  /* 장 [시작 스크롤 위치, 번호, 이름] */
+  const CHAPTERS = [
+    [0, "2.0", "Requirement"],
+    [.105, "2.1", "Motor arrangement"],
+    [.27, "2.2", "Signal timing"],
+    [.375, "2.3", "Function test"],
+    [.47, "2.4", "Exploded assembly"],
+    [.74, "2.5", "Haptic module"]
+  ];
+
+  /* 스포크 프레임 윤곽 — 정면 렌더 실루엣 (zip build/shape.json · shapes.py 로 뽑은 값) */
+  const SHAPE = {"outer":[[280.8,60.0],[277.6,59.2],[276.0,47.2],[274.4,44.8],[268.8,44.0],[265.6,41.6],[260.8,41.6],[238.4,48.0],[212.8,58.4],[204.0,60.0],[200.0,62.4],[196.0,62.4],[176.8,69.6],[168.0,71.2],[165.6,72.8],[149.6,76.8],[140.0,80.8],[134.4,80.8],[124.0,84.8],[110.4,86.4],[92.8,92.8],[83.2,94.4],[80.8,96.0],[67.2,98.4],[64.0,100.0],[31.2,104.8],[10.4,105.6],[5.6,108.0],[1.6,106.4],[-21.6,105.6],[-54.4,101.6],[-70.4,98.4],[-73.6,96.8],[-81.6,96.0],[-86.4,93.6],[-95.2,92.0],[-108.8,86.4],[-112.0,86.4],[-120.8,83.2],[-131.2,83.2],[-133.6,81.6],[-138.4,81.6],[-140.8,80.0],[-149.6,78.4],[-188.8,66.4],[-196.8,62.4],[-201.6,62.4],[-204.0,60.8],[-212.8,59.2],[-220.8,55.2],[-223.2,55.2],[-227.2,52.8],[-232.0,52.0],[-240.0,48.0],[-252.0,44.0],[-259.2,43.2],[-272.8,44.0],[-275.2,48.0],[-275.2,52.8],[-278.4,58.4],[-278.4,63.2],[-279.2,64.8],[-281.6,64.0],[-281.6,52.0],[-283.2,48.8],[-283.2,44.8],[-286.4,37.6],[-288.0,24.0],[-288.8,-10.4],[-288.0,-11.2],[-287.2,-32.0],[-286.4,-36.0],[-284.8,-37.6],[-277.6,-39.2],[-272.0,-42.4],[-268.8,-45.6],[-268.0,-51.2],[-266.4,-51.2],[-263.2,-46.4],[-257.6,-46.4],[-256.8,-47.2],[-247.2,-47.2],[-228.8,-51.2],[-183.2,-56.0],[-171.2,-60.8],[-167.2,-68.0],[-163.2,-68.0],[-159.2,-71.2],[-158.4,-73.6],[-154.4,-77.6],[-147.2,-92.0],[-140.0,-102.4],[-105.6,-164.0],[-94.4,-187.2],[-93.6,-191.2],[-84.8,-211.2],[-83.2,-219.2],[-80.8,-223.2],[-80.8,-226.4],[-76.0,-237.6],[-74.4,-248.8],[-71.2,-255.2],[-69.6,-263.2],[-67.2,-267.2],[-64.0,-279.2],[-62.4,-281.6],[-38.4,-286.4],[-24.0,-288.0],[-11.2,-288.0],[-10.4,-288.8],[10.4,-288.8],[11.2,-288.0],[24.0,-288.0],[57.6,-283.2],[61.6,-280.8],[64.8,-268.8],[71.2,-253.6],[72.8,-242.4],[78.4,-228.0],[78.4,-224.8],[80.8,-220.8],[80.8,-216.8],[88.0,-202.4],[89.6,-196.0],[97.6,-178.4],[97.6,-176.0],[101.6,-170.4],[108.8,-155.2],[111.2,-152.8],[136.8,-106.4],[145.6,-92.8],[154.4,-75.2],[163.2,-68.8],[169.6,-68.0],[173.6,-60.0],[186.4,-56.0],[204.0,-55.2],[235.2,-50.4],[241.6,-50.4],[252.0,-48.0],[263.2,-48.0],[266.4,-52.8],[268.0,-52.8],[268.8,-47.2],[271.2,-44.0],[280.8,-39.2],[283.2,-39.2],[286.4,-36.8],[288.0,-24.0],[288.0,-11.2],[288.8,-10.4],[288.8,10.4],[286.4,35.2],[285.6,36.8],[281.6,38.4],[280.0,40.8],[280.0,47.2],[281.6,51.2],[281.6,59.2]],"holes":[{"c":[-1.0,-48.6],"a":80276,"pts":[[-108.0,87.2],[-97.6,88.8],[-89.6,92.0],[-56.8,96.8],[-52.8,98.4],[-45.6,98.4],[-41.6,100.0],[-24.0,100.8],[-23.2,101.6],[6.4,102.4],[7.2,101.6],[23.2,101.6],[30.4,100.0],[52.0,98.4],[65.6,95.2],[83.2,92.8],[86.4,91.2],[90.4,91.2],[92.8,89.6],[102.4,88.0],[104.8,86.4],[108.0,86.4],[127.2,77.6],[140.8,65.6],[149.6,48.8],[153.6,30.4],[155.2,2.4],[156.0,1.6],[156.0,-19.2],[154.4,-30.4],[148.8,-48.0],[133.6,-80.0],[133.6,-82.4],[131.2,-86.4],[131.2,-88.8],[124.8,-102.4],[124.0,-111.2],[122.4,-113.6],[120.0,-123.2],[111.2,-141.6],[100.8,-156.0],[90.4,-166.4],[84.0,-171.2],[72.0,-177.6],[59.2,-181.6],[55.2,-181.6],[50.4,-184.8],[45.6,-184.8],[43.2,-182.4],[43.2,-180.0],[42.4,-179.2],[40.8,-180.0],[40.8,-186.4],[39.2,-188.8],[38.4,-196.8],[36.8,-199.2],[36.0,-213.6],[33.6,-220.8],[30.4,-245.6],[28.0,-250.4],[27.2,-256.8],[21.6,-263.2],[20.8,-268.0],[17.6,-271.2],[-9.6,-272.0],[-16.8,-271.2],[-21.6,-267.2],[-23.2,-262.4],[-29.6,-254.4],[-34.4,-229.6],[-36.0,-213.6],[-39.2,-201.6],[-39.2,-191.2],[-41.6,-185.6],[-41.6,-180.8],[-43.2,-180.0],[-44.0,-185.6],[-46.4,-188.0],[-52.8,-188.0],[-68.0,-182.4],[-91.2,-164.8],[-104.0,-152.0],[-113.6,-139.2],[-124.0,-120.8],[-125.6,-115.2],[-133.6,-99.2],[-136.0,-91.2],[-136.0,-85.6],[-137.6,-79.2],[-152.0,-44.0],[-156.0,-31.2],[-156.8,0.0],[-156.0,0.8],[-156.0,12.8],[-153.6,36.8],[-149.6,52.8],[-141.6,65.6],[-134.4,72.8],[-126.4,78.4]]}]};
+
+
+  /* ---------- 화면 요소 ---------- */
+  const cv = $(".hx-gl"), bl = $(".hx-bloom"), haze = $(".hx-haze"), scrim = $(".hx-scrim");
+  const tags = $$(".hx-tag"), rows = $$(".hx-bom li");
+  const chap = $(".hx-chap"), chB = $(".hx-chap-sec b", chap), chN = $(".hx-chap-nm", chap), chI = $(".hx-chap-rule i", chap);
+  let vib = null;   /* 진동 (아래 Vib3 — 3D 를 못 그리면 아무것도 안 하는 대신 것) */
+
+  /* 장마다 선 위 작은 눈금 */
+  CHAPTERS.forEach((c) => {
+    if (c[0] <= 0) return;
+    const u = document.createElement("u");
+    u.style.left = c[0] * 100 + "%";
+    $(".hx-chap-rule", chap).appendChild(u);
+  });
+
+
+  /* ---------- 글 칸 : data-cue 위치에서 나타났다 사라짐 ---------- */
+  const cues = $$(".hx-cue[data-cue]").map((el) => {
+    const [a, b, c, d] = el.dataset.cue.split(",").map(Number);
+    return { el, a, b, c, d, v: -1, live: false, on: [] };   /* on : 글 칸이 다 보일 때 할 일 */
+  });
+  const cueOf = (el) => cues.find((c) => c.el === el.closest(".hx-cue"));
+
+  /* 2.0 숫자 — 글 칸이 보일 때 0 부터 올라감 */
+  $$(".hx-kvl .hx-v[data-n]").forEach((v) => {
+    const n = +v.dataset.n, s = v.dataset.s || "";
+    cueOf(v).on.push(() => {
+      const t0 = performance.now();
+      const step = (now) => {
+        const k = clamp((now - t0) / 900), e = 1 - Math.pow(1 - k, 3);
+        v.textContent = (n * e).toFixed(1) + s;
+        if (k < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  });
+
+
+  /* ---------- 2.2 세기 읽기 : 숫자 굴리기 · 단계 · 파형 줄 ---------- */
+  const lv = $(".hx-lv"), lvN = $(".hx-n span", lv), lvLi = $$("ol li", lv), lvP = $(".hx-strip path", lv), lvH = $(".hx-strip .hx-ph", lv);
+  let lvCur = 0;
+
+  const stripPath = (L) => {
+    const cyc = 3 * L.on + 2 * L.gap + L.rest, sx = 300 / cyc, y = 36 - 31 * L.duty;
+    let d = "M0 36";
+    for (let i = 0; i < 3; i++) {
+      const x0 = i * (L.on + L.gap) * sx, x1 = x0 + L.on * sx;
+      d += ` H${x0.toFixed(1)} V${y.toFixed(1)} H${x1.toFixed(1)} V36`;
+    }
+    return d + " H300";
+  };
+
+  const setLevel = (n) => {
+    if (!n || n === lvCur) return;
+    lvCur = n;
+    const L = LV[n];
+    lvN.textContent = Math.round(L.duty * 100);
+    lvN.style.animation = "none";
+    void lvN.offsetWidth;   /* 애니메이션 다시 시작 */
+    lvN.style.animation = "hxRoll .5s cubic-bezier(.2,.7,.1,1) both";
+    lvLi.forEach((li, i) => li.classList.toggle("on", i === n - 1));
+    lvP.setAttribute("d", stripPath(L));
+  };
+
+
+  /* ---------- 2.3 직접 울려 보기 : 고르면 그 패턴으로 두 번 울림 ---------- */
+  const cfgEl = $(".hx-cfg"), goBtn = $(".hx-go", cfgEl);
+  const cfg = { side: "L", snd: "siren", lv: 2, eff: 2, play: 0 };   /* play : 이 시각까지 울림 */
+
+  const updCfg = () => {
+    const n = cfg.snd === "horn" ? 1 : cfg.lv;   /* 경적은 거리와 상관없이 ‘주의’ */
+    cfg.eff = n;
+    $(".hx-o-pin", cfgEl).textContent = cfg.side === "L" ? "D5" : "D6";
+    $(".hx-o-pat", cfgEl).textContent = LV[n].name;
+    $(".hx-o-duty", cfgEl).textContent = Math.round(LV[n].duty * 100) + "%";
+  };
+
+  const playCfg = () => {
+    const L = LV[cfg.eff];
+    cfg.play = performance.now() + 2 * (3 * L.on + 2 * L.gap + L.rest) - L.rest + 300;
+    goBtn.classList.add("playing");
+    if (vib) vib.side = null;   /* 처음부터 다시 울리게 */
+  };
+
+  $$(".hx-rw", cfgEl).forEach((rw) => rw.addEventListener("click", (e) => {
+    const b = e.target.closest(".hx-tog");
+    if (!b) return;
+    $$(".hx-tog", rw).forEach((x) => x.setAttribute("aria-pressed", x === b));
+    const g = rw.dataset.g;
+    cfg[g] = g === "lv" ? +b.dataset.v : b.dataset.v;
+    updCfg();
+    playCfg();
+  }));
+  goBtn.addEventListener("click", playCfg);
+  cueOf(cfgEl).on.push(playCfg);   /* 글 칸이 보이면 한 번 저절로 울림 */
+  updCfg();
+
+  const tryVib = (now) => {
+    if (now < cfg.play) {
+      vib.set(cfg.side, cfg.eff);
+    } else {
+      vib.set(null, 0);
+      goBtn.classList.remove("playing");
+    }
+  };
+
+
+  /* ---------- 글 칸 · 장 번호 · 진동 (매 프레임) ---------- */
+  let ci = -1;
+  const common = (p, now) => {
+    for (const c of cues) {
+      const i = seg(p, c.a, c.b), o = seg(p, c.c, c.d), v = sm(i) * (1 - sm(o));
+      if (v === c.v) continue;
+      c.v = v;
+      c.el.style.opacity = v.toFixed(3);
+      c.el.style.transform = `translate3d(0,${((1 - i) * 24 - o * 18).toFixed(1)}px,0)`;   /* 아래서 올라와 위로 빠짐 */
+      const live = v > .55;
+      if (live !== c.live) {
+        c.live = live;
+        c.el.classList.toggle("live", live);
+        if (live) c.on.forEach((f) => f());
+      }
+    }
+
+    let k = 0;
+    for (let i = 0; i < CHAPTERS.length; i++) if (p >= CHAPTERS[i][0] - .004) k = i;
+    if (k !== ci) {
+      ci = k;
+      chB.textContent = CHAPTERS[k][1];
+      chN.textContent = CHAPTERS[k][2];
+      chN.classList.remove("roll");
+      void chN.offsetWidth;
+      chN.classList.add("roll");
+    }
+    chI.style.transform = `scaleX(${p.toFixed(4)})`;
+
+    lvH.setAttribute("transform", `translate(${(vib.ph * 300).toFixed(1)} 0)`);   /* 파형 줄 위 지금 위치 */
+    vib.tick(now);
+  };
+
+
+  /* =====================================================
+     진동 (3D) — 모터가 떨리며 켜지고, 가는 고리가 번짐 (연하게 · 가운데 모터 L2 / R2 에서만)
+  ===================================================== */
+  class Vib3 {
+    constructor(T3, parent, motors, cam) {
+      this.T3 = T3; this.parent = parent; this.M = motors; this.cam = cam;
+      this.side = null; this.level = 0; this.rings = []; this.t0 = 0; this.last = -1; this.amp = 0; this.ph = 0;
+      const pts = [];
+      for (let i = 0; i <= 96; i++) { const a = i / 96 * Math.PI * 2; pts.push(new T3.Vector3(Math.cos(a), Math.sin(a), 0)); }
+      this.geo = new T3.BufferGeometry().setFromPoints(pts);
+      this.band = new T3.RingGeometry(.95, 1, 96, 1);
+      this.wv = 0;   /* 림을 따라 도는 물결 세기 */
+      this.sc = 1;   /* 카메라 거리에 따른 고리 크기 */
+    }
+
+    set(side, level) {
+      if (side !== this.side || level !== this.level) { this.side = side; this.level = level; this.t0 = performance.now(); this.last = -1; }
+    }
+
+    tick(now) {
+      const L = LV[this.level];
+      let env = 0;
+      this.ph = 0;
+      if (L && this.side) {
+        const cyc = 3 * L.on + 2 * L.gap + L.rest, e = now - this.t0, t = e % cyc, per = L.on + L.gap, n = Math.floor(t / per);
+        this.ph = t / cyc;
+        if (n < 3 && t - n * per < L.on) {
+          env = L.duty;
+          const key = Math.floor(e / cyc) * 3 + n;
+          if (key !== this.last) { this.last = key; this.spawn(L, now); }
+        }
+      }
+      this.amp += (env - this.amp) * .4;
+      this.wv = Math.max(this.amp, this.wv * .955);
+
+      for (const m of this.M) {
+        const on = this.side && L && (this.side === "B" || m.s === this.side);
+        m.dot.material.opacity = on ? .06 + this.amp * .3 : 0;
+        m.dot.quaternion.copy(this.cam.quaternion);
+        m.mat.uniforms.uOp.value = m.mat.userData.o * (on ? 1 + this.amp * .7 : 1);
+        const j = on && !reduce ? this.amp * 2.6 : 0;   /* 떨림 */
+        m.g.position.set(m.pos.x + (Math.random() - .5) * j, m.pos.y + (Math.random() - .5) * j, (Math.random() - .5) * j);
+      }
+
+      for (let i = this.rings.length - 1; i >= 0; i--) {
+        const r = this.rings[i], a = (now - r.t) / 1700;
+        if (a < 0) continue;
+        if (a >= 1) { this.parent.remove(r.l); r.l.material.dispose(); this.rings.splice(i, 1); continue; }
+        r.l.scale.setScalar(14 + a * r.g * this.sc);
+        r.l.material.opacity = Math.pow(1 - a, 1.8) * (.19 + .54 * r.k) * r.w;
+        r.l.quaternion.copy(this.cam.quaternion);
+      }
+    }
+
+    spawn(L, now) {
+      if (reduce) return;
+      const T3 = this.T3;
+      let g = 0;
+      const ring = (Kind, geo, w, dt, m) => {
+        const Mat = Kind === T3.Mesh ? T3.MeshBasicMaterial : T3.LineBasicMaterial;
+        const l = new Kind(geo, new Mat({ color: 0xa9dded, transparent: true, opacity: 0, blending: T3.AdditiveBlending, depthTest: false, depthWrite: false, side: T3.DoubleSide }));
+        l.position.copy(m.pos);
+        l.scale.setScalar(14);
+        this.parent.add(l);
+        this.rings.push({ l, t: now + dt, k: L.duty, w, g });
+      };
+      for (const m of this.M) {
+        if (!((this.side === "B" || m.s === this.side) && Math.abs(m.pos.y) < 1)) continue;
+        g = 125 + 110 * L.duty;
+        ring(T3.Mesh, this.band, .58, 0, m);
+        ring(T3.Line, this.geo, .5, 0, m);
+        if (L.duty >= .7) ring(T3.Line, this.geo, .5, 140, m);   /* 셀수록 고리 하나씩 더 */
+        if (L.duty >= 1) ring(T3.Line, this.geo, .36, 280, m);
+      }
+    }
+  }
+
+
+  /* =====================================================
+     3D 핸들 만들기 — 못 만들면 null
+  ===================================================== */
+  const build3D = () => {
+    const T3 = window.THREE;
+    let R = null;
+    try {
+      R = new T3.WebGLRenderer({ canvas: cv, antialias: true, alpha: false, powerPreference: "high-performance" });
+    } catch (e) {
+      R = null;   /* three.js 를 못 불러왔거나 WebGL 이 안 됨 */
+    }
+    if (!R) return null;
+
+    R.setClearColor(0x000000, 1);
+    const bctx = bl.getContext("2d");
+    const scene = new T3.Scene(), cam = new T3.PerspectiveCamera(30, 1, 20, 12000), root = new T3.Group();
+    scene.add(root);
+
+
+    /* ---------- 재질 : 가장자리만 밝고 면은 비치는 재질 (서로 더해지는 빛) ---------- */
+    const FOG = new T3.Vector2(1500, 3000), WAVE = new T3.Vector3(0, 0, 0), SCAN = new T3.Vector2(0, 0), TONE_U = { value: TONE };
+    const wires = [], dl = [], COL = 0xc6ccd4, ICE = 0xb4dce8;
+    const VS = `varying vec3 vN;varying vec3 vP;varying vec3 vM;varying vec2 vUv;void main(){vUv=uv;vM=position;vec4 mv=modelViewMatrix*vec4(position,1.);vP=mv.xyz;vN=normalMatrix*normal;gl_Position=projectionMatrix*mv;}`;
+    const FS = `varying vec3 vN;varying vec3 vP;varying vec3 vM;varying vec2 vUv;uniform vec3 uC;uniform float uOp,uFill,uEdge,uPow,uGrid,uWk,uFlow,uBk,uLit,uTone,uSl,uKeep;uniform vec2 uN,uFog,uScan,uCut;uniform vec3 uWave;
+ float ln(float x){float f=abs(fract(x-.5)-.5);float w=fwidth(x);return (1.-smoothstep(w*.5,w*1.9,f))*(1.-smoothstep(.1,.3,w));}
+ void main(){if(uTone>.5&&uCut.y>uCut.x&&vUv.x>uCut.x&&vUv.x<uCut.y)discard;
+ vec3 n=normalize(vN);float f=1.-abs(dot(n,normalize(-vP)));float face=gl_FrontFacing?1.:uBk;float a=(uFill*.55+uEdge*pow(f,uPow*1.12))*face;
+ if(gl_FrontFacing){float l=max(dot(n,normalize(vec3(-.5,.62,.6))),0.);a+=uLit*.42*l*l;}
+ a=mix(a,(uFill*.18+uEdge*1.05*pow(f,uPow*1.9))*mix(1.,face,.55),uTone*(1.-uKeep));
+ if(uSl>0.&&uTone>.01){float zz=vM.z/uSl;float w2=fwidth(zz);a+=uTone*.2*(1.-smoothstep(w2*.5,w2*1.9,abs(fract(zz-.5)-.5)))*step(.0004,w2)*(1.-smoothstep(.1,.3,w2))*mix(1.,face,.5);}
+ if(uGrid>0.){float g=0.;if(uN.x>0.)g+=ln(vUv.x*uN.x);if(uN.y>0.)g+=.7*ln(vUv.y*uN.y);a+=uGrid*g*(.3+.7*f)*face*(1.+2.4*uTone);}
+ float x=0.;
+ if(uWk>0.&&uWave.x>.001){float dA=6.2832*(uWave.z<0.?abs(vUv.x-.5):min(vUv.x,1.-vUv.x));float band=pow(.5+.5*cos(dA*11.-uWave.y*15.),5.);x+=uWk*uWave.x*exp(-dA*1.25)*(.16+band)*(.45+.55*f);}
+ if(uFlow>.001)x+=uFlow*pow(.5+.5*cos((vUv.x*2.5+uWave.y*1.7)*6.2832),10.)*1.4;
+ if(uScan.y>.001){float yN=vP.y/(-vP.z*.2679);x+=uScan.y*exp(-pow((yN-uScan.x)*11.,2.))*(.2+.8*f);}
+ float fog=1.-.86*smoothstep(uFog.x,uFog.y,-vP.z);gl_FragColor=vec4(uC*(a*uOp*fog)+vec3(.72,.9,.97)*x*fog,1.);}`;
+
+    const mats = [[], [], [], [], [], [], []], lns = [[], [], [], [], [], [], []], G = [];
+    for (let i = 0; i < 7; i++) { G[i] = new T3.Group(); root.add(G[i]); }   /* 일곱 겹 */
+
+    const mk = (o = {}) => {
+      const m = new T3.ShaderMaterial({
+        uniforms: {
+          uC: { value: new T3.Color(o.c || COL) }, uOp: { value: o.op || 1 },
+          uFill: { value: o.fill == null ? .03 : o.fill }, uEdge: { value: o.edge == null ? .5 : o.edge }, uPow: { value: o.pow || 2.4 },
+          uGrid: { value: o.grid || 0 }, uN: { value: new T3.Vector2(...(o.n || [0, 0])) },
+          uFog: { value: FOG }, uWave: { value: WAVE }, uScan: { value: SCAN },
+          uWk: { value: o.wk || 0 }, uFlow: { value: 0 }, uBk: { value: o.bk == null ? .4 : o.bk }, uLit: { value: o.lit || 0 },
+          uTone: TONE_U, uSl: { value: o.sl || 0 }, uKeep: { value: o.keep || 0 }, uCut: { value: new T3.Vector2(...(o.cut || [0, 0])) }
+        },
+        vertexShader: VS, fragmentShader: FS,
+        transparent: true, blending: T3.AdditiveBlending, depthWrite: false, depthTest: false, side: T3.DoubleSide
+      });
+      m.extensions.derivatives = true;
+      m.userData.o = o.op || 1;
+      return m;
+    };
+    const lmat = (c, o) => {
+      const m = new T3.LineBasicMaterial({ color: c, transparent: true, opacity: o, blending: T3.AdditiveBlending, depthTest: false, depthWrite: false });
+      m.userData.o = o;
+      return m;
+    };
+    const mesh = (i, geo, o = {}, par) => {
+      const mt = o.mat || mk(o);
+      if (!o.mat) mats[i].push(mt);
+      const me = new T3.Mesh(geo, mt);
+      (par || G[i]).add(me);
+      if (o.e) {   /* 모서리 선 */
+        const lm = lmat(o.c || COL, o.e);
+        lns[i].push(lm);
+        me.add(new T3.LineSegments(new T3.EdgesGeometry(geo, o.ea || 30), lm));
+      }
+      return me;
+    };
+    const line = (i, pts, c, o, loop) => {
+      const lm = lmat(c, o);
+      lns[i].push(lm);
+      const l = new (loop ? T3.LineLoop : T3.Line)(new T3.BufferGeometry().setFromPoints(pts), lm);
+      G[i].add(l);
+      return l;
+    };
+
+
+    /* ---------- 형태 만들기 ---------- */
+    /* 도넛 조각 : a = 림을 따라 도는 각(도), t = 단면을 도는 각 (0 바깥 · 90 앞 · 180 안쪽 · 270 뒤) */
+    const fn = (v) => (typeof v === "function" ? v : () => v);
+    const tube = (RrF, rF, a0, a1, t0, t1, na, nt) => {
+      const pos = [], nor = [], uv = [], idx = [];
+      RrF = fn(RrF); rF = fn(rF);
+      for (let i = 0; i <= na; i++) {
+        const ad = a0 + (a1 - a0) * i / na, a = ad * RAD, ca = Math.cos(a), sa = Math.sin(a), Rr = RrF(ad), r = rF(ad);
+        for (let j = 0; j <= nt; j++) {
+          const t = (t0 + (t1 - t0) * j / nt) * RAD, ct = Math.cos(t), st = Math.sin(t);
+          pos.push((Rr + r * ct) * ca, (Rr + r * ct) * sa, r * st);
+          nor.push(ct * ca, ct * sa, st);
+          uv.push(a / (2 * Math.PI), t / (2 * Math.PI));
+        }
+      }
+      for (let i = 0; i < na; i++) for (let j = 0; j < nt; j++) { const a = i * (nt + 1) + j, b = a + nt + 1; idx.push(a, b, a + 1, b, b + 1, a + 1); }
+      const g = new T3.BufferGeometry();
+      g.setAttribute("position", new T3.Float32BufferAttribute(pos, 3));
+      g.setAttribute("normal", new T3.Float32BufferAttribute(nor, 3));
+      g.setAttribute("uv", new T3.Float32BufferAttribute(uv, 2));
+      g.setIndex(idx);
+      return g;
+    };
+    /* 압출한 형태의 꼭짓점을 합쳐 면이 부드럽게 이어지게 */
+    const weld = (g) => {
+      const p = g.attributes.position, map = new Map(), np = [], idx = [];
+      for (let i = 0; i < p.count; i++) {
+        const x = p.getX(i), y = p.getY(i), z = p.getZ(i), k = Math.round(x * 16) + "," + Math.round(y * 16) + "," + Math.round(z * 16);
+        let n = map.get(k);
+        if (n === undefined) { n = np.length / 3; map.set(k, n); np.push(x, y, z); }
+        idx.push(n);
+      }
+      const o = new T3.BufferGeometry();
+      o.setAttribute("position", new T3.Float32BufferAttribute(np, 3));
+      o.setAttribute("uv", new T3.Float32BufferAttribute(new Float32Array(np.length / 3 * 2), 2));
+      o.setIndex(idx);
+      o.computeVertexNormals();
+      return o;
+    };
+    const ext = (pts, holes, o) => {
+      const s = new T3.Shape(pts.map((p) => new T3.Vector2(p[0], p[1])));
+      (holes || []).forEach((h) => s.holes.push(new T3.Path(h.map((p) => new T3.Vector2(p[0], p[1])))));
+      return weld(new T3.ExtrudeGeometry(s, Object.assign({ curveSegments: 1, bevelEnabled: true }, o)));
+    };
+    const rrect = (w, h, r, n = 6) => {   /* 둥근 네모 윤곽 */
+      const P = [], c = [[w / 2 - r, h / 2 - r, 0], [-w / 2 + r, h / 2 - r, 90], [-w / 2 + r, -h / 2 + r, 180], [w / 2 - r, -h / 2 + r, 270]];
+      c.forEach(([x, y, a]) => { for (let i = 0; i <= n; i++) { const t = (a + 90 * i / n) * RAD; P.push([x + r * Math.cos(t), y + r * Math.sin(t)]); } });
+      return P;
+    };
+    const flat = (g) => {
+      if (!g.attributes.uv) g.setAttribute("uv", new T3.Float32BufferAttribute(new Float32Array(g.attributes.position.count * 2), 2));
+      return g;
+    };
+    const cyl = (r, h, n = 40) => flat(new T3.CylinderGeometry(r, r, h, n).rotateX(Math.PI / 2));
+    const at = (m, x, y, z, rz) => { m.position.set(x, y, z); if (rz) m.rotation.z = rz * RAD; return m; };
+
+    /* 림 굵기 : 손이 닿는 9시 · 3시 구간은 안쪽으로 더 굵음 (바깥 354 고정, 안쪽 292 → 280) */
+    const grip = (ad) => { const x = ((ad % 360) + 360) % 360, dd = Math.min(Math.abs(x - 180), x, 360 - x); return sm(clamp((44 - dd) / 13)); };
+    const RR = (ad) => 31 + 6 * grip(ad), RC = (ad) => 323 - 6 * grip(ad);
+    const CA = [116, 133], CUT = [CA[0] / 360, CA[1] / 360];   /* 설계 톤에서 림을 잘라 단면을 보이는 자리 (도) */
+
+    /* 1 외곽 트림 : 그립 뒤를 감싸는 반쪽 관 + 허브 뒤 커버 + 세 갈래 팔 */
+    mesh(0, tube(RC, (ad) => RR(ad) + 6, 0, 360, 186, 354, 240, 14), { fill: .014, edge: .36, pow: 2.2, grid: .028, n: [72, 0], wk: .35, lit: .03, cut: CUT });
+    at(mesh(0, flat(new T3.RingGeometry(298, 349, 160, 1)), { fill: .02, edge: .12 }), 0, 0, -8);
+    line(0, Array.from({ length: 181 }, (_, i) => new T3.Vector3(298 * Math.cos(i * 2 * RAD), 298 * Math.sin(i * 2 * RAD), -8)), COL, .2, true);
+    line(0, Array.from({ length: 181 }, (_, i) => new T3.Vector3(349 * Math.cos(i * 2 * RAD), 349 * Math.sin(i * 2 * RAD), -8)), COL, .2, true);
+    {
+      const g = new T3.SphereGeometry(1, 56, 18, 0, Math.PI * 2, 0, Math.PI / 2).rotateX(-Math.PI / 2);
+      at(mesh(0, g, { fill: .012, edge: .36, pow: 2, grid: .024, n: [28, 14], lit: .035, sl: .09 }), 0, -24, -16).scale.set(176, 160, 128);
+    }
+    at(mesh(0, cyl(47, 74, 48), { fill: .012, edge: .34, pow: 2, e: .24, lit: .03 }), 0, -24, -172);
+    at(mesh(0, cyl(60, 9, 48), { fill: .012, edge: .3, e: .24 }), 0, -24, -139);
+    at(mesh(0, ext(SHAPE.outer.map((p) => [p[0] * 1.035, p[1] * 1.035]), [], { depth: 10, bevelThickness: 8, bevelSize: 6, bevelSegments: 4 }), { fill: .012, edge: .3, pow: 2.2, e: .16, ea: 36, lit: .03, sl: 6 }), 0, 0, -44);
+
+    /* 2 크롬 링 */
+    mesh(1, tube(323, 3.4, 0, 360, 0, 360, 240, 8), { fill: .1, edge: .7, pow: 1.4, wk: .8, keep: .85 });
+
+    /* 3 햅틱 모듈 : 코인 모터 여섯 개 · 받침 · 배선 · 보드 */
+    const HO = { c: ICE }, motors = [];
+    mesh(2, flat(new T3.TubeGeometry(new T3.CatmullRomCurve3([[-306, 0, -6], [-190, -7, -13], [-60, -3, -15], [60, -3, -15], [190, -7, -13], [306, 0, -6]].map((a) => new T3.Vector3(...a))), 90, 1.7, 6, false)), Object.assign({ fill: .12, edge: .55, pow: 1.5, keep: .8 }, HO));
+    [[158, 202], [-22, 22]].forEach(([a0, a1]) => mesh(2, tube(323, 2.6, a0, a1, 0, 360, 40, 6), Object.assign({ fill: .12, edge: .6, pow: 1.4, keep: .8 }, HO)));
+    MOT.forEach((m) => {
+      const x = m.x - 720, y = 388 - m.y, sg = m.s === "L" ? -1 : 1;
+      const mm = mk({ c: ICE, fill: .05, edge: .62, pow: 1.8, op: 1, lit: .1, keep: .75 });
+      mats[2].push(mm);
+      const g = new T3.Group();
+      g.position.set(x, y, 0);
+      G[2].add(g);
+      mesh(2, cyl(13, 7.5), { mat: mm }, g);   /* 코인 모터 */
+      const lm = lmat(ICE, .5);
+      lns[2].push(lm);
+      [[13, 3.75], [13, -3.75], [5.5, 3.95]].forEach(([r, z]) => {
+        g.add(new T3.LineLoop(new T3.BufferGeometry().setFromPoints(Array.from({ length: 48 }, (_, i) => new T3.Vector3(r * Math.cos(i * 7.5 * RAD), r * Math.sin(i * 7.5 * RAD), z))), lm));
+      });
+      {   /* 받침 고리 */
+        const c = mesh(2, new T3.TorusGeometry(16.4, .85, 6, 48, Math.PI * 1.45), Object.assign({ fill: .14, edge: .6, pow: 1.4, keep: .85 }, HO), g);
+        c.rotation.z = (sg > 0 ? 180 : 0) * RAD - Math.PI * .725;
+        c.position.z = -1;
+      }
+      const dot = new T3.Mesh(new T3.CircleGeometry(6, 32), new T3.MeshBasicMaterial({ color: 0xcfeff8, transparent: true, opacity: 0, blending: T3.AdditiveBlending, depthTest: false, depthWrite: false }));
+      dot.position.set(x, y, 0);
+      G[2].add(dot);
+      /* 모터 → 허브 보드 배선 */
+      const yb = y > 10 ? 22 : y < -10 ? -22 : 0;
+      const pts = [
+        new T3.Vector3(x - sg * 10, y, -4),
+        new T3.Vector3(x * .82, y * .86 + (y ? 0 : 9), -15),
+        new T3.Vector3(x * .52, y * .42 + (y > 10 ? 14 : y < -10 ? -12 : -10), -20),
+        new T3.Vector3(x * .28, yb * .9, -15),
+        new T3.Vector3(sg * 50, yb, -9)
+      ];
+      wires.push({ s: m.s, m: mesh(2, flat(new T3.TubeGeometry(new T3.CatmullRomCurve3(pts), 64, 1.25, 5, false)), Object.assign({ fill: .2, edge: .6, pow: 1.2, keep: 1 }, HO)).material });
+      motors.push({ id: m.id, s: m.s, g, pos: new T3.Vector3(x, y, 0), dot, mat: mm });
+    });
+    const pill = (w, h, r, d) => ext(rrect(w, h, r, 5), null, { depth: d, bevelThickness: .9, bevelSize: .9, bevelSegments: 2 });
+    at(mesh(2, pill(104, 66, 12, 3), Object.assign({ fill: .04, edge: .34, e: .34, ea: 40 }, HO)), 0, 0, -12);   /* 보드 */
+    at(mesh(2, pill(88, 5, 2.5, 6), Object.assign({ fill: .03, edge: .24, e: .2, ea: 40 }, HO)), 0, 26, -8);
+    at(mesh(2, pill(88, 5, 2.5, 6), Object.assign({ fill: .03, edge: .24, e: .2, ea: 40 }, HO)), 0, -26, -8);
+    at(mesh(2, pill(26, 20, 6, 5), Object.assign({ fill: .03, edge: .24, e: .2, ea: 40 }, HO)), -30, 0, -8);
+    at(mesh(2, cyl(9, 7, 32), Object.assign({ fill: .03, edge: .3, e: .2 }, HO)), 30, 0, -5);
+    for (let k = 0; k < 12; k++) {   /* 핀 */
+      at(mesh(2, cyl(.7, 9, 8), Object.assign({ fill: .2, edge: .2 }, HO)), -38.5 + k * 7, 26, 3);
+      if (k % 2 === 0) at(mesh(2, cyl(.7, 9, 8), Object.assign({ fill: .2, edge: .2 }, HO)), -38.5 + k * 7, -26, 3);
+    }
+
+    /* 4 가죽 림 : 두께가 있는 관 · 손이 닿는 구간은 결이 촘촘 */
+    mesh(3, tube(RC, RR, 0, 360, 0, 360, 280, 32), { fill: .018, edge: .5, pow: 2.4, grid: .04, n: [60, 12], wk: 1, bk: .22, lit: .045, cut: CUT });
+    mesh(3, tube(RC, (ad) => RR(ad) * .6, 0, 360, 0, 360, 200, 18), { fill: .004, edge: .12, pow: 2.4, bk: .4, cut: CUT });
+    [[145, 215], [-35, 35]].forEach(([a0, a1]) => mesh(3, tube(RC, (ad) => RR(ad) + 1.2, a0, a1, 0, 360, 70, 30), { fill: .004, edge: .08, pow: 2.2, wk: .5, bk: .2 }));
+    const ringAt = (a, grow) => Array.from({ length: 49 }, (_, i) => {   /* 림을 a 도에서 자른 단면 고리 */
+      const t = i * 7.5 * RAD, rr = RR(a) + grow, rc = RC(a);
+      return new T3.Vector3((rc + rr * Math.cos(t)) * Math.cos(a * RAD), (rc + rr * Math.cos(t)) * Math.sin(a * RAD), rr * Math.sin(t));
+    });
+    [35, 145, 215, 325].forEach((a) => line(3, ringAt(a, 1), COL, .55, true));   /* 그립 구간 끝 */
+    [160, 180, 200, -20, 0, 20].forEach((a) => line(3, ringAt(a, .6), COL, .26, true));   /* 관의 굵기가 읽히도록 그립 구간에 몇 개 더 */
+
+    /* 5 스포크 프레임 : 렌더 실루엣을 그대로 압출 + 양쪽 버튼 */
+    const hole = SHAPE.holes.slice().sort((a, b) => b.a - a.a)[0];
+    at(mesh(4, ext(SHAPE.outer, hole ? [hole.pts] : [], { depth: 32, bevelThickness: 8, bevelSize: 4.6, bevelSegments: 4 }), { fill: .03, edge: .52, pow: 2, e: .3, ea: 34, bk: .3, lit: .07, sl: 6 }), 0, 0, -18);
+    [[-211, 7, 2, 2], [211, 7, 2, 3]].forEach(([x, y, nc, nr]) => {
+      at(mesh(4, ext(rrect(92, 84, 32, 10), null, { depth: 8, bevelThickness: 5, bevelSize: 5, bevelSegments: 4 }), { fill: .02, edge: .34, e: .13, ea: 44, lit: .05 }), x, y, 24);
+      const bw = (92 - 30) / nc, bh = (84 - 28) / nr;
+      for (let i = 0; i < nc; i++) for (let j = 0; j < nr; j++) {
+        at(mesh(4, ext(rrect(bw - 7, bh - 7, Math.min(bw, bh) / 2 - 4.5, 7), null, { depth: 1.5, bevelThickness: 1.6, bevelSize: 1.6, bevelSegments: 2 }), { fill: .012, edge: .2, e: .1, ea: 44 }), x + (i - (nc - 1) / 2) * bw, y + (j - (nr - 1) / 2) * bh, 38);
+      }
+    });
+
+    /* 6 허브 쿠션 : 볼록한 패드 (정면도 오른쪽 반 윤곽을 좌우 대칭) */
+    const hp = [[720, 283.5], [736, 284], [778, 289], [811, 295], [836, 303], [849, 312], [865, 330], [870, 340], [875, 381], [875, 406], [870, 430], [857, 460], [839, 498], [826, 515], [813, 519], [803, 532], [789, 544], [760, 557], [737, 560], [720, 561]];
+    const hub = hp.map((p) => [p[0] - 720, 388 - p[1]]).concat(hp.slice(1, -1).reverse().map((p) => [720 - p[0], 388 - p[1]]));
+    at(mesh(5, ext(hub, null, { depth: 18, bevelThickness: 26, bevelSize: 24, bevelOffset: -24, bevelSegments: 10 }), { fill: .02, edge: .52, pow: 2.2, e: .14, ea: 50, bk: .3, lit: .07, sl: 7 }), 0, 0, 48);
+
+    /* 7 엠블럼 커버 */
+    at(mesh(6, ext(rrect(126, 126, 62.9, 16), null, { depth: 7, bevelThickness: 5, bevelSize: 5, bevelOffset: -5, bevelSegments: 3 }), { fill: .03, edge: .55, pow: 2, e: .34, ea: 40, lit: .06 }), 0, -19, 92);
+    line(6, Array.from({ length: 97 }, (_, i) => new T3.Vector3(54 * Math.cos(i * 3.75 * RAD), -19 + 54 * Math.sin(i * 3.75 * RAD), 104.4)), COL, .45, true);
+
+    /* 설계 톤에서만 보이는 것 : 림을 한 군데 잘라 낸 단면 (가죽 · 심지 · 심선 + 빗금) · 조립 축 */
+    const dline = (i, obj, o) => { obj.material = lmat(COL, 0); obj.material.userData.o = o; dl.push({ m: obj.material, i }); G[i].add(obj); return obj; };
+    CA.forEach((a) => {
+      const ca = Math.cos(a * RAD), sa = Math.sin(a * RAD), rc = RC(a), rr = RR(a), P = (u, v) => new T3.Vector3((rc + u) * ca, (rc + u) * sa, v);
+      [rr, rr * .6, 3.4].forEach((r, k) => dline(3, new T3.LineLoop(new T3.BufferGeometry().setFromPoints(Array.from({ length: 64 }, (_, i) => P(r * Math.cos(i * 5.625 * RAD), r * Math.sin(i * 5.625 * RAD))))), k ? .7 : 1));
+      const hatch = [];
+      for (let k = -9; k <= 9; k++) {
+        let prev = null;
+        for (let j = 0; j <= 60; j++) {
+          const t = -rr + 2 * rr * j / 60, u = t, v = t + k * 6.5, d = Math.hypot(u, v), inside = d < rr - .4 && d > rr * .6 + .4;
+          if (inside && prev) hatch.push(P(prev[0], prev[1]), P(u, v));
+          prev = inside ? [u, v] : null;
+        }
+      }
+      dline(3, new T3.LineSegments(new T3.BufferGeometry().setFromPoints(hatch)), .42);
+    });
+    const axis = new T3.Line(new T3.BufferGeometry().setFromPoints([new T3.Vector3(0, 0, -1), new T3.Vector3(0, 0, 1)]), new T3.LineDashedMaterial({ color: COL, transparent: true, opacity: 0, dashSize: .03, gapSize: .012, blending: T3.AdditiveBlending, depthTest: false, depthWrite: false }));
+    axis.computeLineDistances();
+    root.add(axis);
+
+    /* 그립 구간 표시 호 (2.1 에서만) */
+    const zm = lmat(0xa9dded, 0);
+    [[150, 210], [-30, 30]].forEach(([a0, a1]) => root.add(new T3.Line(new T3.BufferGeometry().setFromPoints(Array.from({ length: 61 }, (_, i) => { const a = (a0 + (a1 - a0) * i / 60) * RAD; return new T3.Vector3(374 * Math.cos(a), 374 * Math.sin(a), 0); })), zm)));
+
+    /* 공간의 먼지 : 카메라가 움직일 때 깊이가 느껴지도록 */
+    {
+      const n = 900, p = new Float32Array(n * 3);
+      let sd = 7;
+      const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+      for (let i = 0; i < n; i++) { p[i * 3] = (rnd() - .5) * 7000; p[i * 3 + 1] = -760 + rnd() * 2600; p[i * 3 + 2] = (rnd() - .5) * 7000; }
+      const g = new T3.BufferGeometry();
+      g.setAttribute("position", new T3.Float32BufferAttribute(p, 3));
+      const tc = document.createElement("canvas");
+      tc.width = tc.height = 32;
+      const tx2 = tc.getContext("2d"), gr = tx2.createRadialGradient(16, 16, 0, 16, 16, 16);
+      gr.addColorStop(0, "rgba(255,255,255,1)"); gr.addColorStop(.35, "rgba(255,255,255,.5)"); gr.addColorStop(1, "rgba(255,255,255,0)");
+      tx2.fillStyle = gr;
+      tx2.fillRect(0, 0, 32, 32);
+      scene.add(new T3.Points(g, new T3.PointsMaterial({ map: new T3.CanvasTexture(tc), color: 0xc9d0d8, size: 11, sizeAttenuation: true, transparent: true, opacity: .13, blending: T3.AdditiveBlending, depthTest: false, depthWrite: false })));
+    }
+
+    /* 바닥 : 핸들 아래로 멀어지며 사라지는 가는 격자와 동심원 (안개 없이 공간의 깊이) */
+    const FLR = new T3.Vector2(2000, 6000);
+    const floorM = new T3.ShaderMaterial({
+      uniforms: { uFar: { value: FLR }, uA: { value: 1 } },
+      vertexShader: `varying vec3 vW;varying vec3 vP;void main(){vec4 w=modelMatrix*vec4(position,1.);vW=w.xyz;vec4 mv=viewMatrix*w;vP=mv.xyz;gl_Position=projectionMatrix*mv;}`,
+      fragmentShader: `varying vec3 vW;varying vec3 vP;uniform vec2 uFar;uniform float uA;
+  float gl(float x){float f=abs(fract(x-.5)-.5);float w=fwidth(x);return (1.-smoothstep(w*.5,w*1.7,f))*(1.-smoothstep(.12,.4,w));}
+  float rg(float r,float R){float w=fwidth(r);return 1.-smoothstep(w*.6,w*2.,abs(r-R));}
+  void main(){float r=length(vW.xz);float g=max(gl(vW.x/180.),gl(vW.z/180.))*.42+max(gl(vW.x/900.),gl(vW.z/900.))*.6;
+  float ring=rg(r,520.)+rg(r,1040.)*.8+rg(r,1700.)*.6+rg(r,2600.)*.45;
+  float fade=exp(-r/1700.)*(1.-smoothstep(uFar.x,uFar.y,-vP.z));gl_FragColor=vec4(vec3(.74,.79,.85)*(g*.2+ring*.26)*fade*uA,1.);}`,
+      transparent: true, blending: T3.AdditiveBlending, depthWrite: false, depthTest: false, side: T3.DoubleSide
+    });
+    floorM.extensions.derivatives = true;
+    {
+      const f = new T3.Mesh(new T3.PlaneGeometry(14000, 14000).rotateX(-Math.PI / 2), floorM);
+      f.position.y = -780;
+      scene.add(f);
+    }
+
+    /* 일곱 겹 번호가 붙는 자리 (겹마다) */
+    const TAGP = [[0, 392, 0], [0, 344, 0], [0, 58, 0], [0, 376, 0], [0, 128, 10], [0, 128, 62], [0, 66, 98]].map((a) => new T3.Vector3(...a));
+
+    vib = new Vib3(T3, G[2], motors, cam);
+
+
+    /* ---------- 카메라 길 : 히어로 영상과 겹치지 않는 각도로, 갈수록 안으로 ---------- */
+    const K = (p, ks) => {
+      for (let i = 1; i < ks.length; i++) if (p <= ks[i][0]) { const a = ks[i - 1], b = ks[i]; return mix(a[1], b[1], sm(seg(p, a[0], b[0]))); }
+      return ks[ks.length - 1][1];
+    };
+    const AZ = [[0, -17], [.1, -20], [.145, -28], [.225, -32], [.28, -74], [.36, -68], [.395, -46], [.46, -41], [.53, -62], [.7, -70], [.8, -146], [.9, -156], [1, -162]];
+    const EL = [[0, 9], [.1, 11], [.145, 36], [.225, 34], [.28, 14], [.36, 9], [.395, -24], [.46, -27], [.53, 9], [.7, 10], [.8, 8], [1, 4]];
+    const DS = [[0, 1800], [.1, 1720], [.145, 1600], [.225, 1540], [.28, 680], [.36, 590], [.395, 1500], [.46, 1440], [.53, 2240], [.7, 2160], [.8, 1650], [.9, 760], [1, 400]];
+    const TX = [[0, 0], [.225, 0], [.28, -312], [.36, -312], [.395, 0], [.8, 0], [.9, -250], [1, -316]];
+    const TY = [[0, 0], [.1, 0], [.145, -14], [.225, -14], [.28, 0], [.36, 0], [.395, 10], [.46, 10], [.53, -22], [.7, -22], [.8, 0], [1, 0]];
+    const SP = [[0, 0], [.1, 0], [.145, 14], [.225, 16], [.28, 0], [.46, 0], [.53, 138], [.7, 143], [.8, 80], [.9, 50], [1, 44]];
+    const SX = [[0, 0], [.225, 0], [.28, -.02], [.36, -.02], [.395, 0], [.46, 0], [.53, -.08], [.7, -.08], [.8, 0], [.9, .03], [1, .04]];
+
+    let W = 1, H = 1, fit = 1, wide = 1, mx = 0, my = 0, tx = 0, ty = 0, act = -2, scanCi = -1, scanT = -1e9, lastTo = 0;
+    let dg = null, ox = 0, oy = 0;   /* 끌어서 돌리기 */
+    const lift = [0, 0, 0, 0, 0, 0, 0], tgt = new T3.Vector3(), v = new T3.Vector3();
+
+    /* 마우스 위치만큼 살짝 기울고, 끌면 좌우 · 위아래로 돌아감 (놓으면 제자리로) */
+    pin.addEventListener("pointermove", (e) => {
+      const r = pin.getBoundingClientRect();
+      mx = (e.clientX - r.left) / r.width - .5;
+      my = (e.clientY - r.top) / r.height - .5;
+      if (dg) { ox = clamp(dg.ox + (e.clientX - dg.x) * .32, -110, 110); oy = clamp(dg.oy + (e.clientY - dg.y) * .22, -50, 50); }
+    });
+    pin.addEventListener("pointerdown", (e) => {
+      if (e.target.closest("button, a, input, .hx-cfg")) return;
+      dg = { x: e.clientX, y: e.clientY, ox, oy };
+      pin.classList.add("drag");
+    });
+    const endDrag = () => { dg = null; pin.classList.remove("drag"); };
+    addEventListener("pointerup", endDrag);
+    addEventListener("pointercancel", endDrag);
+
+    const layout = () => {
+      W = pin.clientWidth;
+      H = pin.clientHeight;
+      if (W < 2 || H < 2) { W = H = 0; return; }
+      R.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+      R.setSize(W, H, false);
+      cam.aspect = W / H;
+      fit = Math.min(1, (.48 * W) / (.76 * H));   /* 좁은 화면 : 핸들이 잘리지 않게 멀리 */
+      /* 아이맥 : 맥북(1512 × 860) 화면비보다 가로가 길면 그만큼 핸들도 크게 — 최대 1.12배 (CSS [아이맥 화면비] 와 같은 계산) */
+      wide = innerWidth >= 1513 ? clamp((W / H) / (1512 / 860), 1, 1.12) : 1;
+      bl.width = Math.max(2, Math.round(W / 3));
+      bl.height = Math.max(2, Math.round(H / 3));
+    };
+
+    /* 3D 위치 → 화면 위치 */
+    const put = (el, pos, grp, o) => {
+      v.copy(pos);
+      grp.localToWorld(v);
+      v.project(cam);
+      const x = (v.x * .5 + .5) * W, y = (-v.y * .5 + .5) * H;
+      el.style.cssText = `transform:translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0);opacity:${(v.z < 1 ? o : 0).toFixed(3)}`;
+    };
+
+    const render = (p, pre, now) => {
+      /* 화면 크기가 아직 0 이면 그리지 않고, 크기가 생기면 다시 잼 */
+      if (W < 2 || H < 2 || pin.clientWidth !== W || pin.clientHeight !== H) { layout(); if (W < 2 || H < 2) return; }
+
+      tx += (mx - tx) * .06;
+      ty += (my - ty) * .06;
+      if (!dg) { ox *= .93; oy *= .93; }
+      const sw = reduce ? 0 : 1;   /* 가만히 있어도 아주 살짝 흔들림 */
+      const az = (K(p, AZ) + tx * 11 - ox + sw * Math.sin(now * .00034) * 2.4) * RAD;
+      const el = clamp(K(p, EL) - ty * 7 + oy + sw * Math.cos(now * .00027) * 1.2, -80, 80) * RAD;
+      const d = K(p, DS) / fit / wide, sp = K(p, SP);
+      const back = sm(seg(p, .72, .8)), deep = sm(seg(p, .8, 1));
+
+      tgt.set(K(p, TX), K(p, TY), -sp * deep);
+      cam.position.set(tgt.x + d * Math.sin(az) * Math.cos(el), tgt.y + d * Math.sin(el), tgt.z + d * Math.cos(az) * Math.cos(el));
+      cam.lookAt(tgt);
+      if (!reduce && vib.amp > .01) {   /* 진동할 때 화면도 살짝 떨림 */
+        const k = vib.amp * d * .0034;
+        cam.position.x += (Math.random() - .5) * k;
+        cam.position.y += (Math.random() - .5) * k;
+      }
+      cam.setViewOffset(W, H, -K(p, SX) * W, 0, W, H);
+      FOG.set(d - 400, d + 440);
+      FLR.set(d * 1.5 + 900, d * 2.6 + 3800);
+      vib.sc = clamp(d / 1500, .62, 1);
+
+      /* 겹마다 밝기 : inner 안쪽이 보이기 시작 · open 겹이 벌어짐 · back 뒤에서 */
+      const inner = sm(seg(p, .115, .15)), open = sm(seg(p, .46, .52));
+      const show = p > .545 && p < .708, idx = show ? Math.min(6, Math.floor(seg(p, .565, .69) * 7)) : -1;   /* 2.4 지금 켜진 겹 */
+      const O = [
+        mix(mix(mix(.5, .26, inner), 1, open), .62, back),
+        mix(mix(.7, 1, open), .8, back),
+        mix(mix(mix(.2, 1.15, inner), 1.05, open), 1.3, back),
+        mix(mix(mix(1, .5, inner), 1, open), .55, back),
+        mix(mix(mix(1, .5, inner), 1, open), .36, back),
+        mix(mix(mix(1, .5, inner), 1, open), .36, back),
+        mix(mix(mix(1, .55, inner), 1, open), .36, back)
+      ];
+      for (let i = 0; i < 7; i++) {
+        let o = O[i];
+        if (idx >= 0) o *= i === idx ? 1.25 : .34;
+        lift[i] += ((i === idx ? 1 : 0) - lift[i]) * .14;   /* 켜진 겹은 살짝 위로 */
+        G[i].position.set(0, lift[i] * 30, (i - 3) * sp - lift[i] * 10);
+        mats[i].forEach((m) => { m.userData.o = o; m.uniforms.uOp.value = o; });
+        lns[i].forEach((m) => (m.opacity = m.userData.o * .7 * (1 + 1.9 * TONE) * Math.min(1.4, o)));
+        O[i] = o;
+      }
+      dl.forEach((x) => (x.m.opacity = x.m.userData.o * TONE * Math.min(1.4, O[x.i])));
+      axis.scale.z = 3.7 * sp + 130;
+      axis.material.opacity = .42 * TONE * sm(clamp(sp / 70));
+
+      scrim.style.opacity = Math.max(.55, sm(seg(p, .25, .285)) * (1 - sm(seg(p, .36, .395))), sm(seg(p, .8, .88))).toFixed(3);
+      zm.opacity = .7 * sm(seg(p, .115, .16)) * (1 - sm(seg(p, .25, .275)));
+      haze.style.opacity = (1 - .7 * TONE).toFixed(3);
+      haze.style.transform = `scale(${(1 + p * .55).toFixed(4)}) translate3d(${(-p * 3).toFixed(2)}%,${(p * 2).toFixed(2)}%,0)`;
+
+      /* 2.2 신호 : 왼쪽이 주의 → 접근 → 긴급 / 2.3 울려 보기 : 고른 대로 */
+      if (p >= .285 && p < .372) {
+        const n = p < .312 ? 1 : p < .34 ? 2 : 3;
+        setLevel(n);
+        vib.set("L", n);
+      } else if (p >= .372 && p < .46) {
+        tryVib(now);
+      } else {
+        vib.set(null, 0);
+      }
+
+      common(p, now);
+
+      /* 림을 따라 도는 물결 · 배선을 따라 흐르는 빛 · 장이 바뀔 때 위에서 아래로 훑는 빛 */
+      const vs = vib.side;
+      WAVE.set(vib.wv, now / 1000, vs === "R" ? 1 : vs === "L" ? -1 : WAVE.z);
+      wires.forEach((w) => (w.m.uniforms.uFlow.value = vs && w.s === vs ? .25 + vib.wv * .75 : 0));
+      if (ci !== scanCi) { scanCi = ci; scanT = now; }
+      const st = (now - scanT) / 1700;
+      SCAN.set(mix(1.25, -1.3, Math.pow(clamp(st), 2.6)), st < 1 && !reduce ? .3 * sm(clamp(st * 6)) * (1 - sm(seg(st, .82, 1))) : 0);
+
+      root.updateMatrixWorld(true);
+      R.render(scene, cam);
+      if (cv.width > 0 && cv.height > 0 && bl.width > 0 && bl.height > 0) {   /* 빛 번짐 : 1/3 크기로 복사 → CSS 로 흐리게 */
+        bctx.globalCompositeOperation = "copy";
+        bctx.drawImage(cv, 0, 0, bl.width, bl.height);
+      }
+      const fade = sm(clamp(pre * 1.6));   /* 섹션이 아래서 올라올 때 서서히 */
+      cv.style.opacity = fade.toFixed(3);
+      bl.style.opacity = (.26 * fade * (1 - .75 * TONE)).toFixed(3);
+
+      /* 2.4 일곱 겹 번호 */
+      const to = sm(seg(p, .535, .56)) * (1 - sm(seg(p, .695, .715)));
+      if (to > 0 || lastTo > 0) TAGP.forEach((a, i) => put(tags[i], a, G[i], to));
+      lastTo = to;
+      if (idx !== act) {
+        act = idx;
+        rows.forEach((r, i) => r.classList.toggle("on", i === idx));
+        tags.forEach((t, i) => t.classList.toggle("on", i === idx));
+      }
+    };
+
+    return { layout, render };
+  };
+
+
+  /* =====================================================
+     3D 를 못 그리면 : 정면 그림 + 글 칸 · 세기 읽기만
+  ===================================================== */
+  let stage = build3D();
+  if (!stage) {
+    cv.remove();
+    bl.remove();
+    const im = new Image();
+    im.src = "./images/handle-ghost.webp";
+    im.alt = "";
+    im.className = "hx-nogl";
+    pin.insertBefore(im, pin.children[1]);
+    vib = { ph: 0, amp: 0, side: null, set() {}, tick() {} };
+    stage = {
+      layout() {},
+      render(p, pre, now) {
+        if (p >= .285 && p < .372) setLevel(p < .312 ? 1 : p < .34 ? 2 : 3);
+        common(p, now);
+      }
+    };
+  }
+
+
+  /* =====================================================
+     스크롤 루프 — 섹션이 화면 근처에 있을 때만
+     ---- 스크롤 위치(0 ~ 1)를 바로 쓰지 않고 따라가게 해서 부드럽게 (한 프레임에 16%씩)
+  ===================================================== */
+  let p = -1, raf = 0, near = false, warned = false;
+
+  const loop = (now) => {
+    raf = near ? requestAnimationFrame(loop) : 0;   /* 다음 프레임을 먼저 예약 — 한 프레임에서 문제가 생겨도 멈추지 않게 */
+    if (innerHeight < 2 || innerWidth < 2) return;
+    try {
+      const r = sec.getBoundingClientRect(), vh = innerHeight, total = sec.offsetHeight - vh;
+      if (total > 0 && r.bottom > -vh * .3 && r.top < vh * 1.3) {
+        const target = clamp(-r.top / total), pre = clamp(1 - r.top / vh);
+        if (p < 0 || reduce) {
+          p = target;
+        } else {
+          p += (target - p) * .16;
+          if (Math.abs(target - p) < .00004) p = target;
+        }
+        stage.render(p, pre, now);
+      }
+    } catch (e) {
+      if (!warned) { warned = true; console.warn(e); }
+    }
+  };
+
+  /* 섹션이 화면 위아래 30% 안에 들어오면 계산 시작, 벗어나면 멈춤 */
+  new IntersectionObserver((entries) => {
+    near = entries[0].isIntersecting;
+    if (near && !raf) raf = requestAnimationFrame(loop);
+  }, { rootMargin: "30% 0px" }).observe(sec);
+
+  addEventListener("resize", () => { stage.layout(); p = -1; });
 })();
 
 
