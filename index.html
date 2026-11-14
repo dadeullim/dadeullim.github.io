@@ -57,7 +57,11 @@
 <video class="site-intro__video" id="site-intro-video" muted="" playsinline="" preload="auto" src="./images/intro-v13.mp4"></video>
 <!-- 2026.11.08 : 인트로 음향 (images/intro-sound.mp3 · 17.4초) — 영상과 같이 재생 (script.js [인트로 음향])
      브라우저가 소리 자동 재생을 막으면 화면을 한 번 누르거나 SOUND 버튼을 누를 때 영상 위치에 맞춰 시작 -->
-<audio id="site-intro-sound" preload="auto" src="./images/intro-sound.mp3"></audio>
+<!-- 2026.11.14 : 인트로 소리를 새 영상(intro-v13.mp4) 안에 든 소리로 바꿈 — 영상과 소리가 달랐음
+     (새 소리 : 전체 2~4dB 더 큼 · 처음 0~2초 음색 다름 · 9초쯤 낮은 소리 추가)
+     ---- 영상에서 소리만 그대로 꺼냄 (다시 압축 안 함 · AAC 17.4초) → images/intro-sound-v13.m4a
+     (전 : src="./images/intro-sound.mp3") -->
+<audio id="site-intro-sound" preload="auto" src="./images/intro-sound-v13.m4a"></audio>
 <button aria-pressed="false" class="site-intro__sound" id="site-intro-sound-toggle" type="button">
         SOUND ON
       </button>
