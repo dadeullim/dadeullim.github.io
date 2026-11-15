@@ -30,7 +30,7 @@
 
   <link
     rel="stylesheet"
-    href="./style.css?v=20261114c"
+    href="./style.css?v=20261115c"
   >
 
 
@@ -59,7 +59,7 @@
 
   <link
     rel="stylesheet"
-    href="./interface.css?v=20261114c"
+    href="./interface.css?v=20261115c"
   >
 
 
@@ -83,7 +83,7 @@
   ></script>
 
   <script
-    src="./interface.js?v=20261114c"
+    src="./interface.js?v=20261115c"
     defer
   ></script>
 
@@ -350,11 +350,8 @@
     <i class="hx-tag" aria-hidden="true">6</i>
     <i class="hx-tag" aria-hidden="true">7</i>
 
-    <!-- 네 모서리 꺾쇠 -->
-    <i class="hx-cm hx-cm-tl" aria-hidden="true"></i>
-    <i class="hx-cm hx-cm-tr" aria-hidden="true"></i>
-    <i class="hx-cm hx-cm-bl" aria-hidden="true"></i>
-    <i class="hx-cm hx-cm-br" aria-hidden="true"></i>
+    <!-- 2026.11.15 : 네 모서리 꺾쇠(ㄱ 자 선) 삭제
+         (전 : <i class="hx-cm hx-cm-tl · tr · bl · br"> 4개 — 화면 네 귀퉁이 22px 꺾쇠) -->
 
     <!-- 장 번호 줄 — 2.0 ~ 2.5 (이름은 interface.js 의 CHAPTERS) · 아래 선이 스크롤만큼 차오름 -->
     <div class="hx-chap" aria-hidden="true">
@@ -476,7 +473,7 @@
     ==================================================== -->
 <section class="pcs" aria-label="PROCESS">
 
-  <!-- 제목 (모눈 → 아래로 사라짐) -->
+  <!-- 제목 (2026.11.15 : 모눈은 섹션 전체 · 영상 뒤까지 / 전 : 제목 칸에만 모눈 → 아래로 사라짐) -->
   <div class="pcs-head">
     <h2 class="ttl">도면 그대로,<br><em>손으로 만들었습니다.</em></h2>
     <p class="pcs-lead">설계한 자리에 모터를 넣고, 선을 숨기고, 보드에 잇기까지.</p>
@@ -485,14 +482,16 @@
   <!-- 영상 줄 -->
   <div class="pcs-stream">
 
+    <!-- 2026.11.15 : 가운데 한 줄 → 살짝 지그재그 (왼 · 오 · 왼) — --x 만큼 가운데에서 옆으로 (휴대폰은 가운데)
+         (전 : --x 없음 · 셋 다 가운데) -->
     <div class="pcs-col">
-      <div class="pcs-item" style="--w:50%;--ar:1264/704" data-title="그립에 모터 장착" data-num="STEP 01" data-n="1" data-cap="HW-01 - 01">
+      <div class="pcs-item" style="--w:50%;--x:-14%;--ar:1264/704" data-title="그립에 모터 장착" data-num="STEP 01" data-n="1" data-cap="HW-01 - 01">
         <div class="pcs-in"><video src="./images/handle-process-01-install.mp4" poster="./images/handle-process-01-install.jpg" muted loop playsinline preload="metadata" aria-label="그립에 모터 장착"></video></div>
       </div>
-      <div class="pcs-item" style="--w:28%;--ar:3/4;--pos:58%" data-title="배선 정리" data-num="STEP 02" data-n="2" data-cap="HW-01 - 02">
+      <div class="pcs-item" style="--w:28%;--x:18%;--ar:3/4;--pos:58%" data-title="배선 정리" data-num="STEP 02" data-n="2" data-cap="HW-01 - 02">
         <div class="pcs-in"><video src="./images/handle-process-02-route.mp4" poster="./images/handle-process-02-route.jpg" muted loop playsinline preload="metadata" aria-label="배선 정리"></video></div>
       </div>
-      <div class="pcs-item" style="--w:50%;--ar:2/1" data-title="보드 연결" data-num="STEP 03" data-n="3" data-cap="HW-01 - 03">
+      <div class="pcs-item" style="--w:50%;--x:-10%;--ar:2/1" data-title="보드 연결" data-num="STEP 03" data-n="3" data-cap="HW-01 - 03">
         <div class="pcs-in"><video src="./images/handle-process-03-connect.mp4" poster="./images/handle-process-03-connect.jpg" muted loop playsinline preload="metadata" aria-label="보드 연결"></video></div>
       </div>
     </div>

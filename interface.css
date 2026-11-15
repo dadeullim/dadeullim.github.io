@@ -8474,6 +8474,7 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
         · 색 · 글꼴은 핸들 페이지 값(--ink · --sans · --mono · --gutter) 그대로 (zip 은 따로 --pcs-* 값)
         · 바탕 #000 → 핸들 페이지 검정 var(--hd5-black) #0e0f12
         · 핸들 섹션 공통 모눈 배경(.hd5 > section !important)은 끄고, 제목 칸에만 모눈 → 아래로 사라짐
+          → 2026.11.15 : 모눈을 섹션 전체(제목 + 영상 뒤)로 · 영상 3개는 가운데 → 살짝 지그재그 (왼 · 오 · 왼)
         · 위 섹션과 사이 1px 선은 다른 섹션(.sec + .sec)과 같게
         · 제목 크기는 전과 같은 .hd5 > section[aria-label="PROCESS"] .ttl 규칙 그대로
         · 영상 모서리 6px (2026.11.03 제작 영상 모서리와 같게 / zip 은 0)
@@ -8481,13 +8482,22 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
 .hd5 > section.pcs:not(.hero) {
   --pcs-gutter: clamp(20px, 2.1vw, 30px);
   position: relative;
-  background-image: none !important;   /* 전 : 핸들 공통 모눈 */
+  /* 2026.11.15 : 모눈(도면 칸)을 영상 뒤까지 섹션 전체에 — 제목 칸에 있던 모눈 그대로 옮김
+     (전 : background-image: none !important — 모눈은 제목 칸에만) */
+  background-image:
+    linear-gradient(rgba(255,255,255,.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.075) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px) !important;
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px !important;
+  background-position: -1px -1px !important;
   border-top: 1px solid var(--line);
   color: var(--ink);
   font-family: var(--sans);
 }
 
-/* 제목 칸 — 모눈이 아래로 갈수록 사라짐 */
+/* 제목 칸 — 2026.11.15 : 모눈은 섹션 전체로 옮겨서 여기엔 바탕 없음
+   (전 : background-color var(--hd5-black) + 모눈 100px · 20px / ::after 아래 clamp(90px, 8vw, 140px) 동안 검정으로 사라짐) */
 .hd5 .pcs-head {
   position: relative;
   display: grid;
@@ -8495,25 +8505,6 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
   gap: 24px;
   align-items: end;
   padding: clamp(110px, 10vw, 180px) var(--gutter) clamp(90px, 8vw, 140px);
-  background-color: var(--hd5-black);
-  background-image:
-    linear-gradient(rgba(255,255,255,.075) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.075) 1px, transparent 1px),
-    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
-  background-position: -1px -1px;
-}
-
-.hd5 .pcs-head::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: clamp(90px, 8vw, 140px);
-  background: linear-gradient(rgba(14,15,18,0), var(--hd5-black));   /* zip : #000 */
-  pointer-events: none;
 }
 
 .hd5 .pcs-head > * {
@@ -8535,11 +8526,10 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
   word-break: keep-all;
 }
 
-/* 영상 줄 */
+/* 영상 줄 — 2026.11.15 : 바탕을 비워 섹션 모눈이 영상 뒤로 보이게 (전 : background var(--hd5-black)) */
 .hd5 .pcs-stream {
   position: relative;
   padding: 22vh 0 40vh;
-  background: var(--hd5-black);
 }
 
 .hd5 .pcs-col {
@@ -8553,6 +8543,7 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
 
 .hd5 .pcs-item {
   position: relative;
+  left: var(--x, 0%);   /* 2026.11.15 살짝 지그재그 — 가운데에서 옆으로 밀기 (값은 handle.html 영상마다 --x / 전 : 모두 가운데) */
   overflow: hidden;
   width: var(--w, 50%);
   aspect-ratio: var(--ar, 16 / 9);
@@ -8627,12 +8618,15 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
   letter-spacing: .05em;
 }
 
+/* 2026.11.15 : 영상이 지그재그로 옆으로 가서 25% · 75% 자리 글자가 영상 위에 겹침
+   → 영상을 안 가리게 양 끝으로 (시안 지그재그 판처럼) : STEP 은 왼쪽 끝(단계 이름 아래) · N / 3 은 오른쪽 캡션 앞
+   (전 : .pcs-num left 25% · .pcs-cnt left calc(75% - 3.4em) — 가운데 50% 영상의 양 끝에 맞춘 자리) */
 .hd5 .pcs-num {
-  left: 25%;
+  left: var(--pcs-gutter);
 }
 
 .hd5 .pcs-cnt {
-  left: calc(75% - 3.4em);
+  right: calc(var(--pcs-gutter) + 9em);
   display: flex;
   gap: .45em;
   overflow: visible;
@@ -8686,6 +8680,7 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
 
   .hd5 .pcs-item {
     width: 86% !important;
+    left: 0;   /* 2026.11.15 휴대폰은 지그재그 없이 가운데 */
   }
 
   .hd5 .pcs-num {
@@ -8842,39 +8837,9 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
   color: var(--hd5-black);
 }
 
-/* ---------- 네 모서리 꺾쇠 ---------- */
-.hd5 .hx-cm {
-  position: absolute;
-  z-index: 4;
-  width: 22px;
-  height: 22px;
-  border: 0 solid rgba(242,242,239,.4);
-  pointer-events: none;
-}
-
-.hd5 .hx-cm-tl {
-  left: calc(var(--gutter) - 2px);
-  top: 132px;
-  border-width: 1px 0 0 1px;
-}
-
-.hd5 .hx-cm-tr {
-  right: calc(var(--gutter) - 2px);
-  top: 132px;
-  border-width: 1px 1px 0 0;
-}
-
-.hd5 .hx-cm-bl {
-  left: calc(var(--gutter) - 2px);
-  bottom: 7vh;
-  border-width: 0 0 1px 1px;
-}
-
-.hd5 .hx-cm-br {
-  right: calc(var(--gutter) - 2px);
-  bottom: 7vh;
-  border-width: 0 1px 1px 0;
-}
+/* ---------- 네 모서리 꺾쇠 — 2026.11.15 삭제 ----------
+   (전 : .hx-cm 22 × 22px · 테두리 rgba(242,242,239,.4) 1px
+         · 위 두 개 top 132px · 아래 두 개 bottom 7vh · 좌우 calc(var(--gutter) - 2px)) */
 
 /* ---------- 장 번호 줄 (2.0 ~ 2.5) — 아래 선이 스크롤만큼 차오르고, 장마다 눈금 ---------- */
 .hd5 .hx-chap {
@@ -9455,11 +9420,6 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
 
   html body .hd5 .hx-tr {
     top: 9.9206vw;    /* 150px */
-  }
-
-  html body .hd5 .hx-cm-tl,
-  html body .hd5 .hx-cm-tr {
-    top: 8.7302vw;    /* 132px */
   }
 
   html body .hd5 .hx-lv li.on::before {
@@ -11536,11 +11496,6 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
     gap: 1.5873vw;
     padding: 10vw var(--gutter) 8vw;
   }
-  .hd5 .pcs-head::after {
-    left: 0;
-    right: 0;
-    height: 8vw;
-  }
   .hd5 .pcs-head .ttl {
     margin: 0;
   }
@@ -11554,6 +11509,7 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
     gap: clamp(5.291vw, 13vh, 9.9206vw);
   }
   .hd5 .pcs-item {
+    left: var(--x, 0%);
     width: var(--w, 50%);
   }
   .hd5 .pcs-in video {
@@ -11577,10 +11533,10 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
     height: 1.4em;
   }
   .hd5 .pcs-num {
-    left: 25%;
+    left: var(--pcs-gutter);
   }
   .hd5 .pcs-cnt {
-    left: calc(75% - 3.4em);
+    right: calc(var(--pcs-gutter) + 9em);
     gap: .45em;
   }
   .hd5 .pcs-cur {
@@ -11612,22 +11568,6 @@ html body .site-header .site-header__nav-link[href="./problem.html"] {
     width: 1.455vw;
     height: 1.455vw;
     margin: -0.7275vw 0 0 -0.7275vw;
-  }
-  .hd5 .hx-cm {
-    width: 1.455vw;
-    height: 1.455vw;
-  }
-  .hd5 .hx-cm-tl {
-    left: calc(var(--gutter) - 2px);
-  }
-  .hd5 .hx-cm-tr {
-    right: calc(var(--gutter) - 2px);
-  }
-  .hd5 .hx-cm-bl {
-    left: calc(var(--gutter) - 2px);
-  }
-  .hd5 .hx-cm-br {
-    right: calc(var(--gutter) - 2px);
   }
   .hd5 .hx-chap {
     left: var(--gutter);
