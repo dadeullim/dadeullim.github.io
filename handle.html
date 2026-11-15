@@ -297,11 +297,15 @@
 
   <!-- ===================================================
          00. 히어로 — 핸들 영상 (10/31 최종 렌더) + 영상 시간에 맞춘 글자
+         2026.11.15 : 11.14 밤에 바뀌어 올라간 회청색 그라데이션 영상 → 원래 검정 영상으로 되돌림
+         ---- 주소 뒤 ?r=1115 : 그라데이션 영상을 이미 받은 브라우저가 그걸 계속 쓰지 않게 (파일 이름이 같아서)
+         ---- 그라데이션 영상은 바탕화면 "다들림_핸들히어로_그라데이션영상_보관" 폴더에 둠
+         (전 : ./images/handle-poster.jpg · handle-film-av1.mp4 · handle-film.mp4 — ?r 없음)
     ==================================================== -->
 <section class="hero" data-hero aria-label="다들림 핸들 영상">
-    <video autoplay muted loop playsinline preload="auto" poster="./images/handle-poster.jpg" aria-label="다들림 핸들이 분해되고 진동한 뒤 다시 조립되는 영상">
-      <source src="./images/handle-film-av1.mp4" type='video/mp4; codecs="av01.0.09M.10"'>
-      <source src="./images/handle-film.mp4" type="video/mp4">
+    <video autoplay muted loop playsinline preload="auto" poster="./images/handle-poster.jpg?r=1115" aria-label="다들림 핸들이 분해되고 진동한 뒤 다시 조립되는 영상">
+      <source src="./images/handle-film-av1.mp4?r=1115" type='video/mp4; codecs="av01.0.09M.10"'>
+      <source src="./images/handle-film.mp4?r=1115" type="video/mp4">
     </video>
     <svg class="hero-lines" aria-hidden="true"></svg>
     <div class="hero-ui">
